@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?><!-- SQL 맵퍼 파일은 xml이기 때문에 제일 먼저 xml 
+	선언이 옵니다. -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Pet_Topia.mybatis.mapper.MemberMapper">
+
+	<select id="isId" resultType="member" parameterType="String">
+		select * from member where member_id = #{member_id}
+	</select>
+	
+	<insert id="insert" parameterType="member">
+		insert into member 
+		values (#{member_id},#{member_password},#{member_name},
+		#{member_post},#{member_address},#{member_email},
+		#{member_tell},#{member_btype, jdbcType=VARCHAR},
+		#{member_regnum, jdbcType=VARCHAR},#{auth} )
+	</insert>
+	
+	<update id="update" parameterType="member">
+		update member
+		set member_id=#{member_id},member_password=#{member_password},
+		member_name=#{member_name},member_post=#{member_post},
+		member_address=#{member_address},member_email=#{member_email},
+		member_tell=#{member_tell},member_btype=#{member_btype, jdbcType=VARCHAR},
+		member_regnum=#{member_regnum, jdbcType=VARCHAR}
+		where member_id=#{member_id}
+	</update>
+   
+</mapper>
