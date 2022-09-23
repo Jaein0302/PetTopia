@@ -10,7 +10,7 @@
 <div class="header">
 	<jsp:include page="header.jsp" />
 </div>
- <div class="container mb-5 mainbody">
+ <div class="container mb-5 mainbody" style="margin-top:240px;">
    <form class="mform" name="joinform" action="${pageContext.request.contextPath}/main/joinProcess" method="post">
 	<h1>개인 회원가입</h1>
 	<hr>
@@ -44,8 +44,8 @@
 	
 	
 	<div class="clearfix">
-		<button type="submit" class="submitbtn" style="padding: 14px 20px;">가입</button>
-		<button type="reset" class="cancelbtn">취소</button>
+		<button type="submit" class="button-5 cancelbtn updateb">가입</button>
+		<button type="button" class="button-5 submitbtn signoutb">취소</button>
 	</div>
 	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
@@ -89,6 +89,15 @@ function Postcode() {
         }
     }).open();
 }//function Postcode()
+
+//취소 버튼 누르면 뒤로가기
+$(".signoutb").click(function(){
+	var answer = confirm("가입을 취소하시겠습니까?")
+	if(answer == true)
+		$(location).attr('href','${pageContext.request.contextPath}/main/join');
+})
+
+
 </script>
 </body>
 </html>
