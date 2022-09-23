@@ -86,7 +86,7 @@ public class MemberController {
 
 	//회원가입폼에서 아이디 검사
 	@RequestMapping(value = "/idcheck", method = RequestMethod.GET)
-	public void idcheck(@RequestParam("member_id") String member_id, 
+	public void idcheck(@RequestParam("id") String member_id, 
 						HttpServletResponse response) throws Exception {
 		int result = memberservice.isId(member_id);
 		Logger.info("idcheck");
@@ -127,39 +127,11 @@ public class MemberController {
 	}
 	
 	
-	
-	//회원 정보 수정폼
-	@RequestMapping(value="/update", method = RequestMethod.GET)
-	public ModelAndView member_update(Principal principal,
-									  ModelAndView mv) {
-		
-		String id = principal.getName();
-		
-		if(id==null) {
-			mv.setViewName("redirect:login");
-			Logger.info("id is null");
-		}else {
-			Member m = memberservice.member_info(id);
-			mv.setViewName("member/member_updateForm");
-			mv.addObject("memberinfo",m);
-		}
-		return mv;
+	@RequestMapping(value = "/search_item")
+	public String searchitem(@RequestParam("item") String item,Model m) {
+		m.addAttribute("item",item);
+		return "member/Search_item";
 	}
 	
-	@RequestMapping(value = "/updateProcess", method = RequestMethod.POST)
-	public String updateProcess(Member m,
-							RedirectAttributes rattr,
-							Model model,
-							HttpServletRequest request) throws Exception {
-		int result = memberservice.update(m);
-		if(result==1) {
-			rattr.addFlashAttribute("result","updateSuccess");
-			return "redirect:/board/list";
-		}else {
-			model.addAttribute("url",request.getRequestURL());
-			model.addAttribute("message","정보 수정 실패");
-			return "error/error";
-		}
-	}
 	
 }

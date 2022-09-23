@@ -47,11 +47,11 @@
 		
 		<!-- 검색바 -->            
             <div class="col-lg-6 col-6 text-left">
-                <form action="${pageContext.request.contextPath}/main/search_item">
+                <form action="${pageContext.request.contextPath}/main/search_item" name="search" method="POST" >
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="검색어를 입력해주세요">
+                        <input type="text" name="item" class="form-control" placeholder="검색어를 입력해주세요" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);" required>
                         <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
+                            <span class="input-group-text bg-transparent text-primary isearch" style="cursor:pointer">
                                 <i class="fa fa-search"></i>
                             </span>
                         </div>
@@ -277,6 +277,15 @@
 			event.preventDefault();
 			$("form[name=logout]").submit();
 		})
+		$('.isearch').on('click', function() {
+			var input = $('input[name=item]').val();
+    		if(input.length==0){
+    			alert("검색어 입력해주세요");
+    			event.preventDefault();
+    		}else{
+    			$("form[name=search]").submit();
+    		}
+    	});
 	})
 /* $(".nav .nav-link").on("click", function(){
    $(".nav").find(".active").removeClass("active");
@@ -298,6 +307,13 @@ $(window).on('load', function(){ //load가 되었을때 실행
         $('.me0').addClass('active'); 
     }
 });
+function noSpaceForm(obj) { // 공백사용못하게
+    var str_space = /^ /gi;  // 공백체크
+    if(str_space.exec(obj.value)) { //공백 체크
+        obj.value = obj.value.replace(' ',''); // 공백제거
+        return false;
+    }
+}
 </script>
 </body>
 </html>
