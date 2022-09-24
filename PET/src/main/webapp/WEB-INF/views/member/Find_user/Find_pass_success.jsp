@@ -28,14 +28,14 @@ $("p.countdown").html("<b><font class='text-dark' style='font-size:20px'>"
 <div id="choonDiv"></div>
 <!-- header -->
 <div class="header">
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 </div>
 
 <div class="container mb-5 mainbody" style="height:400px;margin-top: 300px;">
   <div class="row px-xl-5">
    <div class="col-lg-12 text-center" style="margin:0 auto;">
    <div class="border align-items-center" style="width:500px;margin:0 auto;padding:20px">
- 		<span class='text-dark' style="font-size:33px;font-weight:bolder">
+ 		<span class="p-subTitle text-dark" style="font-size:33px;font-weight:bolder">
  		${member_email}</span><br>
  		<span style="font-size:25px;">로 임시비밀번호가 발송되었습니다.</span><br><br>
  		 <p class="countdown"></p>
@@ -44,6 +44,6 @@ $("p.countdown").html("<b><font class='text-dark' style='font-size:20px'>"
   </div>
  </div>
     
-<jsp:include page="footer.jsp" />
+<jsp:include page="../footer.jsp" />
 </body>
 </html>
