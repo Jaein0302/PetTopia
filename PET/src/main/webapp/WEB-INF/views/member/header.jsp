@@ -145,8 +145,7 @@
       </div>
     </div>
   </div>
-  <form name="loginform" action="${pageContext.request.contextPath}/main/loginProcess" 
-		  method="post">
+  <form name="loginform" action="${pageContext.request.contextPath}/main/loginProcess" method="post">
   <div class="login">
     <label>
    <div class="fa fa-user"></div>

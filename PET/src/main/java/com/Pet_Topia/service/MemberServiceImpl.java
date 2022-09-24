@@ -53,14 +53,20 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public Member member_info(String id) {
-		return dao.isId(id);
+	public String find_id(String member_name, String member_email) {
+		return dao.find_id(member_name, member_email);
+	
 	}
 
+	@Override
+	public int find_pass(String member_id, String member_name, String member_email) {
+		Member rmember = dao.find_pass(member_id, member_name, member_email);
+		return (rmember == null) ? -1 : 1;
+	}
 
 	@Override
-	public int update(Member m) {
-		return dao.update(m);
+	public void update_pass(String str, String member_id) {
+		dao.update_pass(str, member_id);
 	}
 
 }

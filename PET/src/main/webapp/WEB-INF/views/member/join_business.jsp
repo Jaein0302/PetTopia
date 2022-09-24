@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>기업 회원가입</title>
+<title>펫토피아 - 기업 회원가입</title>
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
@@ -43,7 +43,7 @@
 	<select class="selectType" style="padding:8px 20px;margin-right:3px">
 		<option value="선택">업종선택</option>
 		<option value="동물병원">동물병원</option>
-		<option value="미용">미용</option>
+		<option value="애견미용">애견미용</option>
 		<option value="훈련기관">훈련기관</option>
 		<option value="기타">직접입력</option>
 	</select>

@@ -113,7 +113,7 @@ function toggleLayer( obj, s ) {
                 });
  
                 // 팝업 닫기 이벤트 정의
-                $("#btn_popup_close").on("click", popupClose);
+                //$("#btn_popup_close").on("click", popupClose);
  
                 // 팝업 배경 클릭 이벤트 정의
                 $panel.find(".popup_bg").on("click", popupClose);

@@ -9,9 +9,11 @@ public interface MemberService {
 
 	public int isId(String id);
 
-	public Member member_info(String id);
+	public String find_id(String member_name, String member_email);
 
-	public int update(Member m);
+	public int find_pass(String member_id, String member_name, String member_email);
+
+	public void update_pass(String str, String member_id);
 
 
 }

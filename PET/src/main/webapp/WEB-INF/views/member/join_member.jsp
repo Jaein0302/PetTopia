@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>회원가입</title>
+<title>펫토피아 - 회원가입</title>
 <style>
 .joinbtn{border:1px solid silver;margin:0 40px;border-radius:20px;cursor:pointer}
 .joinbtn:hover, .joinbtn:active{background-color:#f7e1ab;border:1px solid #f7e1ab}
