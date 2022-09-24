@@ -18,13 +18,13 @@ if(message == 'fail'){
 <body>
 <!-- header -->
 <div class="header">
-	<jsp:include page="header.jsp" />
+	<jsp:include page="../header.jsp" />
 </div>
   <div class="container mb-5 mainbody" style="height:930px;margin-top: 200px;">
     <div class="container-fluid offer pt-5">
         <div class="row px-xl-5">
             <div class="col-md-6 pb-4">
-            <form method="POST" action="${pageContext.request.contextPath}/main/Find_id">
+            <form method="GET" action="${pageContext.request.contextPath}/main/Find_id">
                 <div class="position-relative text-center text-white mb-2 py-5 px-5 joinbtn">
                     <div class="position-relative" style="z-index: 1;">
                         <h2 class="font-weight-semi-bold mb-4">회원 아이디 찾기</h2>
@@ -58,6 +58,6 @@ if(message == 'fail'){
         </div>
     </div>
     </div>
-<jsp:include page="footer.jsp" />
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

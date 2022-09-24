@@ -69,5 +69,11 @@ public class MemberServiceImpl implements MemberService {
 		dao.update_pass(str, member_id);
 	}
 
+	@Override
+	public int mail_code(String member_email) {
+		Member rmember = dao.mail_code(member_email);
+		return (rmember == null) ? -1 : 1;
+	}
+
 }
 

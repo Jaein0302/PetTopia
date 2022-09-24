@@ -8,6 +8,29 @@
 .joinbtn:hover, .joinbtn:active{background-color:#f7e1ab;border:1px solid #f7e1ab}
 </style>
 </head>
+<body>
+<!-- header -->
+<div class="header">
+	<jsp:include page="../header.jsp" />
+</div>
+<form>
+<div class="container mb-5 mainbody" style="height:400px;margin-top: 300px;">
+  <div class="row px-xl-5">
+   <div class="col-lg-12 text-center" style="margin:0 auto;">
+   <div class="border align-items-center" style="width:500px;margin:0 auto;padding:20px">
+ 		<span style="font-size:25px;">요청하신 아이디 찾기 결과입니다.</span><br><br>
+ 		<span style="font-size:19px;">입력한 정보로 조회된 아이디는 
+ 		<b class="text-dark p-subTitle" style="font-size:25px;">${member_id}</b> 입니다.</span><br>
+ 		 <p class="countdown"></p>
+ 		 <button type="button" class="btn btn-primary p-2 m-3 findbtn gologin">로그인 하기</button>
+		 <button type="button" class="btn btn-primary p-2 m-3 findbtn" 
+		 	     onclick="location.href='${pageContext.request.contextPath}/main/Find_user'">다시 찾기</button>
+ 	</div>
+   </div>
+  </div>
+ </div>
+ </form>
+<jsp:include page="../footer.jsp" />
 <script>
 //카운트 시작 숫자
 var count = 10;
@@ -23,34 +46,10 @@ $("p.countdown").html("<b><font class='text-dark' style='font-size:20px'>"
     }
     count--;//카운트 감소
 }, 1000);
-</script>
-<body>
-<!-- header -->
-<div class="header">
-	<jsp:include page="header.jsp" />
-</div>
 
-<div class="container mb-5 mainbody" style="height:400px;margin-top: 300px;">
-  <div class="row px-xl-5">
-   <div class="col-lg-12 text-center" style="margin:0 auto;">
-   <div class="border align-items-center" style="width:500px;margin:0 auto;padding:20px">
- 		<span style="font-size:25px;">요청하신 아이디 찾기 결과입니다.</span><br><br>
- 		<span style="font-size:19px;">입력한 정보로 조회된 아이디는 
- 		<b class="text-dark" style="font-size:25px;">${member_id}</b> 입니다.</span><br>
- 		 <p class="countdown"></p>
-	<button type="button" class="btn btn-primary p-2 m-3 findbtn" 
-		    onclick="location.href='${pageContext.request.contextPath}/main/Find_user'">다시 찾기</button>
- 	</div>
-   </div>
-  </div>
- </div>
-<jsp:include page="footer.jsp" />
-<script>
 $(document).ready(function(){
 	$('.gologin').click(function(){
-		$('#btn_popup_open').get(0).click(function(){
-			location.href="${pageContext.request.contextPath}/main/main"
-			})
+		$('#btn_popup_open').trigger('click');
 	})
 })
 </script>

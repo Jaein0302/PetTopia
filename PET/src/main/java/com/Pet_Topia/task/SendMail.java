@@ -28,6 +28,7 @@ public class SendMail {
 	public void sendMail(MailVO vo) {
 		String sendfile = mysavefolder.getSendfile();
 		String sendpass = mysavefolder.getSendpass();
+		String code = mysavefolder.getCode();
 
 		// 익명 클래스
 		MimeMessagePreparator mp = new MimeMessagePreparator() {
@@ -53,10 +54,14 @@ public class SendMail {
 				// 두번째 인자 : 첨부파일
 				helper.addAttachment("Welcome_to_Pet_Topia.jpg", file);
 				
-				}else {
+				}else if(vo.getSubject()=="<펫토피아> 임시 비밀번호 발송 메일"){
 					FileSystemResource file = new FileSystemResource(new File(sendpass));
 					helper.addInline("Home", file);
-					helper.addAttachment("Pet_Topia.jpg", file);
+					helper.addAttachment("Pet_Topia_pass.jpg", file);
+				}else{
+					FileSystemResource file = new FileSystemResource(new File(code));
+					helper.addInline("Home", file);
+					helper.addAttachment("Pet_Topia_code.jpg", file);
 				}
 			}//prepare() end
 		};//new MimeMessagePreparator()

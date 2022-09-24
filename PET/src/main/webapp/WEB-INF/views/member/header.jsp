@@ -47,7 +47,7 @@
 		
 		<!-- 검색바 -->            
             <div class="col-lg-6 col-6 text-left">
-                <form action="${pageContext.request.contextPath}/main/search_item" name="search" method="POST" >
+                <form action="${pageContext.request.contextPath}/main/search_item" name="search" method="get" >
                     <div class="input-group">
                         <input type="text" name="item" class="form-control" placeholder="검색어를 입력해주세요" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);" required>
                         <div class="input-group-append">

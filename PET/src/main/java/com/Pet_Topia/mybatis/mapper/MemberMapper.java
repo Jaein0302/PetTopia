@@ -19,5 +19,7 @@ public interface MemberMapper {
 
 	public void update_pass(String str, String member_id);
 
+	public Member mail_code(String member_email);
+
 	
 }

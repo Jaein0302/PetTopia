@@ -46,98 +46,14 @@ $(".signoutb").click(function(){
 })
 
 
-
-//국세청 사업자 등록정보 진위확인 api
-$('.regnum').click(function(){
-	var regnum = $('#regnum').val(); //1208806529
-	var bname = $('.bname').val(); //정윤수
-	var bdate = $('.bdate').val(); //20131219
-	
-	if(bname == ""){
-		alert("대표자성명을 입력해주세요");
-		$('.bname').focus();
-	}else if(bdate==""){
-		alert("개업일자 8자리를 입력해주세요");
-		$('.bdate').focus();
-	}else if(regnum==""){
-		alert("사업자 등록번호 10자리를 입력해주세요");
-		$('#regnum').focus();
-	}else{	
-	console.log("사업자등록번호= "+regnum+", 이름="+bname+", 개업일="+bdate);
-	var data = {  
-			"businesses": [   
-			{   
-				"b_no": regnum,      
-				"start_dt": bdate,      
-				"p_nm": bname,      
-				"p_nm2": "",      
-				"b_nm": "",      
-				"corp_no": "",     
-				"b_sector": "",      
-				"b_type": ""    
-			}  
-		]
-	}
-		$.ajax({
-		  url: "https://api.odcloud.kr/api/nts-businessman/v1/validate?serviceKey=LS%2F0%2FFJ0nKGVtQDjRPMbttGggE36jKrWEY%2BSMu0hbj00o0%2FvOy8Z31RmO2J91Wsd%2FepNUPtcqeJ6Ei%2BfzD3cTw%3D%3D",  // serviceKey 값을 xxxxxx에 입력
-		  type: "POST",
-		  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
-		  dataType: "JSON",
-		  contentType: "application/json",
-		  accept: "application/json",
-		  success: function(result) {
-		      console.log("사업자인증 결과 = "+result);
-		      var keys = Object.keys(result);
-		      console.log("키값="+keys);
-		       if (keys.indexOf('valid_cnt') > -1) {
-		    	  alert("사업자등록번호 인증성공");
-		    	  $(".chk_bno").show();
-		    	  chkbno = true;
-		    	  return;
-		      }else{
-		    	  alert("국세청에 등록되지 않은 사업자등록번호입니다.")
-		    	  chkbno = false;
-		    	  return;
-		      } 
-		  },
-		  error: function(result) {
-		      console.log(result.responseText); //responseText의 에러메세지 확인
-		  }
-		});//ajax
-	}
-})
-
 var checkid=false;
 var checkpass=false;
 var checkpasschk=false;
-var chkbno = false;
-var checkbtype =false;
 var checkaddress=false;
 var checktell = false;
 var checkemail=false;
 var checktell=false;
-//업종 selec하면 input에 자동 입력
-$(function(){	
-	var input = $('.inputText');
-	$('.selectType').on("change",function(){
-		var value = $(this).find("option:selected").val();
-		input.val(value);
-		if(value=="기타"){
-			$(input).attr('readOnly', false);
-			$(input).focus();
-			$(input).val('');
-			$(".chk_btype").hide();
-		}else if(value=="선택"){
-			$(input).attr('readOnly', true);
-			$(input).val('');
-			$(".chk_btype").hide();
-			checkbtype = false;
-		}else if(value="동물병원"){
-			$(".chk_btype").show();
-			checkbtype = true;
-		}
-	})//change
-});
+
 //아이디 유효성 검사
 $("input[name=member_id]").on('keyup',
 			function(){
@@ -255,44 +171,7 @@ $("input[name=member_name]").on('keyup',
 				$(".chk_name").hide();
 			}
 })
-//대표자 성명 유효성 검사
-$(".bname").on('keyup',
-				function(){
-			var pattern = /^[가-힣]|[a-zA-Z]$/;
-			var bnameval = $(this).val();
-			if(!pattern.test(bnameval)) {
-				$(".chk_bname").hide();
-			}else{
-				$(".chk_bname").show();
-			}
-})
-//개업일자 유효성 검사
-$(".bdate").on('keyup',
-				function(){
-			var pattern =  /(^(19|20)\d{2})(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
-			var bdate = $(this).val();
-			if(!pattern.test(bdate)) {
-				$(".chk_bdate").hide();
-			}else{
-				$(".chk_bdate").show();
-			}
-})
 
-//업종 공백 검사
-$("input[name=member_btype]").on('keyup',
-		function(){
-	var btype = $(this).val();
-	if(btype != "") {
-		$(".chk_btype").show();
-		checkbtype=true;
-		return;
-	}else if(btype == "") {
-		$(".chk_btype").hide();
-		checkbtype=false;
-		return;
-	}
-	
-})
 
 //주소 공백 검사
 $("input[name=member_address]").on('keyup',
@@ -342,32 +221,33 @@ $("input[name=member_tell]").on('keyup',
 	$("input[name=member_tell]").focus(function(){
 		$("#tell_message").show();
 	});
-
 //이메일 유효성 검사
-$("input[name=member_email]").on('keyup',
-			  function() {
-				 $("#email_message").empty();
-				 var pattern = /^\w+@\w+[.]\w{3}$/;
-				 var email = $(this).val();
-				 if (!pattern.test(email)) {
-					 $("#email_message").css('color', 'tomato').html("이메일형식이 맞지 않습니다.");
-					 $(".chk_email").hide();
-					 checkemail=false;
-					 return;
-				 }else{
-					 $("#email_message").css('color','#6dc99f').html("이메일형식에 맞습니다.");
-					 $(".chk_email").show();
-					 checkemail=true;
-					 return;
-				 }
-});//email keyup 이벤트 처리 끝
-		$("input[name=member_email]").blur(function(){
-			$("#email_message").hide();
-		});
-		$("input[name=member_email]").focus(function(){
-			$("#email_message").show();
-		});		
-
+	$("input[name=member_email]").on('keyup',
+				  function() {
+					 $("#email_message").empty();
+					 var pattern = /^\w+@\w+[.]\w{3}$/;
+					 var email = $(this).val();
+					 if (!pattern.test(email)) {
+						 $("#email_message").css('color', 'tomato').html("이메일형식이 맞지 않습니다.");
+						 $(".chk_email").hide();
+						 checkemail=false;
+						 return;
+					 }else{
+						 $("#email_message").css('color','#6dc99f').html("이메일형식에 맞습니다.");
+						 $(".chk_email").show();
+						 checkemail=true;
+						 return;
+					 }
+	});
+	
+//email keyup 이벤트 처리 끝
+			$("input[name=member_email]").blur(function(){
+				$("#email_message").hide();
+			});
+			$("input[name=member_email]").focus(function(){
+				$("#email_message").show();
+			});	
+				
 function noSpaceForm(obj) { // 공백사용못하게
 var str_space = /\s/;  // 공백체크
 if(str_space.exec(obj.value)) { //공백 체크
@@ -412,11 +292,6 @@ $('.customer').submit(function(){
 		    		$("input[name=member_tell]").focus();
 		    		return false;
 		    	}
-		    	if(!checkemail){
-		    		alert("이메일 주소 형식을 확인해주세요");
-		    		$("input[name='member_email']").focus();
-		    		return false;
-		    	}
 });//개인회원가입 서브밋 end
 
 //기업회원가입 서브밋	    
@@ -434,21 +309,6 @@ $('.business').submit(function(){
 		    	if(!checkpasschk){
 		    		alert("비밀번호 확인을 확인해주세요");
 		    		$("input[name='passwordchk']").val('').focus();
-		    		return false;
-		    	}
-		    	if($("input[name='member_name']").val().trim()=="") {
-		    		alert("이름을 확인해주세요");
-		    		$("input[name='member_name']").val('').focus();
-		    		return false;
-		    	}
-		    	if(!chkbno){
-		    		alert("사업자 등록번호 인증을 확인해주세요");
-		    		$("input[name='member_regnum']").focus();
-		    		return false;
-		    	}
-		    	if(!checkbtype){
-		    		alert("업종을 선택해주세요");
-		    		$(".selectType").focus();
 		    		return false;
 		    	}
 		    	if($("input[name='member_post']").val()=="") {

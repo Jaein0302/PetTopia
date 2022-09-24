@@ -9633,3 +9633,10 @@ input[type=text]:focus, input[type=password]:focus, select:focus {
 }
 .findbtn{border-radius:10px; font-size:20px;padding:10px 20px!important;opacity: 0.8;}
 .findbtn:hover{opacity: 1;color:black;}
+.p-subTitle {
+    background: linear-gradient(transparent 70%, #b3efda 30%);
+    display: inline;
+    font-size: 36px;
+    margin-top: 40px;
+    padding-bottom: 0;
+}

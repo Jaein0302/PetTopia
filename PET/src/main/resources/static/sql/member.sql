@@ -12,7 +12,7 @@ create table member(
    AUTH VARCHAR2(50) not null     --권한
 );
 
-delete member
+delete member;
 
 -- 아이디 : admin / 비번 : 123
 insert into member values ('admin','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','관리자','12345','서울','admin@pet.pet','010-1234-5678',null,null,'ROLE_ADMIN');

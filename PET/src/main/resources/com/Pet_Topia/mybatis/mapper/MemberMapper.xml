@@ -33,5 +33,10 @@
 		update member set member_password = #{str}
 		where member_id=#{member_id} 
 	</update>
+	
+	<select id="mail_code" resultType="member" parameterType="String">
+		select * from member
+		where member_email=#{member_email}
+	</select>
    
 </mapper>

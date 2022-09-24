@@ -52,7 +52,7 @@ button:active{
 
 .mform {
     background-color: #fefefe;
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     width: 550px; /* Could be more or less, depending on screen size */
     padding: 16px;
 }
@@ -67,7 +67,7 @@ hr {
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;}
+    }
 
 /* Clear floats */
 .clearfix{
