@@ -5,11 +5,20 @@ input, select{border-radius:3px;border:1px solid lightgray}
 select:focus{outline:none}
 select{color: #6F6F6F;}
 
-.jinput, input[type=password] {
+.jinput {
     width: 100%;
     padding: 10px;
     margin: 5px 0 22px 0;
     display: inline-block;
+    font-family:'NanumGothic';
+    background: #f5f5f5;
+    font-size: 0.8rem;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+    box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.08 );
+    clear: both;
 }
 
 input[type=radio]{
@@ -44,7 +53,7 @@ button:active{
 .mform {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    width: 600px; /* Could be more or less, depending on screen size */
+    width: 550px; /* Could be more or less, depending on screen size */
     padding: 16px;
 }
 
@@ -53,7 +62,7 @@ hr {
     margin-bottom: 25px;
 }
  
-b + div{width: 100%;
+.jinput + div{width: 100%;
     padding: 10px;
     margin: 5px 0 22px 0;
     display: inline-block;
@@ -62,7 +71,7 @@ b + div{width: 100%;
 
 /* Clear floats */
 .clearfix{
-	margin: 39px 57px;
+	margin: 39px 32.5px;
 }
 
 .clearfix::after {
@@ -78,7 +87,7 @@ b {
 	display: block
 }
 
-#message{display:inline-block;margin-top:-20px;font-size:10px}
+.message{display:inline-block;margin-top:-20px;font-size:13px}
 
 /* Change styles for cancel button and signup button on extra small screens */
 @media screen and (max-width: 300px) {
@@ -104,7 +113,7 @@ b {
   justify-content: center;
   line-height: 1;
   margin: 0 37px;
-  min-height: 48px;
+  min-height: 42px;
   padding: 14px 20px;
   position: relative;
   text-decoration: none;
@@ -147,3 +156,5 @@ b {
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
 }
+
+.fa-check{color:#6dc99f}
