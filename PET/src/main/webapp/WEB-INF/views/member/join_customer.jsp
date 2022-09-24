@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <html>
 <head>
-<title>개인 회원가입</title>
+<title>펫토피아 - 개인 회원가입</title>
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>

@@ -20,3 +20,8 @@ insert into member values ('admin','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n
 -- update member set auth='ROLE_ADMIN' where member_id='admin';
 
 select * from member
+
+select * from member
+where member_id='admin'
+and member_name ='관리자'
+and member_email='admin@pet.pet'

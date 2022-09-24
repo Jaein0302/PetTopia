@@ -17,14 +17,21 @@
 		#{member_regnum, jdbcType=VARCHAR},#{auth} )
 	</insert>
 	
-	<update id="update" parameterType="member">
-		update member
-		set member_id=#{member_id},member_password=#{member_password},
-		member_name=#{member_name},member_post=#{member_post},
-		member_address=#{member_address},member_email=#{member_email},
-		member_tell=#{member_tell},member_btype=#{member_btype, jdbcType=VARCHAR},
-		member_regnum=#{member_regnum, jdbcType=VARCHAR}
+	<select id="find_id" resultType="String" parameterType="String">
+		select member_id from member
+		where member_name=#{member_name} and member_email=#{member_email}
+	</select>
+	
+   	<select id="find_pass" resultType="member" parameterType="String">
+		select * from member
 		where member_id=#{member_id}
+		and member_name =#{member_name}
+		and member_email=#{member_email}
+	</select>
+	
+	<update id="update_pass" parameterType="String">
+		update member set member_password = #{str}
+		where member_id=#{member_id} 
 	</update>
    
 </mapper>
