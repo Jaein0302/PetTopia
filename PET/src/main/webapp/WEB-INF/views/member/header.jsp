@@ -192,7 +192,7 @@
                  <div class="nav-item dropdown" style="position:static!important">
                   <a href="#" class="nav-link dropdown-toggle catename" data-toggle="dropdown">카테고리&nbsp;&nbsp;<i class="fa fa-bars"></i></a>
                		<div class="dropdown-menu rounded-0 m-0">
-                  	 <a href="#" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
+                  	 <a href="${pageContext.request.contextPath}/main/myinfo" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
                      <a href="#" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
                   	 <a href="#" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
                		</div>
@@ -240,7 +240,7 @@
                         	  &nbsp;마이페이지&ensp;<i class="fas fa-caret-down"></i></a>
                         	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
-                        	 	<a href="#" class="dropdown-item mydrop">회원정보</a>
+                        	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
                         	 	<a href="#" class="dropdown-item mydrop">구매내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">작성한글</a>
                         	 	<a href="#" class="dropdown-item">
