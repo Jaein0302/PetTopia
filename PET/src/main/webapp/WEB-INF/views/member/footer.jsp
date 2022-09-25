@@ -27,9 +27,9 @@
                     </div>
                     <div class="gs-footBody">
                         <ul class="gs-links-list">
-                            <li><a>수술/치료</a></li>
-                            <li><a>교육</a></li>
-                            <li><a>미용</a></li>
+                            <li><a class="text-dark">수술/치료</a></li>
+                            <li><a class="text-dark">교육</a></li>
+                            <li><a class="text-dark">미용</a></li>
                         </ul>
                     </div>
                 </div>
@@ -39,9 +39,9 @@
                     </div>
                     <div class="gs-footBody">
                         <ul class="gs-links-list">
-                            <li><a>공지사항</a></li>
-                            <li><a>커뮤니티</a></li>
-                            <li><a>고객센터</a></li>
+                            <li><a class="text-dark">공지사항</a></li>
+                            <li><a class="text-dark" href="${pageContext.request.contextPath}/community/list">커뮤니티</a></li>
+                            <li><a class="text-dark">고객센터</a></li>
                         </ul>
                     </div>
                 </div>

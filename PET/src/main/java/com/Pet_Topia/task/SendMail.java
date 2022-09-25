@@ -27,6 +27,8 @@ public class SendMail {
 
 	public void sendMail(MailVO vo) {
 		String sendfile = mysavefolder.getSendfile();
+		String sendpass = mysavefolder.getSendpass();
+		String code = mysavefolder.getCode();
 
 		// 익명 클래스
 		MimeMessagePreparator mp = new MimeMessagePreparator() {
@@ -42,6 +44,7 @@ public class SendMail {
 				String content = "<img src='cid:Home'>" + vo.getContent();
 				helper.setText(content, true);
 				
+				if(vo.getSubject()=="반려동물 서비스 제휴 사이트 <펫토피아> 회원 가입을 축하드립니다!") {
 				FileSystemResource file = new FileSystemResource(new File(sendfile));
 				//addInline메서드의 첫번째 메서드에는 cid(content id)를 지정합니다.
 				helper.addInline("Home", file);
@@ -50,6 +53,16 @@ public class SendMail {
 				// 첫번째 인자 : 첨부된 파일의 이름입니다.
 				// 두번째 인자 : 첨부파일
 				helper.addAttachment("Welcome_to_Pet_Topia.jpg", file);
+				
+				}else if(vo.getSubject()=="<펫토피아> 임시 비밀번호 발송 메일"){
+					FileSystemResource file = new FileSystemResource(new File(sendpass));
+					helper.addInline("Home", file);
+					helper.addAttachment("Pet_Topia_pass.jpg", file);
+				}else{
+					FileSystemResource file = new FileSystemResource(new File(code));
+					helper.addInline("Home", file);
+					helper.addAttachment("Pet_Topia_code.jpg", file);
+				}
 			}//prepare() end
 		};//new MimeMessagePreparator()
 	

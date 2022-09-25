@@ -3,7 +3,7 @@ package com.Pet_Topia.domain;
 public class MailVO {
 	private String from= "richcoast@naver.com"; //mail.properties에서 작성한 아이디에 해당하는 이메일 주소 작성합니다.
 	private String to;
-	private String subject="반려동물 서비스 제휴 사이트 [펫토피아] 회원 가입을 축하드립니다!";
+	private String subject="반려동물 서비스 제휴 사이트 <펫토피아> 회원 가입을 축하드립니다!";
 	private String content="회원 가입을 축하드립니다. - 내용";
 	
 	public String getFrom() {

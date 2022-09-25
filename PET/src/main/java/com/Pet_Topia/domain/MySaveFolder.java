@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 public class MySaveFolder {
 	private String savefolder;
 	private String sendfile;
+	private String sendpass;
+	private String code;
 
 	public String getSendfile() {
 		return sendfile;
@@ -28,6 +30,22 @@ public class MySaveFolder {
 
 	public void setSavefolder(String savefolder) {
 		this.savefolder = savefolder;
+	}
+
+	public String getSendpass() {
+		return sendpass;
+	}
+
+	public void setSendpass(String sendpass) {
+		this.sendpass = sendpass;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

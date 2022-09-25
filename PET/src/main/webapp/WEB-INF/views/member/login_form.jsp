@@ -11,7 +11,7 @@
 <script>
 var message = "${message}";
 if(message == 'loginFailMsg'){
-   alert('로그인 실패하였습니다. \n재로그인 해주세요.')
+   alert('로그인 실패하였습니다. \n재로그인 해주세요.');
   }else if(message == 'loginSuccessMsg'){
 	  function go_main(){
 	    location.href="${pageContext.request.contextPath}/main/main"
@@ -24,13 +24,18 @@ if(message == 'loginFailMsg'){
 <div class="header">
 	<jsp:include page="header.jsp" />
 </div>
-
 <div class="container mb-5 mainbody" style="height:600px;margin-top:200px;margin-bottom:300px">
-
+<div class="login_message text-center">
+<i class="fas fa-exclamation-circle"></i>&emsp;<span>아이디와 비밀번호를 다시 확인해주세요</span>
+</div>
 <div class="center">
   <div class="ear ear--left"></div>
   <div class="ear ear--right"></div>
   <div class="face">
+  <div class="sad">
+  </div>
+  <div class="sad1">
+  </div>
     <div class="eyes">
       <div class="eye eye--left">
         <div class="glow"></div>

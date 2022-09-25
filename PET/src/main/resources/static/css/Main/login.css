@@ -18,7 +18,7 @@ body {
 }
 .center {
   position: relative;
-  top: 50%;
+  top: 43%;
   left: 50%;
   display: inline-block;
   width: 275px;
@@ -33,6 +33,45 @@ body {
     transition: transform 0.5s;
     transform: translate(-50%, -50%) scale(0.8);
   }
+}
+.sad{
+    position: absolute;
+    top: 72px;
+    left: -31px;
+    width: 256px;
+    height: 200px;
+    border-left: thick solid #243946;
+    border-radius:4px;
+    height: 45px;
+    transform: rotate(60deg);
+}
+.sad1{
+    position: absolute;
+    top: 72px;
+    left: -28px;
+    width: 256px;
+    height: 200px;
+    border-left: thick solid #243946;
+    border-radius:4px;
+    height: 45px;
+    transform: rotate(120deg);
+}
+.login_message{
+    position: relative;
+    margin: 0 auto;
+    background-color: #fae7ec;
+    width: 400px;
+    height: 55px;
+    border-radius:5px;
+    text-align : center;
+    padding : 15px 0;
+    font-family:'JUA';
+    color:#243946;
+    font-size:20px;
+}
+.fa-exclamation-circle{
+	font-size:22px;
+	color:#ef4d61;
 }
 .center .ear {
   position: absolute;
