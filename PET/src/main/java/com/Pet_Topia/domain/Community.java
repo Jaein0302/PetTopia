@@ -1,5 +1,7 @@
 package com.Pet_Topia.domain;
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class Community {
@@ -70,7 +72,9 @@ public class Community {
 		return commu_date;
 	}
 	public void setCommu_date(String commu_date) {
-		this.commu_date = commu_date;
+		Date date = new Date();
+		commu_date = String.format("%1$tY.%1$tm.%1$td", date);
+		this.commu_date = commu_date.substring(2,10); //년-월-일
 	}
 	public String getCommu_thumbnail() {
 		return commu_thumbnail;

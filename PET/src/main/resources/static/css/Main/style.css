@@ -1559,6 +1559,7 @@ pre code {
 .table thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #EDF1FF;
+  border-top:none;
 }
 
 .table tbody + tbody {
@@ -9282,7 +9283,11 @@ button.bg-dark:focus {
 }
 
 a.text-primary:hover, a.text-primary:focus {
-  color: #ba6a62 !important;
+  color: #eaca68!important;
+}
+
+.text-comment{
+  color: #efa954!important;
 }
 
 .text-secondary {
@@ -9376,6 +9381,10 @@ a.text-dark:hover, a.text-dark:focus {
 
 .text-reset {
   color: inherit !important;
+}
+
+.text-small{
+ font-size:13px !important;	
 }
 
 .visible {
@@ -9626,7 +9635,7 @@ a.text-dark:hover, a.text-dark:focus {
 .shopping_cart{font-size:19px}
 .zzim{font-size:19px;}
 .price{font-size:19px}
-input[type=text]:focus, input[type=password]:focus, select:focus {
+input[type=text]:focus, input[type=password]:focus, select:focus,td>textarea:focus {
   box-shadow: 0 0 0 0.2rem rgba(241,197,69,.50);
     outline: none;
     border: none;
@@ -9640,3 +9649,5 @@ input[type=text]:focus, input[type=password]:focus, select:focus {
     margin-top: 40px;
     padding-bottom: 0;
 }
+.commu{font-family:'JUA';font-size:35px;}
+.fa-paw{font-size:28px}

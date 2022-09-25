@@ -12,3 +12,6 @@ COMMENT_COMMU_NUM  references community(COMMU_NUM) on delete cascade
 
 --댓글 시퀀스
 create sequence comm_seq;
+
+
+insert into COMMUNITY_COMM values(comm_seq.nextval,'admin','댓글내용111',sysdate,1)

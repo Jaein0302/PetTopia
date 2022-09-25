@@ -28,7 +28,7 @@
 	
 	<div style="margin: 30px 0 56px 86px;">
 	<b>기업명&ensp;<i class="fas fa-check chk_name" style="display:none"></i></b>
-	<input type="text" class="jinput" name="member_name" placeholder="이름을 입력해주세요"  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"  required>
+	<input type="text" class="jinput" name="member_name" placeholder="기업명을 입력해주세요"  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);"  required>
 	
 	<b>대표자성명&ensp;<i class="fas fa-check chk_bname" style="display:none"></i></b>
 	<input type="text" class="jinput bname" placeholder="대표자성명을 입력해주세요"  onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);" required value="정윤수">
@@ -117,7 +117,8 @@
 			    	  chkbno = true;
 			    	  return;
 			      }else{
-			    	  alert("국세청에 등록되지 않은 사업자등록번호입니다.")
+			    	  alert("국세청에 등록되지 않은 사업자등록번호입니다.");
+			    	  $("input[name='member_regnum']").focus();
 			    	  chkbno = false;
 			    	  return;
 			      } 
@@ -150,7 +151,13 @@
 				$(".chk_btype").show();
 				checkbtype = true;
 			}
-		})//change
+		});//change
+		
+		//로그인 막기
+		$('.me4').click(function(){
+			$(".popup_panel").remove();
+			alert("회원가입 완료 후 로그인 해주세요.")
+		});
 	});
 	
 	//이름 공백 검사

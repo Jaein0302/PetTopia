@@ -68,6 +68,8 @@ body {
     font-family:'JUA';
     color:#243946;
     font-size:20px;
+    border: 1px solid #f5bdc7;
+    top:18px;
 }
 .fa-exclamation-circle{
 	font-size:22px;
