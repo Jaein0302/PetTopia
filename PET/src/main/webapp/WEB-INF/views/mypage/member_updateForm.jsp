@@ -6,14 +6,14 @@
 <title>회원관리 시스템 회원수정 페이지</title>
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <style>
-h3{
-	text-align: center; color: #1a92b9;
-}
-input[type=file]{
-	display:none;
-}
+.mform{width:600px!important}
+.clearfix {margin: 39px 57.5px!important}
+.text-dark{opacity:0.7}
+.text-dark:hover{opacity:1}
 </style>
+
 </head>
 <body>
 <jsp:include page="../member/header.jsp"/>
@@ -25,7 +25,7 @@ input[type=file]{
 	<input type="text" class="jinput" name="id" value="${memberinfo.member_id}" readonly>
 	
 	<b>비밀번호</b>
-	<input type="password" name="password" value="${memberinfo.member_password}" readonly>
+	<input type="password" class="jinput" name="password" value="${memberinfo.member_password}" readonly>
 	
 	<b>이름</b>
 	<input type="text" class="jinput" name="name" value="${memberinfo.member_name}" placeholder="Enter name" 
@@ -35,9 +35,9 @@ input[type=file]{
 	<input type="text" class="jinput" name="email"  value="${memberinfo.member_email}" placeholder="Enter email"
 		required><span id="email_message"></span>
 	
-	<div class="clearfix">
-		<button type="submit" class="submitbtn" style="padding: 14px 20px;">수정</button>
-		<button type="button" class="cancelbtn">취소</button>
+	<div class="clearfix mt-4">
+		<button type="submit" class="button-5 cancelbtn updateb">수정하기</button>
+		<button type="button" class="button-5 submitbtn signoutb">취소</button>
 	</div>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
