@@ -24,7 +24,7 @@ if(message == 'loginFailMsg'){
 <div class="header">
 	<jsp:include page="header.jsp" />
 </div>
-<div class="container mb-5 mainbody" style="height:600px;margin-top:200px;margin-bottom:300px">
+<div class="container mb-5 mainbody" style="height:678px;margin-top:200px;margin-bottom:300px">
 <div class="login_message text-center">
 <i class="fas fa-exclamation-circle"></i>&emsp;<span>아이디와 비밀번호를 다시 확인해주세요</span>
 </div>

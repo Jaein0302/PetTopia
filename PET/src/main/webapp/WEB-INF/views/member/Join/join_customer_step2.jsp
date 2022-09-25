@@ -76,6 +76,10 @@
 	
 	
 	$('.gomail').click(function(){
+		if(!checkemail){
+			alert('이메일 형식을 확인해주세요');
+			$("input[name=member_email]").focus();
+		}else{
 		var member_email = $("input[name=member_email]").val();
 		var token = $("meta[name='_csrf']").attr("content"); 
 		var header = $("meta[name='_csrf_header']").attr("content"); 
@@ -105,6 +109,7 @@
 				$("input[name=member_email]").focus();
 			}
 		}); //ajax
+		}
 	}); //click
 	
 	// 인증하기 클릭
@@ -141,6 +146,11 @@ $(".signoutb").click(function(){
 	if(answer == true)
 		$(location).attr('href','join');
 })
+		//로그인 막기
+		$('.me4').click(function(){
+			$(".popup_panel").remove();
+			alert("회원가입 완료 후 로그인 해주세요.")
+		});
 	</script>
 </body>
 </html>

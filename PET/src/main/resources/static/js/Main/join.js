@@ -333,3 +333,9 @@ $('.business').submit(function(){
 		    	}
 		    	
 });//기업회원가입 서브밋 end
+
+		//로그인 막기
+		$('.me4').click(function(){
+			$(".popup_panel").remove();
+			alert("회원가입 완료 후 로그인 해주세요.")
+		});
