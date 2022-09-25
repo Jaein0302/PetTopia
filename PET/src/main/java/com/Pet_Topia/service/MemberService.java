@@ -16,6 +16,7 @@ public interface MemberService {
 	public void update_pass(String str, String member_id);
 
 	public int mail_code(String member_email);
-
+	
+	public Member member_info(String id);
 
 }

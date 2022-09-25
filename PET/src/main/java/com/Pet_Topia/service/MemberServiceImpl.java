@@ -75,5 +75,10 @@ public class MemberServiceImpl implements MemberService {
 		return (rmember == null) ? -1 : 1;
 	}
 
+	@Override
+	public Member member_info(String id) {
+		return dao.isId(id);
+	}
+
 }
 
