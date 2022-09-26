@@ -3,4 +3,11 @@ $(function(){
 	$(".cowrite").click(function () {
 	    	alert("로그인 후 이용 가능합니다.")
 	});
-})
+
+	$('.summernote').summernote({
+	 placeholder: '내용을 입력해주세요',
+	  height: 450,
+	  lang: "ko-KR"
+        });
+
+});

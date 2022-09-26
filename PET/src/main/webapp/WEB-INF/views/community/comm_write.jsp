@@ -6,7 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>펫토피아 - 커뮤니티</title>
-<link href="${pageContext.request.contextPath}/resources/css/Main/join.css" type="text/css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="${pageContext.request.contextPath}/resources/css/Community/write.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/Community/summernote-lite.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <!-- header -->
@@ -31,12 +33,12 @@
 	<form class="mform" method="post" action="">
 	<sec:authorize access="isAuthenticated()">
 	  <b>제목</b>
-	  <input class="jinput" type="text" name="subject" placeholder="제목을 입력해 주세요." required>
+	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." required>
 	   
 	  <b>내용</b>
-	  <textarea class="jinput" name="content" placeholder="내용을 입력해 주세요." style="height:400px"></textarea>
-	    
-	<div class="clearfix p-0" style="margin: 13px 0px 0px 33px!important;">
+	  <textarea class="summernote" name="commu_content"></textarea>    
+	
+	<div class="clearfix">
 		<button type="submit" class="button-5 cancelbtn updateb">등록</button>
 		<button type="reset" class="button-5 submitbtn signoutb">취소</button>
 	</div>
@@ -46,9 +48,12 @@
    </div>
   </div>
  </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Community/c_list.js"></script>
-
+<script src="${pageContext.request.contextPath}/resources/js/Community/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Community/summernote-ko-KR.js"></script>
 </body>
 <jsp:include page="../member/footer.jsp" />
 </html>

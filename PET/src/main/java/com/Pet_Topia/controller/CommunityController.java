@@ -28,6 +28,7 @@ public class CommunityController {
 		this.service = service;
 	}
 	
+	// 게시판 리스트
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView baordList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
@@ -55,8 +56,11 @@ public class CommunityController {
 		return mv;
 	}
 	
+	// 글쓰기 폼 이동
 	@GetMapping(value="/write")
 	public String boardwrite() {
 		return "community/comm_write";
 	}
+	
+	// 글쓰기
 }
