@@ -23,5 +23,6 @@ public interface MemberMapper {
 
 	public Member isRegnum(String member_regnum);
 	
-	
+	public int update(Member m);
+
 }

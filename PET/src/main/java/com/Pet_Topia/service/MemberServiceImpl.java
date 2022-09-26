@@ -86,5 +86,10 @@ public class MemberServiceImpl implements MemberService {
 		return dao.isId(id);
 	}
 
+	@Override
+	public int update(Member m) {
+		return dao.update(m);
+	}
+
 }
 
