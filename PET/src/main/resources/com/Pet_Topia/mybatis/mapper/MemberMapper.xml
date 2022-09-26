@@ -9,6 +9,10 @@
 		select * from member where member_id = #{member_id}
 	</select>
 	
+	<select id="isRegnum" resultType="member" parameterType="String">
+		select * from member where member_regnum = #{member_regnum}
+	</select>
+	
 	<insert id="insert" parameterType="member">
 		insert into member 
 		values (#{member_id},#{member_password},#{member_name},

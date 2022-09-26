@@ -21,7 +21,8 @@ public interface MemberMapper {
 
 	public Member mail_code(String member_email);
 
+	public Member isRegnum(String member_regnum);
+	
 	public int update(Member m);
 
-	
 }

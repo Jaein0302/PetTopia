@@ -8,6 +8,8 @@ public interface MemberService {
 	public int insert(Member m);
 
 	public int isId(String id);
+	
+	public int isRegnum(String member_regnum);
 
 	public String find_id(String member_name, String member_email);
 
@@ -20,5 +22,6 @@ public interface MemberService {
 	public Member member_info(String id);
 	
 	public int update(Member m);
+
 
 }
