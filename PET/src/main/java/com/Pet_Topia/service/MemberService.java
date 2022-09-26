@@ -18,5 +18,7 @@ public interface MemberService {
 	public int mail_code(String member_email);
 	
 	public Member member_info(String id);
+	
+	public int update(Member m);
 
 }
