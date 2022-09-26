@@ -6,11 +6,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
-<script>
-if(!${agree}){
-	location.href="${pageContext.request.contextPath}/main/join"
-};
-</script>
 <body>
 <!-- header -->
 <div class="header">

@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>펫토피아 - 커뮤니티</title>
-<link href="${pageContext.request.contextPath}/resources/css/Community/list.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/Main/join.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <!-- header -->
@@ -28,35 +28,19 @@
 	</thead>
 	</table>
 	
-	<form method="post" action="">
-	<table class="commut" >
-	<!-- 테이블 간격 -->
-	<colgroup>
-	<col width="15%" />
-	<col width="85%" />
-	</colgroup>
-	<!-- 작성 페이지 -->
+	<form class="mform" method="post" action="">
 	<sec:authorize access="isAuthenticated()">
-	 	<sec:authentication property="principal" var="pinfo"/>
-	    <tr>
-	    	<td>글쓴이</td>
-	    	<td colspan="4"><input class="inputname" type="text" name="user_name" value="${pinfo.username}" readOnly></td>
-	    </tr>
-	    <tr>
-	    	<td>제목</td>
-	    	<td colspan="4"><input class="inputsub" type="text" name="subject" placeholder="제목을 입력해 주세요." required></td>
-	    </tr>
-	    <tr>
-	    	<td>내용</td>
-	    	<td colspan="4"><textarea class="inputcon" name="content" placeholder="내용을 입력해 주세요."></textarea></td>
-	    </tr>
-	 	<tr>
-	 	<td colspan="5">
-	 		<button type="submit" class="addcommu button-5">등록</button>
-	 		<button type="button" class="cancommu button-5">취소</button></td>
-	 	</tr>
+	  <b>제목</b>
+	  <input class="jinput" type="text" name="subject" placeholder="제목을 입력해 주세요." required>
+	   
+	  <b>내용</b>
+	  <textarea class="jinput" name="content" placeholder="내용을 입력해 주세요." style="height:400px"></textarea>
+	    
+	<div class="clearfix p-0" style="margin: 13px 0px 0px 33px!important;">
+		<button type="submit" class="button-5 cancelbtn updateb">등록</button>
+		<button type="reset" class="button-5 submitbtn signoutb">취소</button>
+	</div>
 	 </sec:authorize>
-	    </table>
 </form>
 	
    </div>
