@@ -1,12 +1,16 @@
 package com.Pet_Topia.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -25,6 +30,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.service.CommunityService;
+import com.google.gson.JsonObject;
 
 @Controller
 @RequestMapping(value = "/community")
@@ -74,6 +80,43 @@ public class CommunityController {
 	public String boardwrite() {
 		return "community/comm_write";
 	}
+	
+	//https://truecode-95.tistory.com/208
+	@RequestMapping(value="/summer_image", produces = "application/json; charset=utf8")
+	@ResponseBody
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request ) throws IOException {
+	    JsonObject json = new JsonObject();
+
+	   // String fileRoot = EgovProperties.getProperty("Globals.tempDir");
+	    String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
+	    String extension = originalFileName.substring(originalFileName.lastIndexOf(".")); //파일 확장자
+
+	    String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
+	  //  File targetFile = new File(fileRoot + savedFileName);	
+	    
+	    try {
+	        // 파일 저장
+	        InputStream fileStream = multipartFile.getInputStream();
+	       // FileUtils.copyInputStreamToFile(fileStream, targetFile);	
+	        
+	        // 파일을 열기위하여 common/getImg.do 호출 / 파라미터로 savedFileName 보냄.
+	        json.addProperty("url", "common/getImg.do?savedFileName="+savedFileName);  
+	        json.addProperty("responseCode", "success");
+	   
+	    } catch (IOException e) {
+	      //  FileUtils.deleteQuietly(targetFile);	
+	        json.addProperty("responseCode", "error");
+	        e.printStackTrace();
+	    }
+	    String jsonvalue = json.toString();
+
+	    return jsonvalue;
+	}
+	
+	
+	
+	
+	
 	
 	// 글쓰기
 		@PostMapping("/add")
