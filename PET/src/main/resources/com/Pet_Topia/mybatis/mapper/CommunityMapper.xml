@@ -31,6 +31,33 @@
 	</select>
 	
 
-
+	<insert id="insert" parameterType="community">
+		<selectKey resultType="int" order="BEFORE" keyProperty="commu_num">
+			select nvl(max(commu_num),0)+1 from community
+		</selectKey>
+		insert into community
+		values
+		(#{commu_num},
+		#{commu_name}, #{commu_subject}, 
+		#{commu_content}, #{commu_readcount}, 
+		sysdate, #{commu_thumbnail, jdbcType=VARCHAR},
+		#{commu_file, jdbcType=VARCHAR},
+		#{commu_original, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="setReadCountUpdate" parameterType="int" >
+		update community 
+		set commu_readcount = commu_readcount + 1 
+		where commu_num = #{number}
+	</update>
+	
+	<select id="getDetail" parameterType="int" resultType="community">
+		select * from community where commu_num = #{number}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete community
+		where commu_num = #{number}
+	</delete>
 
 </mapper>
