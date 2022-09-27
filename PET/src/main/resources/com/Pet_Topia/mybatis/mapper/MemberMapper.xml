@@ -52,5 +52,10 @@
 		member_email = #{member_email}
 		where member_id = #{member_id}
 	</update>
+	
+	<delete id="delete" parameterType="String">
+		delete from member
+		where member_id = #{member_id}
+	</delete>
    
 </mapper>

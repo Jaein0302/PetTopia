@@ -242,7 +242,10 @@
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
                         	 	<a href="#" class="dropdown-item mydrop">구매내역</a>
-                        	 	<a href="#" class="dropdown-item mydrop">작성한글</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내가 남긴 상품 문의 조회</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내가 남긴 후기 조회</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내 글</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내 댓글</a>
                         	 	<a href="#" class="dropdown-item">
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>

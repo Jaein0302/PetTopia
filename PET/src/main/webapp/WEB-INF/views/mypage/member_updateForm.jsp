@@ -11,12 +11,18 @@
 .clearfix {margin: 39px 57.5px!important}
 .text-dark{opacity:0.7}
 .text-dark:hover{opacity:1}
+#changePW {
+	width: 150px!important;
+	}
 </style>
 
 </head>
 <body>
 <jsp:include page="../member/header.jsp"/>
 <div class="container mb-5">
+	<div class="row">
+	<jsp:include page="./aside.jsp" />
+			
    <form class="mform" name="updateform" action="updateProcess" method="post">
 	<h1>회원 정보 수정</h1>
 	<hr>
@@ -25,6 +31,8 @@
 	
 	<b>비밀번호</b>
 	<input type="password" class="jinput" name="member_password" value="${memberinfo.member_password}" readonly>
+	<input class="button-5 postb" type="button" value="비밀번호 변경하기"  id="changePW" style="padding:10px 20px">
+	<br><br>
 	
 	<b>이름</b>
 	<input type="text" class="jinput" name="member_name" value="${memberinfo.member_name}" placeholder="Enter name" 
@@ -51,6 +59,7 @@
 	</div>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
+	</div>
 </div>
 <script>
 $('#postcode').click(function(){
@@ -92,6 +101,10 @@ function Postcode() {
         }
     }).open();
 }//function Postcode()
+
+$('#changePW').click(function(){
+	window.open("goto_changePW","post","width=300, height=500");
+})
 </script>
 </body>
 </html>
