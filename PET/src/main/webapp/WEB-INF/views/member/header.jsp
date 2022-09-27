@@ -226,13 +226,11 @@
                          
                         <!-- 로그인 / 회원가입 -->
                    		  <sec:authorize access="isAnonymous()">
-                        	<c:if test="${empty pinfo.username}">
                         	<a href="javascript:void(0)" id="btn_popup_open" class="nav-item nav-link me4">로그인</a>
                             <a href="${pageContext.request.contextPath}/main/join" class="nav-item nav-link jjoin">회원가입</a>
-                        	</c:if>
-                    
+                    	  </sec:authorize>
+                        
                         <!-- 회원 로그인 -->
-                          </sec:authorize>
                   		  <sec:authorize access="isAuthenticated()">
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

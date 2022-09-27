@@ -35,14 +35,15 @@
 	<sec:authentication property="principal" var="pinfo"/>
 	  <input type="hidden" name="commu_name" value="${pinfo.username}">
 	  <b>제목</b>
-	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
+	  <input class="jinput" type="text" name="commu_subject" 
+	  		 value="${c.commu_subject}" placeholder="제목을 입력해 주세요." maxlength="50" required>
 	  <b>대표 이미지</b>
 	  <input class="jinput" type="file" name="commu_thumbnail" accept="image/*" style="font-size:0.9rem;">
 	  <b>내용</b>
-	  <textarea class="summernote" name="commu_content"></textarea>    
+	  <textarea class="summernote" name="commu_content"><c:out value="${c.commu_content}" /></textarea>    
 		
 		<div class="clearfix">
-			<button type="submit" class="button-5 cancelbtn updateb">등록</button>
+			<button type="submit" class="button-5 cancelbtn updateb">수정</button>
 			<button type="reset" class="button-5 submitbtn signoutb">취소</button>
 		</div>
 	

@@ -34,4 +34,25 @@ public class CommunityServiceImpl implements CommunityService {
 		return dao.getBoardList(map);
 	}
 
+	@Override
+	public void insert(Community comm) {
+		dao.insert(comm);
+		
+	}
+
+	@Override
+	public int setReadCountUpdate(int num) {
+		return dao.setReadCountUpdate(num);
+	}
+
+	@Override
+	public Community getDetail(int num) {
+		return dao.getDetail(num);
+	}
+
+	@Override
+	public int delete(int num) {
+		return dao.delete(num);
+	}
+
 }
