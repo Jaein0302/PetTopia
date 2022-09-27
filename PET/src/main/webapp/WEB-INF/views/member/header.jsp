@@ -64,12 +64,12 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="" class="btn border">
+                <a href="product/wish" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
              <!-- 장바구니 -->
-                <a href="" class="btn border">
+                <a href="product/cart" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
@@ -192,9 +192,9 @@
                  <div class="nav-item dropdown" style="position:static!important">
                   <a href="#" class="nav-link dropdown-toggle catename" data-toggle="dropdown">카테고리&nbsp;&nbsp;<i class="fa fa-bars"></i></a>
                		<div class="dropdown-menu rounded-0 m-0">
-                  	 <a href="${pageContext.request.contextPath}/main/myinfo" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
-                     <a href="#" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
-                  	 <a href="#" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
+                  	 <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
+                     <a href="${pageContext.request.contextPath}/product/product_list?item_category='education'" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
+                  	 <a href="${pageContext.request.contextPath}/product/product_list?item_category='beauty" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
                		</div>
                	</div>
                </div>
