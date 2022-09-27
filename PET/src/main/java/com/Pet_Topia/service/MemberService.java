@@ -15,7 +15,7 @@ public interface MemberService {
 
 	public int find_pass(String member_id, String member_name, String member_email);
 
-	public void update_pass(String str, String member_id);
+	public int update_pass(String newpass, String member_id);
 
 	public int mail_code(String member_email);
 	

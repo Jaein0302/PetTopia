@@ -17,7 +17,7 @@ public interface MemberMapper {
 
 	public Member find_pass(String member_id, String member_name, String member_email);
 
-	public void update_pass(String str, String member_id);
+	public int update_pass(String str, String member_id);
 
 	public Member mail_code(String member_email);
 
