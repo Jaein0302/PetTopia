@@ -10,7 +10,7 @@
 <body>
 비밀번호 변경중 오류가 발생했습니다.
 
-<img>
+<img src="${pageContext.request.contextPath}/resources/img/Main/depressed.jpg">
 
 <button>창닫기</button>
 

@@ -10,7 +10,7 @@
 <body>
 비밀번호가 성공적으로 변경되었습니다.
 
-<img>
+<img src="${pageContext.request.contextPath}/resources/img/Main/tabom.jpg">
 
 <button>창닫기</button>
 
