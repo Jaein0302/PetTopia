@@ -14,11 +14,10 @@ create table ITEM (
    ITEM_SEX         VARCHAR2(10), -- male, female
    ITEM_WEIGHT      VARCHAR2(5), -- L, M, S (수정)
    ITEM_SPECIES      VARCHAR2(10) -- dog, cat
-   
-   --판매자 정보는 어디에 들어가야 할까
-   --수향도 추가해야함
 );
+
 select * from item;
+
 
 drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;
