@@ -14,6 +14,7 @@
 	 <form action="changePW_Proccess" method="post">
 		<b>비밀번호</b>
 		<input type="password" class="jinput" id="member_pass" name="member_pass">
+		<div id="pass_message"></div>
 		<b>비밀번호 확인</b>
 		<input type="password" class="jinput" id="member_pass_check"name="member_pass_check">
 		
@@ -36,6 +37,23 @@
 		} else {
 			alert("비밀번호 변경을 시도합니다");
 		}
+	})
+	
+	$('#member_pass').on('keyup', function (){
+		$("#pass_message").empty();
+		var pattern=/^[a-zA-Z0-9]{8,20}$/;
+		 var pw = $(this).val();
+		 if(!pattern.test(pw)){
+			$("#pass_message").css('color','tomato').html("숫자와 영문자 조합으로 8~20자 가능합니다.");
+	    	 return false;
+		 }else{
+		    $("#pass_message").css('color','#6dc99f').html("사용 가능한 비밀번호 입니다.");
+			  $(".chk_pass").show();
+			  $(".chk_passchk").hide(); 
+			  $("#passchk_message").empty();
+			  $("input[name=passwordchk]").val('');
+		     checkpass=true;
+		     return;
 	})
 	</script>
 </body>
