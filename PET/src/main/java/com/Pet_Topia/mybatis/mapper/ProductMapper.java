@@ -11,10 +11,14 @@ import com.Pet_Topia.domain.Product;
 @Mapper
 public interface ProductMapper {
 
-	public List<Product> getSearchList(String category);
+	public List<Product> getSearchList(Map<String, String> map);
 	
- 	
-//	public Product getDetail(int product_num);
+	public List<Product> getListAjax(Map<String, String> map);
+	
+	public int insertProduct(Product product);
+
+	
+	public Product getDetail(int ITEM_ID);
  
 
 }
