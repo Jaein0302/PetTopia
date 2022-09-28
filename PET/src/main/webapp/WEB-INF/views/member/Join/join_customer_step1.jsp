@@ -261,7 +261,13 @@
 	  for(var i = 0; i < checkbox.length; i++) {
 		var $this = $(checkbox[i]);
 	    if(!$this.is(":checked")) {
-	        alert('약관에 동의해주세요.');
+	        Swal.fire({
+				position: 'center',
+				icon: 'info',
+				title: '약관에 동의해주세요.',
+				showConfirmButton: false,
+				timer: 1000
+			})
 	        $("input[name=agree]").val('');
 	        $this.focus();
 	        return false;
@@ -278,7 +284,13 @@ $(".signoutb").click(function(){
 		//로그인 막기
 		$('.me4').click(function(){
 			$(".popup_panel").remove();
-			alert("회원가입 완료 후 로그인 해주세요.")
+			   Swal.fire({
+					position: 'center',
+					icon: 'warning',
+					title: '회원가입 완료 후 로그인 해주세요.',
+					showConfirmButton: false,
+					timer: 1000
+				})
 		});
 	</script>
 </body>

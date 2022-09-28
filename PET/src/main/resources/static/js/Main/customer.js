@@ -25,7 +25,13 @@ var checkcode=false;
 	
 	$('.gomail').click(function(){
 		if(!checkemail){
-			alert('이메일 형식을 확인해주세요');
+			Swal.fire({
+			position: 'center',
+			icon: 'warning',
+			title: '이메일 형식을 확인해주세요.',
+			showConfirmButton: false,
+			timer: 1000
+			})
 			$("input[name=member_email]").focus();
 		}else{
 		var member_email = $("input[name=member_email]").val();
@@ -44,7 +50,11 @@ var checkcode=false;
 			success : function(data) { // controllor에서 list를 return 받았음
 				console.log(data['message']);
 				if(data['message']=="success"){
-					alert(member_email+"로 인증코드를 발송했습니다.");
+				 Swal.fire(
+						  member_email,
+						  '위 이메일주소로 인증코드를 발송하였습니다!',
+						  'success'
+						)
 					$('.mail_code').val(data['code']);
 					$('.chk_email').show();
 					$("input[name=mail_code]").focus();

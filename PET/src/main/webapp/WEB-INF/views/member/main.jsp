@@ -9,12 +9,6 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 </head>
-<script>
-var message = "${message}";
-if(message == 'JoinSuccess'){
-   alert('회원가입을 축하드립니다. \n서비스는 로그인 후 이용가능합니다.')
-  };
-</script>
 <body>
 
 <!-- header -->
@@ -335,5 +329,16 @@ if(message == 'JoinSuccess'){
 
 </div>
 <jsp:include page="footer.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+var message = "${message}";
+if(message == 'JoinSuccess'){
+   Swal.fire(
+  '회원가입을 축하드립니다!',
+  '서비스는 로그인 후 이용가능합니다.',
+  'success'
+)
+  };
+</script>
 </body>
 </html>
