@@ -1,21 +1,22 @@
-
 drop table ITEM cascade constraints purge;
 
 create table ITEM (
-   ITEM_ID         VARCHAR2(15) PRIMARY KEY,
+   ITEM_ID         NUMBER(15) PRIMARY KEY,
    ITEM_NAME      VARCHAR2(30) NOT NULL,
    ITEM_CATEGORY      VARCHAR2(30) NOT NULL,
    ITEM_PRICE      NUMBER(20) NOT NULL,
    ITEM_CONTENT      VARCHAR2(1000) NOT NULL,
-   ITEM_IMAGE      VARCHAR2(100), -- NOT NULL,
-   ITEM_REG_DATE     DATE DEFAULT SYSDATE,  --  NOT NULL,
-   ITEM_RSV_DATE    DATE DEFAULT SYSDATE,  --  NOT NULL,  -- 예약날짜
+   ITEM_IMAGE_ORIGINAL     VARCHAR2(100) NOT NULL,
+   ITEM_IMAGE_FILE      VARCHAR2(100) NOT NULL, --추가
+   ITEM_REG_DATE     DATE DEFAULT SYSDATE NOT NULL,
+   ITEM_RSV_DATE    DATE DEFAULT SYSDATE NOT NULL,  -- 예약날짜
    ITEM_SCORE      NUMBER(20),  -- 후기
-   ITEM_SEX         VARCHAR2(10), -- 남, 여  
+   ITEM_SEX         VARCHAR2(10), -- male, female
    ITEM_WEIGHT      VARCHAR2(5), -- L, M, S (수정)
    ITEM_SPECIES      VARCHAR2(10) -- dog, cat
    
    --판매자 정보는 어디에 들어가야 할까
+   --수향도 추가해야함
 );
 select * from item;
 
@@ -23,23 +24,23 @@ drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;
 
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 150000,'슬개골 탈구 수술', '남', 'L', 'dog' );
+values(item_seq.nextval, '다리수술', 'treat', 150000,'슬개골 탈구 수술', 'male', 'L', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 50000, '슬개골 탈구 수술', '남', 'S', 'dog' );
+values(item_seq.nextval, '다리수술', 'treat', 50000, '슬개골 탈구 수술', 'male', 'S', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 55000, '슬개골 탈구 수술', '여', 'S', 'dog' );
+values(item_seq.nextval, '다리수술', 'treat', 55000, '슬개골 탈구 수술', 'female', 'S', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 80000, '슬개골 탈구 수술', '여', 'S', 'cat' );
+values(item_seq.nextval, '다리수술', 'treat', 80000, '슬개골 탈구 수술', 'female', 'S', 'cat' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 200000, '슬개골 탈구 수술', '남', 'M', 'dog' );
+values(item_seq.nextval, '다리수술', 'treat', 200000, '슬개골 탈구 수술', 'male', 'M', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 100000, '슬개골 탈구 수술', '남', 'M', 'dog' );
+values(item_seq.nextval, '다리수술', 'treat', 100000, '슬개골 탈구 수술', 'male', 'M', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '종양수술', 'treat', 250000, '이개혈종 수술', '남', 'L', 'dog' );
+values(item_seq.nextval, '종양수술', 'treat', 250000, '이개혈종 수술', 'male', 'L', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '종양수술', 'treat', 150000, '이개혈종 수술', '여', 'L', 'cat' );
+values(item_seq.nextval, '종양수술', 'treat', 150000, '이개혈종 수술', 'female', 'L', 'cat' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '종양수술', 'treat', 150000, '이개혈종 수술', '남', 'L', 'cat' );
+values(item_seq.nextval, '종양수술', 'treat', 150000, '이개혈종 수술', 'male', 'L', 'cat' );
 
 
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT) 

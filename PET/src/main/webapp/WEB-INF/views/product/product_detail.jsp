@@ -32,13 +32,13 @@
 					<div class="fakeimg"></div>
 
 					<div class="col-sm-6">
-						<p>상품명</p>
+						<p>상품명</p> <span>${productdata.ITEM_NAME}</span>
 						<hr>
-						<p>판매가</p>
+						<p>판매가</p> <span>${productdata.ITEM_PRICE}</span>
 						<hr>
 						<p>
-							상품개수<span>&nbsp;&nbsp;</span> <select name="ITEM_AMOUNT"
-								id="size-select">
+							상품개수<span>&nbsp;&nbsp;</span> 
+							<select name="ITEM_AMOUNT" id="size-select">
 								<option value="">--[상품개수를 선택하세요]--</option>
 								<option value="1">1개</option>
 								<option value="2">2개</option>
@@ -52,7 +52,7 @@
 						<hr>
 
 
-						<p>총 상품 금액</p>
+						<p>총 상품 금액</p> 
 						<hr style="opacity: 1; background-color: black; margin: 0 auto">
 						<br>
 						<button type="button" class="btn">관심상품 담기</button>
