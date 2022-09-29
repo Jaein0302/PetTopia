@@ -96,10 +96,24 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public Member Id_pw_check(String id, String password) {
+		return dao.Id_pw_check(id, password);
+	}
+
+	@Override
+	public void Delete_user(String id) {
+		dao.Delete_user(id);
+	}
+
+	@Override
+	public Member getMemberdata(String id) {
+		return dao.getMemberdata(id);
+	}
+
+  @Override
 	public List<Product> search_item(String item) {
 		item = "%"+item+"%";
 		return dao.search_item(item);
-		
 	}
 
 	@Override

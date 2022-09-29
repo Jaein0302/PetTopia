@@ -11,6 +11,16 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 </head>
+
+<script>
+var withdraw_message = "${withdraw_message}";
+if (withdraw_message == "withdraw_success"){
+	alert('그동안 펫토피아를 이용해주셔서 감사합니다.');
+} else if (withdraw_message == "withdraw_fail") {
+	alert('탈퇴처리 과정중 문제가 발생하였습니다. \n 관리자에게 문의해주세요.')
+};
+</script>
+
 <body>
 
 <!-- header -->

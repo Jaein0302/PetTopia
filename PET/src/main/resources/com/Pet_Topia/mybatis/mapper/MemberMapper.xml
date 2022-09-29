@@ -53,10 +53,21 @@
 		where member_id = #{member_id}
 	</update>
 	
-	<delete id="delete" parameterType="String">
+	<select id="Id_pw_check"  parameterType="String" resultType="member">
+		select * from member
+		where member_id = #{id}
+		and member_password = #{encPassword}
+	</select>
+	
+	<delete id="Delete_user" parameterType="String">
 		delete from member
 		where member_id = #{member_id}
 	</delete>
+	
+	<select id="getMemberdata" parameterType="String" resultType="member">
+		select * from member
+		where member_id = #{id}
+	</select>
    
     <select id="search_item" resultType="product">
       select *  

@@ -36,6 +36,7 @@ public class MemberController {
 	// import org.slf4j.LoggerFactory;
 	private static final Logger Logger = LoggerFactory.getLogger(MemberController.class);
 
+	
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
 	private SendMail sendMail;

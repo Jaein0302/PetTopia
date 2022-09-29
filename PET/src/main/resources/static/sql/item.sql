@@ -16,6 +16,8 @@ create table ITEM (
    ITEM_SPECIES      VARCHAR2(10) -- dog, cat
 );
 
+select * from item;
+delete item
 
 		select * from item;
 

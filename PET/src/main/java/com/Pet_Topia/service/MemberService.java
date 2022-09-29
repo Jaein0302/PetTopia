@@ -26,6 +26,12 @@ public interface MemberService {
 	
 	public int update(Member m);
 
+	public Member Id_pw_check(String id, String password);
+
+	public void Delete_user(String id);
+
+	public Member getMemberdata(String id);
+
 	public List<Product> search_item(String item);
 
 	public List<Product> search_treat(String item);
