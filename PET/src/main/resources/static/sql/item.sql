@@ -17,7 +17,7 @@ create table ITEM (
 );
 
 select * from item;
-
+delete item
 
 drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;

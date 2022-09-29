@@ -25,4 +25,10 @@ public interface MemberMapper {
 	
 	public int update(Member m);
 
+	public Member Id_pw_check(String id, String encPassword);
+
+	public void Delete_user(String id);
+
+	public Member getMemberdata(String id);
+
 }
