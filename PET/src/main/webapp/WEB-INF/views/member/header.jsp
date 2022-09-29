@@ -284,7 +284,7 @@
     		if(input.length==0){
     			Swal.fire({
     				position: 'center',
-    				icon: 'info',
+    				icon: 'question',
     				title: '검색어를 입력해주세요',
     				showConfirmButton: false,
     				timer: 1000

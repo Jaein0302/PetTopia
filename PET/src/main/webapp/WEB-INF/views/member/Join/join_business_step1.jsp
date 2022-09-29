@@ -276,12 +276,23 @@
 	  }
 	  return true;
 	})
+	
+	
 	//취소 버튼 누르면 뒤로가기
-$(".signoutb").click(function(){
-	var answer = confirm("가입을 취소하시겠습니까?")
-	if(answer == true)
-		$(location).attr('href','join');
-})
+	 $(".signoutb").click(function(){
+		 Swal.fire({
+			  title: '가입을 취소하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $(location).attr('href','join');
+			  }
+			})
+		}) 
+
 		//로그인 막기
 		$('.me4').click(function(){
 			$(".popup_panel").remove();
