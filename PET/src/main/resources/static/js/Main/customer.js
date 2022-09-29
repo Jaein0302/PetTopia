@@ -25,7 +25,7 @@ var checkcode=false;
 	
 	$('.gomail').click(function(){
 		if(!checkemail){
-			alert('이메일 형식을 확인해주세요');
+			alert('이메일 형식을 확인해주세요.');
 			$("input[name=member_email]").focus();
 		}else{
 		var member_email = $("input[name=member_email]").val();
@@ -44,7 +44,11 @@ var checkcode=false;
 			success : function(data) { // controllor에서 list를 return 받았음
 				console.log(data['message']);
 				if(data['message']=="success"){
-					alert(member_email+"로 인증코드를 발송했습니다.");
+				 Swal.fire(
+						  member_email,
+						  '위 이메일주소로 인증코드를 발송하였습니다!',
+						  'success'
+						)
 					$('.mail_code').val(data['code']);
 					$('.chk_email').show();
 					$("input[name=mail_code]").focus();
@@ -71,7 +75,11 @@ var checkcode=false;
 	        $("input[name=mail_code]").focus();
 	        checkcode=false;
 	    }else if(code!="" && inputcode==code){
-	    	alert('인증이 완료되었습니다.');
+	    	Swal.fire(
+			  '본인 인증이 완료되었습니다!',
+			  '다음단계로 이동해주세요.',
+			  'success'
+			)
 	    	$('.chk_code').show();
 	    	checkcode=true;
 	    }
@@ -91,13 +99,28 @@ var checkcode=false;
 		}
 	})
 //취소 버튼 누르면 뒤로가기
-$(".signoutb").click(function(){
-	var answer = confirm("가입을 취소하시겠습니까?")
-	if(answer == true)
-		$(location).attr('href','join');
-})
+	 $(".signoutb").click(function(){
+		 Swal.fire({
+			  title: '가입을 취소하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $(location).attr('href','join');
+			  }
+			})
+		}) 
+		
 		//로그인 막기
 		$('.me4').click(function(){
 			$(".popup_panel").remove();
-			alert("회원가입 완료 후 로그인 해주세요.")
-		});
+			   Swal.fire({
+					position: 'center',
+					icon: 'warning',
+					title: '회원가입 완료 후 로그인 해주세요.',
+					showConfirmButton: false,
+					timer: 1000
+				})
+		});;

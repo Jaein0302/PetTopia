@@ -8,17 +8,6 @@
 .joinbtn:hover, .joinbtn:active{background-color:#f7e1ab;border:1px solid #f7e1ab}
 </style>
 </head>
-<script>
-var message = "${message}";
-if(message == 'loginFailMsg'){
-   alert('로그인 실패하였습니다. \n재로그인 해주세요.');
-  }else if(message == 'loginSuccessMsg'){
-	  function go_main(){
-	    location.href="${pageContext.request.contextPath}/main/main"
-      }
-	  go_main()
-  };
-</script>
 <body>
 <!-- header -->
 <div class="header">
@@ -127,5 +116,22 @@ if(message == 'loginFailMsg'){
     </div>
      </div>
 <jsp:include page="footer.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+var message = "${message}";
+if(message == 'loginFailMsg'){
+   Swal.fire({
+	   icon: 'error',
+	   title: '로그인에 실패하였습니다',
+	   text: '아이디와 비밀번호를 확인해주세요',
+	   footer: '<a href="${pageContext.request.contextPath}/main/Find_user">아이디/비밀번호가 기억안나시나요?</a>'
+	 })
+  }else if(message == 'loginSuccessMsg'){
+	  function go_main(){
+	    location.href="${pageContext.request.contextPath}/main/main"
+      }
+	  go_main()
+  };
+</script>
 </body>
 </html>

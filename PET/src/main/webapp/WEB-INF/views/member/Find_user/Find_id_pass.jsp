@@ -9,12 +9,6 @@
 .joinbtn{border:1px solid silver;margin:0 40px;border-radius:20px;}
 </style>
 </head>
-<script>
-var message = "${message}";
-if(message == 'fail'){
-   alert('등록된 정보가 없습니다.')
-  };
-</script>
 <body>
 <!-- header -->
 <div class="header">
@@ -59,5 +53,15 @@ if(message == 'fail'){
     </div>
     </div>
 <jsp:include page="../footer.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+var message = "${message}";
+if(message == 'fail'){
+    Swal.fire({
+	   icon: 'error',
+	   title: '등록된 정보가 없습니다.',
+	 })
+  };
+</script>
 </body>
 </html>
