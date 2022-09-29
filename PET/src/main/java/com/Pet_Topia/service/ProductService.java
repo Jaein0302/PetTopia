@@ -16,5 +16,15 @@ public interface ProductService {
 	
 	public Product getDetail(int ITEM_ID);
 
+	public int getListCount();
+	
+	public List<Product> getProductList(int page, int limit);
+	
+	public int productUpdate(Product product);
+
+	public int productDelete(int ITEM_ID);
+
+
+
 
 }

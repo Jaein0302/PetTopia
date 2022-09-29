@@ -9,36 +9,67 @@
 <meta charset="UTF-8">
 <title>펫토피아 - 수술/치료</title>
 <link href="${pageContext.request.contextPath}/resources/css/Product/detail.css" rel="stylesheet" type="text/css">
-
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+	p > span, p> select { 
+							float : right;
+							position : relative;
+							right : 60px;
+							}
+	#tab1, #tab2, #tab3, #tab4 {position : relative;
+								left : 20px;
+								}
+	span img { width : 30px}
+</style>
+<script>
+$(function() {	
+	var filename = $("#image_file").val();
+	console.log("filename=" + filename);
+	var fileCallPath = encodeURIComponent(filename);
+	var str = "<img class='img-fluid w-100' src='${pageContext.request.contextPath}/product/display?filename=" +  fileCallPath  +"'>"
+		
+	$(".uploadResult").append(str);	
+	
+	
+	$(".amount").on('change', function(){
+		var p_price = $(".product_price").text().slice(0, -1);
+		console.log("p_price=" + p_price)
+		var t_price = $(".amount").val() * p_price;		
+		$(".total_price").html(t_price);
+	})
+});
+
+
+
+
+</script>
 
 </head>
 
 <body>
 	<jsp:include page="../member/header.jsp" />
-
+	<input type="hidden"  id="image_file" value="${productdata.ITEM_IMAGE_FILE}">
+	
 	<div class="row align-items-center justify-content-center detail">
 		<div class="col-sm-9 ">
 			<br>
 			<div>
 				<b>상품 상세보기</b>
 			</div>
-			<hr
-				style="height: 2px; opacity: 1; background-color: black; margin: 0 auto">
+			<hr	style="height: 2px; opacity: 1; background-color: black; margin: 0 auto">
 			<br>
 
 			<div class="container">
-				<div class="row text-center">
-					<div class="fakeimg"></div>
+				<div class="row text-center detailbox">
+					<div class="uploadResult"></div>
 
 					<div class="col-sm-6">
-						<p>상품명</p> <span>${productdata.ITEM_NAME}</span>
+						<p>상품명 <span>${productdata.ITEM_NAME}</span> </p>
 						<hr>
-						<p>판매가</p> <span>${productdata.ITEM_PRICE}</span>
+						<p>판매가 <span class="product_price">${productdata.ITEM_PRICE}원</span> </p>
 						<hr>
-						<p>
-							상품개수<span>&nbsp;&nbsp;</span> 
-							<select name="ITEM_AMOUNT" id="size-select">
+						<p>상품개수 
+							<select class="amount" name="amount" id="size-select">
 								<option value="">--[상품개수를 선택하세요]--</option>
 								<option value="1">1개</option>
 								<option value="2">2개</option>
@@ -48,15 +79,21 @@
 							</select>
 						</p>
 						<hr>
-						<p>예약 날짜/시간 정하기
+						<p>예약 날짜/시간 정하기 
+							<span>					
+								<a href=#>
+									<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Product/calendar.png">
+								</a>
+							</span>
+						</p>
 						<hr>
 
 
-						<p>총 상품 금액</p> 
+						<p>총 상품 금액 <span class="total_price"> </span></p> 
 						<hr style="opacity: 1; background-color: black; margin: 0 auto">
 						<br>
-						<button type="button" class="btn">관심상품 담기</button>
-						<button type="button" class="btn">장바구니 담기</button>
+						<button type="button" class="btn-primary">관심상품 담기</button>
+						<button type="button" class="btn-primary">장바구니 담기</button>
 					</div>
 				</div>
 				<br>
@@ -67,12 +104,17 @@
 
 			<div class="tab">
 				<input id="tab1" type="radio" name="tabs" checked>
-				<!--디폴트 메뉴-->
-				<label for="tab1">상품상세정보</label> <input id="tab2" type="radio"
-					name="tabs"> <label for="tab2">상품 구매후기</label> <input
-					id="tab3" type="radio" name="tabs"> <label for="tab3">상품
-					문의</label> <input id="tab4" type="radio" name="tabs"> <label
-					for="tab4">취소/ 환불</label>
+				<label for="tab1">상품상세정보</label> 	
+							
+				<input id="tab2" type="radio" name="tabs"> 				
+				<label for="tab2">상품 구매후기</label> 
+				
+				<input id="tab3" type="radio" name="tabs"> 
+				<label for="tab3">상품 문의</label> 
+				
+				<input id="tab4" type="radio" name="tabs"> 
+				<label for="tab4">취소/ 환불</label>
+				
 
 				<section id="content1">
 					<p>상세정보</p>

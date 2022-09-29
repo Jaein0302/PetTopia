@@ -1,6 +1,8 @@
 package com.Pet_Topia.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -12,8 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -100,12 +106,37 @@ public class ProductController {
 		
 	}
 	
+	//상품 등록하기 페이지
 	@GetMapping(value ="/my_product") 
-	public String my_product() {
-		return "product/my_product";			
-	}	
-	
-	@PostMapping(value ="/product_add") 
+	public ModelAndView my_product(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			ModelAndView mv) {
+		int limit = 5; // 한 화면에 출력할 로우 갯수
+		int listcount = productService.getListCount(); // 총 리스트 수를 받아옴
+		// 총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등...)
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		List<Product> productlist = productService.getProductList(page, limit); // 리스트를 받아옴
+		mv.setViewName("product/my_product");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("productlist", productlist);
+		mv.addObject("limit", limit);
+		return mv;
+	}
+
+	//상품 등록하기
+	@PostMapping(value ="/add") 
 	public String add_product(Model mv, 
 							  RedirectAttributes rattr, 
 							  Product product, 
@@ -142,11 +173,11 @@ public class ProductController {
 		if(result == 0) {
 			logger.info("상품 등록실패");
 			mv.addAttribute("url",request.getRequestURL());
-			mv.addAttribute("message", "게시판 삭제 실패");
+			mv.addAttribute("message", "상품 등록 실패");
 			return "error/error";
 		}
 		
-		logger.info("게시판 삭제 성공");		
+		logger.info("상품 등록 성공");		
 		rattr.addFlashAttribute("result","addSuccess");
 		
 		return "redirect:my_product";
@@ -191,8 +222,120 @@ public class ProductController {
 		logger.info("fileDBName = " + fileDBName);
 		return fileDBName;
 	}
+	
+	//이미지 썸네일
+	@GetMapping("/display")
+	public ResponseEntity<byte[]> showImage(String filename) {
+		
+		logger.info("fileName: " + filename);
+		
+		File file = new File("c:\\upload" + filename);
+		
+		logger.info("file: " + file);
+		
+		ResponseEntity<byte[]> result = null;
+		
+		try {
+			HttpHeaders header = new HttpHeaders();
+			
+			header.add("Content=Type", Files.probeContentType(file.toPath()));
+			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	//업데이트 화면
+	@GetMapping(value = "/update_view")
+	public ModelAndView modifyView(
+						int ITEM_ID, 
+						ModelAndView mv,
+						HttpServletRequest request) {
+	
+		Product productdata = productService.getDetail(ITEM_ID);
+	
+		//글 내용 불러오기 실패
+		if(productdata == null) {
+			logger.info("수정보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","수정보기 실패입니다.");
+			return mv;
+		}
+		
+		logger.info("(수정)상세보기 성공");
+		mv.setViewName("product/update_view");
+		mv.addObject("productdata", productdata);
+		return mv;
+	}
+	
+	
+	@PostMapping("/update")
+	public String BoardModifyAction(Model mv, 
+						  RedirectAttributes rattr, 
+						  Product product, 
+						  HttpServletRequest request) throws Exception {
+		
+		MultipartFile uploadfile = product.getUploadfile();
+		
+		if (!uploadfile.isEmpty()) {
+		String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+		product.setITEM_IMAGE_ORIGINAL(fileName); // 원래 파일명 저장
+		String saveFolder = mysavefolder.getSavefolder();
+		
+		logger.info("fileName=" + fileName);
+		logger.info("mysavefolder=" + mysavefolder);
+		logger.info("saveFolder=" + saveFolder);
 
+		String fileDBName = fileDBName(fileName, saveFolder);
+		logger.info("fileDBName = " + fileDBName);
+		
+		// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+		uploadfile.transferTo(new File(saveFolder + fileDBName));
+		logger.info("transferTo path = " + saveFolder + fileDBName);
+		// 바뀐 파일명으로 저장
+		product.setITEM_IMAGE_FILE(fileDBName);
+		}
+		
+		logger.info(product.toString());// selectKey로 정의한 BAORD_NUM 값 확인해 봅니다.
+		int result = productService.productUpdate(product); // 저장 메서드 호출
+		
+		if(result == 0) {
+		logger.info("상품 수정 실패");
+		mv.addAttribute("url",request.getRequestURL());
+		mv.addAttribute("message", "상품 수정 실패");
+		return "error/error";
+		}
+		
+		logger.info("상품 수정 성공");		
+		rattr.addFlashAttribute("result","updateSuccess");
+		
+		return "redirect:my_product";
+		}
 
+	
+	@GetMapping("/delete")
+	public String delete(int ITEM_ID,
+						 Model mv, 
+						 HttpServletRequest request,
+						 RedirectAttributes rattr) {
+
+		int result = productService.productDelete(ITEM_ID);
+		
+		//삭제 처리 실패한 경우
+		if(result == 0) {
+			logger.info("상품 삭제 실패");
+			mv.addAttribute("url",request.getRequestURL());
+			mv.addAttribute("message", "상품 삭제 실패");
+			return "error/error";
+		}
+		logger.info("게시판 삭제 성공");
+		rattr.addFlashAttribute("result","deleteSuccess");
+		return "redirect:my_product";
+	}
+	
+	
 	@RequestMapping(value ="/wish")
 	public String wish_list() {	
 		return "product/wish_list";
@@ -201,7 +344,7 @@ public class ProductController {
 	@RequestMapping(value ="/cart")
 	public String cart_list() {	
 		return "product/cart_list";
-	}	
+	}
 }
 	
 	

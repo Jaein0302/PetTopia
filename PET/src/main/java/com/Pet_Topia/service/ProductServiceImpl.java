@@ -56,4 +56,30 @@ public class ProductServiceImpl implements ProductService {
 	public Product getDetail(int ITEM_ID) {
 		return dao.getDetail(ITEM_ID);
 	}
+	
+	@Override
+	public int getListCount() {
+		return dao.getListCount();
+	}
+
+	@Override
+	public List<Product> getProductList(int page, int limit) {
+
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getProductList(map);
+	}
+	
+	@Override
+	public int productUpdate(Product product) {
+		return dao.productUpdate(product);
+	}
+	
+	@Override
+	public int productDelete(int ITEM_ID) {
+		return dao.productDelete(ITEM_ID);		
+	}
 }

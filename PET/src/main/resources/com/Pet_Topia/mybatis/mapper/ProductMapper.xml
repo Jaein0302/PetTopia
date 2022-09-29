@@ -56,5 +56,41 @@
    	<select id="getDetail" parameterType="int" resultType="product">
 		select * from item where ITEM_ID = 	#{ITEM_ID}
 	</select>
+	
+	<select id="getListCount" resultType="int">
+		select count(*) from item
+	</select>
+	
+	<select id="getProductList" parameterType="java.util.Map"	resultType="product">
+		select *
+		from(select rownum rnum, a.*
+		 	 from (select * 
+			   	   from item
+			   	   order by ITEM_REG_DATE desc) a
+		 	 where rownum &lt;= #{end}
+		 	)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}		
+	</select>
+	
+	<update id="productUpdate" parameterType="product">
+		update item 
+		
+		set ITEM_NAME = #{ITEM_NAME}, 
+			ITEM_CATEGORY = #{ITEM_CATEGORY}, 
+			ITEM_PRICE = #{ITEM_PRICE},
+			ITEM_CONTENT = #{ITEM_CONTENT},   
+			ITEM_IMAGE_ORIGINAL = #{ITEM_IMAGE_ORIGINAL},   
+			ITEM_IMAGE_FILE = #{ITEM_IMAGE_FILE},   
+			ITEM_SEX = #{ITEM_SEX},   
+			ITEM_WEIGHT = #{ITEM_WEIGHT},   
+			ITEM_SPECIES = #{ITEM_SPECIES}
+			
+		where ITEM_ID = #{ITEM_ID}
+	</update> 
+	
+	<delete id="productDelete" parameterType="Int">
+		delete from item  
+		where  ITEM_ID = #{ITEM_ID}	
+	</delete>
 
 </mapper>
