@@ -60,10 +60,11 @@
 		<sec:authorize access="isAuthenticated()">
 		<sec:authentication property="principal" var="pinfo"/>
 		<c:if test="${c.commu_name == pinfo.username || pinfo.username == 'admin' }">
-			<a style="color:#0ab9a0;font-size:16px" href="${pageContext.request.contextPath}/community/modifyView?num=${c.commu_num}">수정</a>
-			&nbsp;
-			<a style="color:tomato;font-size:16px;cursor:pointer" class="deletechk">삭제</a>
-			&nbsp;&nbsp;
+			<a style="color:#0ab9a0;font-size:16px" 
+			   href="${pageContext.request.contextPath}/community/modifyView?num=${c.commu_num}"><i class="fas fa-edit"></i>&nbsp;수정</a>
+			&ensp;
+			<a style="color:tomato;font-size:16px;cursor:pointer" class="deletechk"><i class="fas fa-trash-alt"></i>&nbsp;삭제</a>
+			&ensp;
 			</c:if>
 		</sec:authorize>
 			<a href="${pageContext.request.contextPath}/community/list" style="padding-right:10px;">

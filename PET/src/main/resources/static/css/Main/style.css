@@ -9652,3 +9652,4 @@ input[type=text]:focus, input[type=password]:focus, select:focus,textarea:focus 
 .commu{font-family:'JUA';font-size:35px;}
 .fa-paw{font-size:28px}
 button:focus{boxshadow:none;outline:none;}
+input:focus{boxshadow:none;}

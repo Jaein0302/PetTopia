@@ -16,6 +16,8 @@ public class Community {
 	private String commu_file;
 	private String commu_original; //첨부될 파일 명
 	
+	
+	
 	public String getCommu_original() {
 		return commu_original;
 	}
