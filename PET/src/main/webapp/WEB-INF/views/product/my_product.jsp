@@ -268,10 +268,8 @@ $('#delete').on('click',function(){
 	  	 	 		
 	  	 	 	<h5>상품 이미지</h5>
 			  	<div class="form-group">
-				 	<label for="upfile">파일 첨부</label>
-					<label>
-						<input class="hidden" id="file" type="file" id="upfile" name="uploadfile">					
-					</label>
+			  	 	<label for="BOARD_FILE">파일 첨부</label>
+					<input type="file" id="upfile" name="uploadfile">
 		  		</div> 	  	 	 	
 		  	 	 		  	 	 
 		  	 	 <button type="submit" class="btn btn-primary" id="p_add">상품 등록</button>
