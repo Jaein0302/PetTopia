@@ -72,8 +72,8 @@
                   	    <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">                  	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span> ${p.ITEM_NAME}</span>
-                        <h4 class="text-truncate">${p.ITEM_CONTENT}</h4>
+						<span> ${p.ITEM_CONTENT}</span>
+                        <h4 class="text-truncate">${p.ITEM_NAME}</h4>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black">${p.ITEM_PRICE}</span>

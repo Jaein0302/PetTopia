@@ -27,9 +27,9 @@
                     </div>
                     <div class="gs-footBody">
                         <ul class="gs-links-list">
-                            <li><a class="text-dark">수술/치료</a></li>
-                            <li><a class="text-dark">교육</a></li>
-                            <li><a class="text-dark">미용</a></li>
+                            <li><a class="text-dark" href="${pageContext.request.contextPath}/product/product_list?item_category=treat">수술/치료</a></li>
+                            <li><a class="text-dark" href="${pageContext.request.contextPath}/product/product_list?item_category=education">교육</a></li>
+                            <li><a class="text-dark" href="${pageContext.request.contextPath}/product/product_list?item_category=beauty">미용</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +11,8 @@
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 </head>
-<script>
-var message = "${message}";
-if(message == 'JoinSuccess'){
-   alert('회원가입을 축하드립니다. \n서비스는 로그인 후 이용가능합니다.')
-  };
 
+<script>
 var withdraw_message = "${withdraw_message}";
 if (withdraw_message == "withdraw_success"){
 	alert('그동안 펫토피아를 이용해주셔서 감사합니다.');
@@ -22,6 +20,7 @@ if (withdraw_message == "withdraw_success"){
 	alert('탈퇴처리 과정중 문제가 발생하였습니다. \n 관리자에게 문의해주세요.')
 };
 </script>
+
 <body>
 
 <!-- header -->
@@ -123,7 +122,7 @@ if (withdraw_message == "withdraw_success"){
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <!-- <p class="text-right">15 Products</p> -->
-                    <a href="/product/treat" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Main/dog1.jpg" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0" style="text-align:center">수술/치료</h5>
@@ -131,7 +130,7 @@ if (withdraw_message == "withdraw_success"){
             </div>
                   <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="${pageContext.request.contextPath}/product/product_list?item_category=education" class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Main/dog4.jpg" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0" style="text-align:center">교육</h5>
@@ -139,7 +138,7 @@ if (withdraw_message == "withdraw_success"){
             </div>
                   <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+                    <a href="${pageContext.request.contextPath}/product/product_list?item_category=beauty" class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Main/dog5.jpg" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0" style="text-align:center">미용</h5>
@@ -184,134 +183,24 @@ if (withdraw_message == "withdraw_success"){
             <h2 class="section-title px-5"><span class="px-2">BEST</span></h2>
         </div>
         <div class="row px-xl-5 pb-3">
+        <c:forEach var="p" items="${list}" end="7">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4" onclick="location.href='product/detail'">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                         <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
+                    	<span>${p.ITEM_NAME}</span>
+                        <h4 class="text-truncate">${p.ITEM_CONTENT}</h4>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
+                    	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
                     	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
                         <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-           <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-           <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
-                    </div>
-                    <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>해피동물병원</span>
-                        <h4 class="text-truncate">건강검진</h4>
-                    </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">100,000원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
-                    </div>
-                </div>
-            </div>
+         </c:forEach>
         </div>
     </div>
     <!-- Products End -->
@@ -342,5 +231,16 @@ if (withdraw_message == "withdraw_success"){
 
 </div>
 <jsp:include page="footer.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+var message = "${message}";
+if(message == 'JoinSuccess'){
+   Swal.fire(
+  '회원가입을 축하드립니다!',
+  '서비스는 로그인 후 이용가능합니다.',
+  'success'
+)
+  };
+</script>
 </body>
 </html>

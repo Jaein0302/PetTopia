@@ -1,8 +1,11 @@
 package com.Pet_Topia.mybatis.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.Pet_Topia.domain.Member;
+import com.Pet_Topia.domain.Product;
 
 @Mapper
 public interface MemberMapper {
@@ -30,5 +33,24 @@ public interface MemberMapper {
 	public void Delete_user(String id);
 
 	public Member getMemberdata(String id);
+
+	public List<Product> search_item(String item);
+
+	public List<Product> search_treat(String item);
+	
+	public List<Product> search_edu(String item);
+
+	public List<Product> search_beauty(String item);
+
+	public int search_item_count(String item);
+
+	public int search_treat_count(String item);
+
+	public int search_edu_count(String item);
+
+	public int search_beauty_count(String item);
+
+	public List<Product> best_item();
+
 
 }

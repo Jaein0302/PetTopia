@@ -2,6 +2,7 @@ package com.Pet_Topia.controller;
 
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.MailVO;
 import com.Pet_Topia.domain.Member;
+import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.service.MemberService;
 import com.Pet_Topia.task.SendMail;
 
@@ -50,8 +52,12 @@ public class MemberController {
 	
 	//메인페이지
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main() {
-		return "member/main";
+	public ModelAndView main(ModelAndView mv) {
+		List<Product> list = null;
+		list = memberservice.best_item();
+		mv.setViewName("member/main");
+		mv.addObject("list",list);
+		return mv;
 	}
 	
 	//로그인에러시
@@ -273,9 +279,36 @@ public class MemberController {
 
 	//통합검색
 	@GetMapping(value = "/search_item")
-	public String searchitem(@RequestParam("item") String item,Model m) {
-		m.addAttribute("item",item);
-		return "member/Search_item";
+	public ModelAndView searchitem(@RequestParam("item") String item,ModelAndView mv) {
+		int lc = 0;int tc = 0;int ec = 0;int bc = 0;
+		List<Product> list = null;
+		list = memberservice.search_item(item);
+		lc = memberservice.search_item_count(item);
+		
+		List<Product> tlist = null;
+		tlist = memberservice.search_treat(item);
+		tc = memberservice.search_treat_count(item);
+		
+		List<Product> elist = null;
+		elist = memberservice.search_edu(item);
+		ec = memberservice.search_edu_count(item);
+		
+		List<Product> blist = null;
+		blist = memberservice.search_beauty(item);
+		bc = memberservice.search_beauty_count(item);
+		
+		mv.setViewName("member/Search_item/Search_item");
+		mv.addObject("item",item);
+		mv.addObject("p",list);
+		mv.addObject("t",tlist);
+		mv.addObject("e",elist);
+		mv.addObject("b",blist);
+		if(lc!=0) {
+		mv.addObject("lc",lc);
+		mv.addObject("tc",tc);
+		mv.addObject("ec",ec);
+		mv.addObject("bc",bc);}
+		return mv;
 	}
 	
 	

@@ -1,10 +1,13 @@
 package com.Pet_Topia.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.Member;
+import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.mybatis.mapper.MemberMapper;
 
 @Service
@@ -107,7 +110,58 @@ public class MemberServiceImpl implements MemberService {
 		return dao.getMemberdata(id);
 	}
 
-	
+  @Override
+	public List<Product> search_item(String item) {
+		item = "%"+item+"%";
+		return dao.search_item(item);
+	}
+
+	@Override
+	public List<Product> search_treat(String item) {
+		item = "%"+item+"%";
+		return dao.search_treat(item);
+	}
+
+	@Override
+	public List<Product> search_edu(String item) {
+		item = "%"+item+"%";
+		return dao.search_edu(item);
+	}
+
+	@Override
+	public List<Product> search_beauty(String item) {
+		item = "%"+item+"%";
+		return dao.search_beauty(item);
+	}
+
+	@Override
+	public int search_item_count(String item) {
+		item = "%"+item+"%";
+		return dao.search_item_count(item);
+	}
+
+	@Override
+	public int search_treat_count(String item) {
+		item = "%"+item+"%";
+		return dao.search_treat_count(item);
+	}
+
+	@Override
+	public int search_edu_count(String item) {
+		item = "%"+item+"%";
+		return dao.search_edu_count(item);
+	}
+
+	@Override
+	public int search_beauty_count(String item) {
+		item = "%"+item+"%";
+		return dao.search_beauty_count(item);
+	}
+
+	@Override
+	public List<Product> best_item() {
+		return dao.best_item();
+	}
 
 }
 

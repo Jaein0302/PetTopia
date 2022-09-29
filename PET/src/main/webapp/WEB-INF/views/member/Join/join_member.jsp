@@ -42,11 +42,18 @@
     </div>
     
 <jsp:include page="../footer.jsp" />
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 //로그인 막기
 $('.me4').click(function(){
 	$(".popup_panel").remove();
-	alert("회원가입 완료 후 로그인 해주세요.")
+	Swal.fire({
+		position: 'center',
+		icon: 'warning',
+		title: '회원가입 완료 후 로그인 해주세요.',
+		showConfirmButton: false,
+		timer: 1000
+	})
 });
 </script>
 </body>

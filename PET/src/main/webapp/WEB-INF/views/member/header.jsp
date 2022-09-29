@@ -272,6 +272,7 @@
 
 	<!-- login js -->
 	<script src="${pageContext.request.contextPath}/resources/js/Main/login.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	$(function(){
 		$("#logout").click(function(event){
@@ -281,7 +282,13 @@
 		$('.isearch').on('click', function() {
 			var input = $('input[name=item]').val();
     		if(input.length==0){
-    			alert("검색어 입력해주세요");
+    			Swal.fire({
+    				position: 'center',
+    				icon: 'question',
+    				title: '검색어를 입력해주세요',
+    				showConfirmButton: false,
+    				timer: 1000
+    			})
     			event.preventDefault();
     		}else{
     			$("form[name=search]").submit();

@@ -30,13 +30,18 @@
  	<thead>
    <tr style="border:none">
      <th colspan="3" class="text-left"><span class="commu">&emsp;커뮤니티&nbsp;</span><i class="fas fa-paw"></i></th>
-     <th colspan="2" class="text-right">
-    	 <font size=4>
-	     		<i class="fas fa-th-list"></i>&emsp;
-	     		<i class="fas fa-th-large"></i>&emsp;
-	     		<i class="fas fa-align-justify"></i>
-	     </font>
-     </th>
+     <th colspan="2" class="text-center">
+     <span><i class="fas fa-star"></i>추천 게시글</span>
+	     <div class="block">
+		    <ul id="ticker">
+		        <li><a href="#">제목1</a></li>
+		        <li><a href="#">제목2</a></li>
+		        <li><a href="#">제목3</a></li>
+		        <li><a href="#">제목4</a></li>
+		        <li><a href="#">제목5</a></li>
+		    </ul>
+		</div>
+	</th>
      </tr> 
      <tr>
     	<th>번호</th>
@@ -78,9 +83,24 @@
 	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >
 	  </sec:authorize>
 	 </div>
+	 
+<!-- 검색 창 -->
+	 <div class="text-center" style="position:absolute;left:35%;">
+	 <form method="get" action="">
+	 <select name="search_field">
+	 <option value="0" selected>제목+내용</option>
+	 <option value="1">작성자</option>
+	 <option value="2">제목</option>
+	 <option value="3">내용</option>
+	 </select>
+	 <input type="text" class="search_word" name="search_word" value="">
+	 <input type="button" class="button-5 postb" value="검색" style="min-height:40px;width:15%">
+	 </form>
+	 </div>
+	 
 <!-- 페이징 처리 -->
-	<div class="text-center" style="position:absolute;right: 40%;">
-	<ul class="pagination modal-2">
+	<div style="position:absolute;left:45%;margin-top:72px">
+	<ul class="pagination modal-2 text-center">
 	  
 	 <c:if test="${page <= 1 }">
 	  <li><a href="#" class="prev"><i class="fas fa-angle-double-left"></i></a></li>
@@ -108,11 +128,11 @@
 		<li class="page-item">
 		  <li><a href="#" class="next"><i class="fas fa-angle-double-right"></i></a></li>
 	</c:if>
-	  <c:if test="${page < maxpage }"> 
+	<c:if test="${page < maxpage }"> 
 	     <li>
 			<a class="next" href="${pageContext.request.contextPath}/community/list?page=${page+1}"><i class="fas fa-angle-double-right"></i></a>
 		 </li>
-	  </c:if>
+	</c:if>
 	</ul>
 	</div>
    </div>

@@ -261,7 +261,13 @@
 	  for(var i = 0; i < checkbox.length; i++) {
 		var $this = $(checkbox[i]);
 	    if(!$this.is(":checked")) {
-	        alert('약관에 동의해주세요.');
+	        Swal.fire({
+				position: 'center',
+				icon: 'info',
+				title: '약관에 동의해주세요.',
+				showConfirmButton: false,
+				timer: 1000
+			})
 	        $("input[name=agree]").val('');
 	        $this.focus();
 	        return false;
@@ -269,16 +275,30 @@
 	  }
 	  return true;
 	})
-	//취소 버튼 누르면 뒤로가기
-$(".signoutb").click(function(){
-	var answer = confirm("가입을 취소하시겠습니까?")
-	if(answer == true)
-		$(location).attr('href','join');
-})
+//취소 버튼 누르면 뒤로가기
+	 $(".signoutb").click(function(){
+		 Swal.fire({
+			  title: '가입을 취소하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $(location).attr('href','join');
+			  }
+			})
+		}) 
 		//로그인 막기
 		$('.me4').click(function(){
 			$(".popup_panel").remove();
-			alert("회원가입 완료 후 로그인 해주세요.")
+			   Swal.fire({
+					position: 'center',
+					icon: 'warning',
+					title: '회원가입 완료 후 로그인 해주세요.',
+					showConfirmButton: false,
+					timer: 1000
+				})
 		});
 	</script>
 </body>

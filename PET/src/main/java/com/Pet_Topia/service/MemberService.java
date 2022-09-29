@@ -1,6 +1,9 @@
 package com.Pet_Topia.service;
 
+import java.util.List;
+
 import com.Pet_Topia.domain.Member;
+import com.Pet_Topia.domain.Product;
 
 public interface MemberService {
 	public int isId(String id, String pass);
@@ -28,6 +31,24 @@ public interface MemberService {
 	public void Delete_user(String id);
 
 	public Member getMemberdata(String id);
+
+	public List<Product> search_item(String item);
+
+	public List<Product> search_treat(String item);
+
+	public List<Product> search_edu(String item);
+
+	public List<Product> search_beauty(String item);
+
+	public int search_item_count(String item);
+
+	public int search_treat_count(String item);
+
+	public int search_edu_count(String item);
+
+	public int search_beauty_count(String item);
+
+	public List<Product> best_item();
 
 
 }

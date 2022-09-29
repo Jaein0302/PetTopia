@@ -19,6 +19,27 @@ create table ITEM (
 select * from item;
 delete item
 
+		select * from item;
+
+	select *
+	from(select rownum rnum, a.*
+		 from (select * 
+			   from item
+			   order by ITEM_REG_DATE desc) a
+		 where rownum <= 8
+		 )
+	where rnum >= 2 and rnum <=8
+	
+			
+		
+		
+		select * 
+		from ( select rownum rnum, *
+		  	   from ( select * from item)
+		       where rownum &lt;= #{end}
+			 )
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+
 drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;
 
