@@ -27,6 +27,15 @@
 	if($('input[type=checkbox]').is(":checked")){
 		console.log("바뀜");
 	};
+$(function() {	
+	var filename = $("#image_file").val();
+	console.log("filename=" + filename);
+	var fileCallPath = encodeURIComponent(filename);
+	var str = "<img class='img-fluid w-100' src='${pageContext.request.contextPath}/product/display?filename=" +  fileCallPath  +"'>"
+		
+	$(".uploadResult").append(str);
+});
+			
 </script>
 
 <body>
@@ -85,18 +94,18 @@
         <c:forEach var="p" items="${productlist}">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                    <!--  
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 uploadResult">
+                    <%--  
 						<c:set var="reg_date" value="${p.ITEM_REG_DATE}"/>			
 						<c:set var="image_file" value="${p.ITEM_IMAGE_FILE}"/>			
     					<c:set var = "length" value = "${fn:length(image_file)}"/>                       
                         <img class="img-fluid w-100" src="${pageContext.request.contextPath}/C:\upload/" + ${fn:substring(reg_date, 0,10)} + ${fn:substring(image_file, length-22,length)}>
-                  	-->
-                  	    <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">                  	
+                     --%> 
+                  		<input type="hidden"  id="image_file" value="${p.ITEM_IMAGE_FILE}">
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span> ${p.ITEM_NAME}</span>
-                        <h4 class="text-truncate">${p.ITEM_CONTENT}</h4>
+                    	<span> ${p.ITEM_CONTENT}</span>
+                        <h4 class="text-truncate">${p.ITEM_NAME}</h4>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black">${p.ITEM_PRICE}</span>
