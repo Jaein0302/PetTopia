@@ -37,6 +37,14 @@ $(function() {
 		var t_price = $(".amount").val() * p_price;		
 		$(".total_price").html(t_price);
 	})
+	
+	
+	//달력모양 아이콘 클릭시에 캘린더 팝업창으로 보여주기
+	$("#openCalendar").click(function (){
+		window.open("openCalendar","get","width=900, height=900");
+	})
+	
+	
 });
 
 
@@ -81,9 +89,7 @@ $(function() {
 						<hr>
 						<p>예약 날짜/시간 정하기 
 							<span>					
-								<a href=#>
-									<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Product/calendar.png">
-								</a>
+								<img id="openCalendar" class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Product/calendar.png">
 							</span>
 						</p>
 						<hr>

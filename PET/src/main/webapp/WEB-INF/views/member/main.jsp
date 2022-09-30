@@ -13,6 +13,16 @@
 </head>
 
 <script>
+
+//회원정보 수정 alert
+var MU_message = "${MU_message}";
+if(MU_message == "success"){
+	alert('회원정보가 성공적으로 변경되었습니다.');
+} else if (MU_message == "fail"){
+	alert('회원정보 수정중 문제가 발생하였습니다. \n 관리자에게 문의해주세요.')
+}
+
+//회원 탈퇴 alert
 var withdraw_message = "${withdraw_message}";
 if (withdraw_message == "withdraw_success"){
 	alert('그동안 펫토피아를 이용해주셔서 감사합니다.');

@@ -60,17 +60,16 @@ public class MypageController {
 	//회원정보 변경 프로세스
 	@RequestMapping(value="/updateProcess", method = RequestMethod.POST)
 	public String BoardModifyAction(	Member member,
-										Model model,
 										HttpServletRequest request,
 										RedirectAttributes rattr) throws Exception{
 		
 		int result = memberservice.update(member);
 		
 		if (result == 1) {
+			rattr.addFlashAttribute("MU_message","success");
 			return "redirect:/";
 		} else {
-			model.addAttribute("url", request.getRequestURL());
-			model.addAttribute("message","정보 수정 실패");
+			rattr.addFlashAttribute("MU_message","fail");
 			return "error/error";
 		}
 	}
