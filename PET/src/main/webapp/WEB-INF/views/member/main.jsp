@@ -197,7 +197,7 @@ if (withdraw_message == "withdraw_success"){
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4" onclick="location.href='product/detail'">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">
+                         <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
                     	<span>${p.ITEM_NAME}</span>
