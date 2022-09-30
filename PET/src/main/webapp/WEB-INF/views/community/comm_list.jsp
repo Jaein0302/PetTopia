@@ -43,7 +43,19 @@
 		    </ul>
 		</div>
 	</th>
-	<th colspan="1" class="text-right"></th>
+	<th colspan="1" class="text-right">
+	
+	<!-- 글쓰기 버튼 -->
+	 <div class="text-right">
+	 <sec:authorize access="isAnonymous()">
+	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >
+	 </sec:authorize>
+	 <sec:authorize access="isAuthenticated()">
+	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >
+	  </sec:authorize>
+	 </div>
+	
+	</th>
 	</tr>
 	</thead>
 	</table>
@@ -89,18 +101,10 @@
 	  </c:forEach>
 	  </tbody>
 	 </table>
-<!-- 글쓰기 버튼 -->
-	 <div class="text-right">
-	 <sec:authorize access="isAnonymous()">
-	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >
-	 </sec:authorize>
-	 <sec:authorize access="isAuthenticated()">
-	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >
-	  </sec:authorize>
-	 </div>
+
 	 
 <!-- 검색 창 -->
-	 <div class="text-center" style="position:absolute;left:35%;">
+	 <div class="text-center mt-4" style="position:absolute;left:35%;">
 	 <form method="get" action="">
 	 <select name="search_field">
 	 <option value="0" selected>제목+내용</option>
@@ -114,7 +118,7 @@
 	 </div>
 	 
 <!-- 페이징 처리 -->
-	<div style="position:absolute;left:45%;margin-top:72px">
+	<div style="position:absolute;left:45%;margin-top:80px">
 	<ul class="pagination modal-2 text-center">
 	  
 	 <c:if test="${page <= 1 }">

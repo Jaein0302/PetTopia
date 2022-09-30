@@ -149,10 +149,7 @@ public class CommunityController {
 		public ModelAndView detail(int num, ModelAndView mv, HttpServletRequest request,
 				@RequestHeader(value = "referer") String beforeURL)
 		{
-			logger.info("referer:" + beforeURL);
-			if (beforeURL.endsWith("list")) {
-				service.setReadCountUpdate(num);
-			}
+			service.setReadCountUpdate(num);
 			List<Community> hlist = service.hot_List(); 
 			Community community = service.getDetail(num);
 			// board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.

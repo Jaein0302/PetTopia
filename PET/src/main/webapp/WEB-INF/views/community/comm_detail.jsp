@@ -9,8 +9,15 @@
 <title>펫토피아 - 커뮤니티</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="${pageContext.request.contextPath}/resources/css/Community/list.css" type="text/css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/Community/write.css" type="text/css" rel="stylesheet">
 </head>
+<style>
+.mform {
+    background-color: #fefefe;
+    margin: 1% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    width: 80%; /* Could be more or less, depending on screen size */
+    padding: 16px;
+}
+</style>
 <body>
 <!-- header -->
 <div class="header">
@@ -45,7 +52,19 @@
 		    </ul>
 		</div>
 	</th>
-	<th colspan="1" class="text-right"></th>
+	<th colspan="1" class="text-right">
+	
+	<!-- 글쓰기 버튼 -->
+	 <div class="text-right">
+	 <sec:authorize access="isAnonymous()">
+	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >
+	 </sec:authorize>
+	 <sec:authorize access="isAuthenticated()">
+	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >
+	  </sec:authorize>
+	 </div>
+	
+	</th>
 	</tr>
 	</thead>
 	</table>
