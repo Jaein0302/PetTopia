@@ -24,7 +24,7 @@
 <jsp:include page="../member/header.jsp" />
 </div>
 
- <div class="container mb-5 mainbody" style="height:1000px;margin-top:220px;">
+ <div class="container mb-5 mainbody" style="height:500%;margin-top:220px;">
   <div class="row px-xl-5">
    <div class="col-lg-12" style="margin:0 auto;">
  		
@@ -45,7 +45,7 @@
 		    <c:forEach var="h" items="${hlist}" end="4"  varStatus="status">
 		        <li><a href="detail?num=${h.commu_num}">
 		        <span class="text-count">${status.index+1}</span>
-		        <span class="text-body"><c:out value="${h.commu_subject}" escapeXml="true"/></span>
+		        <span class="text-body"><c:out value="${h.commu_subject}" escapeXml="true" /></span>
 	  			<span class="text-comment text-small">[<c:out value="${h.cnt}"/>]</span>
 		        </a></li>
 		    </c:forEach>
@@ -89,7 +89,7 @@
     
      	<tr>
      	 <td colspan="2" style="text-align:left!important;height:200px;border:none;padding-top:20px">
-     	 <div style="white-space:pre-wrap;font-size:16px;padding:10px 15px"><c:out value="${c.commu_content}" /></div></td>
+     	 <div style="white-space:pre-wrap;font-size:16px;padding:10px 15px">${c.commu_content}</div></td>
      	</tr>
      	
 		<tr>
@@ -119,7 +119,6 @@
    </div>
   </div>
  </div>
-<script src="${pageContext.request.contextPath}/resources/js/Community/c_list.js"></script>
 <script>
 $(function(){
 	$(".deletechk").click(function () {
@@ -128,6 +127,29 @@ $(function(){
 	    	$(location).attr('href','${pageContext.request.contextPath}/community/delete?num=${c.commu_num}'); 	
 	    }
 	});
+		//로그인 후 글쓰기 가능
+		$(".cowrite").click(function () {
+		    Swal.fire({
+						position: 'center',
+						icon: 'warning',
+						title: '로그인 후 이용가능합니다.',
+						showConfirmButton: false,
+						timer: 1000
+					})
+		});
+		//추천 게시글
+		 var ticker = function()
+	    {
+	        setTimeout(function(){
+	            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+	            {
+	                $(this).detach().appendTo('ul#ticker').removeAttr('style');
+	            });
+	            ticker();
+	        }, 2000);
+	    };
+	    ticker();
+		
 });
 </script>
 </body>

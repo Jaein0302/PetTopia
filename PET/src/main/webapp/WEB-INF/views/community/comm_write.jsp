@@ -8,6 +8,7 @@
 <title>펫토피아 - 커뮤니티</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${pageContext.request.contextPath}/resources/css/Community/write.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/Summernote/summernote-lite.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <!-- header -->
@@ -35,12 +36,13 @@
 	  <input type="hidden" name="commu_name" value="${pinfo.username}">
 	  <b>제목</b>
 	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
-	  <b>대표 이미지</b>
-	  <input class="jinput" type="file" name="commu_thumbnail" accept="image/*" style="font-size:0.9rem;">
-	  <b>내용</b>
-	  <textarea class="jtextarea" name="commu_content"></textarea>    
-	  <b>사진 첨부</b>
-	  <input class="jinput" type="file" name="commu_thumbnail" accept="image/*" style="font-size:0.9rem;">
+	  <label for="upfile">대표 이미지 업로드</label> 
+	  <input class="jinput" id="upfile" type="file" name="uploadfile" accept="image/*" style="font-size:0.9rem;width:50%">
+	  <span id="filevalue">${c.commu_original}</span>
+	  <img src="${pageContext.request.contextPath}/resources/img/Main/remove.png" alt="파일삭제"
+		 width="12px" class="remove">
+	  <b class="mt-3">내용</b>
+	  <textarea id="summernote" name="commu_content"></textarea>
 	
 	  <div class="clearfix">
 		 <button type="submit" class="button-5 cancelbtn updateb">등록</button>
@@ -58,6 +60,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Community/c_list.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Community/write.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Summernote/summernote-lite.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 </body>
 <jsp:include page="../member/footer.jsp" />
 </html>

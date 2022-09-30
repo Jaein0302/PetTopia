@@ -1,7 +1,5 @@
 package com.Pet_Topia.domain;
 
-import java.util.Date;
-
 import org.springframework.web.multipart.MultipartFile;
 
 public class Community {
@@ -12,30 +10,9 @@ public class Community {
 	private String commu_content;
 	private int commu_readcount;
 	private String commu_date;
-	private String commu_thumbnail;
 	private String commu_file;
 	private String commu_original; //첨부될 파일 명
 	
-	
-	
-	public String getCommu_original() {
-		return commu_original;
-	}
-	public void setCommu_original(String commu_original) {
-		this.commu_original = commu_original;
-	}
-	public int getCnt() {
-		return cnt;
-	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
-	}
-	public MultipartFile getUploadfile() {
-		return uploadfile;
-	}
-	public void setUploadfile(MultipartFile uploadfile) {
-		this.uploadfile = uploadfile;
-	}
 	private int    cnt; 		//댓글 수
 	private MultipartFile uploadfile;
 
@@ -76,12 +53,6 @@ public class Community {
 	public void setCommu_date(String commu_date) {
 		this.commu_date = commu_date.substring(2,10); //년-월-일
 	}
-	public String getCommu_thumbnail() {
-		return commu_thumbnail;
-	}
-	public void setCommu_thumbnail(String commu_thumbnail) {
-		this.commu_thumbnail = commu_thumbnail;
-	}
 	public String getCommu_file() {
 		return commu_file;
 	}
@@ -89,7 +60,24 @@ public class Community {
 		this.commu_file = commu_file;
 	}
 	
-	
+	public String getCommu_original() {
+		return commu_original;
+	}
+	public void setCommu_original(String commu_original) {
+		this.commu_original = commu_original;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
+	}
 	
 	
 }

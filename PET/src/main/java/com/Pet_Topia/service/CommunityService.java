@@ -20,4 +20,6 @@ public interface CommunityService {
 
 	List<Community> hot_List();
 
+	int udpate(Community comm);
+
 }

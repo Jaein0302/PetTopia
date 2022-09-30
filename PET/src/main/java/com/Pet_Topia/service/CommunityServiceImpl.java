@@ -60,4 +60,10 @@ public class CommunityServiceImpl implements CommunityService {
 		return dao.hot_list();
 	}
 
+	@Override
+	public int udpate(Community comm) {
+		return dao.update(comm);
+		
+	}
+
 }

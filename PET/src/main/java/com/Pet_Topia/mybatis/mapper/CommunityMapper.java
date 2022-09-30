@@ -27,5 +27,7 @@ public interface CommunityMapper {
 
 		public List<Community> hot_list();
 
+		public int update(Community comm);
+
 	
 }
