@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,9 @@
      <span><i class="fas fa-star"></i>추천 게시글 TOP 5&emsp;</span>
 	     <div class="block">
 		    <ul id="ticker">
-		    <c:forEach var="h" items="${hlist}" end="4">
+		    <c:forEach var="h" items="${hlist}" end="4"  varStatus="status">
 		        <li><a href="detail?num=${h.commu_num}">
+		        <span class="text-count">${status.index+1}</span>
 		        <span class="text-body"><c:out value="${h.commu_subject}" escapeXml="true"/></span>
 	  			<span class="text-comment text-small">[<c:out value="${h.cnt}"/>]</span>
 		        </a></li>
@@ -62,7 +64,7 @@
      	 <i style="color:#4a4c4b;"class="fa fa-user"></i>&nbsp; <span class="userdoc" >${c.commu_name}</span></div>
      	 </td>
         <td style="text-align:right!important;font-size: 14px;color: #4a4c4b;">
-     	  <i style="color:#4a4c4b;"class="fa fa-clock-o"></i>&nbsp;&nbsp;${c.commu_date}&nbsp; <span style="font-size:12px">|</span>&nbsp;  
+     	  <i style="color:#4a4c4b;"class="fa fa-clock-o"></i>&nbsp;&nbsp;${fn:replace(c.commu_date, '-', '.')}&nbsp; <span style="font-size:12px">|</span>&nbsp;  
      	  <i style="color:#4a4c4b;"class="fa fa-eye"></i>&nbsp;&nbsp;${c.commu_readcount}</td>
      	</tr>
     
