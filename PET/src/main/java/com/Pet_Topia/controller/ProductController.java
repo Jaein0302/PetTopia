@@ -61,9 +61,10 @@ public class ProductController {
 		logger.info("item_category= " + category);
 		logger.info("search_field= " + index);
 		logger.info("search_word= " + search_word);
-
+		
+		
 		mv.addObject("productlist", list);
-		mv.setViewName("product/treat_list");
+		mv.setViewName("product/product_list");
 		return mv;
 	}	
 	
@@ -224,28 +225,6 @@ public class ProductController {
 		return fileDBName;
 	}
 	
-	//이미지 썸네일
-	@GetMapping("/display")
-	public ResponseEntity<byte[]> showImage(String filename) {
-		
-		logger.info("fileName: " + filename);
-		
-		File file = new File("c:\\upload" + filename);
-		
-		logger.info("file: " + file);
-		
-		ResponseEntity<byte[]> result = null;
-		
-		try {
-			HttpHeaders header = new HttpHeaders();
-			
-			header.add("Content=Type", Files.probeContentType(file.toPath()));
-			result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
 	
 	//업데이트 화면
 	@GetMapping(value = "/update_view")
@@ -336,7 +315,6 @@ public class ProductController {
 		return "redirect:my_product";
 	}
 	
-	
 	@RequestMapping(value ="/wish")
 	public String wish_list() {	
 		return "product/wish_list";
@@ -347,11 +325,13 @@ public class ProductController {
 		return "product/cart_list";
 	}
 	
+
 	/** 스케줄 **/
 	@RequestMapping(value = "/openCalendar", method=RequestMethod.GET)
 	public String openCalendar() {
 		return "schedule/calendar";
 	}
+
 }
 	
 	

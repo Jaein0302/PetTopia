@@ -25,17 +25,6 @@
 </head>
 <body>
 	<div class="container">
-	<%-- 게시글이 있는 경우 --%>
-		<div class="rows">
-			<span>줄보기</span>
-			<select class="form-control" id="viewcount">
-				<option value="1">1</option>
-				<option value="3">3</option>
-				<option value="5">5</option>
-				<option value="7">7</option>
-				<option value="10" selected>10</option>			
-			</select>
-		</div>
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -52,31 +41,40 @@
 			</thead>
 		</table>
 		<a href = "#">		
-			<button type="button" class="btn btn-info floar-right" data-toggle="modal" data-target="#myModal">문의하기</button>
+			<button type="button" class="btn btn-info floar-right" data-toggle="modal" data-target="#product_ask">문의하기</button>
 		</a>
 	</div>
 	
 	<%-- modal 시작 --%>
-	<div class="modal" id="myModal">
+
+	<div class="modal" id="product_ask">
 	  <div class="modal-dialog">
 	    <div class="modal-content"> 	      
 	      <!-- Modal body -->
 	      <div class="modal-body">
-		  	 <form name="ask_form" action="/add" method="post">
-		  	 	 <div>
+	      	<sec:authorize access="isAuthenticated()">
+			<sec:authentication property="principal" var="pinfo"/>
+		  	 <form action="${pageContext.request.contextPath}/ask/add" method="post">		  	 
+		  	 	 <input type="text" class="form-control" name="ITEM_ASK_USERNAME" value="${pinfo.username}" readOnly>
+		  	 	 <input type="hidden" class="form-control" name="ITEM_ASK_ITEMID" value="${productdata.ITEM_ID}" readOnly>
+	 	  	 	 <div>
 		  	 	 	<p>제목</p>
-		  	 	 	<input type="text" class="form-control">		  	 	 
+					<textarea name="ITEM_ASK_SUBJECT" class="form-control" rows="1"></textarea>		  	 	 
 		  	 	 </div>
 		  	 	 <div>
 		  	 	 	<p>내용</p>
-					<textarea class="form-control" rows="5"></textarea>		  	 	 
-				 </div>
-		  	 	 <button type="submit" class="btn btn-primary">문의 등록</button>
+					<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>		  	 	 
+				 </div>	 
+				 
+				 <button type="submit" class="btn btn-primary" id="p_add">상품 등록</button>
 		  	 	 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+				 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">				  	 	 
 		  	 </form>
+		  </sec:authorize>		  	 
 	      </div>  	      
 	    </div>
 	  </div>
 	</div>	
+	
 	
 </body>

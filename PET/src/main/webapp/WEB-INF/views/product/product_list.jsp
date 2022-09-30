@@ -24,9 +24,8 @@
 </style>
 
 <script>
-	if($('input[type=checkbox]').is(":checked")){
-		console.log("바뀜");
-	};
+
+			
 </script>
 
 <body>
@@ -47,6 +46,29 @@
 		    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		    	
 		    </form>
 		</div>
+		<div>
+			<form class="search_select">
+				<h5>성별</h5>
+			  	<label><input type='checkbox' name='ITEM_SEX' value='male' >남성</label>
+			 	<label><input type='checkbox' name='ITEM_SEX' value='female' >여성</label>
+				<hr>
+				
+				<h5>크기</h5>
+			  	<label><input type='checkbox' name='ITEM_WEIGHT' value='L' >대형</label>
+			 	<label><input type='checkbox' name='ITEM_WEIGHT' value='M' >중형</label>
+			 	<label><input type='checkbox' name='ITEM_WEIGHT' value='S' >소형</label>
+				<hr>
+				    
+				<h5>종류</h5>
+			  	<label><input type='checkbox' name='ITEM_SPECIES' value='dog' >반려견</label>
+			 	<label><input type='checkbox' name='ITEM_SPECIES' value='cat' >반려묘</label>
+	
+		    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		 
+			</form>
+		</div>
+		<div>
+			<a href="${pageContext.request.contextPath}/product/my_product">상품등록</a>
+		</div>
 	</div>	
 </div>
 
@@ -58,21 +80,14 @@
             <h2 class="section-title px-5"><span class="px-2">검색결과</span></h2>
         </div>        
         <div class="row px-xl-5 pb-3">
-        
-        <c:forEach var="p" items="${productlist}">	        
+        <c:forEach var="p" items="${productlist}">	
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                    <!--  
-						<c:set var="reg_date" value="${p.ITEM_REG_DATE}"/>			
-						<c:set var="image_file" value="${p.ITEM_IMAGE_FILE}"/>			
-    					<c:set var = "length" value = "${fn:length(image_file)}"/>                       
-                        <img class="img-fluid w-100" src="${pageContext.request.contextPath}/C:\upload/" + ${fn:substring(reg_date, 0,10)} + ${fn:substring(image_file, length-22,length)}>
-                  	-->
-                  	    <img class="img-fluid w-100" src="${pageContext.request.contextPath}/resources/img/Main/product-2.jpg" alt="">                  	
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 uploadResult">
+                 		<img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-						<span> ${p.ITEM_CONTENT}</span>
+                    	<span> ${p.ITEM_CONTENT}</span>
                         <h4 class="text-truncate">${p.ITEM_NAME}</h4>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">

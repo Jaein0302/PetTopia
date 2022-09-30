@@ -22,6 +22,16 @@
 	span img { width : 30px}
 </style>
 <script>
+
+	$(function() {	
+		$(".amount").on('change', function(){
+			var p_price = $(".product_price").text().slice(0, -1);
+			console.log("p_price=" + p_price)
+			var t_price = $(".amount").val() * p_price;		
+			$(".total_price").html(t_price);
+		})
+	});
+
 $(function() {	
 	var filename = $("#image_file").val();
 	console.log("filename=" + filename);
@@ -48,15 +58,12 @@ $(function() {
 });
 
 
-
-
 </script>
 
 </head>
 
 <body>
 	<jsp:include page="../member/header.jsp" />
-	<input type="hidden"  id="image_file" value="${productdata.ITEM_IMAGE_FILE}">
 	
 	<div class="row align-items-center justify-content-center detail">
 		<div class="col-sm-9 ">
@@ -70,7 +77,7 @@ $(function() {
 			<div class="container">
 				<div class="row text-center detailbox">
 					<div class="uploadResult"></div>
-
+                 		<img class='img-fluid w-10' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}">
 					<div class="col-sm-6">
 						<p>상품명 <span>${productdata.ITEM_NAME}</span> </p>
 						<hr>
@@ -131,7 +138,10 @@ $(function() {
 				</section>
 
 				<section id="content3">
-					<jsp:include page='ask_view.jsp' />
+					<jsp:include page='ask_view.jsp' flush="false">
+			            <jsp:param name="ITEM_ID" value='${productdata.ITEM_ID}' />
+      				</jsp:include>
+
 				</section>
 
 				<section id="content4">

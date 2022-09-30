@@ -11,6 +11,5 @@ public class Pet_topia_JavaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(Pet_topia_JavaApplication.class, args);
 	}
-
 }
 /* http://localhost:9600/pet_topia/ */
