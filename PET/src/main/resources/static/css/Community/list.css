@@ -128,7 +128,7 @@ td>input[type=text], td>textarea {
 	justify-content: center;
 	line-height: 1;
 	margin: 0 37px;
-	min-height: 42px;
+	min-height: 40px;
 	padding: 10px 18px;
 	position: relative;
 	text-decoration: none;
@@ -146,7 +146,7 @@ td>input[type=text], td>textarea {
 
 .postb {
 	width: 90px;
-	height: 17px !important;
+	height: 15px !important;
 	margin: 0 !important;
 	background-color: #f0c16a;
 }
@@ -190,12 +190,28 @@ td>input[type=text], td>textarea {
 
 /* 추천 게시글 */
 .block {
-	border: 1px solid silver;
-	padding: 6px;
+	border: 1px solid #f1d172;
+	border-radius: 3px;
+	padding: 5px 5px;
 	height: 28px;
 	overflow: hidden;
 	width: 300px;
-	font-size: 1em;
+	font-size: 15px;
+	font-weight: lighter;
+	background: #fff;
+}
+
+.text-count {
+	padding: 2px 5px;
+	background: #f1d172;
+	color: #fff;
+	font-weight: bold;
+	margin-right: 3px;
+	font-size: 12px;
+}
+
+.fa-star {
+	color: #f1d172
 }
 
 .block ul, .block li {
@@ -235,4 +251,16 @@ td {
 	border: 1px solid #dfe4ed;
 	border-radius: 3px;
 	width: 45%
+}
+
+@media ( max-width : 1000px) {
+	.commu, .fa-paw {
+		font-size: 25px !important
+	}
+}
+@media ( max-width : 786px) {
+	.commu, .fa-paw {
+		font-size: 25px !important
+	}
+	.commu{display:none;}
 }

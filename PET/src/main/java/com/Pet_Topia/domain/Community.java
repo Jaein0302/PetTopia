@@ -74,8 +74,6 @@ public class Community {
 		return commu_date;
 	}
 	public void setCommu_date(String commu_date) {
-		Date date = new Date();
-		commu_date = String.format("%1$tY.%1$tm.%1$td", date);
 		this.commu_date = commu_date.substring(2,10); //년-월-일
 	}
 	public String getCommu_thumbnail() {
