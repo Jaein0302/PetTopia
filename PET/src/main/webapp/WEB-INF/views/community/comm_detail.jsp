@@ -7,8 +7,8 @@
 <meta charset="UTF-8">
 <title>펫토피아 - 커뮤니티</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="${pageContext.request.contextPath}/resources/css/Community/list.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/Community/write.css" type="text/css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/Community/summernote-lite.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <!-- header -->
@@ -20,13 +20,31 @@
   <div class="row px-xl-5">
    <div class="col-lg-12" style="margin:0 auto;">
  		
-	<table class="table text-center">
+	<table class="table text-center m-0">
+ 	<!-- 테이블 간격 -->
+	<colgroup>
+	<col width="40%" />
+	<col width="29%" />
+	<col width="31%" />
+	</colgroup>
  	<thead>
-   <tr style="border:none">
-     <th colspan="3" class="text-left"><span class="commu">&emsp;커뮤니티&nbsp;</span><i class="fas fa-paw"></i></th>
-     <th colspan="2" class="text-right">
-     </th>
-     </tr> 
+ 	<tr style="border:none">
+ 	<th colspan="1" class="text-left"><span class="commu">&emsp;커뮤니티&nbsp;</span><i class="fas fa-paw"></i></th>
+    <th colspan="1" class="text-center">
+     <span><i class="fas fa-star"></i>추천 게시글 TOP 5&emsp;</span>
+	     <div class="block">
+		    <ul id="ticker">
+		    <c:forEach var="h" items="${hlist}" end="4">
+		        <li><a href="detail?num=${h.commu_num}">
+		        <span class="text-body"><c:out value="${h.commu_subject}" escapeXml="true"/></span>
+	  			<span class="text-comment text-small">[<c:out value="${h.cnt}"/>]</span>
+		        </a></li>
+		    </c:forEach>
+		    </ul>
+		</div>
+	</th>
+	<th colspan="1" class="text-right"></th>
+	</tr>
 	</thead>
 	</table>
 	
@@ -80,12 +98,7 @@
    </div>
   </div>
  </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Community/c_list.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/Community/summernote-lite.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/Community/summernote-ko-KR.js"></script>
 <script>
 $(function(){
 	$(".deletechk").click(function () {

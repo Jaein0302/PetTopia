@@ -56,6 +56,8 @@ public class CommunityController {
 
 		if (endpage > maxpage)
 			endpage = maxpage;
+		
+		List<Community> hlist = service.hot_List(); 
 
 		List<Community> boardlist = service.getBoardList(page, limit); // 리스트를 받아옴
 		mv.setViewName("community/comm_list");
@@ -65,6 +67,7 @@ public class CommunityController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("listcount", listcount);
 		mv.addObject("boardlist", boardlist);
+		mv.addObject("hlist",hlist);
 		mv.addObject("limit", limit);
 		return mv;
 	}
@@ -150,19 +153,16 @@ public class CommunityController {
 			if (beforeURL.endsWith("list")) {
 				service.setReadCountUpdate(num);
 			}
-
+			List<Community> hlist = service.hot_List(); 
 			Community community = service.getDetail(num);
 			// board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
 			if (community == null) {
-				logger.info("상세보기 실패");
 				mv.setViewName("error/error");
 				mv.addObject("url", request.getRequestURL());
 				mv.addObject("message", "상세보기 실패입니다.");
 			} else {
-				logger.info("상세보기 성공");
-				//int count = service.getListCount(num);
 				mv.setViewName("community/comm_detail");
-				//mv.addObject("count", count);
+				mv.addObject("hlist",hlist);
 				mv.addObject("c", community);
 			}
 			return mv;

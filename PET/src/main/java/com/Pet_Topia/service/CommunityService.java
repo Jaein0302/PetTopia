@@ -18,4 +18,6 @@ public interface CommunityService {
 
 	int delete(int num);
 
+	List<Community> hot_List();
+
 }
