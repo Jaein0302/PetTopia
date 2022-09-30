@@ -33,13 +33,6 @@
 	});
 
 $(function() {	
-	var filename = $("#image_file").val();
-	console.log("filename=" + filename);
-	var fileCallPath = encodeURIComponent(filename);
-	var str = "<img class='img-fluid w-100' src='${pageContext.request.contextPath}/product/display?filename=" +  fileCallPath  +"'>"
-		
-	$(".uploadResult").append(str);	
-	
 	
 	$(".amount").on('change', function(){
 		var p_price = $(".product_price").text().slice(0, -1);
@@ -53,7 +46,6 @@ $(function() {
 	$("#openCalendar").click(function (){
 		window.open("openCalendar","get","width=900, height=900");
 	})
-	
 	
 });
 
