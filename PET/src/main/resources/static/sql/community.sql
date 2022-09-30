@@ -40,3 +40,13 @@ select *
 		where rownum <= 10 
 	) 
 where rnum>=1 and rnum<=10
+
+
+		select *
+		 from ( select community.*, nvl(cnt,0) cnt
+				from community left outer join (select COMMUNITY_COMM.COMMENT_COMMU_NUM, count(*) cnt
+												from COMMUNITY_COMM
+												group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
+				on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+				order by community.COMMU_NUM desc)
+		 order by cnt desc, COMMU_READCOUNT desc

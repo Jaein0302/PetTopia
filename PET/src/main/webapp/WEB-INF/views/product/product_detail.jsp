@@ -22,6 +22,7 @@
 	span img { width : 30px}
 </style>
 <script>
+
 	$(function() {	
 		$(".amount").on('change', function(){
 			var p_price = $(".product_price").text().slice(0, -1);
@@ -30,6 +31,33 @@
 			$(".total_price").html(t_price);
 		})
 	});
+
+$(function() {	
+	var filename = $("#image_file").val();
+	console.log("filename=" + filename);
+	var fileCallPath = encodeURIComponent(filename);
+	var str = "<img class='img-fluid w-100' src='${pageContext.request.contextPath}/product/display?filename=" +  fileCallPath  +"'>"
+		
+	$(".uploadResult").append(str);	
+	
+	
+	$(".amount").on('change', function(){
+		var p_price = $(".product_price").text().slice(0, -1);
+		console.log("p_price=" + p_price)
+		var t_price = $(".amount").val() * p_price;		
+		$(".total_price").html(t_price);
+	})
+	
+	
+	//달력모양 아이콘 클릭시에 캘린더 팝업창으로 보여주기
+	$("#openCalendar").click(function (){
+		window.open("openCalendar","get","width=900, height=900");
+	})
+	
+	
+});
+
+
 </script>
 
 </head>
@@ -68,9 +96,7 @@
 						<hr>
 						<p>예약 날짜/시간 정하기 
 							<span>					
-								<a href=#>
-									<img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Product/calendar.png">
-								</a>
+								<img id="openCalendar" class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Product/calendar.png">
 							</span>
 						</p>
 						<hr>

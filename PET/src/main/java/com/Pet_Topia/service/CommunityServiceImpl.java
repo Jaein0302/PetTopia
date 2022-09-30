@@ -55,4 +55,9 @@ public class CommunityServiceImpl implements CommunityService {
 		return dao.delete(num);
 	}
 
+	@Override
+	public List<Community> hot_List() {
+		return dao.hot_list();
+	}
+
 }
