@@ -138,10 +138,7 @@ $(function() {
 				</section>
 
 				<section id="content3">
-					<jsp:include page='ask_view.jsp' flush="false">
-			            <jsp:param name="ITEM_ID" value='${productdata.ITEM_ID}' />
-      				</jsp:include>
-
+					<jsp:include page='ask_view.jsp' />
 				</section>
 
 				<section id="content4">
