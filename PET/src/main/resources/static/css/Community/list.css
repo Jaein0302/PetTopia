@@ -264,7 +264,7 @@ td {
 	width: 45%
 }
 
-@media ( max-width : 1000px) {
+@media ( max-width : 992px) {
 	.commu, .fa-paw {
 		font-size: 25px !important
 	}

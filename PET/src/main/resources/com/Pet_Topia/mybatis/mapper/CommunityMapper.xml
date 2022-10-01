@@ -60,7 +60,12 @@
 	</update>
 	
 	<select id="getDetail" parameterType="int" resultType="community">
-		select * from community where commu_num = #{number}
+		select community.*,  nvl(cnt,0) cnt
+		from community left outer join (select COMMUNITY_COMM.COMMENT_COMMU_NUM, count(*) cnt
+										 from COMMUNITY_COMM
+										 group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
+		on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+		where community.commu_num = #{number}
 	</select>
 	
 	<delete id="delete" parameterType="int">
