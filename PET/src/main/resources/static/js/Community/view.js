@@ -31,7 +31,7 @@ $(function(){
 					$(rdata.list).each(function(){
 						output = '';
 						img = '';
-						if($("#loginid").val() == this.comment_name) {
+						if($("#loginid").val() == this.comment_name || $("#loginid").val()=='admin') {
 							img = "<img src='../resources/img/Main/pencil.png' width='17px' class='update' style='cursor:pointer'>&emsp;&ensp;"
 								+ "<img src='../resources/img/Main/delete1.png' width='17px' class='remove' style='cursor:pointer'>&emsp;&ensp;"		
 								+ "<input type='hidden' value='" + this.comment_num +"'>";

@@ -60,7 +60,11 @@ padding:6px 15px
 	</colgroup>
  	<thead>
  	<tr style="border:none">
- 	<th colspan="1" class="text-left"><span class="commu">&emsp;커뮤니티&nbsp;</span><i class="fas fa-paw"></i></th>
+ 	<th colspan="1" class="text-left">
+ 		<a style='color:#6F6F6F;' href='${pageContext.request.contextPath}/community/list'>
+ 			<span class="commu">&emsp;커뮤니티&nbsp;</span><i class="fas fa-paw"></i>
+    	</a>
+    </th>
     <th colspan="1" class="text-center">
      <span><i class="fas fa-star"></i>추천 게시글 TOP 5&emsp;</span>
 	     <div class="block">
