@@ -4,9 +4,23 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.Pet_Topia.mybatis.mapper.CommunityMapper">
-
+	
+	<sql id="search_">
+   	<if test="search_field!=null">
+      where 
+       <choose>
+          <when test="search_field=='commu_subject'">commu_subject</when>
+          <when test="search_field=='commu_name'">commu_name</when>
+          <when test="search_field=='commu_content'">commu_content</when>
+       </choose>
+        like #{search_word} 
+      </if>
+   </sql>
+	
+	
 	<select id="getListCount" resultType="int">
 		select count(*) from community
+		<include refid="search_"/>
 	</select>
 
 	<select id="getBoardList" parameterType="java.util.Map"	resultType="community">
@@ -17,6 +31,7 @@
 												 from COMMUNITY_COMM
 												 group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
 					on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+					<include refid="search_"/>
 					order by community.COMMU_NUM desc	) b
 			  where rownum &lt;= #{end}
 			)
@@ -33,7 +48,7 @@
 		(#{commu_num},
 		#{commu_name}, #{commu_subject}, 
 		#{commu_content}, #{commu_readcount}, 
-		sysdate,
+		sysdate,#{commu_thumbnail, jdbcType=VARCHAR},
 		#{commu_file, jdbcType=VARCHAR},
 		#{commu_original, jdbcType=VARCHAR})
 	</insert>
@@ -67,7 +82,7 @@
 	
 	<update id="update" parameterType="community">
 		update community
-		set commu_subject=#{commu_subject}, commu_content=#{commu_content}, 
+		set commu_subject=#{commu_subject}, commu_content=#{commu_content}, commu_thumbnail=#{commu_thumbnail},
 		commu_file=#{commu_file, jdbcType=VARCHAR}, commu_original=#{commu_original, jdbcType=VARCHAR}
 		where commu_num = #{commu_num}
 	</update>

@@ -10,6 +10,7 @@ public class Community {
 	private String commu_content;
 	private int commu_readcount;
 	private String commu_date;
+	private String commu_thumbnail;
 	private String commu_file;
 	private String commu_original; //첨부될 파일 명
 	
@@ -51,7 +52,7 @@ public class Community {
 		return commu_date;
 	}
 	public void setCommu_date(String commu_date) {
-		this.commu_date = commu_date.substring(2,10); //년-월-일
+		this.commu_date = commu_date.substring(0,10); //년-월-일
 	}
 	public String getCommu_file() {
 		return commu_file;
@@ -77,6 +78,12 @@ public class Community {
 	}
 	public void setUploadfile(MultipartFile uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+	public String getCommu_thumbnail() {
+		return commu_thumbnail;
+	}
+	public void setCommu_thumbnail(String commu_thumbnail) {
+		this.commu_thumbnail = commu_thumbnail;
 	}
 	
 	

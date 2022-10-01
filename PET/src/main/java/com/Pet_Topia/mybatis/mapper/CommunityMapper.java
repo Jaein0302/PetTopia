@@ -1,7 +1,7 @@
 package com.Pet_Topia.mybatis.mapper;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -11,10 +11,10 @@ import com.Pet_Topia.domain.Community;
 public interface CommunityMapper {
 
 		// 글의 갯수 구하기
-		public int getListCount();
+		public int getListCount(Map<String, String> map);
 
 		// 글 목록 보기
-		public List<Community> getBoardList(HashMap<String, Integer> map);
+		public List<Community> getBoardList(Map<String, Object> map);
 		
 		//	글 삽입
 		public void insert(Community comm);

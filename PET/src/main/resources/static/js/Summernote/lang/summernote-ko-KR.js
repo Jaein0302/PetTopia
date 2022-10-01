@@ -127,8 +127,8 @@ return /******/ (function(modules) { // webpackBootstrap
         size: '글자 크기'
       },
       image: {
-        image: '그림',
-        insert: '그림 삽입',
+        image: '사진 업로드',
+        insert: '사진 업로드',
         resizeFull: '100% 크기로 변경',
         resizeHalf: '50% 크기로 변경',
         resizeQuarter: '25% 크기로 변경',

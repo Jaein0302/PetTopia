@@ -7789,7 +7789,7 @@ var Buttons_Buttons = /*#__PURE__*/function () {
       });
       this.context.memo('button.picture', function () {
         return _this2.button({
-          contents: _this2.ui.icon(_this2.options.icons.picture),
+          contents: _this2.ui.icon(_this2.options.icons.picture)+' 사진업로드',
           tooltip: _this2.lang.image.image,
           click: _this2.context.createInvokeHandler('imageDialog.show')
         }).render();
@@ -9792,7 +9792,6 @@ external_root_jQuery_commonjs2_jquery_commonjs_jquery_amd_jquery_default.a.summe
 			    ['fontsize', ['fontsize']],
 			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
 			    ['color', ['forecolor','color']],
-			    ['table', ['table']],
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['insert',['picture']],
 			  ],

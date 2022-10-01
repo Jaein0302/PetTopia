@@ -24,7 +24,18 @@ td>input[type=text], td>textarea {
 	clear: both;
 }
 
+.search-div {
+	position: absolute;
+	left: 28%;
+}
+
 /* 페이징 css */
+.pagination-div {
+	position: absolute;
+	left: 40%;
+	top: 114%;
+}
+
 .pagination {
 	list-style: none;
 	padding: 0;
@@ -41,7 +52,7 @@ td>input[type=text], td>textarea {
 	display: block;
 	font-size: 14px;
 	text-decoration: none;
-	padding: 5px 12px;
+	padding: 6px 12px;
 	color: #fff;
 	margin-left: -1px;
 	border: 1px solid transparent;
@@ -257,10 +268,55 @@ td {
 	.commu, .fa-paw {
 		font-size: 25px !important
 	}
+	.cthumbnail {
+		min-height: 300px !important;
+	}
+	.thumbnail-div {
+		height: 300px !important;
+	}
+	.mainbody {
+		height: 2000px !important;
+	}
+	.pagination-div {
+		top: 105% !important;
+	}
+	.search-div {
+		left: 20%;
+	}
 }
+
 @media ( max-width : 786px) {
 	.commu, .fa-paw {
 		font-size: 25px !important
 	}
-	.commu{display:none;}
+	.commu {
+		display: none;
+	}
+	.cthumbnail {
+		min-height: 100% !important;
+	}
+	.thumbnail-div {
+		height: 100% !important;
+	}
+	.mainbody {
+		height: 4800px !important;
+	}
+	.pagination-div {
+		top: 102% !important;
+	}
+	.search-div {
+		left: 15%;
+	}
+}
+
+.cthumbnail {
+	width: 100%;
+	min-height: 200px;
+}
+
+.thumbnail-div {
+	display: inline-block;
+	width: 100%;
+	height: 200px;
+	overflow: hidden;
 }

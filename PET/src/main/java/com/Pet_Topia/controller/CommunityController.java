@@ -7,6 +7,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -50,9 +52,11 @@ public class CommunityController {
 	// 게시판 리스트
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView baordList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			@RequestParam(value="search_word",defaultValue="",required=false)String search_word,
+			@RequestParam(value="search_field",defaultValue="-1",required=false)int index,
 			ModelAndView mv) {
 		int limit = 8; // 한 화면에 출력할 로우 갯수
-		int listcount = service.getListCount(); // 총 리스트 수를 받아옴
+		int listcount = service.getListCount(index, search_word); // 총 리스트 수를 받아옴
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
 		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
@@ -65,7 +69,7 @@ public class CommunityController {
 
 		List<Community> hlist = service.hot_List();
 
-		List<Community> boardlist = service.getBoardList(page, limit); // 리스트를 받아옴
+		List<Community> boardlist = service.getBoardList(index, search_word, page, limit); // 리스트를 받아옴
 		mv.setViewName("community/comm_list");
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
@@ -73,6 +77,8 @@ public class CommunityController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("listcount", listcount);
 		mv.addObject("boardlist", boardlist);
+		mv.addObject("search_field", index);
+		mv.addObject("search_word", search_word);
 		mv.addObject("hlist", hlist);
 		mv.addObject("limit", limit);
 		return mv;
@@ -94,6 +100,10 @@ public class CommunityController {
 			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명 
 			comm.setCommu_original(fileName);// 원래 파일명 저장 
 			String saveFolder = mysavefolder.getSavefolder();
+			
+			logger.info("fileName=" + fileName);
+			logger.info("mysavefolder=" + mysavefolder);
+			logger.info("saveFolder=" + saveFolder);
 
 			String fileDBName = fileDBName(fileName, saveFolder);
 			logger.info("fileDBName = " + fileDBName);
@@ -102,6 +112,21 @@ public class CommunityController {
 			logger.info("transferTo path = " + saveFolder + fileDBName); // 바뀐 파일명으로 저장
 			comm.setCommu_file(fileDBName);
 		}
+		
+		// 이미지 태그를 추출하기 위한 정규식.
+		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+		// 추출할 내용.
+		String content = comm.getCommu_content();
+		// 내용 중에서 이미지 태그를 찾아라!
+		Matcher match = pattern.matcher(content);
+		String imgTag = null;
+		if(match.find()){ // 이미지 태그를 찾았다면,,
+		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+		}
+		// 결과값은 name1.jpg
+		System.out.println("imgTag : " + imgTag);
+		comm.setCommu_thumbnail(imgTag);
+		
 		service.insert(comm); // 저장 메서드 호출
 		return "redirect:list";
 	}
@@ -211,6 +236,22 @@ public class CommunityController {
 						comm.setCommu_original("");//""로 초기화 합니다.
 					}//else end
 				}//else end
+				
+				// 이미지 태그를 추출하기 위한 정규식.
+				Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+				// 추출할 내용.
+				String content = comm.getCommu_content();
+				// 내용 중에서 이미지 태그를 찾아라!
+				Matcher match = pattern.matcher(content);
+				String imgTag = null;
+				if(match.find()){ // 이미지 태그를 찾았다면,,
+				    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+				}
+				// 결과값은 name1.jpg
+				System.out.println("imgTag : " + imgTag);
+				comm.setCommu_thumbnail(imgTag);
+				
+				
 				int result = service.udpate(comm);
 
 				if (result == 0) {

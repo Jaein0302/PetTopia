@@ -45,7 +45,14 @@
 		    <c:forEach var="h" items="${hlist}" end="4"  varStatus="status">
 		        <li><a href="detail?num=${h.commu_num}">
 		        <span class="text-count">${status.index+1}</span>
-		        <span class="text-body"><c:out value="${h.commu_subject}" escapeXml="true" /></span>
+		        <span class="text-body">
+		         <c:if test="${h.commu_subject.length()>=12}">
+		  	     		<c:out value="${h.commu_subject.substring(0,12)}..." />
+			  	 </c:if>
+			  	 <c:if test="${h.commu_subject.length()<12}">
+		        		<c:out value="${h.commu_subject}" escapeXml="true"/>
+		         </c:if>
+		        </span>
 	  			<span class="text-comment text-small">[<c:out value="${h.cnt}"/>]</span>
 		        </a></li>
 		    </c:forEach>
@@ -57,10 +64,10 @@
 	<!-- 글쓰기 버튼 -->
 	 <div class="text-right">
 	 <sec:authorize access="isAnonymous()">
-	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >
+	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >&emsp;&emsp;
 	 </sec:authorize>
 	 <sec:authorize access="isAuthenticated()">
-	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >
+	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >&emsp;&emsp;
 	  </sec:authorize>
 	 </div>
 	

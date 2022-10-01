@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	var check=0;
 	
 	//submit 버튼 클릭할 때 이벤트 부분
 	$("form").submit(function(){
@@ -18,10 +17,8 @@ $(document).ready(function() {
 		
 		//파일첨부를 변경하지 않으면 $('filevalue').text()의 파일명을
 		// 파라미터 'check'라는 이름으로 form에 추가하여 전송합니다.
-		if(check == 0){
+		if($('#filevalue').text() == ""){
 			value = $('#filevalue').text();
-			html = "<input type='hidden' value='" + value + "' name='check'>";
-			$(this).append(html);
 		}
 		
 	});//submit end
@@ -40,7 +37,6 @@ $(document).ready(function() {
 	show();
 	 
 	 $("#upfile").change(function(){
-		check++;
 		var inputfile = $(this).val().split('\\');
 		$('#filevalue').text(inputfile[inputfile.length - 1]);
 		show();

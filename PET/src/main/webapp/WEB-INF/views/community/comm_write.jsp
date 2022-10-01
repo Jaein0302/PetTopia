@@ -36,11 +36,14 @@
 	  <input type="hidden" name="commu_name" value="${pinfo.username}">
 	  <b>제목</b>
 	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
+	  
 	  <label for="upfile">대표 이미지 업로드</label> 
 	  <input class="jinput" id="upfile" type="file" name="uploadfile" accept="image/*" style="font-size:0.9rem;width:50%">
-	  <span id="filevalue">${c.commu_original}</span>
+	  <span id="filevalue"></span>
+	  <input type="hidden" name="commu_thumbnail" id="check" value="">
 	  <img src="${pageContext.request.contextPath}/resources/img/Main/remove.png" alt="파일삭제"
 		 width="12px" class="remove">
+	  
 	  <b class="mt-3">내용</b>
 	  <textarea id="summernote" name="commu_content"></textarea>
 	
