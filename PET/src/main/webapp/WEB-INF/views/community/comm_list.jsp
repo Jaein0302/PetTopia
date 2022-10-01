@@ -64,7 +64,7 @@
 	  <input type="button" class="button-5 postb cowrite" value="글쓰기" >&emsp;&emsp;
 	 </sec:authorize>
 	 <sec:authorize access="isAuthenticated()">
-	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >&emsp;&emsp;
+	  <input type="button" class="button-5 postb" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/community/write'" >&emsp;&emsp;&emsp;
 	  </sec:authorize>
 	 </div>
 	

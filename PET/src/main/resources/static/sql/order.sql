@@ -1,3 +1,5 @@
+drop table ORDERINFO cascade constraints purge;
+
 create table ORDERINFO(
 ORDER_ID         NUMBER(15) PRIMARY KEY,
 ITEM_ID      number(30) references item(item_id) on delete cascade,

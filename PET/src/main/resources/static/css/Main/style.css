@@ -3208,7 +3208,7 @@ input[type="button"].btn-block {
   font-size:18px;
   display: block;
   width: 100%;
-  padding: 0.25rem 1.5rem;
+  padding: 0.2rem 1.2rem;
   clear: both;
   font-weight: 400;
   color: #212529;
@@ -9630,7 +9630,7 @@ a.text-dark:hover, a.text-dark:focus {
 .fa-shopping-cart{color:#64dfb7!important}
 .fa-cut{font-size:21px}
 .smenu{padding-left:35px}
-.mydrop{font-size:16px}
+.mydrop{font-size:15.7px}
 #logout{font-size:15.7px!important;margin:0px 0px 0px -23.5px;padding:0;}
 .shopping_cart{font-size:19px}
 .zzim{font-size:19px;}
