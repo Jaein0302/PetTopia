@@ -26,14 +26,14 @@
     resize: none;
     padding:10px
 }
-#write{
+#write, #write1{
     vertical-align: middle;
     width: 14.3%;
     height: 90px;
     font-size:1.17em;
     opacity:1
 }
-#write:hover{
+#write:hover, #write1:hover{
 	opacity:0.8
 }
 #comment table tbody tr,#comment table tbody tr td{
@@ -102,7 +102,6 @@ padding:6px 15px
 	</tr>
 	</thead>
 	</table>
-	
 	<form class="mform mb-0 pb-0" method="post" action="">
 	<input type="hidden" name="commu_num" id="num" value="${c.commu_num}">
      <table class="table viewp1 mb-0">
@@ -133,7 +132,6 @@ padding:6px 15px
 			</td>
 			<td class="p-2">
 			<div style="text-align:right;">
-			
 			<sec:authorize access="isAuthenticated()">
 			<sec:authentication property="principal" var="pinfo"/>
 			<input type="hidden" id="loginid" value="${pinfo.username}">
@@ -158,8 +156,14 @@ padding:6px 15px
 				<!-- <button class="btn btn-info float-left">총 50자까지 가능합니다.</button> -->
 				<textarea rows=3 class="comment-textarea"
 					      id="content" maxLength="50"></textarea>
-				<button id="write" class="btn btn-primary text-dark">댓글 등록</button>
-					
+					      
+				 <sec:authorize access="isAnonymous()">
+				  <button id="write1" class="btn btn-primary text-dark">댓글 등록</button>
+				 </sec:authorize>
+				 <sec:authorize access="isAuthenticated()">
+				  <button id="write" class="btn btn-primary text-dark">댓글 등록</button>
+				 </sec:authorize>
+					      
 					<table class="mt-4 table">
 					  <tbody>
 					
@@ -167,8 +171,7 @@ padding:6px 15px
 				    </table>
 				<div id="message"></div>
 				</div>
- 			
-	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	
    </div>
   </div>
  </div>
@@ -199,6 +202,18 @@ $(function(){
 						timer: 1000
 					})
 		});
+		
+		//로그인 후 댓글쓰기 가능
+		$("#write1").click(function () {
+		    Swal.fire({
+						position: 'center',
+						icon: 'warning',
+						title: '로그인 후 이용가능합니다.',
+						showConfirmButton: false,
+						timer: 1000
+					})
+		});
+		
 		//추천 게시글
 		 var ticker = function()
 	    {

@@ -75,9 +75,12 @@ $(function(){
 	});// click end
 	
 	$("#write").click(function() {
+		
 		var content = $(".comment-textarea").val().trim();
+		
 		if(!content) {
 			alert('내용을 입력하세요')
+			$(".comment-textarea").focus();
 			return false;
 		}
 		var buttonText = $("#write").text(); 	//버튼의 라벨로 add할지 update 할지 결정 
