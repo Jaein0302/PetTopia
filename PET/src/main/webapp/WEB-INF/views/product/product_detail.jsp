@@ -23,14 +23,20 @@
 </style>
 <script>
 
-	$(function() {	
-		$(".amount").on('change', function(){
-			var p_price = $(".product_price").text().slice(0, -1);
-			console.log("p_price=" + p_price)
-			var t_price = $(".amount").val() * p_price;		
-			$(".total_price").html(t_price);
-		})
-	});
+var result = "${result}";
+
+$(function() {	
+	$(".amount").on('change', function(){
+		var p_price = $(".product_price").text().slice(0, -1);
+		console.log("p_price=" + p_price)
+		var t_price = $(".amount").val() * p_price;		
+		$(".total_price").html(t_price);
+	})
+	
+	if(result == 'addSuccess'){
+		alert("상품 문의 성공입니다.");
+	}
+});
 
 $(function() {	
 	
@@ -128,7 +134,7 @@ $(function() {
 				<section id="content2">
 					<jsp:include page='review_view.jsp' />
 				</section>
-
+				
 				<section id="content3">
 					<jsp:include page='ask_view.jsp' />
 				</section>
