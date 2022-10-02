@@ -6,9 +6,9 @@ import com.Pet_Topia.domain.Community;
 
 public interface CommunityService {
 
-	int getListCount();
+	int getListCount(int index, String search_word);
 
-	List<Community> getBoardList(int page, int limit);
+	List<Community> getBoardList(int index, String search_word, int page, int limit);
 
 	void insert(Community comm);
 
@@ -19,5 +19,7 @@ public interface CommunityService {
 	int delete(int num);
 
 	List<Community> hot_List();
+
+	int udpate(Community comm);
 
 }

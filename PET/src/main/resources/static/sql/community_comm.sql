@@ -15,3 +15,15 @@ create sequence comm_seq;
 
 
 insert into COMMUNITY_COMM values(comm_seq.nextval,'admin','댓글내용111',sysdate,1)
+
+
+select * 
+		from(select rownum rnum, c.*
+		  from(select *
+		  		 from community_comm
+		  		 where comment_commu_num = 1
+		  		 order by comment_date desc
+		  		 ) c
+		  where rownum <= 10
+		)
+		where rnum between 1 and 10

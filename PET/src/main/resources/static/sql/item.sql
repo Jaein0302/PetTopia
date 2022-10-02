@@ -43,8 +43,8 @@ delete item
 drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;
 
-insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
-values(item_seq.nextval, '다리수술', 'treat', 150000,'슬개골 탈구 수술', 'male', 'L', 'dog' );
+insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES,ITEM_IMAGE_FILE, ITEM_IMAGE_ORIGINAL) 
+values(item_seq.nextval, '다리수술', 'treat', 150000,'슬개골 탈구 수술', 'male', 'L', 'dog','1','1' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 
 values(item_seq.nextval, '다리수술', 'treat', 50000, '슬개골 탈구 수술', 'male', 'S', 'dog' );
 insert into item(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES) 

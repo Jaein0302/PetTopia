@@ -7,7 +7,7 @@ COMMU_SUBJECT VARCHAR2(300),   						--제목
 COMMU_CONTENT VARCHAR2(4000),   					--내용
 COMMU_READCOUNT NUMBER,         					--조회수
 COMMU_DATE DATE,            						--작성날짜
-COMMU_THUMBNAIL VARCHAR2(100),  					--대표 이미지
+COMMU_THUMBNAIL VARCHAR2(200), 
 COMMU_FILE VARCHAR2(100),      						--파일이름
 COMMU_ORIGINAL VARCHAR2(100)						--파일이름(가공)
 );
@@ -28,6 +28,8 @@ insert into community values(9,'admin','테스트 - 제목 9','테스트 - 내�
 insert into community values(10,'admin','테스트 - 제목 10','테스트 - 내용 10',0,sysdate,null,null,null);
 insert into community values(11,'admin','테스트 - 제목 11','테스트 - 내용 11',0,sysdate,null,null,null);
 insert into community values(12,'admin','테스트 - 제목 12','테스트 - 내용 12',0,sysdate,null,null,null);
+
+
 
 select * 
 		from ( select rownum rnum, b.*

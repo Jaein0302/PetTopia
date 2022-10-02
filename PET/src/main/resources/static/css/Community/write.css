@@ -58,7 +58,7 @@ hr {
 /* Clear floats */
 .clearfix{
 	position: absolute;
-    left: 31.5%;
+    left: 32.5%;
     margin-top: 85px !important;
 }
 
@@ -147,3 +147,78 @@ b {
 .fa-check{color:#6dc99f}
 
 .updateb{margin-right:70px;}
+
+/* 별점 */
+.mform label{
+	border:none!important;
+}
+.rating-message{
+    position: absolute;
+    font-size: 18px;
+    left: 41.5%;
+    top: 10.8%;
+}
+.rating {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+    position: absolute;
+    left: 38%;
+    top: 14%;
+}
+
+.rating input {
+    position: absolute;
+    left: -999999px;
+}
+
+.rating label {
+    display: inline-block;
+    font-size: 0;
+}
+
+.rating > label:before {
+    position: relative;
+    font: 24px/1 FontAwesome;
+    display: block;
+    content: "\f005";
+    color: #ccc;
+    background: -webkit-linear-gradient(-45deg, #d9d9d9 0%, #b3b3b3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.rating > label:hover:before,
+.rating > label:hover ~ label:before,
+.rating > label.selected:before,
+.rating > label.selected ~ label:before {
+    color: #f0ad4e;
+    background: -webkit-linear-gradient(-45deg, #fcb551 0%, #d69a45 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 아래 화살표 애니메이션 */
+.fa-chevron-down{
+	font-style:normal !important;
+	font-size:15px!important;
+}
+.arrow-bounce {
+  display: inline-block;
+}
+.bounce {
+  -webkit-animation: bounce 1.5s infinite;
+}
+@-webkit-keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+}

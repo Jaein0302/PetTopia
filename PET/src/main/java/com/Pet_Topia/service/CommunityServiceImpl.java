@@ -2,6 +2,7 @@ package com.Pet_Topia.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,13 +21,26 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public int getListCount() {
-		return dao.getListCount();
+	public int getListCount(int index, String search_word) {
+		Map<String, String> map = new HashMap<String, String>();
+		if(index!=-1) {
+			String[] search_field=new String[] {"commu_subject", "commu_content", "commu_name"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word","%"+search_word+"%");
+		}
+		return dao.getListCount(map);
 	}
 
 	@Override
-	public List<Community> getBoardList(int page, int limit) {
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+	public List<Community> getBoardList(int index, String search_word, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		if(index!=-1) {
+			String[] search_field=new String[] {"commu_subject", "commu_content", "commu_name"};
+			map.put("search_field", search_field[index]);
+			map.put("search_word","%"+search_word+"%");
+		}
+		
 		int startrow=(page-1)*limit+1;
 		int endrow=startrow+limit-1;
 		map.put("start", startrow);
@@ -58,6 +72,12 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List<Community> hot_List() {
 		return dao.hot_list();
+	}
+
+	@Override
+	public int udpate(Community comm) {
+		return dao.update(comm);
+		
 	}
 
 }
