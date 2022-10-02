@@ -37,7 +37,7 @@
 	  <b>제목</b>
 	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
 	  
-	  <label for="upfile">대표 이미지 업로드</label> 
+	  <label for="upfile">대표 이미지 업로드</label>
 	  <input class="jinput" id="upfile" type="file" name="uploadfile" accept="image/*" style="font-size:0.9rem;width:50%">
 	  <span id="filevalue"></span>
 	  <input type="hidden" name="commu_thumbnail" id="check" value="">

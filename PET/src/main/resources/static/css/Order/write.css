@@ -146,7 +146,12 @@ b {
 
 .fa-check{color:#6dc99f}
 
+.updateb{margin-right:70px;}
+
 /* 별점 */
+.mform label{
+	border:none!important;
+}
 .rating-message{
     position: absolute;
     font-size: 18px;
