@@ -23,6 +23,11 @@ th{
 	color: #808080;
 	font-weight:lighter
 }
+.text-small2 {
+	font-size:14px!important;
+	color: #9f9f9f;
+	font-weight:lighter
+}
 /* 지난 예약 */
 .arrow-bounce {
   display: inline-block;
@@ -44,6 +49,7 @@ th{
             transform: translateY(-5px);
   }
 }
+
 /* 예약중 */
 .onair {
   display: inline-block;

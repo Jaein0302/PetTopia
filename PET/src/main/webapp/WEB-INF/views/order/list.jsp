@@ -47,8 +47,10 @@
 	</colgroup>
    		<tr>
 	   		<th class='pb-0' colspan='2'>
-	   			<i class="fas fa-angle-right"></i>&ensp;
-	   				예약번호&ensp;:&ensp;ABC12345678
+	   			<i class="far fa-calendar-check"></i>&ensp;
+	   				예약번호&ensp;:&ensp;ABC12345678 
+	   			<span class='text-small2 pl-2'>
+	   			<i class="fas fa-angle-double-left"></i>&nbsp;상세보기</span>
 	   		</th>
 	   		<th class='text-right pb-0'>
 	   			<span class='order-modify pr-2'>예약 수정</span><span class='text-small1'>|</span>
@@ -101,13 +103,17 @@
 	</colgroup>
    		<tr>
 	   		<th class='pb-0' colspan='2'>
-	   			<i class="fas fa-angle-right"></i>&ensp;
+	   			<i class="far fa-calendar-check"></i>&ensp;
 	   				예약번호&ensp;:&ensp;DEF12345678
+	   				<span class='text-small2 pl-2'>
+	   			<i class="fas fa-angle-double-left"></i>&nbsp;상세보기</span>
 	   		</th>
 	   		<th class='text-right pb-0'>
-	   			<span class='text-comment'><i class="fas fa-pencil-alt"></i>
-	   				리뷰 쓰기
-	   			</span>
+	   			<a href="${pageContext.request.contextPath}/order/review" class="text-decoration-none">
+		   			<span class='text-comment'><i class="fas fa-pencil-alt"></i>
+		   				리뷰 쓰기
+		   			</span>
+	   			</a>
 	   		</th>
    		</tr>
    	<tbody class='border-bottom'>

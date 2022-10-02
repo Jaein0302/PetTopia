@@ -32,7 +32,7 @@ public class OrderController {
 		
 	}
 	
-	// 구매내역
+	// 예약내역
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(ModelAndView mv) {
 		mv.setViewName("order/list");
@@ -43,6 +43,13 @@ public class OrderController {
 	@RequestMapping(value = "/myreview", method = RequestMethod.GET)
 	public ModelAndView myreview(ModelAndView mv) {
 		mv.setViewName("order/review_mylist");
+		return mv;
+	}
+	
+	// 내가 남긴 후기
+	@RequestMapping(value = "/review", method = RequestMethod.GET)
+	public ModelAndView review(ModelAndView mv) {
+		mv.setViewName("order/review_write");
 		return mv;
 	}
 	

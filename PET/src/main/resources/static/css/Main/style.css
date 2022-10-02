@@ -9650,7 +9650,7 @@ input[type=text]:focus, input[type=password]:focus, select:focus,textarea:focus 
     padding-bottom: 0;
 }
 .commu{font-family:'JUA';font-size:35px;}
-.fa-paw{font-size:28px}
+.fa-paw, .fa-camera{font-size:28px}
 button:focus{boxshadow:none;outline:none;}
 input:focus{boxshadow:none;}
  input[type="file"] {  /* 파일 필드 숨기기 */
