@@ -1,4 +1,4 @@
-drop table ITEM_ASK
+drop table item_ask cascade constraints purge;
 
 create table ITEM_ASK(
 	ITEM_ASK_NUM 		number(15) primary key,  -- 문의 번호
