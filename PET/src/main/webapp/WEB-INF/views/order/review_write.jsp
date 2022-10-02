@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>펫토피아 - 커뮤니티</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="${pageContext.request.contextPath}/resources/css/Community/write.css" type="text/css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/Order/write.css" type="text/css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/Summernote/summernote-lite.css" type="text/css" rel="stylesheet">
 </head>
 <body>
