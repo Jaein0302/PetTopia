@@ -29,4 +29,19 @@ public class AskServiceImpl implements AskService {
 		return dao.insertAsk(itemask);		
 	}
 	
+	@Override
+	public int getListCount(Product product) {
+		return dao.getListCount(product);
+	}
+	
+	@Override
+	public List<ItemAsk> getAskList(int page, int limit, Product product) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("product", product);
+		return dao.getAskList(map);
+	}
 }

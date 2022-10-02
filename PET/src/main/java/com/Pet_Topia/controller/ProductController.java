@@ -30,8 +30,10 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.domain.Product;
+import com.Pet_Topia.service.AskService;
 import com.Pet_Topia.service.ProductService;
 
 @Controller
@@ -41,12 +43,15 @@ public class ProductController {
 	private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 	
 	private ProductService productService;
+	private AskService askService;
 	private MySaveFolder mysavefolder;
 	
 	@Autowired
 	public ProductController(ProductService productService,
-							 MySaveFolder mysavefolder) {
+							 MySaveFolder mysavefolder,
+							 AskService askService) {
 		this.productService = productService;
+		this.askService = askService;
 		this.mysavefolder = mysavefolder;
 	}
 	
@@ -91,8 +96,11 @@ public class ProductController {
 	@GetMapping(value ="/detail")
 	public ModelAndView productdetail(
 					@RequestParam(value="ITEM_ID", required = true) int ITEM_ID,
+					@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 					ModelAndView mv			
 					) {
+		
+		//product_detail.jsp 화면
 		Product product = productService.getDetail(ITEM_ID);
 		
 		if(product == null) {
@@ -104,6 +112,30 @@ public class ProductController {
 			mv.setViewName("product/product_detail");
 			mv.addObject("productdata", product);
 		}
+		
+		//ask.view.jsp(상품문의)에 값 전달
+		int limit = 10; // 한 화면에 출력할 로우 갯수
+		int listcount = askService.getListCount(product); // 총 리스트 수를 받아옴
+		// 총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등...)
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+		
+		List<ItemAsk> asklist = askService.getAskList(page, limit, product); // 리스트를 받아옴
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("asklist", asklist);
+		mv.addObject("limit", limit);
+		
+		
 		return mv;
 		
 	}
