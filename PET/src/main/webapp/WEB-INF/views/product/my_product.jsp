@@ -268,7 +268,7 @@ $('#delete').on('click',function(){
 	  	 	 		
 	  	 	 	<h5>상품 이미지</h5>
 			  	<div class="form-group">
-			  	 	<label for="BOARD_FILE">파일 첨부</label>
+			  	 	<label for="upfile">파일 첨부</label>
 					<input type="file" id="upfile" name="uploadfile">
 		  		</div> 	  	 	 	
 		  	 	 		  	 	 
