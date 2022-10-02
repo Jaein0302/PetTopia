@@ -6,6 +6,7 @@ public class Review {
 	private String review_id;   	// 아이디
 	private int review_item_id; 	// 상품번호
 	private int review_score;		// 평점
+	private String review_subject;  // 리뷰 제목
 	private String review_content;  // 리뷰 내용
 	private String review_reg_date; // 리뷰 날짜
 	private String review_image;    // 리뷰 이미지
@@ -52,6 +53,12 @@ public class Review {
 	}
 	public void setReview_image(String review_image) {
 		this.review_image = review_image;
+	}
+	public String getReview_subject() {
+		return review_subject;
+	}
+	public void setReview_subject(String review_subject) {
+		this.review_subject = review_subject;
 	}
 
 }

@@ -11,6 +11,17 @@
 <link href="${pageContext.request.contextPath}/resources/css/Order/orderlist.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+
+	<!-- 지도 띄우기 -->	
+ 	<div class="popup_panel1">
+       <div class="popup_bg1"></div>
+            <div class="popup_contents1">
+                <a href="javascript:void(0)" id="btn_popup_close1"></a>
+  			 <div id="map" style="width:100%;height:500px;"></div>
+   		</div>
+    </div>
+
+
 <!-- header -->
 <div class="header">
 <jsp:include page="../member/header.jsp" />
@@ -70,7 +81,10 @@
    		</tr>
    		<tr>
    			<td>애견훈련교실
-   				<i class="fas fa-map-marker-alt pl-1"></i>
+   			<input type="hidden" id="address" value='충북 청주시 서원구 1순환로 632 (사창동)'>
+   				<span id="showmap" style="cursor:pointer">
+   					<i class="fas fa-map-marker-alt pl-1"></i>
+   				</span>
    			</td>
    		</tr>
    		<tr>
@@ -129,7 +143,10 @@
    		</tr>
    		<tr>
    			<td>애견스튜디오
+   			<input type="hidden" id="address" value='서울 종로구 종로 1 (종로1가)'>
+   				<span id="showmap" style="cursor:pointer">
    				<i class="fas fa-map-marker-alt pl-1"></i>
+   				</span>
    			</td>
    		</tr>
    		<tr>
@@ -143,6 +160,9 @@
    </div>
   </div>
   </div>
+    <script src="${pageContext.request.contextPath}/resources/js/Order/orderlist.js"></script>
+	<!-- 카카오 맵 api -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a0aac50d998d4e38614102e447c876b&libraries=services"></script>
 </body>
 <jsp:include page="../member/footer.jsp" />
 </html>

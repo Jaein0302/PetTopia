@@ -38,40 +38,41 @@
 	</thead>
 	</table>
 	
-<form class="mform" method="post" action="${pageContext.request.contextPath}/community/add" enctype="multipart/form-data">
+<form class="mform" method="post" action="${pageContext.request.contextPath}/order/add" enctype="multipart/form-data">
 	<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="pinfo"/>
-	  <input type="hidden" name="commu_name" value="${pinfo.username}">
-	  
+	  <input type="hidden" name="review_id" value="${pinfo.username}">
+	  <input type="hidden" name="review_item_id" value="1">
 	  <div class="rating-message">
 	  	 <span class="bounce arrow-bounce pr-1"><i class="fa fa-2x fa-chevron-down"></i></span>
 	  	 별점을 남겨주세요
 	  </div>
+	  <input type='hidden' id='starrating' name='review_score' value='3'>
 	  
 	  <div class="rating">
-		  <label>
+		  <label class="star1">
 		    <input type="radio" name="rating" value="5" title="5 stars">
 		  </label>
-		  <label>
+		  <label class="star2">
 		    <input type="radio" name="rating" value="4" title="4 stars">
 		  </label>
-		  <label class="selected">
+		  <label class="star3 selected">
 		    <input type="radio" name="rating" value="3" title="3 stars">
 		  </label>
-		  <label>
+		  <label class="star4">
 		    <input type="radio" name="rating" value="2" title="2 stars">
 		  </label>
-		  <label>
+		  <label class="star5">
 		    <input type="radio" name="rating" value="1" title="1 star">
 		  </label>
 		</div>
 	  
 	  
 	  <b style='margin-top: 5rem !important'>리뷰 제목</b>
-	  <input class="jinput" type="text" name="commu_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
+	  <input class="jinput" type="text" name="review_subject" placeholder="제목을 입력해 주세요." maxlength="50" required>
 	  
 	  <b class="mt-2">리뷰 내용</b>
-	  <textarea id="summernote" name="commu_content"></textarea>
+	  <textarea id="summernote" name="review_content"></textarea>
 	
 	  <div class="clearfix">
 		 <button type="submit" class="button-5 cancelbtn updateb">등록</button>
@@ -89,7 +90,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Community/c_list.js"></script>
-<script src="${pageContext.request.contextPath}/resources/js/Community/write.js"></script>
+<script src="${pageContext.request.contextPath}/resources/js/Order/review_write.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Summernote/summernote-lite.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 <script>
@@ -97,7 +98,22 @@ $('.rating input').change(function () {
 	  var $radio = $(this);
 	  $('.rating .selected').removeClass('selected');
 	  $radio.closest('label').addClass('selected');
-	});
+	  
+	  if($(".star1").hasClass("selected") === true) {
+			$('#starrating').val('5');
+		}else if($(".star2").hasClass("selected") === true) {
+			$('#starrating').val('4');
+		}else if($(".star3").hasClass("selected") === true) {
+			$('#starrating').val('3');
+		}else if($(".star4").hasClass("selected") === true) {
+			$('#starrating').val('2');
+		}else if($(".star5").hasClass("selected") === true) {
+			$('#starrating').val('1');
+		}
+	  
+});
+
+
 </script>
 </body>
 <jsp:include page="../member/footer.jsp" />
