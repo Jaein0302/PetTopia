@@ -4,6 +4,7 @@ create table ORDERINFO(
 ORDER_ID         NUMBER(15) PRIMARY KEY,
 ITEM_ID      number(30) references item(item_id) on delete cascade,
 MEBER_ID      varchar2(20) references member(member_id) on delete cascade,
+order_date varchar2(100), --예약한 날짜
 order_amount number(10),
 order_price number(10)
 )
