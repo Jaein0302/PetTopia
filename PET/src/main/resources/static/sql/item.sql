@@ -10,7 +10,7 @@ create table ITEM (
    ITEM_IMAGE_FILE      VARCHAR2(100) NOT NULL, --추가
    ITEM_REG_DATE     DATE DEFAULT SYSDATE NOT NULL,
    ITEM_RSV_DATE    DATE DEFAULT SYSDATE NOT NULL,  -- 예약날짜
-   ITEM_SCORE      NUMBER(20),  -- 후기
+   ITEM_SCORE      NUMBER(20,1),  -- 후기
    ITEM_SEX         VARCHAR2(10), -- male, female
    ITEM_WEIGHT      VARCHAR2(5), -- L, M, S (수정)
    ITEM_SPECIES      VARCHAR2(10) -- dog, cat

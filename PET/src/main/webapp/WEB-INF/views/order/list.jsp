@@ -65,7 +65,7 @@
 	   		</th>
 	   		<th class='text-right pb-0'>
 	   			<span class='order-modify pr-2'>예약 수정</span><span class='text-small1'>|</span>
-	   			<span class='order-cancel pl-2'>예약 취소</span>
+	   			<span class='order-cancel pl-2 order-cancel cpointer'>예약 취소</span>
 	   		</th>
    		</tr>
    	<tbody class='border-bottom'>
@@ -163,6 +163,24 @@
     <script src="${pageContext.request.contextPath}/resources/js/Order/orderlist.js"></script>
 	<!-- 카카오 맵 api -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a0aac50d998d4e38614102e447c876b&libraries=services"></script>
+<script>
+$(document).ready(function() {
+	//예약 취소
+	$(".order-cancel").click(function(){
+	 Swal.fire({
+		  title: '예약을 취소하시겠습니까?',
+		  icon: 'error',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			  $(location).attr('href','list');
+		  }
+		})
+	});//click
+});
+</script>
 </body>
 <jsp:include page="../member/footer.jsp" />
 </html>

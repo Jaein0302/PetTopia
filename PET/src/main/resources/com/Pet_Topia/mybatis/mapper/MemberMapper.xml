@@ -132,7 +132,11 @@
     </select> 
     
     <select id="best_item" resultType="product">
-      select * from item
-      order by ITEM_SCORE desc
+      select item.*,  nvl(cnt,0) cnt
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+      order by item.ITEM_SCORE asc
     </select>
 </mapper>

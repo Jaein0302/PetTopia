@@ -8,6 +8,7 @@ public class Review {
 	private int review_score;		// 평점
 	private String review_subject;  // 리뷰 제목
 	private String review_content;  // 리뷰 내용
+	private String review_text;		// 리뷰 텍스트
 	private String review_reg_date; // 리뷰 날짜
 	private String review_image;    // 리뷰 이미지
 	
@@ -46,7 +47,7 @@ public class Review {
 		return review_reg_date;
 	}
 	public void setReview_reg_date(String review_reg_date) {
-		this.review_reg_date = review_reg_date;
+		this.review_reg_date = review_reg_date.substring(2,10); //년-월-일
 	}
 	public String getReview_image() {
 		return review_image;
@@ -59,6 +60,12 @@ public class Review {
 	}
 	public void setReview_subject(String review_subject) {
 		this.review_subject = review_subject;
+	}
+	public String getReview_text() {
+		return review_text;
+	}
+	public void setReview_text(String review_text) {
+		this.review_text = review_text;
 	}
 
 }

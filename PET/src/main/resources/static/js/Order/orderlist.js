@@ -1,7 +1,7 @@
 $(function(){
 
 	$(document).on("click", "#showmap", function(){
-	
+	var thismap = $(this).prev().val();
 	var $panel = $(".popup_panel1");
     var $panelContents = $panel.find(".popup_contents1");
 
@@ -51,7 +51,7 @@ $(function(){
 
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
 	        var infowindow = new kakao.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">장소</div>'
+	            content: '<div class="text-dark" style="width:200px;text-align:center;padding:6px 0;">'+thismap+'</div>'
 	        });
 	        infowindow.open(map, marker);
 
