@@ -6,8 +6,23 @@ import com.Pet_Topia.domain.Community;
 
 public interface CommunityService {
 
-	int getListCount();
+	int getListCount(int index, String search_word);
 
-	List<Community> getBoardList(int page, int limit);
+	List<Community> getBoardList(int index, String search_word, int page, int limit);
 
+<<<<<<< HEAD
+=======
+	void insert(Community comm);
+
+	int setReadCountUpdate(int num);
+
+	Community getDetail(int num);
+
+	int delete(int num);
+
+	List<Community> hot_List();
+
+	int udpate(Community comm);
+
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.Pet_Topia.mybatis.mapper.OrderMapper">
+
+	<insert id="insert" parameterType="review">
+		<selectKey resultType="int" order="BEFORE" keyProperty="review_num">
+			select nvl(max(review_num),0)+1 from review
+		</selectKey>
+		insert into review
+		values
+		(#{review_num},
+		#{review_id}, #{review_item_id}, 
+		#{review_score}, #{review_subject}, #{review_content}, 
+		sysdate,#{review_image, jdbcType=VARCHAR})
+	</insert>
+
+
+</mapper>

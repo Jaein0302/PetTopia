@@ -192,9 +192,15 @@
                  <div class="nav-item dropdown" style="position:static!important">
                   <a href="#" class="nav-link dropdown-toggle catename" data-toggle="dropdown">카테고리&nbsp;&nbsp;<i class="fa fa-bars"></i></a>
                		<div class="dropdown-menu rounded-0 m-0">
+<<<<<<< HEAD
                   	 <a href="${pageContext.request.contextPath}/main/myinfo" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
                      <a href="#" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
                   	 <a href="#" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
+=======
+                  	 <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
+                     <a href="${pageContext.request.contextPath}/product/product_list?item_category=education" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
+                  	 <a href="${pageContext.request.contextPath}/product/product_list?item_category=beauty" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                		</div>
                	</div>
                </div>
@@ -241,8 +247,16 @@
                         	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
+<<<<<<< HEAD
                         	 	<a href="#" class="dropdown-item mydrop">구매내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">작성한글</a>
+=======
+                        	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
+                        	 	<a href="${pageContext.request.contextPath}/order/myreview" class="dropdown-item mydrop">내가 남긴 리뷰</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내 글</a>
+                        	 	<a href="#" class="dropdown-item mydrop">내 댓글</a>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                         	 	<a href="#" class="dropdown-item">
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>
@@ -271,6 +285,7 @@
 
 	<!-- login js -->
 	<script src="${pageContext.request.contextPath}/resources/js/Main/login.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	$(function(){
 		$("#logout").click(function(event){
@@ -280,7 +295,13 @@
 		$('.isearch').on('click', function() {
 			var input = $('input[name=item]').val();
     		if(input.length==0){
-    			alert("검색어 입력해주세요");
+    			Swal.fire({
+    				position: 'center',
+    				icon: 'question',
+    				title: '검색어를 입력해주세요',
+    				showConfirmButton: false,
+    				timer: 1000
+    			})
     			event.preventDefault();
     		}else{
     			$("form[name=search]").submit();

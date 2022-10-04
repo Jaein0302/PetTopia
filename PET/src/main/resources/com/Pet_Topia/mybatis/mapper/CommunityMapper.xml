@@ -4,17 +4,24 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.Pet_Topia.mybatis.mapper.CommunityMapper">
-
+	
+	<sql id="search_">
+   	<if test="search_field!=null">
+      where 
+       <choose>
+          <when test="search_field=='commu_subject'">commu_subject</when>
+          <when test="search_field=='commu_name'">commu_name</when>
+          <when test="search_field=='commu_content'">commu_content</when>
+       </choose>
+        like #{search_word} 
+      </if>
+   </sql>
+	
+	
 	<select id="getListCount" resultType="int">
 		select count(*) from community
+		<include refid="search_"/>
 	</select>
-
-	<!-- 문법 오류 where rnum >= #{start} ==> 해결법 1) where rnum &gt;= #{start} 2) 
-		where rnum <![CDATA[ >= ]]> #{start} ==> 설명 1) HTML 문서는 '<', '>'와 같은 마크업 
-		문자들을 파싱해서 읽어들이는 구조입니다. 그래서 마크업 문자들을 작다(<), 크다(>)로 사용하기 위해서 '&lt;', '&gt;' 
-		등의 escape 문자열(escape character)을 이용해야 합니다. < -> &lt; > -> &gt; 2) CDATA(Character 
-		DATA) - XML 파서가 분석하지 않는 문자 데이터를 의미합니다. 사용하는 방법은 <![CDATA[ 와 ]]> 사이에 문자들을 
-		넣으면 됩니다. -->
 
 	<select id="getBoardList" parameterType="java.util.Map"	resultType="community">
 		select * 
@@ -24,6 +31,7 @@
 												 from COMMUNITY_COMM
 												 group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
 					on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+					<include refid="search_"/>
 					order by community.COMMU_NUM desc	) b
 			  where rownum &lt;= #{end}
 			)
@@ -31,6 +39,61 @@
 	</select>
 	
 
+<<<<<<< HEAD
 
 
+=======
+	<insert id="insert" parameterType="community">
+		<selectKey resultType="int" order="BEFORE" keyProperty="commu_num">
+			select nvl(max(commu_num),0)+1 from community
+		</selectKey>
+		insert into community
+		values
+		(#{commu_num},
+		#{commu_name}, #{commu_subject}, 
+		#{commu_content}, #{commu_readcount}, 
+		sysdate,#{commu_thumbnail, jdbcType=VARCHAR},
+		#{commu_file, jdbcType=VARCHAR},
+		#{commu_original, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="setReadCountUpdate" parameterType="int" >
+		update community 
+		set commu_readcount = commu_readcount + 1 
+		where commu_num = #{number}
+	</update>
+	
+	<select id="getDetail" parameterType="int" resultType="community">
+		select community.*,  nvl(cnt,0) cnt
+		from community left outer join (select COMMUNITY_COMM.COMMENT_COMMU_NUM, count(*) cnt
+										 from COMMUNITY_COMM
+										 group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
+		on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+		where community.commu_num = #{number}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete community
+		where commu_num = #{number}
+	</delete>
+	
+	<select id="hot_list" resultType="community">
+		select *
+		 from ( select community.*, nvl(cnt,0) cnt
+				from community left outer join (select COMMUNITY_COMM.COMMENT_COMMU_NUM, count(*) cnt
+												from COMMUNITY_COMM
+												group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
+				on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+				order by community.COMMU_NUM desc) c
+		 WHERE c.COMMU_DATE >= TO_CHAR(SYSDATE-7,'YYYYMMDD')
+		 order by cnt desc, COMMU_READCOUNT desc
+	</select>
+	
+	<update id="update" parameterType="community">
+		update community
+		set commu_subject=#{commu_subject}, commu_content=#{commu_content}, commu_thumbnail=#{commu_thumbnail},
+		commu_file=#{commu_file, jdbcType=VARCHAR}, commu_original=#{commu_original, jdbcType=VARCHAR}
+		where commu_num = #{commu_num}
+	</update>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 </mapper>

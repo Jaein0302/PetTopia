@@ -21,33 +21,6 @@ select{color: #6F6F6F;}
     clear: both;
 }
 
-input[type=radio]{
-	width: 5%;
-    display: inline-block;
-    border: none;
-}
-
-button {
-    color: white;
-    margin: 8px 0;
-    border: none;
-    width: 100%;
-    opacity: 0.8;
-}
-
-button:hover {
-    opacity:1;
-     cursor: pointer; 
-    
-}
-button:focus{
-   outline:none !important;
-   box-shadow:none;
-}
-
-button:active{
-   outline:none;
-}
 
 
 .mform {

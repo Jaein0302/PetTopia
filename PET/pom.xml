@@ -113,9 +113,30 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+<<<<<<< HEAD
+=======
+		
+		<!-- 파일 업로드 로직과 JSON을 리턴하기 위한 gson 사용 
+		https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.6</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <properties>
+		    <version>2.8.6</version>
+		    </properties>
+		</dependency>
+		
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	</dependencies>
 
-	<build>
+	<build> 
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

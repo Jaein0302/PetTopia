@@ -7,7 +7,7 @@ COMMU_SUBJECT VARCHAR2(300),   						--제목
 COMMU_CONTENT VARCHAR2(4000),   					--내용
 COMMU_READCOUNT NUMBER,         					--조회수
 COMMU_DATE DATE,            						--작성날짜
-COMMU_THUMBNAIL VARCHAR2(100),  					--대표 이미지
+COMMU_THUMBNAIL VARCHAR2(200), 
 COMMU_FILE VARCHAR2(100),      						--파일이름
 COMMU_ORIGINAL VARCHAR2(100)						--파일이름(가공)
 );
@@ -29,6 +29,8 @@ insert into community values(10,'admin','테스트 - 제목 10','테스트 - 내
 insert into community values(11,'admin','테스트 - 제목 11','테스트 - 내용 11',0,sysdate,null,null,null);
 insert into community values(12,'admin','테스트 - 제목 12','테스트 - 내용 12',0,sysdate,null,null,null);
 
+
+
 select * 
 		from ( select rownum rnum, b.*
 		  from (select community.*,  nvl(cnt,0) cnt
@@ -40,3 +42,13 @@ select *
 		where rownum <= 10 
 	) 
 where rnum>=1 and rnum<=10
+
+
+		select *
+		 from ( select community.*, nvl(cnt,0) cnt
+				from community left outer join (select COMMUNITY_COMM.COMMENT_COMMU_NUM, count(*) cnt
+												from COMMUNITY_COMM
+												group by COMMUNITY_COMM.COMMENT_COMMU_NUM) c
+				on community.COMMU_NUM = c.COMMENT_COMMU_NUM
+				order by community.COMMU_NUM desc)
+		 order by cnt desc, COMMU_READCOUNT desc

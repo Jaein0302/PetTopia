@@ -56,7 +56,7 @@ $("input[name=member_regnum]").focus(function(){
 			alert("사업자 등록번호 10자리를 입력해주세요");
 			$('#regnum').focus();
 		}else if(!isReg){
-			alert("이미 등록된 사업자 등록번호입니다.");
+			alert("사업자 등록번호를 확인해주세요");
 			$('#regnum').focus();
 		}else{	
 		console.log("사업자등록번호= "+regnum+", 이름="+bname+", 개업일="+bdate);
@@ -86,7 +86,11 @@ $("input[name=member_regnum]").focus(function(){
 			      var keys = Object.keys(result);
 			      console.log("키값="+keys);
 			       if (keys.indexOf('valid_cnt') > -1) {
-			    	  alert("사업자등록번호 인증성공");
+			    	 Swal.fire(
+						  '사업자 인증이 완료되었습니다!',
+						  '다음단계로 이동해주세요.',
+						  'success'
+						)
 			    	  $(".chk_bno").show();
 			    	  chkbno = true;
 			    	  return;
@@ -128,11 +132,6 @@ $("input[name=member_regnum]").focus(function(){
 			}
 		});//change
 		
-		//로그인 막기
-		$('.me4').click(function(){
-			$(".popup_panel").remove();
-			alert("회원가입 완료 후 로그인 해주세요.")
-		});
 	});
 	
 	//이름 공백 검사
@@ -204,11 +203,31 @@ $("input[name=member_regnum]").focus(function(){
 	})
 	
 	//취소 버튼 누르면 뒤로가기
-	$(".signoutb").click(function(){
-		var answer = confirm("가입을 취소하시겠습니까?")
-		if(answer == true)
-			$(location).attr('href','join');
-	})
+	 $(".signoutb").click(function(){
+		 Swal.fire({
+			  title: '가입을 취소하시겠습니까?',
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+				  $(location).attr('href','join');
+			  }
+			})
+		}) 
+		
+		//로그인 막기
+		$('.me4').click(function(){
+			$(".popup_panel").remove();
+			   Swal.fire({
+					position: 'center',
+					icon: 'warning',
+					title: '회원가입 완료 후 로그인 해주세요.',
+					showConfirmButton: false,
+					timer: 1000
+				})
+		});
 	
 	function noSpaceForm(obj) { // 공백사용못하게
 	var str_space = /\s/;  // 공백체크

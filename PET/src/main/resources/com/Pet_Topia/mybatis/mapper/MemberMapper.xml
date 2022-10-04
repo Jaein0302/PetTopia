@@ -40,7 +40,91 @@
 	</select>
 	
 	
+<<<<<<< HEAD
 	
 	
+=======
+	<select id="Id_pw_check"  parameterType="String" resultType="member">
+		select * from member
+		where member_id = #{id}
+		and member_password = #{encPassword}
+	</select>
+	
+	<delete id="Delete_user" parameterType="String">
+		delete from member
+		where member_id = #{member_id}
+	</delete>
+	
+	<select id="getMemberdata" parameterType="String" resultType="member">
+		select * from member
+		where member_id = #{id}
+	</select>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
    
+    <select id="search_item" resultType="product">
+      select *  
+      from item
+      where (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select>
+    
+    <select id="search_treat" resultType="product">
+      select *  
+      from item
+      where ITEM_CATEGORY = 'treat'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+    
+    <select id="search_edu" resultType="product">
+      select *  
+      from item
+      where ITEM_CATEGORY = 'education'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+    
+    <select id="search_beauty" resultType="product">
+      select *  
+      from item
+      where ITEM_CATEGORY = 'beauty'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+   
+   <select id="search_item_count" resultType="int">
+   	select count(*)
+   	from item
+    where (ITEM_CONTENT like #{item}
+    or ITEM_NAME like #{item})
+   </select>
+   
+   <select id="search_treat_count" resultType="int">
+      select count(*)
+      from item
+      where ITEM_CATEGORY = 'treat'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+    
+    <select id="search_edu_count" resultType="int">
+      select count(*) 
+      from item
+      where ITEM_CATEGORY = 'education'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+    
+    <select id="search_beauty_count" resultType="int">
+      select count(*)  
+      from item
+      where ITEM_CATEGORY = 'beauty'
+      and (ITEM_CONTENT like #{item}
+      or ITEM_NAME like #{item})
+    </select> 
+    
+    <select id="best_item" resultType="product">
+      select * from item
+      order by ITEM_SCORE desc
+    </select>
 </mapper>

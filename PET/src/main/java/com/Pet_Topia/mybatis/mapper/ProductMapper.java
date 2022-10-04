@@ -1,6 +1,7 @@
 package com.Pet_Topia.mybatis.mapper;
 
 import java.lang.System.Logger;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +12,21 @@ import com.Pet_Topia.domain.Product;
 @Mapper
 public interface ProductMapper {
 
-	public List<Product> getSearchList(String category);
+	public List<Product> getSearchList(Map<String, String> map);
 	
- 	
-//	public Product getDetail(int product_num);
+	public List<Product> getListAjax(Map<String, String> map);
+	
+	public int insertProduct(Product product);
+
+	public Product getDetail(int ITEM_ID);
+	
+	public int getListCount();
+
+	public List<Product> getProductList(HashMap<String, Integer> map);
  
+	public int productUpdate(Product product);
+	
+	public int productDelete(int ITEM_ID);
+
 
 }
