@@ -237,9 +237,17 @@
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
-                        	  &nbsp;마이페이지&ensp;<i class="fas fa-caret-down"></i></a>
+                        	  &nbsp;
+                        	  <c:if test="${pinfo.username=='admin'}">관리자</c:if>
+                        	  <c:if test="${pinfo.username!='admin'}">마이페이지</c:if>
+                        	  &ensp;<i class="fas fa-caret-down"></i></a>
+                        	 
+                        	 
                         	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
+                        	 	<c:if test="${pinfo.username=='admin'}">
+                        	 	<a href="#" class="dropdown-item mydrop">회원관리</a>
+                        	 	</c:if>
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
                         	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
