@@ -10,12 +10,4 @@ public interface CommunityService {
 
 	List<Community> getBoardList(int page, int limit);
 
-	void insert(Community comm);
-
-	int setReadCountUpdate(int num);
-
-	Community getDetail(int num);
-
-	int delete(int num);
-
 }

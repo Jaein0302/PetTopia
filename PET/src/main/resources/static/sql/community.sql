@@ -14,7 +14,7 @@ COMMU_ORIGINAL VARCHAR2(100)						--파일이름(가공)
 
 
 select * from COMMUNITY;
-select nvl(max(commu_num),0)+1 from community;
+select nvl(max(COMMU_NUM),0)+1 from community;
 
 insert into community values(1,'admin','테스트 - 제목 1','테스트 - 내용 1',0,sysdate,null,null,null);
 insert into community values(2,'admin','테스트 - 제목 2','테스트 - 내용 2',0,sysdate,null,null,null);

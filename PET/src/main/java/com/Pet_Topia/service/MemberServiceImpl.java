@@ -29,12 +29,6 @@ public class MemberServiceImpl implements MemberService {
 										   //1은 아이디가 존재하는 경우
 	}
 	
-	@Override
-	public int isRegnum(String member_regnum) {
-		Member rmember = dao.isRegnum(member_regnum);
-		return (rmember == null) ? -1 : 1; 
-	}
-
 
 	@Override
 	public int isId(String id, String password) {
@@ -71,9 +65,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int update_pass(String newpass, String member_id) {
-		int result = dao.update_pass(newpass, member_id);
-		return result;
+	public void update_pass(String str, String member_id) {
+		dao.update_pass(str, member_id);
 	}
 
 	@Override
@@ -86,11 +79,10 @@ public class MemberServiceImpl implements MemberService {
 	public Member member_info(String id) {
 		return dao.isId(id);
 	}
+	
+	
+	
 
-	@Override
-	public int update(Member m) {
-		return dao.update(m);
-	}
 
 }
 
