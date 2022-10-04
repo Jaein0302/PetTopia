@@ -13,8 +13,53 @@
 		(#{review_num},
 		#{review_id}, #{review_item_id}, 
 		#{review_score}, #{review_subject}, #{review_content}, 
+		#{review_text},
 		sysdate,#{review_image, jdbcType=VARCHAR})
 	</insert>
 
+	<select id="getListCount" resultType="int">
+		select count(*) from review
+		where review_item_id = #{ITEM_ID}
+	</select>
 
+	<select id="getBoardList" parameterType="java.util.Map"	resultType="review">
+		select * 
+			from ( select rownum rnum, b.*
+			  from (select review.*
+					from review 
+					where review_item_id = #{ITEM_ID}
+					order by review.review_reg_date desc) b
+			  where rownum &lt;= #{end}
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="mygetListCount" resultType="int">
+		select count(*) from review
+		where review_id = #{ITEM_ID}
+	</select>
+
+	<select id="mygetBoardList" parameterType="java.util.Map"	resultType="review">
+		select * 
+			from ( select rownum rnum, b.*
+			  from (select review.*
+					from review 
+					where review_id = #{ITEM_ID}
+					order by review.review_reg_date desc) b
+			  where rownum &lt;= #{end}
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="starAVG" parameterType="int" resultType="Double">
+		select avg(review_score)
+  		from review
+  		where review_item_id = #{review_item_id}
+	</select>
+	
+	<update id="starUpdate" parameterType="product">
+		update item 
+		set ITEM_SCORE = #{ITEM_SCORE}
+		where item_id = #{ITEM_ID}
+	</update>
 </mapper>

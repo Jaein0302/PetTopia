@@ -84,8 +84,8 @@
                     
                     <%-- 썸네일 --%>
                     <div class="card-header position-relative overflow-hidden border p-0 thumbnail-div">
-                         <c:if test="${!empty b.commu_file && !empty b.commu_thumbnail}">
-                         <img class='cthumbnail img-fluid w-100' src="${pageContext.request.contextPath}/upload${fn:replace(b.commu_file, '\\', '/')}">              	
+                         <c:if test="${!empty b.commu_file && (!empty b.commu_thumbnail || empty b.commu_thumbnail)}">
+                         <img class='cthumbnail img-fluid w-100' src="/pet_topia/upload${b.commu_file}">
                     	 </c:if>
                     	 <c:if test="${empty b.commu_file && !empty b.commu_thumbnail}">
                     	 <img class='cthumbnail img-fluid w-100'${fn:replace(b.commu_thumbnail, '>', ' ')}>

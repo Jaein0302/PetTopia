@@ -8,8 +8,16 @@ public interface ReviewService {
 
 	void insert(Review review);
 
-	int getListCount(int index, String search_word);
+	int getListCount(int ITEM_ID);
 
-	List<Review> getBoardList(int index, String search_word, int page, int limit);
+	List<Review> getBoardList(int ITEM_ID, int page, int limit);
+
+	int mygetListCount(String member_id);
+
+	List<Review> mygetBoardList(String member_id, int page, int limit);
+
+	Double starAVG(int review_item_id);
+
+	void starUpdate(int review_item_id);
 
 }

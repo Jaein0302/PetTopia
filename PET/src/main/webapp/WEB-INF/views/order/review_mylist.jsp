@@ -24,25 +24,7 @@
    
    <!-- 내가 남긴 리뷰 -->
    <div class="col-md-9 pb-3">
-   <table class="table text-center">
-	<!-- 테이블 간격 -->
-	<colgroup>
-	<col width="13%" />
-	<col width="45%" />
-	<col width="17%" />
-	<col width="15%" />
-	<col width="10%" />
-	</colgroup>
- 	<thead>
-     <tr>
-    	<th>번호</th>
-    	<th class="text-left">제목</th>
-    	<th>작성자</th>
-    	<th>작성일</th>
-    	<th>조회수</th>
-     </tr>
-    </thead>
-    <tbody>
+     <table class="table text-center">
      <c:set var="num" value="${listcount-(page-1)*limit}" />
      <c:forEach var="b" items="${boardlist}">
      <tr>
@@ -52,41 +34,20 @@
 	  </td>
 	 <td class="text-left"><%--제목 --%>
 	  <div>
-	  	 <a href="detail?num=${b.commu_num}">
+	  	 <a href="detail?num=${b.review_num}">
 	  	    <span class="text-dark">
-	  	    	 <c:if test="${b.commu_subject.length()>=20}">
-		  	     		<c:out value="${b.commu_subject.substring(0,20)}..." />
-			  	 </c:if>
-			  	 <c:if test="${b.commu_subject.length()<20}">
-		        		<c:out value="${b.commu_subject}" escapeXml="true"/>
-		         </c:if>
+		        <c:out value="${b.review_subject}" escapeXml="true"/>
 	  	    </span>
-	  		<span class="text-comment text-small">[<c:out value="${b.cnt}"/>]</span>
 	  	 </a>
 	  </div>
 	  </td>
-	  <td><div>${b.commu_name}</div></td>
-	  <td><div>${fn:replace(b.commu_date, '-', '.')}</div></td>
-	  <td><div>${b.commu_readcount}</div></td>
+	  <td><div>${b.review_id}</div></td>
+	  <td><div>${fn:replace(b.review_reg_date, '-', '.')}</div></td>
+	  <td><div>${b.review_score}</div></td>
 	  </tr>
 	  </c:forEach>
-	  </tbody>
 	 </table>
 
-	 
-<!-- 검색 창 -->
-	 <div class="text-center mt-4" style="position:absolute;left:35%;">
-	 <form method="get" action="">
-	 <select name="search_field">
-	 <option value="0" selected>제목+내용</option>
-	 <option value="1">작성자</option>
-	 <option value="2">제목</option>
-	 <option value="3">내용</option>
-	 </select>
-	 <input type="text" class="search_word" name="search_word" value="">
-	 <input type="button" class="button-5 postb" value="검색" style="min-height:40px;width:15%">
-	 </form>
-	 </div>
 	 
 <!-- 페이징 처리 -->
 	<div style="position:absolute;left:45%;margin-top:80px">

@@ -6,27 +6,15 @@ create table ITEM (
    ITEM_CATEGORY      VARCHAR2(30) NOT NULL,
    ITEM_PRICE      NUMBER(20) NOT NULL,
    ITEM_CONTENT      VARCHAR2(1000) NOT NULL,
-<<<<<<< HEAD
-   ITEM_IMAGE      VARCHAR2(100) NOT NULL,
-   ITEM_REG_DATE      DATE DEFAULT SYSDATE NOT NULL,
-   ITEM_RSV_DATE      DATE DEFAULT SYSDATE NOT NULL,
-   ITEM_SCORE      NUMBER(20),
-   ITEM_SEX         VARCHAR2(10),
-   ITEM_WEIGHT      NUMBER(10),
-   ITEM_SPECIES      VARCHAR2(10)
-=======
    ITEM_IMAGE_ORIGINAL     VARCHAR2(100) NOT NULL,
    ITEM_IMAGE_FILE      VARCHAR2(100) NOT NULL, --추가
    ITEM_REG_DATE     DATE DEFAULT SYSDATE NOT NULL,
    ITEM_RSV_DATE    DATE DEFAULT SYSDATE NOT NULL,  -- 예약날짜
-   ITEM_SCORE      NUMBER(20),  -- 후기
+   ITEM_SCORE      NUMBER(20,1),  -- 후기
    ITEM_SEX         VARCHAR2(10), -- male, female
    ITEM_WEIGHT      VARCHAR2(5), -- L, M, S (수정)
    ITEM_SPECIES      VARCHAR2(10) -- dog, cat
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 );
-<<<<<<< HEAD
-=======
 
 select * from item;
 delete item
@@ -51,10 +39,7 @@ delete item
 		       where rownum &lt;= #{end}
 			 )
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
-<<<<<<< HEAD
-=======
 drop sequence item_seq
 create sequence item_seq start with 1 increment by 1;
 
@@ -96,6 +81,5 @@ values(item_seq.nextval, '반려묘 미용', 'beauty', 50000, '안전한 고양�
       select *  
       from item
       where ITEM_CATEGORY = 'treat'
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
 

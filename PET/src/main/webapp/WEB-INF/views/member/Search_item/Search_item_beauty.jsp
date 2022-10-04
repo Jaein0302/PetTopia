@@ -13,8 +13,9 @@
                   	   <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span class="text-body"> ${p.ITEM_NAME}</span>
-                        <h4 class="text-truncate">${p.ITEM_CONTENT}</h4>
+                    	<span class="text-body"> ${p.ITEM_CONTENT}</span>
+						<h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
+						<i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>

@@ -9,9 +9,6 @@ $(function(){
 					timer: 1000
 				})
 	});
-<<<<<<< HEAD
-})
-=======
 	//취소 버튼 누르면 뒤로가기
 	 $(".signoutb").click(function(){
 		 Swal.fire({
@@ -83,4 +80,3 @@ function sendFile(file, editor) {
 		}
 	});
 }
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git

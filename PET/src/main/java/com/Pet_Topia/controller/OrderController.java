@@ -50,43 +50,48 @@ public class OrderController {
 		return mv;
 	}
 	
-	// 내가 남긴 후기
-	@RequestMapping(value = "/myreview", method = RequestMethod.GET)
-	public ModelAndView baordList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			@RequestParam(value="search_word",defaultValue="",required=false)String search_word,
-			@RequestParam(value="search_field",defaultValue="-1",required=false)int index,
-			ModelAndView mv) {
-		int limit = 10; // 한 화면에 출력할 로우 갯수
-		int listcount = rservice.getListCount(index, search_word); // 총 리스트 수를 받아옴
-		// 총 페이지 수
-		int maxpage = (listcount + limit - 1) / limit;
-		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
-		int startpage = ((page - 1) / 10) * 10 + 1;
-		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등...)
-		int endpage = startpage + 10 - 1;
-
-		if (endpage > maxpage)
-			endpage = maxpage;
-
-		List<Review> boardlist = rservice.getBoardList(index, search_word, page, limit); // 리스트를 받아옴
-		mv.setViewName("order/review_mylist");
-		mv.addObject("page", page);
-		mv.addObject("maxpage", maxpage);
-		mv.addObject("startpage", startpage);
-		mv.addObject("endpage", endpage);
-		mv.addObject("listcount", listcount);
-		mv.addObject("boardlist", boardlist);
-		mv.addObject("search_field", index);
-		mv.addObject("search_word", search_word);
-		mv.addObject("limit", limit);
-		return mv;
-	}
-	
-	// 후기 작성 폼
+	// 리뷰 작성 폼
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public ModelAndView review(ModelAndView mv) {
 		mv.setViewName("order/review_write");
 		return mv;
+	}
+	
+	// 리뷰 쓰기
+	@PostMapping("/add")
+	public String add(Review review, HttpServletRequest request) throws Exception {
+		
+		// 이미지 태그를 추출하기 위한 정규식.
+		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
+		// 추출할 내용.
+		String content = review.getReview_content();
+		// 내용 중에서 이미지 태그를 찾아라!
+		Matcher match = pattern.matcher(content);
+		String imgTag = null;
+		if(match.find()){ // 이미지 태그를 찾았다면,,
+		    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
+		}
+		// 결과값은 name1.jpg
+		System.out.println("imgTag : " + imgTag);
+		review.setReview_image(imgTag);
+		
+		// 텍스트만 추출
+		String textTag = content.replaceAll("<[^>]*>", "");
+		System.out.println("textTag : " + textTag);
+		review.setReview_text(textTag);
+		
+		rservice.insert(review); // 저장 메서드 호출
+		
+		int review_item_id = review.getReview_item_id();
+		
+		//별점 구하기
+		Double star_avg = rservice.starAVG(review_item_id);
+		logger.info("평균 별점 : "+star_avg);
+		
+		//별점 Update
+		rservice.starUpdate(review_item_id);
+		
+		return "redirect:list";
 	}
 	
 	// 썸머노트 이미지 업로드
@@ -119,27 +124,29 @@ public class OrderController {
 			return jsonObject;
 		}
 		
-		// 글쓰기
-		@PostMapping("/add")
-		public String add(Review review, HttpServletRequest request) throws Exception {
-			
-			// 이미지 태그를 추출하기 위한 정규식.
-			Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
-			// 추출할 내용.
-			String content = review.getReview_content();
-			// 내용 중에서 이미지 태그를 찾아라!
-			Matcher match = pattern.matcher(content);
-			String imgTag = null;
-			if(match.find()){ // 이미지 태그를 찾았다면,,
-			    imgTag = match.group(0); // 글 내용 중에 첫번째 이미지 태그를 뽑아옴.
-			}
-			// 결과값은 name1.jpg
-			System.out.println("imgTag : " + imgTag);
-			review.setReview_image(imgTag);
-			
-			rservice.insert(review); // 저장 메서드 호출
-			return "redirect:list";
-		}
+		// 나의 리뷰 게시판
+		@RequestMapping(value = "/myreview", method = RequestMethod.GET)
+		public ModelAndView myreview(
+				@RequestParam(value = "member_id") String member_id,
+				@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+				ModelAndView mv) {
 		
-	
+			int limit = 10; // 한 화면에 출력할 로우 갯수
+			int listcount = rservice.mygetListCount(member_id); // 총 리스트 수를 받아옴
+			int maxpage = (listcount + limit - 1) / limit;
+			int startpage = ((page - 1) / 10) * 10 + 1;
+			int endpage = startpage + 10 - 1;
+			if (endpage > maxpage) endpage = maxpage;
+
+			List<Review> boardlist = rservice.mygetBoardList(member_id, page, limit); // 리스트를 받아옴
+			mv.setViewName("order/review_mylist");
+			mv.addObject("page", page);
+			mv.addObject("maxpage", maxpage);
+			mv.addObject("startpage", startpage);
+			mv.addObject("endpage", endpage);
+			mv.addObject("listcount", listcount);
+			mv.addObject("boardlist", boardlist);
+			mv.addObject("limit", limit);
+			return mv;
+		}
 }

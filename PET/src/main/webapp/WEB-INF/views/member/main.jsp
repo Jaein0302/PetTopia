@@ -132,11 +132,7 @@ if (withdraw_message == "withdraw_success"){
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <!-- <p class="text-right">15 Products</p> -->
-<<<<<<< HEAD
-                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
-=======
                     <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="cat-img position-relative overflow-hidden mb-3">
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Main/dog1.jpg" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0" style="text-align:center">수술/치료</h5>
@@ -199,13 +195,14 @@ if (withdraw_message == "withdraw_success"){
         <div class="row px-xl-5 pb-3">
         <c:forEach var="p" items="${list}" end="7">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
+                <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                          <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span>${p.ITEM_NAME}</span>
-                        <h4 class="text-truncate">${p.ITEM_CONTENT}</h4>
+                    	<span class="text-body"> ${p.ITEM_CONTENT}</span>
+						<h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
+						<i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>

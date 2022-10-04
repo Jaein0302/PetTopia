@@ -9,6 +9,10 @@
 		select * from member where member_id = #{member_id}
 	</select>
 	
+	<select id="isRegnum" resultType="member" parameterType="String">
+		select * from member where member_regnum = #{member_regnum}
+	</select>
+	
 	<insert id="insert" parameterType="member">
 		insert into member 
 		values (#{member_id},#{member_password},#{member_name},
@@ -39,11 +43,16 @@
 		where member_email=#{member_email}
 	</select>
 	
+	<update id="update" parameterType="member">
+		update member
+		set
+		member_name = #{member_name},
+		member_post = #{member_post},
+		member_address = #{member_address},
+		member_email = #{member_email}
+		where member_id = #{member_id}
+	</update>
 	
-<<<<<<< HEAD
-	
-	
-=======
 	<select id="Id_pw_check"  parameterType="String" resultType="member">
 		select * from member
 		where member_id = #{id}
@@ -59,7 +68,6 @@
 		select * from member
 		where member_id = #{id}
 	</select>
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
    
     <select id="search_item" resultType="product">
       select *  
@@ -124,7 +132,11 @@
     </select> 
     
     <select id="best_item" resultType="product">
-      select * from item
-      order by ITEM_SCORE desc
+      select item.*,  nvl(cnt,0) cnt
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+      order by item.ITEM_SCORE asc
     </select>
 </mapper>

@@ -2,7 +2,7 @@ drop table community cascade constraints purge;
 
 create table community(
 COMMU_NUM NUMBER primary key,   					--글번호
-COMMU_NAME VARCHAR2(15) references member(MEMBER_ID),--글쓴이
+COMMU_NAME VARCHAR2(15)  references member(member_id) on delete cascade,--글쓴이
 COMMU_SUBJECT VARCHAR2(300),   						--제목
 COMMU_CONTENT VARCHAR2(4000),   					--내용
 COMMU_READCOUNT NUMBER,         					--조회수
@@ -14,7 +14,7 @@ COMMU_ORIGINAL VARCHAR2(100)						--파일이름(가공)
 
 
 select * from COMMUNITY;
-select nvl(max(COMMU_NUM),0)+1 from community;
+select nvl(max(commu_num),0)+1 from community;
 
 insert into community values(1,'admin','테스트 - 제목 1','테스트 - 내용 1',0,sysdate,null,null,null);
 insert into community values(2,'admin','테스트 - 제목 2','테스트 - 내용 2',0,sysdate,null,null,null);
