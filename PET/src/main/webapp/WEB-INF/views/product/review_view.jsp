@@ -18,7 +18,7 @@
 	<col width="30%" />
 	</colgroup>
       <tr>
-      <%-- 커밋 --%> 
+      <%-- 커밋 22--%> 
       	  <%-- 아이디, 날짜, 별점 --%>
 		  <td class="p-1"><div>${b.review_id}</div></td>
 		  <td class="p-1"><div>${fn:replace(b.review_reg_date, '-', '.')}</div></td>
