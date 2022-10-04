@@ -1,20 +1,14 @@
 package com.Pet_Topia.controller;
 
 import java.util.List;
-<<<<<<< HEAD
-=======
 import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,30 +29,17 @@ public class CommunityController {
 	private static final Logger logger = LoggerFactory.getLogger(CommunityController.class);
 
 	private CommunityService service;
-<<<<<<< HEAD
-	
-=======
 	private MySaveFolder mysavefolder;
 
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	@Autowired
-<<<<<<< HEAD
 	public CommunityController(CommunityService service) {
-=======
 	public CommunityController(CommunityService service, MySaveFolder mysavefolder) {
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 		this.service = service;
-<<<<<<< HEAD
-=======
 		this.mysavefolder = mysavefolder;
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	}
-<<<<<<< HEAD
 	
-=======
 
 	// 게시판 리스트
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView baordList(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			@RequestParam(value="search_word",defaultValue="",required=false)String search_word,
@@ -92,19 +73,13 @@ public class CommunityController {
 		mv.addObject("limit", limit);
 		return mv;
 	}
-<<<<<<< HEAD
 	
 	@GetMapping(value="/write")
-=======
-
 	// 글쓰기 폼 이동
 	@GetMapping(value = "/write")
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	public String boardwrite() {
 		return "community/comm_write";
 	}
-<<<<<<< HEAD
-=======
 
 	// 글쓰기
 	@PostMapping("/add")
@@ -334,5 +309,4 @@ public class CommunityController {
 
 		return jsonObject;
 	}
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 }
