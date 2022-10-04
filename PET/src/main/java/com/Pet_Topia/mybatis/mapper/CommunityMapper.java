@@ -10,9 +10,18 @@ import com.Pet_Topia.domain.Community;
 @Mapper
 public interface CommunityMapper {
 
+<<<<<<< HEAD
+	// 글의 갯수 구하기
+		public int getListCount();
+=======
 		// 글의 갯수 구하기
 		public int getListCount(Map<String, String> map);
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
+<<<<<<< HEAD
+	// 글 목록 보기
+		public List<Community> getBoardList(HashMap<String, Integer> map);
+=======
 		// 글 목록 보기
 		public List<Community> getBoardList(Map<String, Object> map);
 		
@@ -24,6 +33,7 @@ public interface CommunityMapper {
 		public Community getDetail(int num);
 
 		public int delete(int num);
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
 		public List<Community> hot_list();
 

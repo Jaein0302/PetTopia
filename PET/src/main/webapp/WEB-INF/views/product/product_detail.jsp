@@ -147,6 +147,6 @@ $(function() {
 
 		</div>
 	</div>
-
+<jsp:include page="../member/footer.jsp" />
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.Community;
+import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.mybatis.mapper.OrderMapper;
 
@@ -28,31 +29,53 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public int getListCount(int index, String search_word) {
-		Map<String, String> map = new HashMap<String, String>();
-		if(index!=-1) {
-			String[] search_field=new String[] {"commu_subject", "commu_content", "commu_name"};
-			map.put("search_field", search_field[index]);
-			map.put("search_word","%"+search_word+"%");
-		}
-		return dao.getListCount(map);
+	public int getListCount(int ITEM_ID) {
+		return dao.getListCount(ITEM_ID);
 	}
 
 	@Override
-	public List<Review> getBoardList(int index, String search_word, int page, int limit) {
+	public List<Review> getBoardList(int ITEM_ID, int page, int limit) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		if(index!=-1) {
-			String[] search_field=new String[] {"commu_subject", "commu_content", "commu_name"};
-			map.put("search_field", search_field[index]);
-			map.put("search_word","%"+search_word+"%");
-		}
-		
 		int startrow=(page-1)*limit+1;
 		int endrow=startrow+limit-1;
+		map.put("ITEM_ID", ITEM_ID);
 		map.put("start", startrow);
 		map.put("end", endrow);
 		return dao.getBoardList(map);
+	}
+
+	@Override
+	public int mygetListCount(String member_id) {
+		return dao.mygetListCount(member_id);
+	}
+
+	@Override
+	public List<Review> mygetBoardList(String member_id, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("member_id", member_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.mygetBoardList(map);
+	}
+
+	@Override
+	public Double starAVG(int review_item_id) {
+		return dao.starAVG(review_item_id);
+	}
+
+	@Override
+	public void starUpdate(int review_item_id) {
+		Double ratingAvg = dao.starAVG(review_item_id);
+		
+		ratingAvg = (double) (Math.round(ratingAvg*10));
+		ratingAvg = ratingAvg / 10;
+		
+		Product p = new Product();
+		p.setITEM_ID(review_item_id);
+		p.setITEM_SCORE(ratingAvg);
+		dao.starUpdate(p);
 	}
 
 

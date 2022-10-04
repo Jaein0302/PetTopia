@@ -6,8 +6,11 @@
 <mapper namespace="com.Pet_Topia.mybatis.mapper.ProductMapper">
 
    <select id="getSearchList" parameterType="map" resultType="product">
-      select *  
-      from item
+     select item.*,  nvl(cnt,0) cnt
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
       where ITEM_CATEGORY = #{category}
       <if test="search_field == 1">
       	and ITEM_NAME = #{search_word}      
@@ -15,7 +18,11 @@
    </select> 
    
    <select id="getListAjax" parameterType="map" resultType="product">
-      select *  
+     select item.*,  nvl(cnt,0) cnt
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
       from item
       where ITEM_CATEGORY = 'treat'
 		<if test='sex != ""'>

@@ -12,12 +12,14 @@ public class Product {
 	private String ITEM_IMAGE_FILE			;
 	private String ITEM_REG_DATE			;
 	private String ITEM_RSV_DATE			;
-	private int    ITEM_SCORE				;
+	private double ITEM_SCORE				;
 	private String ITEM_SEX					;
 	private String ITEM_WEIGHT				;
 	private String ITEM_SPECIES				;
 	
 	private MultipartFile uploadfile		;
+	//리뷰 수
+	private int cnt					;
 
 	public int getITEM_ID() {
 		return ITEM_ID;
@@ -91,11 +93,11 @@ public class Product {
 		ITEM_RSV_DATE = iTEM_RSV_DATE;
 	}
 
-	public int getITEM_SCORE() {
+	public double getITEM_SCORE() {
 		return ITEM_SCORE;
 	}
 
-	public void setITEM_SCORE(int iTEM_SCORE) {
+	public void setITEM_SCORE(double iTEM_SCORE) {
 		ITEM_SCORE = iTEM_SCORE;
 	}
 
@@ -129,6 +131,14 @@ public class Product {
 
 	public void setUploadfile(MultipartFile uploadfile) {
 		this.uploadfile = uploadfile;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 	

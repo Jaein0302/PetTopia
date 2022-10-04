@@ -33,8 +33,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.domain.Product;
+import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.service.AskService;
 import com.Pet_Topia.service.ProductService;
+import com.Pet_Topia.service.ReviewService;
 
 @Controller
 @RequestMapping(value = "/product")
@@ -45,14 +47,17 @@ public class ProductController {
 	private ProductService productService;
 	private AskService askService;
 	private MySaveFolder mysavefolder;
+	private ReviewService rservice;
 	
 	@Autowired
 	public ProductController(ProductService productService,
 							 MySaveFolder mysavefolder,
-							 AskService askService) {
+							 AskService askService,
+							 ReviewService rservice) {
 		this.productService = productService;
 		this.askService = askService;
 		this.mysavefolder = mysavefolder;
+		this.rservice = rservice;
 	}
 	
 	@RequestMapping(value ="/product_list")
@@ -127,10 +132,18 @@ public class ProductController {
 			endpage = maxpage;
 		
 		List<ItemAsk> asklist = askService.getAskList(page, limit, product); // 리스트를 받아옴
+		
+		
+		//리뷰게시판
+		int rlistcount = rservice.getListCount(ITEM_ID);
+		List<Review> rlist = rservice.getBoardList(ITEM_ID,page, limit);
+		
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
 		mv.addObject("endpage", endpage);
+		mv.addObject("rlistcount", rlistcount);
+		mv.addObject("rlist", rlist);
 		mv.addObject("listcount", listcount);
 		mv.addObject("asklist", asklist);
 		mv.addObject("limit", limit);

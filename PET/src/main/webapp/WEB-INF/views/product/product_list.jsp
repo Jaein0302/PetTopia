@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-출처: https://cofs.tistory.com/262 [CofS:티스토리]<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="Free HTML Templates" name="keywords">
 <meta content="Free HTML Templates" name="description">
@@ -88,10 +89,11 @@
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
                     	<span> ${p.ITEM_CONTENT}</span>
-                        <h4 class="text-truncate">${p.ITEM_NAME}</h4>
+                         <h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
+                         <i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black">${p.ITEM_PRICE}</span>
+                    	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
                     	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
                         <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
                     </div>
@@ -101,5 +103,6 @@
          </div>     
      </div>
 </div>
+<jsp:include page="../member/footer.jsp" />
 </body>
 </html>
