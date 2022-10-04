@@ -1,7 +1,22 @@
 .review_img {
-	width: 200px !important;
-	height: 180px;
+	width: 130px !important;
+	height: 110px;
 	object-fit: cover;
 	border-radius:10px;
 	border:none;
 }
+
+.rborder{
+	border-top:2px solid #e5e5e5
+}
+
+.rsubject{
+	font-family:'JUA';
+	font-size:20px!important;
+}
+
+.rlist{
+	color: #6F6F6F;
+	font-size: 35px;
+	padding:20px 0
+} 

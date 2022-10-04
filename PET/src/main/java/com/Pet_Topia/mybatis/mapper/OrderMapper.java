@@ -25,5 +25,7 @@ public interface OrderMapper {
 
 	void starUpdate(Product p);
 
+	List<Review> getPhoto(int ITEM_ID);
+
 
 }
