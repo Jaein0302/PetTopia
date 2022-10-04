@@ -54,7 +54,7 @@ $(function() {
 	
 	//달력모양 아이콘 클릭시에 캘린더 팝업창으로 보여주기
 	$("#openCalendar").click(function (){
-		window.open("openCalendar","get","width=900, height=900");
+		window.open("openCalendar","get","width=1133, height=875");
 	})
 	
 });

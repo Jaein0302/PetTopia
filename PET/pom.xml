@@ -119,10 +119,8 @@
 		<dependency>
 		    <groupId>com.google.code.gson</groupId>
 		    <artifactId>gson</artifactId>
-		    <properties>
 		    <version>2.8.6</version>
-		    </properties> 
-		</dependency> 
+		</dependency>
 		
 	</dependencies>
 
