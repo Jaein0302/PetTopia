@@ -62,4 +62,11 @@
 		set ITEM_SCORE = #{ITEM_SCORE}
 		where item_id = #{ITEM_ID}
 	</update>
+	
+	<select id="getPhoto" resultType="review">
+		select * from review
+		where review_image is not null
+		and review_item_id = #{ITEM_ID}
+		order by review_reg_date desc
+	</select>
 </mapper>

@@ -66,9 +66,9 @@ $(function() {
 
 <body>
 	<jsp:include page="../member/header.jsp" />
-	
+	<div class="container mb-5">
 	<div class="row align-items-center justify-content-center detail">
-		<div class="col-sm-9 ">
+		<div class="col-sm-11">
 			<br>
 			<div>
 				<b>상품 상세보기</b>
@@ -78,11 +78,11 @@ $(function() {
 			
 			
 			<div class="container">
-				<form>
-				<div class="row text-center detailbox">
-					<div class="uploadResult"></div>
-                 		<img class='img-fluid w-10' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}" style="width:450px; height:450px">
-					<div class="col-sm-6">
+				<div class="row px-xl-5 text-center detailbox">
+					<div class="uploadResult col-md-5">
+                 		<img class='img-fluid w-30' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}">
+					</div>
+					<div class="col-md-7">
 						<p>상품명 <span>${productdata.ITEM_NAME}</span> </p>
 						<hr>
 						<p>판매가 <span class="product_price">${productdata.ITEM_PRICE}원</span> </p>
@@ -116,7 +116,6 @@ $(function() {
 						</a>
 					</div>
 				</div>
-				</form>
 				<br>
 			</div>
 			<hr
@@ -156,6 +155,7 @@ $(function() {
 			</div>
 
 		</div>
+	</div>
 	</div>
 <jsp:include page="../member/footer.jsp" />
 </body>

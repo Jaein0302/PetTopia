@@ -142,6 +142,7 @@ public class ProductController {
 		//리뷰게시판
 		int rlistcount = rservice.getListCount(ITEM_ID);
 		List<Review> rlist = rservice.getBoardList(ITEM_ID,page, limit);
+		List<Review> photo = rservice.getPhoto(ITEM_ID); 
 		
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
@@ -149,6 +150,7 @@ public class ProductController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("rlistcount", rlistcount);
 		mv.addObject("rlist", rlist);
+		mv.addObject("photo", photo);
 		mv.addObject("listcount", listcount);
 		mv.addObject("asklist", asklist);
 		mv.addObject("limit", limit);
