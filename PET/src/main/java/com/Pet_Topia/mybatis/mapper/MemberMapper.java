@@ -20,14 +20,17 @@ public interface MemberMapper {
 
 	public Member find_pass(String member_id, String member_name, String member_email);
 
-	public int update_pass(String str, String member_id);
+	public void update_pass(String str, String member_id);
 
 	public Member mail_code(String member_email);
 
-	public Member isRegnum(String member_regnum);
 	
-	public int update(Member m);
+	//public Member getSearchListCount(int index, String search_word);
+	
 
+<<<<<<< HEAD
+	
+=======
 	public Member Id_pw_check(String id, String encPassword);
 
 	public void Delete_user(String id);
@@ -53,4 +56,5 @@ public interface MemberMapper {
 	public List<Product> best_item();
 
 
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 }

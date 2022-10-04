@@ -64,12 +64,12 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="product/wish" class="btn border">
+                <a href="" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
              <!-- 장바구니 -->
-                <a href="product/cart" class="btn border">
+                <a href="" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <span class="badge">0</span>
                 </a>
@@ -192,9 +192,15 @@
                  <div class="nav-item dropdown" style="position:static!important">
                   <a href="#" class="nav-link dropdown-toggle catename" data-toggle="dropdown">카테고리&nbsp;&nbsp;<i class="fa fa-bars"></i></a>
                		<div class="dropdown-menu rounded-0 m-0">
+<<<<<<< HEAD
+                  	 <a href="${pageContext.request.contextPath}/main/myinfo" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
+                     <a href="#" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
+                  	 <a href="#" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
+=======
                   	 <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="dropdown-item"><i class="fas fa-clinic-medical"></i><span class="smenu">수술/치료</span></a>
                      <a href="${pageContext.request.contextPath}/product/product_list?item_category=education" class="dropdown-item"><i class="fas fa-glasses"></i><span class="smenu">교육</span></a>
                   	 <a href="${pageContext.request.contextPath}/product/product_list?item_category=beauty" class="dropdown-item"><i class="fas fa-cut"></i><span class="smenu" style="padding-left:37px">미용</span></a>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                		</div>
                	</div>
                </div>
@@ -220,17 +226,19 @@
                             <a href="${pageContext.request.contextPath}/main/main" class="nav-item nav-link me0 active">Home</a>
                             <a href="#" class="nav-item nav-link me1">공지사항</a>
                             <a href="${pageContext.request.contextPath}/community/list" class="nav-item nav-link me2">커뮤니티</a>
-                            <a href="#" class="nav-item nav-link me3">고객센터</a>
+                            <a href="${pageContext.request.contextPath}/admin/admin_main" class="nav-item nav-link me3">고객센터</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                          
                         <!-- 로그인 / 회원가입 -->
                    		  <sec:authorize access="isAnonymous()">
+                        	<c:if test="${empty pinfo.username}">
                         	<a href="javascript:void(0)" id="btn_popup_open" class="nav-item nav-link me4">로그인</a>
                             <a href="${pageContext.request.contextPath}/main/join" class="nav-item nav-link jjoin">회원가입</a>
-                    	  </sec:authorize>
-                        
+                        	</c:if>
+                    
                         <!-- 회원 로그인 -->
+                          </sec:authorize>
                   		  <sec:authorize access="isAuthenticated()">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
@@ -241,11 +249,16 @@
                         	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
+<<<<<<< HEAD
+                        	 	<a href="#" class="dropdown-item mydrop">구매내역</a>
+                        	 	<a href="#" class="dropdown-item mydrop">작성한글</a>
+=======
                         	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
                         	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
                         	 	<a href="#" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="#" class="dropdown-item mydrop">내 댓글</a>
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                         	 	<a href="#" class="dropdown-item">
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>

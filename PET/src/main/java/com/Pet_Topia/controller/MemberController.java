@@ -163,17 +163,6 @@ public class MemberController {
 		out.print(result);
 	}
 	
-	//회원가입폼에서 사업자등록번호 검사
-		@RequestMapping(value = "/regnum_check", method = RequestMethod.GET)
-		public void regnum_check(@RequestParam("reg_num") String member_regnum, 
-							HttpServletResponse response) throws Exception {
-			int result = memberservice.isRegnum(member_regnum);
-			Logger.info("regnum_check");
-			response.setContentType("text/html; charset=utf-8");
-			PrintWriter out = response.getWriter();
-			out.print(result);
-		}
-	
 	//회원가입
 	@RequestMapping(value = "/joinProcess", method = RequestMethod.POST)
 	public String joinProcess(Member m,

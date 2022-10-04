@@ -14,7 +14,7 @@ img{display: block; margin: 0px auto;}
 		${exception}<br> 
 		<img src="${pageContext.request.contextPath}/resources/img/Main/403.jpeg"> <br>
 		<hr>
-		<h1>${key}</h1>
+		<h1>${key} </h1>
 	</div>
 </body>
 </html>
