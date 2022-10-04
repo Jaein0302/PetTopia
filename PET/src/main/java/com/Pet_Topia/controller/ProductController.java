@@ -1,8 +1,6 @@
 package com.Pet_Topia.controller;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -14,14 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,10 +28,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.ItemAsk;
+import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.service.AskService;
+import com.Pet_Topia.service.MemberService;
 import com.Pet_Topia.service.ProductService;
 import com.Pet_Topia.service.ReviewService;
 
@@ -46,6 +45,7 @@ public class ProductController {
 	
 	private ProductService productService;
 	private AskService askService;
+	private MemberService memberservice;
 	private MySaveFolder mysavefolder;
 	private ReviewService rservice;
 	
@@ -53,8 +53,10 @@ public class ProductController {
 	public ProductController(ProductService productService,
 							 MySaveFolder mysavefolder,
 							 AskService askService,
-							 ReviewService rservice) {
+							 ReviewService rservice,
+							 MemberService memberservice) {
 		this.productService = productService;
+		this.memberservice = memberservice;
 		this.askService = askService;
 		this.mysavefolder = mysavefolder;
 		this.rservice = rservice;
@@ -137,6 +139,7 @@ public class ProductController {
 		//리뷰게시판
 		int rlistcount = rservice.getListCount(ITEM_ID);
 		List<Review> rlist = rservice.getBoardList(ITEM_ID,page, limit);
+		List<Review> photo = rservice.getPhoto(ITEM_ID); 
 		
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
@@ -144,6 +147,7 @@ public class ProductController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("rlistcount", rlistcount);
 		mv.addObject("rlist", rlist);
+		mv.addObject("photo", photo);
 		mv.addObject("listcount", listcount);
 		mv.addObject("asklist", asklist);
 		mv.addObject("limit", limit);
@@ -214,8 +218,15 @@ public class ProductController {
 			product.setITEM_IMAGE_FILE(fileDBName);
 		}
 		
-		logger.info(product.toString());// selectKey로 정의한 BAORD_NUM 값 확인해 봅니다.
-		int result = productService.insertProduct(product); // 저장 메서드 호출
+		logger.info(product.toString());
+		
+		// MEMBER_ADDRESS값 가져오기
+		String ITEM_SELLER  = product.getITEM_SELLER();
+		Member memberlist = memberservice.member_info(ITEM_SELLER);		
+		String ITEM_ADDRESS = memberlist.getMember_address();
+		product.setITEM_ADDRESS(ITEM_ADDRESS);
+
+		int result = productService.insertProduct(product);
 		
 		if(result == 0) {
 			logger.info("상품 등록실패");
@@ -226,6 +237,8 @@ public class ProductController {
 		
 		logger.info("상품 등록 성공");		
 		rattr.addFlashAttribute("result","addSuccess");
+		
+
 		
 		return "redirect:my_product";
 	}
@@ -360,6 +373,36 @@ public class ProductController {
 		return "redirect:my_product";
 	}
 	
+	@GetMapping("/purchase")
+	public ModelAndView purchase_view(int ITEM_ID,
+									 String amount,
+									 ModelAndView mv, 
+									 HttpServletRequest request,
+									 RedirectAttributes rattr) {
+
+		Product productdata = productService.getDetail(ITEM_ID);		
+		
+		//글 내용 불러오기 실패
+		if(productdata == null) {
+			logger.info("구매페이지보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","수정보기 실패입니다.");
+			return mv;
+		}
+		
+		logger.info("구매페이지보기 성공");
+		
+		Member memberlist = memberservice.member_info(productdata.getITEM_SELLER());		
+
+		mv.setViewName("product/purchase_view");
+		mv.addObject("productdata", productdata);
+		mv.addObject("memberlist", memberlist);
+		mv.addObject("amount", amount);
+		return mv;
+	}
+	
+	
 	@RequestMapping(value ="/wish")
 	public String wish_list() {	
 		return "product/wish_list";
@@ -376,7 +419,15 @@ public class ProductController {
 	public String openCalendar() {
 		return "schedule/calendar";
 	}
-
+	
+	/**이벤트(예약스케줄)를 저장하는 프로세스**/
+	//json 데이터를 어떻게 받아서 넣지?
+	//서비스 인터페이스/ 서비스클래스/ 매퍼인터페이스도 만들어야함
+	@PostMapping("/saveEvent")
+	@ResponseBody
+	public String saveEvent(){
+		return "";
+	}
 }
 	
 	

@@ -11,11 +11,11 @@
 <!-- fullcalender -->
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/lib/main.css' rel='stylesheet' />
 <script src='${pageContext.request.contextPath}/resources/fullcalendar/lib/main.js'></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-
-  document.addEventListener('DOMContentLoaded', function() {
-
-    /* initialize the external events
+	var calendar = null;
+  $(document).ready(function (){
+	   /* initialize the external events
     -----------------------------------------------------------------*/
 
     var containerEl = document.getElementById('external-events-list');
@@ -45,19 +45,19 @@
     -----------------------------------------------------------------*/
 
     var calendarEl = document.getElementById('calendar');
-    var calendar = new FullCalendar.Calendar(calendarEl, {
+    calendar = new FullCalendar.Calendar(calendarEl, {
       locale: 'ko',
       timeZone: 'Asia/Seoul',
       initialView: "timeGridWeek",
       slotMinTime: '08:00',
-      slotMaxtime: '23:00',
+      slotMaxTime: '23:00',
       eventDurationEditable: false,
       headerToolbar: {
         left: 'prev,next today',
         center: 'title',
         right: 'timeGridWeek,timeGridDay'
       },
-      editable: true,
+      editable: false,
       droppable: true, // this allows things to be dropped onto the calendar
       drop: function(arg) {
           arg.draggedEl.parentNode.removeChild(arg.draggedEl);
@@ -65,8 +65,51 @@
     });
     calendar.render();
 
-  });
+	  
+  })//document ready end
 
+  //1. 이벤트 데이터를 추출해야 함
+  //2. ajax로 서버에 전송하여 DB에 저장해야함
+  function allSave(){
+	  var allEvent = calendar.getEvents();
+	  
+	  var events = new Array();
+	  for(var i=0; i< allEvent.length; i++){
+		  
+		  var obj = new Object();
+		  
+		  
+		  obj.title = allEvent[i]._def.title; //이벤트의 명칭
+		  obj.allday = allEvent[i]._def.allDay; //하루종일인지 아닌지 알려주는 boolean (true/false)
+		  obj.start = allEvent[i]._instance.range.start;//시작 날짜 및 시간
+		  obj.end = allEvent[i]._instance.range.end;//마침 날짜 및 시간
+		  obj.seller = null;	//판매자 정보
+		  
+		  events.push(obj);
+	  }
+	  var jsondata = JSON.stringify(events);
+	  console.log(jsondata);
+	  
+	  savedata(jsondata);
+  }
+
+  function savedata(jsondata){
+	  $.ajax({
+		  type: "POST",
+		  url: "${pageContext.request.contextPath}/product/saveEvent",
+		  data: jsondata,
+		  contentType: "application/json",
+		  dataType: "json",
+		  success: function(){
+			  alert("성공적으로 예약되었습니다.");
+			  window.close();
+		  },
+		  error: function(){
+			  alert("에러");
+		  }
+	  })//ajax end
+
+  }//savedata 펑션 정의
 </script>
 <style>
 
@@ -121,6 +164,8 @@
   #calendar > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr:nth-child(1) > td{
   	display: none
   }
+  
+
 
 </style>
 </head>
@@ -132,7 +177,11 @@
 
       <div id='external-events-list'>
         <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-          <div class='fc-event-main'>예약</div>
+          <div class='fc-event-main'>title1</div>
+        </div>
+        
+        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+          <div class='fc-event-main'>title2</div>
         </div>
       </div>
 
@@ -141,7 +190,11 @@
     <div id='calendar-wrap'>
       <div id='calendar'></div>
     </div>
-
+    <br>
+	<div class="fc">
+	<button class="fc-button-primary" style="height:50px" onClick="javascript:allSave();">예약하기</button>
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+	</div>
   </div>
 </body>
 </html>

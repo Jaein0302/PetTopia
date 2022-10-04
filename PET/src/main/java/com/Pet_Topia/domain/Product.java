@@ -16,6 +16,8 @@ public class Product {
 	private String ITEM_SEX					;
 	private String ITEM_WEIGHT				;
 	private String ITEM_SPECIES				;
+	private String ITEM_ADDRESS				;
+	private String ITEM_SELLER 				;
 	
 	private MultipartFile uploadfile		;
 	//리뷰 수
@@ -140,7 +142,22 @@ public class Product {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
+
+	public String getITEM_ADDRESS() {
+		return ITEM_ADDRESS;
+	}
+
+	public void setITEM_ADDRESS(String iTEM_ADDRESS) {
+		ITEM_ADDRESS = iTEM_ADDRESS;
+	}
+
+	public String getITEM_SELLER() {
+		return ITEM_SELLER;
+	}
+
+	public void setITEM_SELLER(String iTEM_SELLER) {
+		ITEM_SELLER = iTEM_SELLER;
+	}
 	
 	
 }

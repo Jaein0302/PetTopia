@@ -78,5 +78,10 @@ public class ReviewServiceImpl implements ReviewService {
 		dao.starUpdate(p);
 	}
 
+	@Override
+	public List<Review> getPhoto(int ITEM_ID) {
+		return dao.getPhoto(ITEM_ID);
+	}
+
 
 }
