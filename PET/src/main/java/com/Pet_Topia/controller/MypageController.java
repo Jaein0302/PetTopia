@@ -1,6 +1,7 @@
 package com.Pet_Topia.controller;
 
 import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,9 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.service.MemberService;
@@ -23,22 +27,23 @@ import com.Pet_Topia.service.MemberService;
 @RequestMapping(value = "/mypage")
 public class MypageController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	private static final Logger logger = LoggerFactory.getLogger(MypageController.class);
 	
 	private MemberService memberservice;
+	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
-	public MypageController(MemberService memberservice) {
+	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder) {
 		this.memberservice = memberservice;
+		this.passwordEncoder = passwordEncoder;
 	}
 	
 	//회원정보폼으로 이동
 	@RequestMapping(value ="/update", method= RequestMethod.GET)
-	public ModelAndView member_update(Principal principal, ModelAndView mv) {
+	public ModelAndView member_updateform(Principal principal, ModelAndView mv) {
 		
 		String id = (String) principal.getName();
 		
-		//int i = 5/0; //오류테스트
 
 		if (id == null) {
 			mv.setViewName("redirect:login");

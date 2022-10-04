@@ -39,10 +39,6 @@
 	</select>
 	
 
-<<<<<<< HEAD
-
-
-=======
 	<insert id="insert" parameterType="community">
 		<selectKey resultType="int" order="BEFORE" keyProperty="commu_num">
 			select nvl(max(commu_num),0)+1 from community
@@ -95,5 +91,4 @@
 		commu_file=#{commu_file, jdbcType=VARCHAR}, commu_original=#{commu_original, jdbcType=VARCHAR}
 		where commu_num = #{commu_num}
 	</update>
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 </mapper>

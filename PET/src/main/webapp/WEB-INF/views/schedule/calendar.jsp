@@ -57,7 +57,7 @@
         center: 'title',
         right: 'timeGridWeek,timeGridDay'
       },
-      editable: false,
+      editable: true,
       droppable: true, // this allows things to be dropped onto the calendar
       drop: function(arg) {
           arg.draggedEl.parentNode.removeChild(arg.draggedEl);
@@ -128,21 +128,19 @@
   <div id='wrap'>
 
     <div id='external-events'>
-      <h4>일정을 드래그해서 예약해주세요.<br><br>수정되지 않으니 잘못 드래그하셨다면 창을 껐다가 다시 켜주세요.</h4>
+      <h4>일정을 드래그해서 예약해주세요</h4>
 
       <div id='external-events-list'>
         <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-          <div class='fc-event-main'>예약할 회원의 아이디가 들어갑니다</div>
+          <div class='fc-event-main'>예약</div>
         </div>
       </div>
 
     </div>
-	
+
     <div id='calendar-wrap'>
       <div id='calendar'></div>
     </div>
-    
-    <button>예약하기</button>
 
   </div>
 </body>

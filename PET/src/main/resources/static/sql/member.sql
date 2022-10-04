@@ -30,8 +30,4 @@ insert into member values ('beauty1','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ
 insert into member values ('beauty2','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 서대문구 홍은중앙로3길 22','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_MEMBER');
 
 
-insert into member values ('admin','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','관리자','12345','서울','admin@pet.pet','010-1234-5678',null,null,'ROLE_ADMIN');
--- update member set auth='ROLE_ADMIN' where member_id='admin';
-insert into member values ('cha3','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','관리자','12345','서울','admin@pet.pet','010-1234-5678',null,null,'1');
-select * from member
 

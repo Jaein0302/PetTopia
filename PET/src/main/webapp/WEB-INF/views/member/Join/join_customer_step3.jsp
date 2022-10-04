@@ -6,11 +6,6 @@
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
-<script>
-if(!${agree}){
-	location.href="${pageContext.request.contextPath}/main/join"
-};
-</script>
 <body>
 <!-- header -->
 <div class="header">
@@ -44,7 +39,7 @@ if(!${agree}){
 	<input class="button-5 postb" type="button" value="우편검색"  id="postcode" style="padding:10px 20px">
 	
 	<b>주소&ensp;<i class="fas fa-check chk_address" style="display:none"></i></b>
-		<input type="text" class="jinput" id="address" name="member_address" maxlength="2" placeholder="주소를 입력해주세요" required>
+		<input type="text" class="jinput" id="address" name="member_address" placeholder="주소를 입력해주세요" required>
 	<span class="message" id="address_message"></span>
 	
 	<b>연락처&ensp;<i class="fas fa-check chk_tell" style="display:none"></i></b>
