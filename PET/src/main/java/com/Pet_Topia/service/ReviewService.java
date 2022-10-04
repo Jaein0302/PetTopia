@@ -20,4 +20,6 @@ public interface ReviewService {
 
 	void starUpdate(int review_item_id);
 
+	List<Review> getPhoto(int iTEM_ID);
+
 }
