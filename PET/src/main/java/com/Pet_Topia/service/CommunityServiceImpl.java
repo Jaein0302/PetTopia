@@ -48,6 +48,8 @@ public class CommunityServiceImpl implements CommunityService {
 		return dao.getBoardList(map);
 	}
 
+<<<<<<< HEAD
+=======
 	@Override
 	public void insert(Community comm) {
 		dao.insert(comm);
@@ -80,4 +82,5 @@ public class CommunityServiceImpl implements CommunityService {
 		
 	}
 
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 }

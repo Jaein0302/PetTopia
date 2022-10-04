@@ -10,6 +10,8 @@ public interface CommunityService {
 
 	List<Community> getBoardList(int index, String search_word, int page, int limit);
 
+<<<<<<< HEAD
+=======
 	void insert(Community comm);
 
 	int setReadCountUpdate(int num);
@@ -22,4 +24,5 @@ public interface CommunityService {
 
 	int udpate(Community comm);
 
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 }

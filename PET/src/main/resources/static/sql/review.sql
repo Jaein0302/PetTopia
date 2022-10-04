@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 DROP TABLE review CASCADE CONSTRAINTS PURGE;
 
 create table review(
@@ -12,3 +14,4 @@ create table review(
 )
 
 select * from review
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git

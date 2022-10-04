@@ -132,7 +132,11 @@ if (withdraw_message == "withdraw_success"){
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <!-- <p class="text-right">15 Products</p> -->
+<<<<<<< HEAD
+                    <a href="" class="cat-img position-relative overflow-hidden mb-3">
+=======
                     <a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class="cat-img position-relative overflow-hidden mb-3">
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
                         <img class="img-fluid" src="${pageContext.request.contextPath}/resources/img/Main/dog1.jpg" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0" style="text-align:center">수술/치료</h5>
@@ -195,7 +199,7 @@ if (withdraw_message == "withdraw_success"){
         <div class="row px-xl-5 pb-3">
         <c:forEach var="p" items="${list}" end="7">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='product/detail'">
+                <div class="card product-item border-0 mb-4" onclick="location.href='#'">
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                          <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
                     </div>
