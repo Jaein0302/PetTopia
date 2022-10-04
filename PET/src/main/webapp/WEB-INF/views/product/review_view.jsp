@@ -6,7 +6,7 @@
 <body>
  <div class="container-fluid pt-5">
   <div class="row px-xl-5 pb-3">
-   
+    
    <c:if test="${!empty rlist}">
      <c:forEach var="b" items="${rlist}">
    <table class="mb-3 table text-left">
