@@ -17,6 +17,28 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
+	
+	 <dependency>
+		<groupId>org.apache.poi</groupId>
+		<artifactId>poi-ooxml</artifactId>
+		<version>4.1.0</version>
+		 </dependency>
+		  
+		  <dependency>
+		<groupId>com.github.librepdf</groupId>
+		<artifactId>openpdf</artifactId>
+		<version>1.3.8</version>
+		 </dependency>
+		 
+		
+		
+	
+	
+	
+	
+	
+	
+	
 	      <!-- 스프링 시큐리티 tag 라이브러리 -->
 	   <dependency>
 	      <groupId>org.springframework.security</groupId>
@@ -91,6 +113,8 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+<<<<<<< HEAD
+=======
 		
 		<!-- 파일 업로드 로직과 JSON을 리턴하기 위한 gson 사용 
 		https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -109,6 +133,7 @@
 		    </properties>
 		</dependency>
 		
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	</dependencies>
 
 	<build> 
