@@ -30,7 +30,10 @@ public class Security_Config extends WebSecurityConfigurerAdapter{
 		
 		http.authorizeRequests()
 			.antMatchers("/resources/**/**").permitAll()
-			.antMatchers("/main/**").permitAll();
+			.antMatchers("/main/**").permitAll()
+			.antMatchers("/community/**").permitAll()
+			.antMatchers("/mypage/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 			//.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
 			//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 		

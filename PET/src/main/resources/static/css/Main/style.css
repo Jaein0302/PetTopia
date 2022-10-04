@@ -9651,6 +9651,7 @@ input[type=text]:focus, input[type=password]:focus, select:focus,td>textarea:foc
 }
 .commu{font-family:'JUA';font-size:35px;}
 .fa-paw, .fa-camera{font-size:28px}
+.fa-star{color:#efc65e}
 button:focus{boxshadow:none;outline:none;}
 input:focus{boxshadow:none;}
  input[type="file"] {  /* 파일 필드 숨기기 */
@@ -9677,3 +9678,4 @@ input:focus{boxshadow:none;}
   border-radius: .25em;
 }
 
+.cpointer{cursor:pointer}

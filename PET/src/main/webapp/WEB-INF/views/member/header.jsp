@@ -240,6 +240,8 @@
                         <!-- 회원 로그인 -->
                           </sec:authorize>
                   		  <sec:authorize access="isAuthenticated()">
+                  		  <sec:authentication property="principal" var="pinfo"/>
+	  						<input type="hidden" name="member_id" value="${pinfo.username}">
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
@@ -253,7 +255,7 @@
 =======
                         	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
-                        	 	<a href="${pageContext.request.contextPath}/order/myreview" class="dropdown-item mydrop">내가 남긴 리뷰</a>
+                        	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
                         	 	<a href="#" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="#" class="dropdown-item mydrop">내 댓글</a>
 >>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git

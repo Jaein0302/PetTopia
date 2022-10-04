@@ -22,19 +22,19 @@
  		
 	<table class="table text-center">
  	<thead>
-   <tr style="border:none">
-     <th colspan="3" class="text-left">
-     			<span class="commu">
-     				&emsp;리뷰 작성&nbsp;
-     			</span>
-     				<i class="fas fa-camera"></i>
-     			<span class='pl-4'>
-     				&lt; 반려견 놀이훈련 &gt; <span class='text-small pl-1'>2022.10.1(토) 방문</span>
-     			</span>
-     </th>
-     <th colspan="2" class="text-right">
-     </th>
-     </tr> 
+	   <tr style="border:none">
+	     <th colspan="3" class="text-left">
+	     			<span class="commu">
+	     				&emsp;리뷰 작성&nbsp;
+	     			</span>
+	     				<i class="fas fa-camera"></i>
+	     </th>
+     	 <th colspan="2" class="text-right">
+     	 <span class='pr-5'>
+	     	&lt; 반려견 놀이훈련 &gt; <span class='text-small pl-1'>2022.10.1(토) 방문</span>
+	     </span>
+     	 </th>
+     	</tr> 
 	</thead>
 	</table>
 	
@@ -42,7 +42,7 @@
 	<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="pinfo"/>
 	  <input type="hidden" name="review_id" value="${pinfo.username}">
-	  <input type="hidden" name="review_item_id" value="1">
+	  <input type="hidden" name="review_item_id" value="10001">
 	  <div class="rating-message">
 	  	 <span class="bounce arrow-bounce pr-1"><i class="fa fa-2x fa-chevron-down"></i></span>
 	  	 별점을 남겨주세요
@@ -94,6 +94,7 @@
 <script src="${pageContext.request.contextPath}/resources/js/Summernote/summernote-lite.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 <script>
+//별점 매기기
 $('.rating input').change(function () {
 	  var $radio = $(this);
 	  $('.rating .selected').removeClass('selected');
