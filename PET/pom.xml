@@ -106,8 +106,6 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
-<<<<<<< HEAD
-=======
 		
 		<!-- 파일 업로드 로직과 JSON을 리턴하기 위한 gson 사용 
 		https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -126,7 +124,6 @@
 		    </properties>
 		</dependency>
 		
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 	</dependencies>
 
 	<build> 
