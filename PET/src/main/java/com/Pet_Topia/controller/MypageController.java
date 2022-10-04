@@ -1,23 +1,16 @@
 package com.Pet_Topia.controller;
 
 import java.security.Principal;
-
-<<<<<<< HEAD
-=======
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD
-=======
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -58,8 +51,6 @@ public class MypageController {
 		
 		return mv;
 	}
-<<<<<<< HEAD
-=======
 	
 	//회원정보 변경 프로세스
 	@RequestMapping(value="/updateProcess", method = RequestMethod.POST)
@@ -136,6 +127,5 @@ public class MypageController {
 		}
 		
 	}
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
 }
