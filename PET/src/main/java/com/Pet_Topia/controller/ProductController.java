@@ -403,17 +403,6 @@ public class ProductController {
 	}
 	
 	
-	@RequestMapping(value ="/wish")
-	public String wish_list() {	
-		return "product/wish_list";
-	}	
-	
-	@RequestMapping(value ="/cart")
-	public String cart_list() {	
-		return "product/cart_list";
-	}
-	
-
 
 }
 	

@@ -64,14 +64,12 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="product/wish" class="btn border">
+                <a href="${pageContext.request.contextPath }/mypage/wishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
-                    <span class="badge">0</span>
                 </a>
              <!-- 장바구니 -->
-                <a href="product/cart" class="btn border">
+                <a href="${pageContext.request.contextPath }/mypage/cartList" class="btn border">
                     <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge">0</span>
                 </a>
             </div>
         </div>
