@@ -83,5 +83,15 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.getPhoto(ITEM_ID);
 	}
 
+	@Override
+	public Review getDetail(String review_num) {
+		return dao.getDetail(review_num);
+	}
+
+	@Override
+	public int review_del(String review_num) {
+		return dao.review_del(review_num);
+	}
+
 
 }

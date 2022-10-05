@@ -2,8 +2,8 @@ DROP TABLE review CASCADE CONSTRAINTS PURGE;
 
 create table review(
 	review_num      number primary key,
-	review_id 		varchar2(15) not null references member(member_id) on delete cascade,
-	review_item_id  number(15) not null references item(item_id) on delete cascade,
+	review_id 		references member(member_id) on delete cascade,
+	review_item_id  references item(item_id) on delete cascade,
 	review_score    number(5) not null,
 	review_subject   varchar2(50) not null,
 	review_content   varchar2(2000) not null,
@@ -36,3 +36,6 @@ insert into review
 									group by review_item_id) c
 	  on item.item_id = c.review_item_id
       order by item.ITEM_SCORE desc
+      
+      
+      

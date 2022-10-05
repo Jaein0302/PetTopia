@@ -31,9 +31,22 @@ public class Security_Config extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 			.antMatchers("/resources/**/**").permitAll()
 			.antMatchers("/main/**").permitAll()
-			.antMatchers("/community/**").permitAll()
 			.antMatchers("/mypage/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
-			.antMatchers("/order/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
+			.antMatchers("/community/list").permitAll()
+			.antMatchers("/community/detail").permitAll()
+			.antMatchers("/community/write").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/community/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/community/modifyView").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/community/update").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/community/delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/community/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/review_detail").permitAll()
+			.antMatchers("/order/review_delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/list").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/review").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+			.antMatchers("/order/myreview").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 			//.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
 			//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 		
