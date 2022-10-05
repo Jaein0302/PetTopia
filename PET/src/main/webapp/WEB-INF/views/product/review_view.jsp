@@ -41,7 +41,7 @@
 	
 	<c:if test='${!empty photo}'>
 	<h2 class='text-left rlist' style='mb-4'>포토 리뷰 <i class="fas fa-camera"></i></h2>
-	<div class='w-100 text-center' style="position:relative">
+	<div class='w-100 text-center' style="position:relative; ">
 	<c:forEach var="ph" items="${photo}" end='4'>
 		<input type="hidden" id="reviewnum" value="${ph.review_num}">
     	<div class="rdetail" style="cursor:pointer; float:left">

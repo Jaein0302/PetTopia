@@ -27,7 +27,7 @@ $(document).on('click','.rdetail',function(){
         
 		var review_num = $(this).prev().val();
 		
-		//디테일 가져오기
+		// 리뷰 디테일 가져오기
 		$.ajax({
 			url : "http://"+pathname +"/pet_topia/order/review_detail",
 			type : 'post',
