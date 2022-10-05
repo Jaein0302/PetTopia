@@ -218,7 +218,7 @@
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0 nav">
                             <a href="${pageContext.request.contextPath}/main/main" class="nav-item nav-link me0 active">Home</a>
-                            <a href="#" class="nav-item nav-link me1">공지사항</a>
+                            <a href="${pageContext.request.contextPath}/admin/admin_notice" class="nav-item nav-link me1">공지사항</a>
                             <a href="${pageContext.request.contextPath}/community/list" class="nav-item nav-link me2">커뮤니티</a>
                             <a href="#" class="nav-item nav-link me3">고객센터</a>
                         </div>

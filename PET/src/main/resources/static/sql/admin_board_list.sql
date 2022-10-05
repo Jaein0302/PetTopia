@@ -12,8 +12,14 @@ CREATE TABLE Adn(
  PRIMARY KEY(ADN_NUMBER)
  );
  
- 
-insert into Adn values(4,'admin','1234','test1','test합니다','1','1','1',sysdate);
+ select * from Adn;
+insert into Adn values(4,'admin','1234','test4','test합니다','1','0','0',sysdate);
+                                                                    --
+                                                                
+--0일때는 일반 글 
+--1일때는 공지사항 메인으로 글 메인글일시 - 1 을 입력 -
+--test는 1234번 글을 생성하고 2,3번글을 메인공지로 갈수있도록 해보기
+
 
 select * from
 			(select rownum rnum, b.*
@@ -105,7 +111,32 @@ begin
 	select *from temp;
 	
 	
-	
+ select * 
+	  from ( select rownum rnum, b.*
+	          from  (select * 
+	                 from member  
+	                 where member_id != 'admin'
+	                 <include refid="search_"/>
+	                   order by member_id
+	                  )b 
+	           where rownum &lt;=  #{end}    
+	        ) 
+	  where rnum &gt;= #{start} and rnum  &lt;=  #{end}	
+	  
+	  
+--sql 파일에 있는것 실행해보기
+
+	  select * from
+			(select rownum rnum, b.*
+			 from
+			 	(select * from Adn
+			 	 order by ADN_MAINCOLUMN desc,
+			 	 ADN_DATE desc) b
+			 where rownum <=10
+			)
+		where rnum >= 1 and rnum <= 10	
+	  
+	  
 	
 	
 	

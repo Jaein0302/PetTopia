@@ -62,7 +62,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	
-	
 	//공지사항 게시물 관련 메서드
 	public List<Abn> getAdminNoticeList(int page, int limit) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();

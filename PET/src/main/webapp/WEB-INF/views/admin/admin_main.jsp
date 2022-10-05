@@ -59,7 +59,7 @@
   <a href="${pageContext.request.contextPath}/admin/admin_notice"><i class="fa fa-fw fa-home"></i> 공지사항</a>
   <a href="#services"><i class="fa fa-fw fa-wrench"></i> 이벤트</a>
   <a href="${pageContext.request.contextPath}/admin/admin_list"><i class="fa fa-fw fa-user"></i> 회원관리</a>
-  <a href="#contact"><i class="fa fa-fw fa-envelope"></i>1:1문의</a>
+  <a href="${pageContext.request.contextPath}/admin/admin_ask_list"><i class="fa fa-fw fa-envelope"></i>1:1문의</a>
 </div>
 
 

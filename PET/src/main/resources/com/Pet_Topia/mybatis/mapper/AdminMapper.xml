@@ -43,6 +43,8 @@
 	  
 	  <delete id="delete" parameterType="String">
 	  delete from member where member_id = #{id}
+	  
+	  
 	  </delete>
 
 	<select id="searchCount" parameterType="map" resultType="int">
@@ -65,8 +67,8 @@
 	</select>
 
 
-<select id="getAdminNoticeListCount" resultType="int">
-		select count(*) from Adn
+  <select id="getAdminNoticeListCount" resultType="int">
+		select count(*) from Adn where ADN_MAINCOLUMN =0
 	</select>
 
 

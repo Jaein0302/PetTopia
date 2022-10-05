@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<jsp:include page="../member/header.jsp" /> 
- 
+ <jsp:include page="../member/header.jsp" />  
+ <script src ="${pageContext.request.contextPath}/resources/js/list.js"></script>
  <style>
 select.form-control {
 	width: auto;
@@ -43,17 +43,7 @@ select.form-control {
 <body>
 <div class="container">  
  <%-- 게시글이 있는 경우--%> 
- <c:if test="${listcount > 0 }">
-  <div class="rows">
-    <span>줄보기</span>
-	<select class="form-control" id="viewcount">
-	  <option value="1">1</option>
-	  <option value="3">3</option>
-	  <option value="5">5</option>
-	  <option value="7">7</option>
-	  <option value="10" selected>10</option>
-	</select>
-  </div>
+
   <table class="table table-striped">
    <thead>
 	<tr>
@@ -63,27 +53,40 @@ select.form-control {
 	   </th>
 	</tr>
 	<tr>
-		<th><div>번호</div></th>
+		<th><div>글번호</div></th>
 		<th><div>제목</div></th>
 		<th><div>작성자</div></th>
 		<th><div>날짜</div></th>
-		<th><div>조회수</div></th>
 	</tr>	
    </thead>
    <tbody>
 	<c:set var="num" value="${listcount-(page-1)*limit}"/>	
 	<c:forEach var="b" items="${admin_notice_boardlist}">	
 	<tr>
-	  <td><%--번호 --%>
+	<td>
+	
+	<c:choose>  
+	 <c:when test="${b.ADN_MAINCOLUMN != 0}">
+		[공지]
+	</c:when> <%--sdsdsdsd --%>
+	<c:otherwise> 
 		<c:out value="${num}"/><%-- num 출력 --%>		
 		<c:set var="num" value="${num-1}"/>	<%-- num=num-1; 의미--%>	
-	  </td>
+	</c:otherwise> 
+   </c:choose>	  
+	</td>
+			
 	  <td><%--제목 --%>
-	  ${b.ADMIN_SUBJECT}
+	     <div>			
+			
+			<a href="detail?num=${b.ADN_NUMBER}">
+			 <c:out value="${b.ADN_SUBJECT}" escapeXml="true"/>
+			</a> 
+			
+		  </div>
 		</td>
-		<td><div>${b.admin_content}2</div></td>
-		<td><div>${b.ADMIN_BOARD_DATE}</div></td>	
-		<td><div>${b.ADMIN_MAIN_COLUMN}</div></td>
+		<td><div>${b.ADN_NAME}</div></td>
+		<td><div>${b.ADN_DATE}</div></td>	
 	   </tr>
 	  </c:forEach>
 	 </tbody>	
@@ -139,7 +142,6 @@ select.form-control {
 			</c:if>
 		 </ul>
 		</div>
- </c:if><%-- <c:if test="${listcount > 0 }"> end --%>
 	
  <%-- 게시글이 없는 경우--%>
  <c:if test="${listcount == 0 }">
