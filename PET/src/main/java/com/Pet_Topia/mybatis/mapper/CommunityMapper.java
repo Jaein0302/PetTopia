@@ -29,5 +29,9 @@ public interface CommunityMapper {
 
 		public int update(Community comm);
 
+		public int mygetListCount(String member_id);
+
+		public List<Community> mygetPostList(Map<String, Object> map);
+
 	
 }

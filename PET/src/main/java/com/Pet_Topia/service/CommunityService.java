@@ -22,4 +22,8 @@ public interface CommunityService {
 
 	int udpate(Community comm);
 
+	int mygetListCount(String member_id);
+
+	List<Community> mygetPostList(String member_id, int page, int limit);
+
 }

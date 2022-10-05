@@ -414,20 +414,7 @@ public class ProductController {
 	}
 	
 
-	/** 스케줄 **/
-	@RequestMapping(value = "/openCalendar", method=RequestMethod.GET)
-	public String openCalendar() {
-		return "schedule/calendar";
-	}
-	
-	/**이벤트(예약스케줄)를 저장하는 프로세스**/
-	//json 데이터를 어떻게 받아서 넣지?
-	//서비스 인터페이스/ 서비스클래스/ 매퍼인터페이스도 만들어야함
-	@PostMapping("/saveEvent")
-	@ResponseBody
-	public String saveEvent(){
-		return "";
-	}
+
 }
 	
 	

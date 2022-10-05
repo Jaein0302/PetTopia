@@ -68,8 +68,8 @@
 	  
   })//document ready end
 
-  //1. 이벤트 데이터를 추출해야 함
-  //2. ajax로 서버에 전송하여 DB에 저장해야함
+  //1. DB에서 판매자의 스케줄표를 받아와야 함 
+  //2. 내가 선택한 날짜를 상세페이지로 돌려줘야 함
   function allSave(){
 	  var allEvent = calendar.getEvents();
 	  
@@ -78,38 +78,20 @@
 		  
 		  var obj = new Object();
 		  
-		  
-		  obj.title = allEvent[i]._def.title; //이벤트의 명칭
-		  obj.allday = allEvent[i]._def.allDay; //하루종일인지 아닌지 알려주는 boolean (true/false)
 		  obj.start = allEvent[i]._instance.range.start;//시작 날짜 및 시간
 		  obj.end = allEvent[i]._instance.range.end;//마침 날짜 및 시간
-		  obj.seller = null;	//판매자 정보
 		  
 		  events.push(obj);
 	  }
 	  var jsondata = JSON.stringify(events);
-	  console.log(jsondata);
+	  console.log(jsondata); //[{"start":"2022-10-04T12:00:00.000Z","end":"2022-10-04T13:00:00.000Z"}]
 	  
-	  savedata(jsondata);
+	  return_to_parent(jsondata);
   }
 
-  function savedata(jsondata){
-	  $.ajax({
-		  type: "POST",
-		  url: "${pageContext.request.contextPath}/product/saveEvent",
-		  data: jsondata,
-		  contentType: "application/json",
-		  dataType: "json",
-		  success: function(){
-			  alert("성공적으로 예약되었습니다.");
-			  window.close();
-		  },
-		  error: function(){
-			  alert("에러");
-		  }
-	  })//ajax end
-
-  }//savedata 펑션 정의
+	function return_to_parent(jsondata){
+		
+	};
 </script>
 <style>
 
@@ -180,9 +162,6 @@
           <div class='fc-event-main'>title1</div>
         </div>
         
-        <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-          <div class='fc-event-main'>title2</div>
-        </div>
       </div>
 
     </div>
