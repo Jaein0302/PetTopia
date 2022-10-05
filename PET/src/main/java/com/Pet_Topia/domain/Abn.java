@@ -3,67 +3,78 @@ package com.Pet_Topia.domain;
 import org.springframework.web.multipart.MultipartFile;
 public class Abn {
 	
-	private String admin_content;
-	private String ADMIN_SUBJECT;
-	private String ADMIN_MAIN_COLUMN;
-	private String ADMIN_WIRTER;
-	private MultipartFile uploadfile;
-	private String ADMIN_BOARD_ORIGINAL; //첨부될 파일 이름
-	private String ADMIN_BOARD_DATE;
-    private String ADMIN_BOARD_FILE;
+	private int ADN_NUMBER;
+	private String ADN_NAME;
+	private String ADN_PASS;
+	private String ADN_SUBJECT;
+	private String ADN_CONTENT; //첨부될 파일 이름
+	private String ADN_FILE;
+	private String ADN_ORIGINAL;
+	private String ADN_MAINCOLUMN;
+	private String ADN_DATE;
 	
-    
-    
-	public String getADMIN_SUBJECT() {
-		return ADMIN_SUBJECT;
+	//private MultipartFile uploadfile;
+	//이건 뭐였지?
+	
+	
+	
+	public int getADN_NUMBER() {
+		return ADN_NUMBER;
 	}
-	public void setADMIN_SUBJECT(String aDMIN_SUBJECT) {
-		ADMIN_SUBJECT = aDMIN_SUBJECT;
+	public void setADN_NUMBER(int aDN_NUMBER) {
+		ADN_NUMBER = aDN_NUMBER;
 	}
-	public String getADMIN_MAIN_COLUMN() {
-		return ADMIN_MAIN_COLUMN;
+	public String getADN_NAME() {
+		return ADN_NAME;
 	}
-	public void setADMIN_MAIN_COLUMN(String aDMIN_MAIN_COLUMN) {
-		ADMIN_MAIN_COLUMN = aDMIN_MAIN_COLUMN;
+	public void setADN_NAME(String aDN_NAME) {
+		ADN_NAME = aDN_NAME;
 	}
-	public String getADMIN_WIRTER() {
-		return ADMIN_WIRTER;
+	public String getADN_PASS() {
+		return ADN_PASS;
 	}
-	public void setADMIN_WIRTER(String aDMIN_WIRTER) {
-		ADMIN_WIRTER = aDMIN_WIRTER;
+	public void setADN_PASS(String aDN_PASS) {
+		ADN_PASS = aDN_PASS;
 	}
-	public MultipartFile getUploadfile() {
-		return uploadfile;
+	public String getADN_SUBJECT() {
+		return ADN_SUBJECT;
 	}
-	public void setUploadfile(MultipartFile uploadfile) {
-		this.uploadfile = uploadfile;
+	public void setADN_SUBJECT(String aDN_SUBJECT) {
+		ADN_SUBJECT = aDN_SUBJECT;
 	}
-	public String getADMIN_BOARD_ORIGINAL() {
-		return ADMIN_BOARD_ORIGINAL;
+	public String getADN_CONTENT() {
+		return ADN_CONTENT;
 	}
-	public void setADMIN_BOARD_ORIGINAL(String aDMIN_BOARD_ORIGINAL) {
-		ADMIN_BOARD_ORIGINAL = aDMIN_BOARD_ORIGINAL;
+	public void setADN_CONTENT(String aDN_CONTENT) {
+		ADN_CONTENT = aDN_CONTENT;
 	}
-	public String getADMIN_BOARD_DATE() {
-		return ADMIN_BOARD_DATE;
+	public String getADN_FILE() {
+		return ADN_FILE;
 	}
-	public void setADMIN_BOARD_DATE(String aDMIN_BOARD_DATE) {
-		ADMIN_BOARD_DATE = aDMIN_BOARD_DATE;
+	public void setADN_FILE(String aDN_FILE) {
+		ADN_FILE = aDN_FILE;
 	}
-	public String getADMIN_BOARD_FILE() {
-		return ADMIN_BOARD_FILE;
+	public String getADN_ORIGINAL() {
+		return ADN_ORIGINAL;
 	}
-	public void setADMIN_BOARD_FILE(String aDMIN_BOARD_FILE) {
-		ADMIN_BOARD_FILE = aDMIN_BOARD_FILE;
+	public void setADN_ORIGINAL(String aDN_ORIGINAL) {
+		ADN_ORIGINAL = aDN_ORIGINAL;
 	}
-	public String getAdmin_content() {
-		return admin_content;
+	public String getADN_MAINCOLUMN() {
+		return ADN_MAINCOLUMN;
 	}
-	public void setAdmin_content(String admin_content) {
-		this.admin_content = admin_content;
+	public void setADN_MAINCOLUMN(String aDN_MAINCOLUMN) {
+		ADN_MAINCOLUMN = aDN_MAINCOLUMN;
 	}
+	public String getADN_DATE() {
+		return ADN_DATE;
+	}
+	public void setADN_DATE(String aDN_DATE) {
+		ADN_DATE = aDN_DATE;
+	}
+	
+   
 
-	
 	
 
 }
