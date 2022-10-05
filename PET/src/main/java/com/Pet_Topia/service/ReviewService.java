@@ -22,4 +22,8 @@ public interface ReviewService {
 
 	List<Review> getPhoto(int iTEM_ID);
 
+	Review getDetail(String review_num);
+
+	int review_del(String review_num);
+
 }

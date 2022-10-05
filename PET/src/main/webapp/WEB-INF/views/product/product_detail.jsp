@@ -45,7 +45,19 @@ $(function() {
 	}
 	
 	$(".purchase").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/purchase?ITEM_ID=${productdata.ITEM_ID}&amount=" + $(".amount").val();
+		location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
+	})
+	
+	$(".cart").on('click', function(){
+		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
+	})
+	
+	$("button").on('click', function(){
+		if($(".amount").val() == '') {
+			return false;
+		}
 	})
 	
 	$(".amount").on('change', function(){
@@ -98,6 +110,7 @@ $(function() {
 
 <body>
 	<jsp:include page="../member/header.jsp" />
+
 	<div class="container mb-5">
 	<div class="row align-items-center justify-content-center detail">
 		<div class="col-sm-11">

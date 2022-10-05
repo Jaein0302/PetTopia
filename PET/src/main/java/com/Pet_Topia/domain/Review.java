@@ -12,6 +12,10 @@ public class Review {
 	private String review_reg_date; // 리뷰 날짜
 	private String review_image;    // 리뷰 이미지
 	
+	private String order_name;		// 주문이름 
+	private String seller;			// 상호
+	private String order_date;		// 주문날짜
+	
 	
 	public int getReview_num() {
 		return review_num;
@@ -67,5 +71,25 @@ public class Review {
 	public void setReview_text(String review_text) {
 		this.review_text = review_text;
 	}
+	public String getOrder_name() {
+		return order_name;
+	}
+	public void setOrder_name(String order_name) {
+		this.order_name = order_name;
+	}
+	public String getSeller() {
+		return seller;
+	}
+	public void setSeller(String seller) {
+		this.seller = seller;
+	}
+	public String getOrder_date() {
+		return order_date;
+	}
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
+	
+	
 
 }

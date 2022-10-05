@@ -126,9 +126,9 @@ public class OrderController {
 		}
 		
 		// 나의 리뷰 게시판
-		@RequestMapping(value = "/myreview", method = RequestMethod.GET)
+		@GetMapping(value = "/myreview")
 		public ModelAndView myreview(
-				@RequestParam(value = "member_id") String member_id,
+				@RequestParam("member_id") String member_id,
 				@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 				ModelAndView mv) {
 		
@@ -138,7 +138,7 @@ public class OrderController {
 			int startpage = ((page - 1) / 10) * 10 + 1;
 			int endpage = startpage + 10 - 1;
 			if (endpage > maxpage) endpage = maxpage;
-
+			logger.info("아이디는 "+member_id);
 			List<Review> boardlist = rservice.mygetBoardList(member_id, page, limit); // 리스트를 받아옴
 			mv.setViewName("order/review_mylist");
 			mv.addObject("page", page);
@@ -151,4 +151,19 @@ public class OrderController {
 			return mv;
 		}
 		
+		//리뷰 디테일
+		@PostMapping(value="/review_detail")
+		@ResponseBody
+		public Review review_detail(@RequestParam("review_num") String review_num) {
+			Review r = rservice.getDetail(review_num);
+			return r;
+		}
+		
+		//리뷰 삭제
+		@PostMapping(value="/review_delete")
+		@ResponseBody
+		public int review_delete(@RequestParam("review_num") String review_num) {
+			int r = rservice.review_del(review_num);
+			return r;
+		}
 }

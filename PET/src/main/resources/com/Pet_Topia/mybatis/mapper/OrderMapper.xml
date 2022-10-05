@@ -36,15 +36,16 @@
 	
 	<select id="mygetListCount" resultType="int">
 		select count(*) from review
-		where review_id = #{ITEM_ID}
+		where review_id = #{member_id}
 	</select>
 
 	<select id="mygetBoardList" parameterType="java.util.Map"	resultType="review">
 		select * 
 			from ( select rownum rnum, b.*
-			  from (select review.*
-					from review 
-					where review_id = #{ITEM_ID}
+			  from (select review.* , item.*
+					from review left outer join item
+	 				on review.review_item_id = item.item_id
+					where review_id = #{member_id}
 					order by review.review_reg_date desc) b
 			  where rownum &lt;= #{end}
 			)
@@ -69,4 +70,15 @@
 		and review_item_id = #{ITEM_ID}
 		order by review_reg_date desc
 	</select>
+	
+	<select id="getDetail" resultType="review">
+		select * from review
+		where review_num = #{review_num}
+	</select>
+	
+	<delete id="review_del">
+		delete from review
+		where review_num = #{review_num}
+	</delete>
+	
 </mapper>
