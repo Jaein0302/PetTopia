@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.Community_comm;
 import com.Pet_Topia.mybatis.mapper.Community_comm_Mapper;
 
@@ -51,6 +52,23 @@ public class Community_comm_ServiceImpl implements Community_comm_Service {
 	public int commentsDelete(int comment_num) {
 		return dao.commentsDelete(comment_num);
 	}
+	
+	@Override
+	public int getMyCommentListCount(String member_id) {
+		return dao.getMyCommentListCount(member_id);
+	}
+
+	@Override
+	public List<Community> getMyCommentList(String member_id, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("member_id", member_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.getMyCommentList(map);
+	}
+
 
 
 }

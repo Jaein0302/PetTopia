@@ -80,4 +80,20 @@ public class CommunityServiceImpl implements CommunityService {
 		
 	}
 
+	@Override
+	public int mygetListCount(String member_id) {
+		return dao.mygetListCount(member_id);
+	}
+
+	@Override
+	public List<Community> mygetPostList(String member_id, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("member_id", member_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.mygetPostList(map);
+	}
+
 }

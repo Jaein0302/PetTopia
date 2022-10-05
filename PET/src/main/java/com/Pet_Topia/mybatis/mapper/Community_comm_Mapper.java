@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.Community_comm;
 
 @Mapper
@@ -19,5 +20,9 @@ public interface Community_comm_Mapper {
 	int commentsUpdate(Community_comm co);
 
 	int commentsDelete(int comment_num);
+
+	int getMyCommentListCount(String member_id);
+
+	List<Community> getMyCommentList(Map<String, Object> map);
 
 }

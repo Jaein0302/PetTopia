@@ -91,4 +91,21 @@
 		commu_file=#{commu_file, jdbcType=VARCHAR}, commu_original=#{commu_original, jdbcType=VARCHAR}
 		where commu_num = #{commu_num}
 	</update>
+	
+	<select id="mygetListCount" parameterType="String" resultType="int">
+		select count(*) from community
+		where commu_name = #{member_id}
+	</select>
+	
+	<select id="mygetPostList" parameterType="java.util.Map"	resultType="community">
+		select * 
+			from ( select rownum rnum, b.*
+			  from (select community.*
+					from community 
+					where commu_name = #{member_id}
+					order by commu_date desc) b
+			  where rownum &lt;= #{end}
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
 </mapper>
