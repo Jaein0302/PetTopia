@@ -88,7 +88,7 @@
                          <img class='cthumbnail img-fluid w-100' src="/pet_topia/upload${b.commu_file}">
                     	 </c:if>
                     	 <c:if test="${empty b.commu_file && !empty b.commu_thumbnail}">
-                    	 <img class='cthumbnail img-fluid w-100'${fn:replace(b.commu_thumbnail, '>', ' ')}>
+                    	 <img class='cthumbnail img-fluid w-100' style="object-fit: cover;"${fn:replace(b.commu_thumbnail, '>', ' ')}>
                     	 </c:if>
                     	 <c:if test="${empty b.commu_file && empty b.commu_thumbnail}">
                     	 <c:set var="ran"><%= java.lang.Math.round(java.lang.Math.random() * 4) %></c:set>

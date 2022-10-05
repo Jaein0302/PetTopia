@@ -27,5 +27,9 @@ public interface OrderMapper {
 
 	List<Review> getPhoto(int ITEM_ID);
 
+	Review getDetail(String review_num);
+
+	int review_del(String review_num);
+
 
 }
