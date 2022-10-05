@@ -38,7 +38,19 @@ $(function() {
 	}
 	
 	$(".purchase").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/purchase?ITEM_ID=${productdata.ITEM_ID}&amount=" + $(".amount").val();
+		location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
+	})
+	
+	$(".cart").on('click', function(){
+		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
+	})
+	
+	$("button").on('click', function(){
+		if($(".amount").val() == '') {
+			return false;
+		}
 	})
 });
 
@@ -66,6 +78,7 @@ $(function() {
 
 <body>
 	<jsp:include page="../member/header.jsp" />
+
 	<div class="container mb-5">
 	<div class="row align-items-center justify-content-center detail">
 		<div class="col-sm-11">
@@ -89,7 +102,7 @@ $(function() {
 						<hr>
 						<p>상품개수 
 							<select class="amount" name="amount" id="size-select">
-								<option value="0">--[상품개수를 선택하세요]--</option>
+								<option value="">--[상품개수를 선택하세요]--</option>
 								<option value="1">1개</option>
 								<option value="2">2개</option>
 								<option value="3">3개</option>
@@ -106,14 +119,23 @@ $(function() {
 						</p>
 						<hr>
 
-
-						<p>총 상품 금액 <span class="total_price"> </span></p> 
-						<hr style="opacity: 1; background-color: black; margin: 0 auto">
-						<br>
-						<button type="button" class="btn btn-primary">관심상품 담기</button>
-						<button type="button" class="btn btn-primary">장바구니 담기</button>
-						<button type="button" class="btn btn-primary purchase">바로 구매하기</button>
-						</a>
+						<sec:authorize access="isAuthenticated()">
+                        <sec:authentication property="principal" var="pinfo"/>
+							<input type="hidden" name="member_id" value="${pinfo.username}" class="member_id">
+							<p>총 상품 금액 <span class="total_price"> </span></p> 
+							<hr style="opacity: 1; background-color: black; margin: 0 auto">
+							<br>
+							<button type="button" class="btn btn-primary wishlist">관심상품 담기</button>
+							<button type="button" class="btn btn-primary cart">장바구니 담기</button>
+							<button type="button" class="btn btn-primary purchase">바로 구매하기</button>
+						</sec:authorize>
+						
+						<sec:authorize access="isAnonymous()">
+							<button type="button" class="btn btn-primary">관심상품 담기</button>
+							<button type="button" class="btn btn-primary">장바구니 담기</button>
+							<button type="button" class="btn btn-primary">바로 구매하기</button>
+		 				</sec:authorize>
+		 				
 					</div>
 				</div>
 				<br>

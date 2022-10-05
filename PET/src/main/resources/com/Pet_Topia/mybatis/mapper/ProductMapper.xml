@@ -99,5 +99,34 @@
 		delete from item  
 		where  ITEM_ID = #{ITEM_ID}	
 	</delete>
+	
+	<insert id="OrderInsert"  parameterType="map">
+		insert into ORDERINFO
+		(ORDER_ID, ITEM_ID, MEBER_ID, order_amount, order_price)
+		values
+		(#{order_id}, #{item_id}, #{member_id}, #{order_amount}, #{order_price})		
+	</insert>
+	
+	<insert id="CartInsert" parameterType="java.util.Map">
+		<selectKey resultType="int" order="BEFORE" keyProperty="CART_ID">
+			select nvl(max(CART_ID),0)+1 from cart
+		</selectKey>	
+		insert into cart
+		(CART_ID, CART_ITEM_ID, CART_MEMBER_ID, CART_ITEM_NAME, CART_ITEM_IMAGE, CART_AMOUNT, CART_ITEM_PRICE)
+		values
+		(#{CART_ID}, #{CART_ITEM_ID}, #{CART_MEMBER_ID}, #{CART_ITEM_NAME},
+		 #{CART_ITEM_IMAGE}, #{CART_AMOUNT}, #{CART_ITEM_PRICE})
+	</insert>
 
+	<select id="getCartList" parameterType="String"	resultType="cart">
+		select *
+		from cart
+		where CART_MEMBER_ID = #{member_id}
+	</select>
+	
+	<select id="checkCart" resultType="cart" parameterType="int">
+		select *
+		from cart
+		where CART_ITEM_ID = #{ITEM_ID}
+	</select>
 </mapper>

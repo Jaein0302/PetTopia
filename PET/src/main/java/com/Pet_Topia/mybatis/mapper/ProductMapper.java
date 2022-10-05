@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.Product;
 
 @Mapper
@@ -27,6 +28,13 @@ public interface ProductMapper {
 	public int productUpdate(Product product);
 	
 	public int productDelete(int ITEM_ID);
-
+	
+	public int OrderInsert(HashMap<String, Object> map);
+	
+	public int CartInsert(HashMap<String, Object> map);
+	
+	public List<Cart> getCartList(String member_id);
+	
+	public Cart checkCart(int ITEM_ID);
 
 }

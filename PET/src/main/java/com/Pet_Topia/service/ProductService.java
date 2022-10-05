@@ -2,6 +2,7 @@ package com.Pet_Topia.service;
 
 import java.util.List;
 
+import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.Product;
 
 
@@ -24,7 +25,12 @@ public interface ProductService {
 
 	public int productDelete(int ITEM_ID);
 
-
-
+	public int OrderInsert(int order_id, int item_id, String member_id, int order_amount, int order_price);
+	
+	public int CartInsert(Product productdata, int amount, String member_id);
+	
+	public List<Cart> getCartList(String member_id);
+	
+	public Cart checkCart(int ITEM_ID);
 
 }
