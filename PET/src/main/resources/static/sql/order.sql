@@ -10,3 +10,5 @@ order_price number(10)
 
 insert into orderInfo
 values (1, 20001, 'buyer1', 1, 1000)
+
+select * from ORDERINFO

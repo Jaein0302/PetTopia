@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
@@ -373,12 +375,12 @@ public class ProductController {
 		return "redirect:my_product";
 	}
 	
-	@GetMapping("/purchase")
+	@GetMapping("/order_view")
 	public ModelAndView purchase_view(int ITEM_ID,
 									 String amount,
+									 String member_id,
 									 ModelAndView mv, 
-									 HttpServletRequest request,
-									 RedirectAttributes rattr) {
+									 HttpServletRequest request) {
 
 		Product productdata = productService.getDetail(ITEM_ID);		
 		
@@ -391,27 +393,103 @@ public class ProductController {
 			return mv;
 		}
 		
-		logger.info("구매페이지보기 성공");
+		logger.info("구매페이지보기 성공");		
+		Member memberlist = memberservice.member_info(member_id);		
 		
-		Member memberlist = memberservice.member_info(productdata.getITEM_SELLER());		
+		//UID 만들기
+		
+		String order_uid = UUID.randomUUID().toString();		
+		logger.info("order_uid=" + order_uid);
 
-		mv.setViewName("product/purchase_view");
+		mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
 		mv.addObject("amount", amount);
+		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/purchase")
+	public int purchase_view(@RequestParam(value="order_id") int order_id,
+							 @RequestParam(value="item_id") int item_id,
+							 @RequestParam(value="member_id") String member_id,
+							 @RequestParam(value="order_amount") int order_amount,
+							 @RequestParam(value="order_price") int order_price) {
+
+
+		int result = productService.OrderInsert(order_id, item_id, member_id, order_amount, order_price);
+		
+		return result;
+	}
+	
+	
+//	@GetMapping(value = "/update_view")
+//	public ModelAndView updateView(	int ITEM_ID, 
+//									ModelAndView mv,
+//									HttpServletRequest request) {
+//	
+//		Product productdata = productService.getDetail(ITEM_ID);
+//	
+//		//글 내용 불러오기 실패
+//		if(productdata == null) {
+//			logger.info("수정보기 실패");
+//			mv.setViewName("error/error");
+//			mv.addObject("url",request.getRequestURL());
+//			mv.addObject("message","수정보기 실패입니다.");
+//			return mv;
+//		}
+//		
+//		logger.info("(수정)상세보기 성공");
+//		mv.setViewName("product/update_view");
+//		mv.addObject("productdata", productdata);
+//		return mv;
+//	}
+	
+	@GetMapping("/cart")
+	public ModelAndView cart_list(int ITEM_ID,
+									 int amount,
+									 String member_id,
+									 ModelAndView mv, 
+									 HttpServletRequest request) {
+		
+		
+		//cart에 있는 아이템인지 확인
+		Cart check = productService.checkCart(ITEM_ID);
+		
+		if(check == null) {
+			//카트에 담기
+			Product productdata = productService.getDetail(ITEM_ID);	
+			int result = productService.CartInsert(productdata,amount,member_id);		
+			
+			if(result != 1) {
+				logger.info("장바구니등록 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url",request.getRequestURL());
+				mv.addObject("message","장바구니페이지 실패입니다.");
+				return mv;
+			}
+		} else {
+			 String message = "<alert>이미 장바구니에 있습니다.</alert>";
+		}
+		
+		logger.info("장바구니등록 성공");	
+		
+		//카트에 담은 item 가져오기
+		List<Cart> cartlist= productService.getCartList(member_id);
+
+		mv.addObject("check", check);		
+		mv.addObject("cartlist", cartlist);		
+		mv.setViewName("product/cart_list");
+		return mv;
+	}
 	
 	@RequestMapping(value ="/wish")
 	public String wish_list() {	
 		return "product/wish_list";
 	}	
 	
-	@RequestMapping(value ="/cart")
-	public String cart_list() {	
-		return "product/cart_list";
-	}
+
 	
 
 	/** 스케줄 **/
@@ -431,3 +509,4 @@ public class ProductController {
 }
 	
 	
+
