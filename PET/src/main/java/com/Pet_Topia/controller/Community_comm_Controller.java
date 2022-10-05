@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.Community_comm;
+import com.Pet_Topia.service.CommunityService;
 import com.Pet_Topia.service.Community_comm_Service;
 
 @RestController //@Controller + @ResponseBody
@@ -24,12 +25,14 @@ public class Community_comm_Controller {
 	
 private static final Logger logger = LoggerFactory.getLogger(Community_comm_Controller.class);
 
-	
+	private CommunityService Communityservice;
 	private Community_comm_Service commentService;
 
 	@Autowired
-	public Community_comm_Controller(Community_comm_Service commentService) {
+	public Community_comm_Controller(Community_comm_Service commentService,
+									CommunityService communityService) {
 		this.commentService = commentService;
+		this.Communityservice = communityService;
 	}
 	
 	@PostMapping(value = "/list")
@@ -57,9 +60,36 @@ private static final Logger logger = LoggerFactory.getLogger(Community_comm_Cont
 		return commentService.commentsDelete(comment_num);
 	}
 	
+	/**내가 쓴 커뮤니티 글**/
+	@RequestMapping(value = "/myPost", method = RequestMethod.GET)
+	public ModelAndView myPost(
+			@RequestParam(value = "member_id") String member_id,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			ModelAndView mv) {
+		
+		int limit = 10; // 한 화면에 출력할 로우 갯수
+		int listcount = Communityservice.mygetListCount(member_id); // 나의 글 총 리스트 수를 받아옴
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+		if (endpage > maxpage) endpage = maxpage;
+		
+		List<Community> postList = Communityservice.mygetPostList(member_id, page, limit); // 리스트를 받아옴
+		mv.setViewName("community/post_mylist");//order/review_mylist 참고
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("postList", postList);
+		mv.addObject("limit", limit);
+		
+		return mv;
+	}
+	
 	/**내가 쓴 댓글**/
 	@RequestMapping(value = "/myComment", method = RequestMethod.GET)
-	public ModelAndView myreview(
+	public ModelAndView myComment(
 			@RequestParam(value = "member_id") String member_id,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 			ModelAndView mv) {
