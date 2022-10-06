@@ -67,6 +67,7 @@
                 <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                 </a>
+                
             </div>
         </div>
 	</div>
@@ -224,15 +225,14 @@
                             <a href="${pageContext.request.contextPath}/main/join" class="nav-item nav-link jjoin">회원가입</a>
                     	  </sec:authorize>
                         
-                        <!-- 회원 로그인 -->
-                  		  <sec:authorize access="isAuthenticated()">
+                        <!-- 일반 회원 로그인 -->
+                  		  <sec:authorize access="hasRole('ROLE_MEMBER')">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
                         	  &nbsp;
-                        	  <c:if test="${pinfo.username=='admin'}">관리자</c:if>
                         	  <c:if test="${pinfo.username!='admin'}">마이페이지</c:if>
                         	  &ensp;<i class="fas fa-caret-down"></i></a>
                         	 
@@ -248,9 +248,6 @@
                         	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
-                        	 	<c:if test="${pinfo.username!='admin'}">
-                        	 		<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 등록한 상품</a>                        	 		
-                        	 	</c:if> 
                         	 	<a href="#" class="dropdown-item">                     
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>
@@ -258,6 +255,65 @@
                         	 </form>
                         	 </div>
                         	</sec:authorize>
+                        	
+                        <!-- 판매자일때 드롭다운 메뉴 -->	
+                        <sec:authorize access="hasRole('ROLE_SELLER')">
+                  		  <sec:authentication property="principal" var="pinfo"/>
+	  						<input type="hidden" name="member_id" value="${pinfo.username}">
+                        	<div class="nav-item dropdown" >
+                        	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
+                        	  &nbsp;
+                        	  <c:if test="${pinfo.username!='admin'}">판매자 메뉴</c:if>
+                        	  &ensp;<i class="fas fa-caret-down"></i></a>
+                        	 
+                        	 
+                        	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
+                        	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
+                        	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
+                        	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
+                        	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
+                        	 	<a href="#" class="dropdown-item mydrop">상품등록</a>
+                        	 	<a href="#" class="dropdown-item mydrop">나의 일정확인</a>
+                        	 	<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 등록한 상품</a>                     	 		
+                        	 	<a href="#" class="dropdown-item">                     
+                        	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
+                        	 </div>
+                        	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        	 </form>
+                        	 </div>
+                        	</sec:authorize>
+                        	
+                        
+                        <!-- admin 드롭다운 메뉴 -->
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+                  		  <sec:authentication property="principal" var="pinfo"/>
+	  						<input type="hidden" name="member_id" value="${pinfo.username}">
+                        	<div class="nav-item dropdown" >
+                        	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
+                        	  &nbsp;
+                        	  <c:if test="${pinfo.username=='admin'}">관리자 메뉴</c:if>
+                        	  &ensp;<i class="fas fa-caret-down"></i></a>
+                        	 
+                        	 
+                        	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
+                        	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
+                        	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
+                        	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
+                        	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
+                        	 	<a href="#" class="dropdown-item mydrop">상품등록</a>
+                        	 	<a href="#" class="dropdown-item mydrop">나의 일정확인</a>
+                        	 	<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 등록한 상품</a>                     	 		
+                        	 	<a href="#" class="dropdown-item">                     
+                        	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
+                        	 </div>
+                        	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                        	 </form>
+                        	 </div>
+                        	</sec:authorize>
+                        	
+                        	
                         </div>
                     </div>
                 </nav>
