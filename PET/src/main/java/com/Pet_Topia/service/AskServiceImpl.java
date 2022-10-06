@@ -44,4 +44,10 @@ public class AskServiceImpl implements AskService {
 		map.put("product", product);
 		return dao.getAskList(map);
 	}
+	
+	@Override
+	public ItemAsk getaskDetail(int ITEM_ASK_NUM) {
+		return dao.getaskDetail(ITEM_ASK_NUM);
+	}
+
 }

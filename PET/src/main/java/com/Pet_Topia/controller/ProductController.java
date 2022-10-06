@@ -104,7 +104,7 @@ public class ProductController {
 	
 	@GetMapping(value ="/detail")
 	public ModelAndView productdetail(
-					@RequestParam(value="ITEM_ID", required = true) int ITEM_ID,
+					@RequestParam(value="ITEM_ID", required = false) int ITEM_ID,
 					@RequestParam(value = "page", defaultValue = "1", required = false) int page,
 					ModelAndView mv			
 					) {
@@ -123,7 +123,7 @@ public class ProductController {
 		}
 		
 		//ask.view.jsp(상품문의)에 값 전달
-		int limit = 10; // 한 화면에 출력할 로우 갯수
+		int limit = 3; // 한 화면에 출력할 로우 갯수
 		int listcount = askService.getListCount(product); // 총 리스트 수를 받아옴
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
@@ -163,9 +163,12 @@ public class ProductController {
 	@GetMapping(value ="/my_product") 
 	public ModelAndView my_product(
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			ModelAndView mv) {
+						  String member_id,
+						  ModelAndView mv) {
+		
+		int listcount = productService.getmyListCount(member_id); // 해당하는 리스트만 받아옴
+
 		int limit = 5; // 한 화면에 출력할 로우 갯수
-		int listcount = productService.getListCount(); // 총 리스트 수를 받아옴
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
 		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
@@ -176,7 +179,8 @@ public class ProductController {
 		if (endpage > maxpage)
 			endpage = maxpage;
 
-		List<Product> productlist = productService.getProductList(page, limit); // 리스트를 받아옴
+		List<Product> productlist = productService.getProductList(page, limit, member_id); // 리스트를 받아옴		
+
 		mv.setViewName("product/my_product");
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
@@ -193,6 +197,7 @@ public class ProductController {
 	public String add_product(Model mv, 
 							  RedirectAttributes rattr, 
 							  Product product, 
+							  String member_id,
 							  HttpServletRequest request) throws Exception {
 		
 		MultipartFile uploadfile = product.getUploadfile();
@@ -228,7 +233,7 @@ public class ProductController {
 		String ITEM_ADDRESS = memberlist.getMember_address();
 		product.setITEM_ADDRESS(ITEM_ADDRESS);
 
-		int result = productService.insertProduct(product);
+		int result = productService.insertProduct(product, member_id);
 		
 		if(result == 0) {
 			logger.info("상품 등록실패");
@@ -423,29 +428,6 @@ public class ProductController {
 		return result;
 	}
 	
-	
-//	@GetMapping(value = "/update_view")
-//	public ModelAndView updateView(	int ITEM_ID, 
-//									ModelAndView mv,
-//									HttpServletRequest request) {
-//	
-//		Product productdata = productService.getDetail(ITEM_ID);
-//	
-//		//글 내용 불러오기 실패
-//		if(productdata == null) {
-//			logger.info("수정보기 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url",request.getRequestURL());
-//			mv.addObject("message","수정보기 실패입니다.");
-//			return mv;
-//		}
-//		
-//		logger.info("(수정)상세보기 성공");
-//		mv.setViewName("product/update_view");
-//		mv.addObject("productdata", productdata);
-//		return mv;
-//	}
-	
 	@GetMapping("/cart")
 	public ModelAndView cart_list(int ITEM_ID,
 									 int amount,
@@ -460,7 +442,8 @@ public class ProductController {
 		if(check == null) {
 			//카트에 담기
 			Product productdata = productService.getDetail(ITEM_ID);	
-			int result = productService.CartInsert(productdata,amount,member_id);		
+			int result = productService.CartInsert(productdata,amount,member_id);	
+			
 			
 			if(result != 1) {
 				logger.info("장바구니등록 실패");
@@ -490,6 +473,22 @@ public class ProductController {
 	}	
 	
 
+	
+
+	/** 스케줄 **/
+	@RequestMapping(value = "/openCalendar", method=RequestMethod.GET)
+	public String openCalendar() {
+		return "schedule/calendar";
+	}
+	
+	/**이벤트(예약스케줄)를 저장하는 프로세스**/
+	//json 데이터를 어떻게 받아서 넣지?
+	//서비스 인터페이스/ 서비스클래스/ 매퍼인터페이스도 만들어야함
+	@PostMapping("/saveEvent")
+	@ResponseBody
+	public String saveEvent(){
+		return "";
+	}
 }
 	
 	

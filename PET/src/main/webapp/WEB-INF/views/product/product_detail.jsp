@@ -44,15 +44,14 @@ $(function() {
 		alert("상품 문의 성공입니다.");
 	}
 	
-	$(".purchase").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
-	})
-	
-	$(".cart").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		+ $(".amount").val() + "&member_id=" + $(".member_id").val();
-	})
+	   $(".purchase").on('click', function(){
+		      location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		      + $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
+		   })
+		   
+		   $(".cart").on('click', function(){
+		      location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		      + $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
 	
 	$("button").on('click', function(){
 		if($(".amount").val() == '') {
