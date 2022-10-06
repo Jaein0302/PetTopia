@@ -3,7 +3,7 @@ package com.Pet_Topia.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Product {
-	private int ITEM_ID					;
+	private int    ITEM_ID					;
 	private String ITEM_NAME				;
 	private String ITEM_CATEGORY			;
 	private int	   ITEM_PRICE				;
@@ -18,6 +18,7 @@ public class Product {
 	private String ITEM_SPECIES				;
 	private String ITEM_ADDRESS				;
 	private String ITEM_SELLER 				;
+	private String MEMBER_ID				;
 	
 	private MultipartFile uploadfile		;
 	//리뷰 수
@@ -158,6 +159,13 @@ public class Product {
 	public void setITEM_SELLER(String iTEM_SELLER) {
 		ITEM_SELLER = iTEM_SELLER;
 	}
-	
+
+	public String getMEMBER_ID() {
+		return MEMBER_ID;
+	}
+
+	public void setMEMBER_ID(String mEMBER_ID) {
+		MEMBER_ID = mEMBER_ID;
+	}
 	
 }

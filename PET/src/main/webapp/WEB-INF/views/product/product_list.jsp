@@ -67,9 +67,6 @@
 		    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		 
 			</form>
 		</div>
-		<div>
-			<a href="${pageContext.request.contextPath}/product/my_product">상품등록</a>
-		</div>
 	</div>	
 </div>
 

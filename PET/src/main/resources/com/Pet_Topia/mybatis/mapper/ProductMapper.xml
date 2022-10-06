@@ -53,10 +53,10 @@
 		</selectKey>
 		insert into item
 		(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_IMAGE_ORIGINAL, ITEM_IMAGE_FILE, ITEM_REG_DATE,
-		 ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER)
+		 ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER, MEMBER_ID)
 		values
 		(#{ITEM_ID}, #{ITEM_NAME}, #{ITEM_CATEGORY}, #{ITEM_PRICE}, #{ITEM_CONTENT}, #{ITEM_IMAGE_ORIGINAL}, #{ITEM_IMAGE_FILE}, sysdate,
-		#{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER})		
+		#{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER}, #{MEMBER_ID})		
 	</insert>
 	
 	
@@ -73,10 +73,11 @@
 		from(select rownum rnum, a.*
 		 	 from (select * 
 			   	   from item
+			   	   where MEMBER_ID = #{member_id}
 			   	   order by ITEM_REG_DATE desc) a
 		 	 where rownum &lt;= #{end}
 		 	)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}		
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<update id="productUpdate" parameterType="product">
@@ -128,5 +129,9 @@
 		select *
 		from cart
 		where CART_ITEM_ID = #{ITEM_ID}
+	</select>
+	
+	<select id="getmyListCount" resultType="int">
+		select count(*) from item where MEMBER_ID = #{member_id}
 	</select>
 </mapper>

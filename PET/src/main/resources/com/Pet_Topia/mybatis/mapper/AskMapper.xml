@@ -7,7 +7,7 @@
 	
 	 <insert id="insertAsk" parameterType="itemAsk">
 	 	<selectKey resultType="int" order="BEFORE" keyProperty="ITEM_ASK_NUM">
-			select nvl(max(ITEM_ASK_NUM),0)+1 
+			select nvl(max(ITEM_ASK_NUM),0) +1
 			from ITEM_ASK
 		</selectKey>
 
@@ -33,6 +33,12 @@
 		 	)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 		and ITEM_ASK_ITEMID = #{product.ITEM_ID}		
+	</select>
+	
+	<select id="getaskDetail" parameterType="int" resultType="ItemAsk">
+		select *
+		from ItemAsk
+		where ITEM_ASK_NUM = #{ITEM_ASK_NUM}	
 	</select>
 	
    

@@ -62,7 +62,7 @@
 					<td>개수<span> ${c.CART_AMOUNT}개</span></td>
 		   		</tr> 		
 		   		<tr>
-					<td>가격<span>${c.CART_ITEM_PRICE}원</span></td>
+					<td>가격<span>${c.ITEM_PRICE * amount}원</span></td>
 		   		</tr> 		
 		   	</tbody>
 	   	</table>

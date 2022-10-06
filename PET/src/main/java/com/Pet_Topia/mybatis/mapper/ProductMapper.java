@@ -17,13 +17,13 @@ public interface ProductMapper {
 	
 	public List<Product> getListAjax(Map<String, String> map);
 	
-	public int insertProduct(Product product);
+	public int insertProduct(Map<Object, Object> map);
 
 	public Product getDetail(int ITEM_ID);
 	
 	public int getListCount();
 
-	public List<Product> getProductList(HashMap<String, Integer> map);
+	public List<Product> getProductList(HashMap<String, Object> map);
  
 	public int productUpdate(Product product);
 	
@@ -36,5 +36,7 @@ public interface ProductMapper {
 	public List<Cart> getCartList(String member_id);
 	
 	public Cart checkCart(int ITEM_ID);
+	
+	public int getmyListCount(String member_id);
 
 }

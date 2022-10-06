@@ -18,5 +18,7 @@ public interface AskMapper {
 	public int getListCount(Product product);
 	
 	public List<ItemAsk> getAskList(HashMap<String, Object> map);
+	
+	public ItemAsk getaskDetail(int ITEM_ASK_NUM);
 
 }

@@ -67,10 +67,6 @@
                 <a href="${pageContext.request.contextPath }/mypage/wishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                 </a>
-             <!-- 장바구니 -->
-                <a href="${pageContext.request.contextPath }/mypage/cartList" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                </a>
             </div>
         </div>
 	</div>
@@ -252,7 +248,10 @@
                         	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
                         	 	<a href="${pageContext.request.contextPath}/community/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
-                        	 	<a href="#" class="dropdown-item">
+                        	 	<c:if test="${pinfo.username!='admin'}">
+                        	 		<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 등록한 상품</a>                        	 		
+                        	 	</c:if> 
+                        	 	<a href="#" class="dropdown-item">                     
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>
                         	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
