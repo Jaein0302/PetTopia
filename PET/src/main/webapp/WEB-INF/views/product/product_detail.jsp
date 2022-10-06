@@ -46,8 +46,12 @@ $(function() {
 	}
 	
 	$(".purchase").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		      + $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
+		if($("#datetimepicker1Input").val() == ''){
+			alert("예약날짜와 시간을 설정해주세요");
+		} else {
+			location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		      	+ $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
+		}
 	})//purchase click function
 		   
 	$(".cart").on('click', function(){
@@ -171,7 +175,6 @@ $(function() {
 						<hr style="opacity: 1; background-color: black; margin: 0 auto">
 						<br>
 						<button type="button" class="btn btn-primary">관심상품 담기</button>
-						<button type="button" class="btn btn-primary">장바구니 담기</button>
 						<button type="button" class="btn btn-primary purchase">바로 구매하기</button>
 						
 					</div>
