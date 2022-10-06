@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -425,28 +426,6 @@ public class ProductController {
 		return result;
 	}
 
-	
-	@GetMapping(value = "/update_view")
-	public ModelAndView updateView(	int ITEM_ID, 
-									ModelAndView mv,
-									HttpServletRequest request) {
-	
-		Product productdata = productService.getDetail(ITEM_ID);
-	
-		//글 내용 불러오기 실패
-		if(productdata == null) {
-			logger.info("수정보기 실패");
-			mv.setViewName("error/error");
-			mv.addObject("url",request.getRequestURL());
-			mv.addObject("message","수정보기 실패입니다.");
-			return mv;
-		}
-		
-		logger.info("(수정)상세보기 성공");
-		mv.setViewName("product/update_view");
-		mv.addObject("productdata", productdata);
-		return mv;
-	}
   
   
   
@@ -502,20 +481,7 @@ public class ProductController {
 
 	
 
-	/** 스케줄 **/
-	@RequestMapping(value = "/openCalendar", method=RequestMethod.GET)
-	public String openCalendar() {
-		return "schedule/calendar";
-	}
 	
-	/**이벤트(예약스케줄)를 저장하는 프로세스**/
-	//json 데이터를 어떻게 받아서 넣지?
-	//서비스 인터페이스/ 서비스클래스/ 매퍼인터페이스도 만들어야함
-	@PostMapping("/saveEvent")
-	@ResponseBody
-	public String saveEvent(){
-		return "";
-	}
 }
 	
 	
