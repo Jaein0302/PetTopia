@@ -38,35 +38,33 @@ $(function() {
 		console.log("p_price=" + p_price)
 		var t_price = $(".amount").val() * p_price;		
 		$(".total_price").html(t_price);
-	})//amount change function
-	
+	})
 	
 	if(result == 'addSuccess'){
 		alert("상품 문의 성공입니다.");
 	}
 	
-	$(".purchase").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+	   $(".purchase").on('click', function(){
+		      location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
 		      + $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
-	})//purchase click function
+		   })
 		   
-	$(".cart").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		+ $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
-	});//cart click function
+		   $(".cart").on('click', function(){
+		      location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
+		      + $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
 	
 	$("button").on('click', function(){
 		if($(".amount").val() == '') {
 			return false;
 		}
-	})//button click function
+	})
 	
 	$(".amount").on('change', function(){
 		var p_price = $(".product_price").text().slice(0, -1);
 		console.log("p_price=" + p_price)
 		var t_price = $(".amount").val() * p_price;		
 		$(".total_price").html(t_price);
-	})//amount change function
+	})
 	
 	new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
 		stepping: 30,
@@ -98,12 +96,12 @@ $(function() {
 	            clear: 'fa fa-solid fa-trash',
 	            close: 'fas fa-solid fa-xmark'
 	        },
-	        sideBySide: true,
 	    },
-	});//temus dominus end
+	});
 	
-
 });
+
+
 
 </script>
 
@@ -155,13 +153,17 @@ $(function() {
 							<p>
 								예약 날짜/시간 정하기
 
-							<div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-  								<input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-   								<span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker'>
-    								<span class='fa fa-solid fa-calendar'></span>
-  								</span>
+							<div class='input-group' id='datetimepicker1'
+								data-td-target-input='nearest' data-td-target-toggle='nearest'>
+  									 <input id='datetimepicker1Input' type='text' class='form-control'
+										data-td-target='#datetimepicker1' />
+   									<span class='input-group-text' data-td-target='#datetimepicker1'
+										data-td-toggle='datetimepicker'>
+    								 <span class='fa fa-solid fa-calendar'></span>
+  									 </span>
  							</div>
 							
+							</p>
 							</form>
 						<hr>
 
