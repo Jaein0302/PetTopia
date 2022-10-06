@@ -64,12 +64,8 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="${pageContext.request.contextPath }/mypage/wishList" class="btn border">
+                <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
-                </a>
-             <!-- 장바구니 -->
-                <a href="${pageContext.request.contextPath }/mypage/cartList" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
                 </a>
             </div>
         </div>

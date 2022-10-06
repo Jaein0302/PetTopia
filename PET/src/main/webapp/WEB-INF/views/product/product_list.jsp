@@ -94,8 +94,8 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
+                    	<!-- 찜하기 버튼 -->
+                    	<a href="${pageContext.request.contextPath}/product/addToWish?ITEM_ID=${p.ITEM_ID}" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
                     </div>
                 </div>
             </div>        

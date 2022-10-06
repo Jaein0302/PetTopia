@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.Product;
+import com.Pet_Topia.domain.Wish;
 import com.Pet_Topia.mybatis.mapper.ProductMapper;
 
 @Service
@@ -125,5 +125,19 @@ public class ProductServiceImpl implements ProductService {
 	public Cart checkCart(int ITEM_ID) {
 		return dao.checkCart(ITEM_ID);
 	}
+
+
+	@Override
+	public Wish checkWish(int iTEM_ID, String member_id) {
+		return dao.checkWish(iTEM_ID,member_id);
+	}
+
+
+	@Override
+	public int WishInsert(Wish newWishItem) {
+		return dao.WishInsert(newWishItem);
+	}
+
+
 
 }
