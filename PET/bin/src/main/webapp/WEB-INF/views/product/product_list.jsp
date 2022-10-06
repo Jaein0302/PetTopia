@@ -25,7 +25,28 @@
 </style>
 
 <script>
+$(function(){
+	
+	/*
+		첫번째. 위시버튼을 눌렀을때 에이잭스에서 사용자 아이디로 찜한 상품이 있는지 확인한다. 있으면 있다고 alert창 띄우기
+		두번째. 없으면 에이잭스에서 사용자 아이디로 상품을 찜한다. 완료되면 완료되었다고 alert창 띄우기
+	*/
+	$('#wishbutton').on('click', function(){
+		$.ajax({
+			url: "",
+			data : {},
+			success: function(resp){
+				if(resp == 1){ //사용자 아이디로 찜한 상품이 있을경우
+					alert("해당 상품은 이미 찜한상품에 있습니다.");
+				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
+					
+				}
+			}
+		})//첫번째 ajax end
 
+	});//wishbutton click function
+	
+})//ready function
 			
 </script>
 
@@ -92,7 +113,7 @@
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
                     	<!-- 찜하기 버튼 -->
-                    	<a href="${pageContext.request.contextPath}/product/addToWish?ITEM_ID=${p.ITEM_ID}" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
+                    	<button id="wishbutton"></button>
                     </div>
                 </div>
             </div>        

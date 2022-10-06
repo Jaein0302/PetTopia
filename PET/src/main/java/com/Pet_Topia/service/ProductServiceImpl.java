@@ -150,16 +150,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
-
 	@Override
-	public Wish checkWish(int iTEM_ID, String member_id) {
-		return dao.checkWish(iTEM_ID,member_id);
+	public int WishInsert(Wish newWishItem) {
+		return dao.WishInsert(newWishItem);
 	}
 
 
 	@Override
-	public int WishInsert(Wish newWishItem) {
-		return dao.WishInsert(newWishItem);
+	public int checkWish(int iTEM_ID, String member_id) {
+		return dao.checkWish(iTEM_ID, member_id);
 	}
 
 

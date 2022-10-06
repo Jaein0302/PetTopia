@@ -39,7 +39,7 @@ public interface ProductMapper {
 	
 	public int getmyListCount(String member_id);
 
-	public Wish checkWish(int iTEM_ID, String member_id);
+	public int checkWish(int iTEM_ID, String member_id);
 
 	public int WishInsert(Wish newWishItem);
 
