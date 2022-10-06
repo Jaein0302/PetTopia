@@ -153,7 +153,7 @@ $('#delete').on('click',function(){
             <tr>
                <td>         
                   <c:out value="${num}"/>
-                      <c:set var="num" value="${num-1}" />
+                  <c:set var="num" value="${num-1}" />
                </td>               
                <td><div>${p.ITEM_ID}</div></td>
                <td>${p.ITEM_NAME}</td>
@@ -229,9 +229,9 @@ $('#delete').on('click',function(){
        <div class="modal-content">                  
          <!-- Modal body -->
          <div class="modal-body">
-            <form action="${pageContext.request.contextPath}/product/add" method="post" enctype="multipart/form-data">
-               <sec:authorize access="isAuthenticated()">
-                <sec:authentication property="principal" var="pinfo"/>
+         <sec:authorize access="isAuthenticated()">
+         <sec:authentication property="principal" var="pinfo"/>
+            <form action="${pageContext.request.contextPath}/product/add?member_id=${pinfo.username}" method="post" enctype="multipart/form-data">  
                
                <h5>판매자명</h5>
             <input type="text" name="ITEM_SELLER" value="${pinfo.username}" class="form-control" readOnly>                
@@ -281,9 +281,9 @@ $('#delete').on('click',function(){
                 <button type="submit" class="btn btn-primary" id="p_add">상품 등록</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
-                </sec:authorize>             
             </form>
-         </div>           
+            </sec:authorize>             
+         </div>      
        </div>
      </div>
    </div>   

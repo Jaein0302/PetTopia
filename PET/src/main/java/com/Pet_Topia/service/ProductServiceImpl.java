@@ -48,8 +48,24 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int insertProduct(Product product) {
-		return dao.insertProduct(product);		
+	public int insertProduct(Product product, String member_id) {
+		Map<Object, Object> map = new HashMap<Object, Object>();
+		map.put("ITEM_ID", product.getITEM_ID());
+		map.put("ITEM_NAME", product.getITEM_NAME());
+		map.put("ITEM_CATEGORY", product.getITEM_CATEGORY());
+		map.put("ITEM_PRICE", product.getITEM_PRICE());
+		map.put("ITEM_CONTENT", product.getITEM_CONTENT());
+		map.put("ITEM_IMAGE_ORIGINAL", product.getITEM_IMAGE_ORIGINAL());
+		map.put("ITEM_IMAGE_FILE", product.getITEM_IMAGE_FILE());
+		map.put("ITEM_REG_DATE", product.getITEM_REG_DATE());
+		map.put("ITEM_SEX", product.getITEM_SEX());
+		map.put("ITEM_WEIGHT", product.getITEM_WEIGHT());
+		map.put("ITEM_SPECIES", product.getITEM_SPECIES());
+		map.put("ITEM_ADDRESS", product.getITEM_ADDRESS());
+		map.put("ITEM_SELLER", product.getITEM_SELLER());
+		map.put("MEMBER_ID", member_id);
+		
+		return dao.insertProduct(map);		
 	}
 
 	
@@ -64,13 +80,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getProductList(int page, int limit) {
+	public List<Product> getProductList(int page, int limit, String member_id) {
 
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		int startrow=(page-1)*limit+1;
 		int endrow=startrow+limit-1;
 		map.put("start", startrow);
 		map.put("end", endrow);
+		map.put("member_id", member_id);
+		
 		return dao.getProductList(map);
 	}
 	
@@ -125,6 +143,12 @@ public class ProductServiceImpl implements ProductService {
 	public Cart checkCart(int ITEM_ID) {
 		return dao.checkCart(ITEM_ID);
 	}
+	
+	@Override
+	public int getmyListCount(String member_id) {
+		return dao.getmyListCount(member_id);
+	}
+
 
 
 	@Override

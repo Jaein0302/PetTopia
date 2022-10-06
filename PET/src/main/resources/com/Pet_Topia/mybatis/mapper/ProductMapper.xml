@@ -53,10 +53,10 @@
 		</selectKey>
 		insert into item
 		(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_IMAGE_ORIGINAL, ITEM_IMAGE_FILE, ITEM_REG_DATE,
-		 ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER)
+		 ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER, MEMBER_ID)
 		values
 		(#{ITEM_ID}, #{ITEM_NAME}, #{ITEM_CATEGORY}, #{ITEM_PRICE}, #{ITEM_CONTENT}, #{ITEM_IMAGE_ORIGINAL}, #{ITEM_IMAGE_FILE}, sysdate,
-		#{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER})		
+		#{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER}, #{MEMBER_ID})		
 	</insert>
 	
 	
@@ -73,10 +73,11 @@
 		from(select rownum rnum, a.*
 		 	 from (select * 
 			   	   from item
+			   	   where MEMBER_ID = #{member_id}
 			   	   order by ITEM_REG_DATE desc) a
 		 	 where rownum &lt;= #{end}
 		 	)
-		where rnum &gt;= #{start} and rnum &lt;= #{end}		
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<update id="productUpdate" parameterType="product">
@@ -107,22 +108,6 @@
 		(#{order_id}, #{item_id}, #{member_id}, #{order_amount}, #{order_price})		
 	</insert>
 	
-	<insert id="CartInsert" parameterType="java.util.Map">
-		<selectKey resultType="int" order="BEFORE" keyProperty="CART_ID">
-			select nvl(max(CART_ID),0)+1 from cart
-		</selectKey>	
-		insert into cart
-		(CART_ID, CART_ITEM_ID, CART_MEMBER_ID, CART_ITEM_NAME, CART_ITEM_IMAGE, CART_AMOUNT, CART_ITEM_PRICE)
-		values
-		(#{CART_ID}, #{CART_ITEM_ID}, #{CART_MEMBER_ID}, #{CART_ITEM_NAME},
-		 #{CART_ITEM_IMAGE}, #{CART_AMOUNT}, #{CART_ITEM_PRICE})
-	</insert>
-
-	<select id="getCartList" parameterType="String"	resultType="cart">
-		select *
-		from cart
-		where CART_MEMBER_ID = #{member_id}
-	</select>
 	
 	<select id="checkWish" resultType="wish">
 		select *
@@ -131,6 +116,7 @@
 		and WISH_MEMBER_ID = #{member_id}
 	</select>
 	
+  
 	<insert id="WishInsert" parameterType="wish">
 		insert into wish
 		(WISH_ID, WISH_ITEM_ID, WISH_MEMBER_ID, WISH_ITEM_NAME, WISH_ITEM_IMAGE, WISH_RSV_DATE, WISH_ITEM_PRICE)

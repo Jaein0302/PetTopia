@@ -26,3 +26,6 @@ insert into item_ask
 		 	)
 		where rnum >= 1  and rnum <=5
 		and ITEM_ASK_ITEMID = '30002'
+		
+		
+		select nvl(max(ITEM_ASK_NUM), 0)+1 from ITEM_ASK where ITEM_ASK_ITEMID = '20002'				

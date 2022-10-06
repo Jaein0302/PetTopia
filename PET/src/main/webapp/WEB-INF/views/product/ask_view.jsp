@@ -21,31 +21,37 @@
 </style>
 <script>
    $(function(){
+ 
       $(".ask_denied").click(function(){
          alert("로그인 후 이용가능합니다.")            
       });
       
-<%--      
-      $(".ask_access").click(function(){
-         var data = $(this).data('id');
-         console.log(data);
-         $("#product_add").val(data);
+
+
+      $(".a_detail").click(function(){
+    	  var ITEM_ASK_NUM = $('#ask_num').text();
+    	  console.log("ITEM_ASK_NUM=" + ITEM_ASK_NUM);
+    	  
+    	  $.ajax({
+    		url : 'ask/detail',
+    		type : 'GET',
+    		data : {"ITEM_ASK_NUM" : ITEM_ASK_NUM},
+    		dataType : "json",
+    		success : function(data) {
+    			
+				console.log("성공")
+    			
+    			
+    		}
+    	  })
       })      
-      
-   $("#product_ask").on('show.bs.modal', function(e){
-      var id = $(e.relatedTarget).data('id');
-   })
---%>   
-      
-      
-      
    })
 </script>
 
 </head>
 <body>
    <div class="container">
-      <span class="ask" style="display:inline">내 상품 ( ${listcount} )</span>   
+      <span class="ask" style="display:inline">문의 목록 ( ${listcount} )</span>   
       <table class="table table-striped">
          <thead>
             <tr>
@@ -56,62 +62,17 @@
             </tr>
               <c:forEach var="a" items="${asklist}">   
                <tr>
-                  <td>${a.ITEM_ASK_NUM}</td>
+                  <td id="ask_num">${a.ITEM_ASK_NUM}</td>
                   <td>
-                     <a href="detail?num=${b.BOARD_NUM}">
-                        ${a.ITEM_ASK_SUBJECT}
-                     </a>
+                     ${a.ITEM_ASK_SUBJECT}                 
                   </td>
                   <td>${a.ITEM_ASK_USERNAME}</td>
                   <td>${a.ITEM_ASK_DATE}</td>
+                  <td><button class="btn-dark a_detail" data-toggle="modal" data-target="#ask_detail">상세보기</button></td>
                </tr>
             </c:forEach>
          </thead>
-      </table>       
-   
-      <!-- 페이징
-      <div class="center-block">
-         <ul class="pagination justify-content-center">
-           <c:if test="${page <= 1 }">
-            <li class="page-item">
-             <a class="page-link gray">이전&nbsp;</a>
-            </li>
-           </c:if>
-            <c:if test="${page > 1 }">
-            <li class="page-item">
-             <a  href="${pageContext.request.contextPath}/product/detail?page=${page-1}" 
-                 class="page-link">이전&nbsp;</a>
-            </li>
-           </c:if>
-           
-         <c:forEach var="a" begin="${startpage}" end="${endpage}">
-            <c:if test="${a == page}">
-             <li class="page-item active">
-               <a class="page-Link">${a}</a>
-             </li>
-            </c:if>
-            <c:if test="${a != page }"> 
-              <li class="page-item">
-               <a href="${pageContext.request.contextPath}/product/detail?page=${a}" 
-                  class="page-Link">${a}</a>
-             </li>
-            </c:if>
-          </c:forEach>
-          
-          <c:if test="${page >= maxpage }">
-            <li class="page-item">
-             <a class="page-link gray">&nbsp;다음</a>
-            </li>
-           </c:if>
-            <c:if test="${page < maxpage }">
-            <li class="page-item">
-             <a  href="${pageContext.request.contextPath}/product/detail?page=${page+1}" 
-                 class="page-link">&nbsp;다음</a>
-            </li>
-           </c:if>
-         </ul>    
-      </div>
-    -->
+      </table>   
     
       <div class="text-right">
           <sec:authorize access="isAnonymous()">
@@ -124,8 +85,7 @@
       </div>
 </div>
 
-   <%-- modal 시작 --%>
-
+   <%-- 문의 등록 modal 시작 --%>
    <div class="modal" id="product_ask">
      <div class="modal-dialog">
        <div class="modal-content">          
@@ -134,7 +94,7 @@
             <form  action="${pageContext.request.contextPath}/ask/add" method="post">   
                <sec:authorize access="isAuthenticated()">               
                <sec:authentication property="principal" var="pinfo"/>
-               
+               	               
                 <input type="text" class="form-control" name="ITEM_ASK_ITEMID"  value="${param.ITEM_ID}">
             
              	<input type="text" class="form-control" name="ITEM_ASK_USERNAME" value="${pinfo.username}" readOnly>
@@ -157,7 +117,36 @@
          </div>           
        </div>
      </div>
+   </div> 
+     
+   <%-- 문의 수정 modal 시작 --%>
+   <div class="modal" id="ask_detail">
+     <div class="modal-dialog">
+       <div class="modal-content">          
+         <!-- Modal body -->
+         <div class="modal-body">
+            <form id="update" action="${pageContext.request.contextPath}/ask/update" method="post">              
+                
+                <div><p>제목</p><textarea name="ITEM_ASK_SUBJECT" class="form-control" rows="1"></textarea></div>
+                
+                <div><p>내용</p><textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea></div>    
+             
+             	<sec:authentication property="principal" var="pinfo"/>         
+             	<c:if  test="${pinfo.username} !=  ${ITEM_ASK_USERNAME}">       
+	             	<button type="button" class="btn btn-primary">문의 수정</button>
+	             	<button type="button" class="btn btn-primary">문의 삭제</button>             	
+	                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+	            </c:if>
+             
+             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">      
+                                      
+            </form>
+         </div>           
+       </div>
+     </div>
    </div>   
+   
+ 
    
    
 </body>

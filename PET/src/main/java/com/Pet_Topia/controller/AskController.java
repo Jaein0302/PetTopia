@@ -73,29 +73,18 @@ public class AskController {
 		return "redirect:" + beforeURL;		
 	}
 	
-//	@GetMapping(value = "/detail_view")
-//	public ModelAndView modifyView(
-//						int ITEM_ASK_NUM, 
-//						ModelAndView mv,
-//						HttpServletRequest request) {
-//	
-//		ItemAsk askdata = askService.getaskDetail(ITEM_ASK_NUM);
-//	
-//		//글 내용 불러오기 실패
-//		if(askdata == null) {
-//			logger.info("수정보기 실패");
-//			mv.setViewName("error/error");
-//			mv.addObject("url",request.getRequestURL());
-//			mv.addObject("message","수정보기 실패입니다.");
-//			return mv;
-//		}
-//		
-//		logger.info("(수정)상세보기 성공");
-//		mv.setViewName("product/update_view");
-//		mv.addObject("productdata", productdata);
-//		return mv;
-//	}
+	@GetMapping(value = "/detail")
+	public String modifyView(int ITEM_ASK_NUM,
+							 Model mv,
+							 @RequestHeader(value = "referer") String beforeURL)throws Exception {
+		
+		ItemAsk itemask = askService.getaskDetail(ITEM_ASK_NUM); 		
+		logger.info(itemask.getITEM_ASK_SUBJECT());		
+	
+		mv.addAttribute("itemask",itemask);
 
+		return "redirect:" + beforeURL;		
+	}
 
 }
 	

@@ -14,13 +14,15 @@ public interface ProductService {
 	
 	public List<Product> getListAjax(String sex, String weight, String species);
 	
-	public int insertProduct(Product product) ;
+	//상품 등록
+	public int insertProduct(Product product, String member_id) ;
 	
 	public Product getDetail(int ITEM_ID);
 
 	public int getListCount();
 	
-	public List<Product> getProductList(int page, int limit);
+	//상품 조회
+	public List<Product> getProductList(int page, int limit, String member_id);
 	
 	public int productUpdate(Product product);
 
@@ -33,6 +35,8 @@ public interface ProductService {
 	public List<Cart> getCartList(String member_id);
 	
 	public Cart checkCart(int ITEM_ID);
+	
+	public int getmyListCount(String member_id);
 
 	public Wish checkWish(int iTEM_ID, String member_id);
 
