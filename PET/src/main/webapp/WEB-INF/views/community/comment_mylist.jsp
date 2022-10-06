@@ -64,7 +64,7 @@
 	 </c:if> 
 	 <c:if test="${page > 1 }">
 	  <li>
-		<a class="next" href="${pageContext.request.contextPath}/comment/list?page=${page-1}"><i class="fas fa-angle-double-left"></i></a>
+		<a class="next" href="${pageContext.request.contextPath}/comment/myComment?page=${page-1}&member_id=<sec:authentication property="principal.Username"/>"><i class="fas fa-angle-double-left"></i></a>
 	  </li>
 	 </c:if> 
 	 
@@ -76,7 +76,7 @@
 	   </c:if>
 	   <c:if test="${a != page }"> 
 	 	 <li>
-			<a class="pnum" href="${pageContext.request.contextPath}/comment/list?page=${a}">${a}</a>
+			<a class="pnum" href="${pageContext.request.contextPath}/comment/myComment?page=${a}&member_id=<sec:authentication property="principal.Username"/>">${a}</a>
 		 </li>
 	   </c:if>
 	 </c:forEach>
@@ -87,7 +87,7 @@
 	</c:if>
 	<c:if test="${page < maxpage }"> 
 	     <li>
-			<a class="next" href="${pageContext.request.contextPath}/comment/list?page=${page+1}"><i class="fas fa-angle-double-right"></i></a>
+			<a class="next" href="${pageContext.request.contextPath}/comment/myComment?page=${page+1}&member_id=<sec:authentication property="principal.Username"/>"><i class="fas fa-angle-double-right"></i></a>
 		 </li>
 	</c:if>
 	</ul>

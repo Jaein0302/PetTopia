@@ -127,6 +127,8 @@ $(function() {
                  		<img class='img-fluid w-30' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}">
 					</div>
 						<div class="col-md-7">
+							<form>
+							
 							<p>
 								상품명 <span>${productdata.ITEM_NAME}</span>
 							</p>
@@ -162,7 +164,7 @@ $(function() {
  							</div>
 							
 							</p>
-								
+							</form>
 						<hr>
 
 

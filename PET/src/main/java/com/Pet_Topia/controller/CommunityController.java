@@ -319,30 +319,5 @@ public class CommunityController {
 		return jsonObject;
 	}
 	
-	/**내가 쓴 커뮤니티 글**/
-	@RequestMapping(value = "/myPost", method = RequestMethod.GET)
-	public ModelAndView myreview(
-			@RequestParam(value = "member_id") String member_id,
-			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
-			ModelAndView mv) {
-		
-		int limit = 10; // 한 화면에 출력할 로우 갯수
-		int listcount = service.mygetListCount(member_id); // 나의 글 총 리스트 수를 받아옴
-		int maxpage = (listcount + limit - 1) / limit;
-		int startpage = ((page - 1) / 10) * 10 + 1;
-		int endpage = startpage + 10 - 1;
-		if (endpage > maxpage) endpage = maxpage;
-		
-		List<Community> postList = service.mygetPostList(member_id, page, limit); // 리스트를 받아옴
-		mv.setViewName("community/post_mylist");//order/review_mylist 참고
-		mv.addObject("page", page);
-		mv.addObject("maxpage", maxpage);
-		mv.addObject("startpage", startpage);
-		mv.addObject("endpage", endpage);
-		mv.addObject("listcount", listcount);
-		mv.addObject("postList", postList);
-		mv.addObject("limit", limit);
-		
-		return mv;
-	}
+
 }

@@ -1,6 +1,7 @@
 package com.Pet_Topia.controller;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -13,27 +14,23 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
+import com.Pet_Topia.domain.Wish;
 import com.Pet_Topia.service.AskService;
 import com.Pet_Topia.service.MemberService;
 import com.Pet_Topia.service.ProductService;
@@ -427,51 +424,81 @@ public class ProductController {
 		
 		return result;
 	}
+
 	
-	@GetMapping("/cart")
-	public ModelAndView cart_list(int ITEM_ID,
-									 int amount,
-									 String member_id,
-									 ModelAndView mv, 
-									 HttpServletRequest request) {
-		
-		
-		//cart에 있는 아이템인지 확인
-		Cart check = productService.checkCart(ITEM_ID);
-		
-		if(check == null) {
-			//카트에 담기
-			Product productdata = productService.getDetail(ITEM_ID);	
-			int result = productService.CartInsert(productdata,amount,member_id);	
-			
-			
-			if(result != 1) {
-				logger.info("장바구니등록 실패");
-				mv.setViewName("error/error");
-				mv.addObject("url",request.getRequestURL());
-				mv.addObject("message","장바구니페이지 실패입니다.");
-				return mv;
-			}
-		} else {
-			 String message = "<alert>이미 장바구니에 있습니다.</alert>";
+	@GetMapping(value = "/update_view")
+	public ModelAndView updateView(	int ITEM_ID, 
+									ModelAndView mv,
+									HttpServletRequest request) {
+	
+		Product productdata = productService.getDetail(ITEM_ID);
+	
+		//글 내용 불러오기 실패
+		if(productdata == null) {
+			logger.info("수정보기 실패");
+			mv.setViewName("error/error");
+			mv.addObject("url",request.getRequestURL());
+			mv.addObject("message","수정보기 실패입니다.");
+			return mv;
 		}
 		
-		logger.info("장바구니등록 성공");	
-		
-		//카트에 담은 item 가져오기
-		List<Cart> cartlist= productService.getCartList(member_id);
-
-		mv.addObject("check", check);		
-		mv.addObject("cartlist", cartlist);		
-		mv.setViewName("product/cart_list");
+		logger.info("(수정)상세보기 성공");
+		mv.setViewName("product/update_view");
+		mv.addObject("productdata", productdata);
 		return mv;
 	}
-	
-	@RequestMapping(value ="/wish")
+  
+  
+  
+	/**나의 찜 목록으로 이동**/
+	@RequestMapping(value ="/goToMyWishList")
 	public String wish_list() {	
 		return "product/wish_list";
-	}	
+	}
+  
+  
 	
+	/**찜 목록에 상품 추가하기**/
+	@RequestMapping(value = "/addToWish")
+	public ModelAndView addToWish(@RequestParam(value="ITEM_ID") int ITEM_ID, ModelAndView mv, Principal principal,
+									HttpServletRequest request, Wish newWishItem) {
+		//현재 로그인한 아이디
+		String member_id = (String) principal.getName();
+		logger.info("!!!!member_id : "+member_id);
+		//사용자의 찜목록에 아이템이 있는지 확인
+		Wish check = productService.checkWish(ITEM_ID, member_id);
+		logger.info("!!!!ITEM_ID : "+ITEM_ID);
+		if(check == null) { //WishList에 해당 아이템이 없을때
+		
+			Product productdata = productService.getDetail(ITEM_ID);//찜목록에 넣을 상품의 정보를 가져온다
+			
+			//wish id는 시퀀스로 넣고 , rsvdate는 sysdate로 넣자 
+			newWishItem.setWISH_ITEM_ID(productdata.getITEM_ID());//productdata.getter 메서드로 가져오자
+			newWishItem.setWISH_ITEM_IMAGE(productdata.getITEM_IMAGE_FILE());
+			newWishItem.setWISH_ITEM_NAME(productdata.getITEM_NAME());
+			newWishItem.setWISH_ITEM_PRICE(productdata.getITEM_PRICE());
+			newWishItem.setWISH_MEMBER_ID(member_id);
+			
+			int result = productService.WishInsert(newWishItem);		
+			
+			if(result != 1) { //찜목록 등록 실패
+				logger.info("!!!!찜 목록 등록 실패");
+				mv.setViewName("error/error");
+				mv.addObject("url",request.getRequestURL());
+				mv.addObject("message","찜 목록 등록에 실패하였습니다.");
+				return mv; // 현재페이지에서 등록 실패 alert을 띄우고 싶은데
+			} else { //찜목록 등록 성공
+				logger.info("!!!!찜 목록 등록 성공");
+				mv.setViewName("");//찜을 한 페이지로 리다이렉트하기
+				return mv; //현재페이지에서 등록성공 alert을 띄우고 싶은데
+			}
+		} else { //WishList에 해당 아이템이 있을때
+			 mv.setViewName("error/error");
+			 mv.addObject("url", request.getRequestURL());
+			 mv.addObject("message","이미 찜 목록에 있는 상품입니다");
+			 return mv; //현재 페이지에서 이미 있는 아이템이라고 alert을 띄우고 싶은데
+		}
+	} //addToWish 끝
 
 	
 

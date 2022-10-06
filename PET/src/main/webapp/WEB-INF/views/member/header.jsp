@@ -64,7 +64,7 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="${pageContext.request.contextPath }/mypage/wishList" class="btn border">
+                <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                 </a>
             </div>
@@ -246,7 +246,7 @@
                         	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
                         	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
-                        	 	<a href="${pageContext.request.contextPath}/community/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
+                        	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
                         	 	<c:if test="${pinfo.username!='admin'}">
                         	 		<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 등록한 상품</a>                        	 		

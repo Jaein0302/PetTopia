@@ -15,7 +15,7 @@
 	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/order/list">예약내역</a></li>
 	                 <li class="nav-item"><a class="nav-link" href="#">내가 남긴 문의</a></li>
 	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}">내가 남긴 리뷰</a></li>
-	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/community/myPost?member_id=${pinfo.username}">내 글</a></li>
+	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}">내 글</a></li>
 	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}">내 댓글</a></li>
 	                 <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/mypage/withdraw">회원 탈퇴</a></li>
                	</ul>

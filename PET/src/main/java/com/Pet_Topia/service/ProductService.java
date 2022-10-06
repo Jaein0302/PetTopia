@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.Pet_Topia.domain.Cart;
 import com.Pet_Topia.domain.Product;
+import com.Pet_Topia.domain.Wish;
 
 
 
@@ -36,5 +37,10 @@ public interface ProductService {
 	public Cart checkCart(int ITEM_ID);
 	
 	public int getmyListCount(String member_id);
+
+	public Wish checkWish(int iTEM_ID, String member_id);
+
+	public int WishInsert(Wish newWishItem);
+
 
 }

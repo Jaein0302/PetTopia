@@ -108,30 +108,20 @@
 		(#{order_id}, #{item_id}, #{member_id}, #{order_amount}, #{order_price})		
 	</insert>
 	
-	<insert id="CartInsert" parameterType="java.util.Map">
-		<selectKey resultType="int" order="BEFORE" keyProperty="CART_ID">
-			select nvl(max(CART_ID),0)+1 from cart
-		</selectKey>	
-		insert into cart
-		(CART_ID, CART_ITEM_ID, CART_MEMBER_ID, CART_ITEM_NAME, CART_ITEM_IMAGE, CART_AMOUNT, CART_ITEM_PRICE)
+	
+	<select id="checkWish" resultType="wish">
+		select *
+		from wish
+		where WISH_ITEM_ID = #{iTEM_ID}
+		and WISH_MEMBER_ID = #{member_id}
+	</select>
+	
+  
+	<insert id="WishInsert" parameterType="wish">
+		insert into wish
+		(WISH_ID, WISH_ITEM_ID, WISH_MEMBER_ID, WISH_ITEM_NAME, WISH_ITEM_IMAGE, WISH_RSV_DATE, WISH_ITEM_PRICE)
 		values
-		(#{CART_ID}, #{CART_ITEM_ID}, #{CART_MEMBER_ID}, #{CART_ITEM_NAME},
-		 #{CART_ITEM_IMAGE}, #{CART_AMOUNT}, #{CART_ITEM_PRICE})
+		(wish_seq.NEXTVAL, #{WISH_ITEM_ID}, #{WISH_MEMBER_ID} , #{WISH_ITEM_NAME}, #{WISH_ITEM_IMAGE}, SYSDATE, #{WISH_ITEM_PRICE})
 	</insert>
-
-	<select id="getCartList" parameterType="String"	resultType="cart">
-		select *
-		from cart
-		where CART_MEMBER_ID = #{member_id}
-	</select>
 	
-	<select id="checkCart" resultType="cart" parameterType="int">
-		select *
-		from cart
-		where CART_ITEM_ID = #{ITEM_ID}
-	</select>
-	
-	<select id="getmyListCount" resultType="int">
-		select count(*) from item where MEMBER_ID = #{member_id}
-	</select>
 </mapper>
