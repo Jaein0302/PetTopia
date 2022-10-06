@@ -451,7 +451,6 @@ public class ProductController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
-		return;
 	}
 	
 	/** 찜 목록에 상품 추가하기

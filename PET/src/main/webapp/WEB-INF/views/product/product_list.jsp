@@ -25,7 +25,31 @@
 </style>
 
 <script>
+$(function(){
+	
+	/*
+		첫번째. 위시버튼을 눌렀을때 에이잭스에서 사용자 아이디로 찜한 상품이 있는지 확인한다. 있으면 있다고 alert창 띄우기
+		두번째. 없으면 에이잭스에서 사용자 아이디로 상품을 찜한다. 완료되면 완료되었다고 alert창 띄우기
+	*/
+	$('#wishbutton').on('click', function(){
+		
+		var item_id = $('#hidden_itemID').val()
+		
+		$.ajax({
+			url: "is_inmywish",
+			data : {"ITEM_ID" : item_id }, //앞에는 파라미터로 넘길 이름 뒤에는 넣을 값
+			success: function(resp){
+				if(resp == 1){ //사용자 아이디로 찜한 상품이 있을경우
+					alert("해당 상품은 이미 찜한상품에 있습니다.");
+				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
+					alert("여기까지만") //이제 찜하는 과정을 하면 된다!
+				}
+			}
+		})//첫번째 ajax end
 
+	});//wishbutton click function
+	
+})//ready function
 			
 </script>
 
@@ -80,9 +104,9 @@
         <div class="row px-xl-5 pb-3">
         <c:forEach var="p" items="${productlist}">	
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
+                <div class="card product-item border-0 mb-4" >
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0 uploadResult">
-                 		<img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">
+                 		<img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
                     	<span> ${p.ITEM_CONTENT}</span>
@@ -92,10 +116,13 @@
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
                     	<!-- 찜하기 버튼 -->
-                    	<a href="${pageContext.request.contextPath}/product/addToWish?ITEM_ID=${p.ITEM_ID}" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
+                    	<a href="javascript:void(0)" class="btn border" id="wishbutton">
+                  			<input type="hidden" value="${p.ITEM_ID }" id="hidden_itemID">
+                  			<i class="fas fa-heart text-primary"></i>
+               			</a>
                     </div>
                 </div>
-            </div>        
+            </div>
          </c:forEach>            
          </div>     
      </div>
