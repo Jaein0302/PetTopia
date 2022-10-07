@@ -1,5 +1,6 @@
 package com.Pet_Topia.controller;
 
+
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -114,7 +117,6 @@ public class MypageController {
 									HttpServletResponse response) {
 		
 		String id = (String) principal.getName();
-		
 		Member rmember = memberservice.getMemberdata(id);
 		
 		//로그아웃을 위해서 필요
@@ -131,6 +133,8 @@ public class MypageController {
 		}
 		
 	}
+	
+
 	
 
 	

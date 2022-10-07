@@ -133,6 +133,11 @@ $(function() {
 		alert("문의 수정이 완료되었습니다");
 	}
 	
+	
+	$('#datetimepicker1Input').on('change',function (){
+		alert($(this).val());
+	})
+	
 });
 
 </script>
@@ -174,12 +179,13 @@ $(function() {
                         예약 날짜/시간 정하기
 
                      <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                          <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
+                          <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' readOnly/>
                            <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker'>
                             <span class='fa fa-solid fa-calendar'></span>
                           </span>
                       </div>
-                     
+                      
+      
                      </form>
                   <hr>
 

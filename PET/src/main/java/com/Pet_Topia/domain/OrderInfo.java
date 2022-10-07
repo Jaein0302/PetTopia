@@ -3,14 +3,15 @@ package com.Pet_Topia.domain;
 public class OrderInfo {
 	
 	private int order_id;				// 주문번호
-	private String order_member_id; 	//아이디
+	private String order_member_id; 	//주문자의 아이디
 	private int order_item_id;			//상품번호
-	private String order_item_sellerName; //판매자
+	private String order_item_sellerName; //판매자의 이름
 	private String order_item_name;		//상품이름
 	private int order_item_price;	//상품가격
 	private String order_time;			//예약시간
 	private String order_location;		//장소
 	private String order_image;			//썸네일
+	private String order_seller;		//판매자의 아이디
 	
 	private int cnt;			//리뷰갯수
 	
@@ -74,6 +75,12 @@ public class OrderInfo {
 	}
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	public String getOrder_seller() {
+		return order_seller;
+	}
+	public void setOrder_seller(String order_seller) {
+		this.order_seller = order_seller;
 	}
 	
 	
