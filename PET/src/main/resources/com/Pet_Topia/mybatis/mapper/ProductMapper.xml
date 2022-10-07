@@ -108,6 +108,12 @@
 		(#{order_id}, #{item_id}, #{member_id}, #{order_amount}, #{order_price})		
 	</insert>
 	
+	<select id="getmyListCount" parameterType="String" resultType="int">
+		select count(*)
+		from item
+		where MEMBER_ID = #{member_id}
+	</select>
+	
 	
 	<select id="checkWish" resultType="wish">
 		select *
