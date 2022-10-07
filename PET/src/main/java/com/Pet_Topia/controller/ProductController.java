@@ -123,7 +123,7 @@ public class ProductController {
 		}
 		
 		//ask.view.jsp(상품문의)에 값 전달
-		int limit = 3; // 한 화면에 출력할 로우 갯수
+		int limit = 10; // 한 화면에 출력할 로우 갯수
 		int listcount = askService.getListCount(product); // 총 리스트 수를 받아옴
 		// 총 페이지 수
 		int maxpage = (listcount + limit - 1) / limit;
