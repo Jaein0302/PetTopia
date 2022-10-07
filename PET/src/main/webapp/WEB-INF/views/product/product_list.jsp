@@ -39,13 +39,30 @@ $(function(){
 			url: "is_inmywish",
 			data : {"ITEM_ID" : item_id }, //앞에는 파라미터로 넘길 이름 뒤에는 넣을 값
 			success: function(resp){
-				if(resp == 1){ //사용자 아이디로 찜한 상품이 있을경우
+				//console.log(resp);
+				if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
 					alert("해당 상품은 이미 찜한상품에 있습니다.");
 				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
-					alert("이제 찜하는 과정을 하면 된다")
+					
+					
+					$.ajax({
+						url:"addWish",
+						data: {"ITEM_ID" : item_id},
+						success: function(resp){
+							//console.log(resp)
+							if (resp != null) {
+								alert("상품이 성공적으로 찜목록에 담겼습니다.");
+							} else{
+								alert("상품을 찜목록에 담는중 오류가 발생했습니다.");
+							}
+						}//inner success
+					})//inner ajax
+					
+					
+					
 				}
-			}
-		})//첫번째 ajax end
+			},//outter success
+		})//outer ajax end
 
 	});//wishbutton click function
 	

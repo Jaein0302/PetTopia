@@ -39,9 +39,15 @@ public interface ProductMapper {
 	
 	public int getmyListCount(String member_id);
 
-	public int checkWish(int iTEM_ID, String member_id);
+	public Integer checkWish(int iTEM_ID, String member_id);
 
 	public int WishInsert(Wish newWishItem);
+
+	public int getMyWishCount(String member_id);
+
+	public List<Wish> getMyWishList(HashMap<String, Object> map);
+
+	public int deleteWish(int wish_id);
 
 
 }

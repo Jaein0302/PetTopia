@@ -157,8 +157,34 @@ public class ProductServiceImpl implements ProductService {
 
 
 	@Override
-	public int checkWish(int iTEM_ID, String member_id) {
+	public Integer checkWish(int iTEM_ID, String member_id) {
 		return dao.checkWish(iTEM_ID, member_id);
+	}
+
+
+	@Override
+	public int getMyWishCount(String member_id) {
+		return dao.getMyWishCount(member_id);
+	}
+
+
+	@Override
+	public List<Wish> getMyWishList(String member_id, int page, int limit) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("member_id", member_id);
+		
+		return dao.getMyWishList(map);
+	}
+
+
+	@Override
+	public int deleteWish(int wish_id) {
+		return dao.deleteWish(wish_id);
 	}
 
 

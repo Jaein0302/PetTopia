@@ -15,3 +15,8 @@ select * from wish;
 
 drop sequence wish_seq;
 create sequence wish_seq start with 1 increment by 1;
+
+		select *
+		from wish
+		where WISH_ITEM_ID = 10001
+		and WISH_MEMBER_ID = 'buyer1'

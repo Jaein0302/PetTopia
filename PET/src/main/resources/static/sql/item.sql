@@ -1,21 +1,22 @@
 drop table ITEM cascade constraints purge;
 
 create table ITEM (
-   ITEM_ID       	    NUMBER(15) PRIMARY KEY,
-   ITEM_NAME      		VARCHAR2(30) NOT NULL,
-   ITEM_CATEGORY      	VARCHAR2(30) NOT NULL,
-   ITEM_PRICE      		NUMBER(20) NOT NULL,
-   ITEM_CONTENT     	VARCHAR2(1000) NOT NULL,
+   ITEM_ID              NUMBER(15) PRIMARY KEY,
+   ITEM_NAME            VARCHAR2(30) NOT NULL,
+   ITEM_CATEGORY         VARCHAR2(30) NOT NULL,
+   ITEM_PRICE            NUMBER(20) NOT NULL,
+   ITEM_CONTENT        VARCHAR2(1000) NOT NULL,
    ITEM_IMAGE_ORIGINAL  VARCHAR2(100) NOT NULL,
    ITEM_IMAGE_FILE      VARCHAR2(100) NOT NULL,
-   ITEM_REG_DATE     	DATE DEFAULT SYSDATE NOT NULL,
-   ITEM_RSV_DATE    	DATE DEFAULT SYSDATE NOT NULL,  -- 예약날짜
-   ITEM_SCORE      		NUMBER(20,1),  -- 후기
-   ITEM_SEX         	VARCHAR2(10), -- male, female
-   ITEM_WEIGHT      	VARCHAR2(5), -- L, M, S (수정)
-   ITEM_SPECIES     	VARCHAR2(10), -- dog, cat
-   ITEM_ADDRESS			VARCHAR2(150),
-   ITEM_SELLER 			VARCHAR2(15) references member(MEMBER_ID)
+   ITEM_REG_DATE        DATE DEFAULT SYSDATE NOT NULL,
+   ITEM_RSV_DATE       DATE DEFAULT SYSDATE NOT NULL,  -- 예약날짜
+   ITEM_SCORE            NUMBER(20,1),  -- 후기
+   ITEM_SEX            VARCHAR2(10), -- male, female
+   ITEM_WEIGHT         VARCHAR2(5), -- L, M, S (수정)
+   ITEM_SPECIES        VARCHAR2(10), -- dog, cat
+   ITEM_ADDRESS         VARCHAR2(150),
+   ITEM_SELLER          VARCHAR2(15), --안쓰는곳
+   MEMBER_ID          VARCHAR2(15) references member(MEMBER_ID) --내가 등록한 상품에서 필요함 (추가), 등록한 사람의 아이디
 );
 
 select * from item;

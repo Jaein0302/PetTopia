@@ -14,6 +14,9 @@ order_image      VARCHAR2(100) --썸네일
 
 delete ORDERINFO
 
+<<<<<<< HEAD
+select * from ORDERINFO
+=======
 insert into orderInfo values (10000001, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 05. 10:30','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000002, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 07. 11:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000003, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 07. 14:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
@@ -26,4 +29,5 @@ insert into orderInfo values (10000007, 'user1', 10001, '해피동물병원', '�
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
 select to_char(sysdate, 'YYYY. MM. DD. HH24:MI') from dual
 
+>>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
 
