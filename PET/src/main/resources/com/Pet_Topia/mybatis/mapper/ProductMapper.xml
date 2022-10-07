@@ -115,7 +115,7 @@
 	</select>
 	
 	
-	<select id="checkWish" resultType="wish">
+	<select id="checkWish" resultType="int">
 		select *
 		from wish
 		where WISH_ITEM_ID = #{iTEM_ID}

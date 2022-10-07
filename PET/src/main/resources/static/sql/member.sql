@@ -16,7 +16,6 @@ delete member;
 
 -- 관리자 아이디 : admin / 비번 : 123
 insert into member values ('admin','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','관리자','12345','서울','admin@pet.pet','010-1234-5678',null,null,'ROLE_ADMIN');
-
 -- ▼▼▼ 기업 아이디 ▼▼▼   비번 : 123
 
 -- 동물병원
@@ -30,4 +29,5 @@ insert into member values ('beauty1','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ
 insert into member values ('beauty2','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 서대문구 홍은중앙로3길 22','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_MEMBER');
 
 
+insert into member values ('seller10','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 서대문구 홍은중앙로3길 22','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_SELLER');
 

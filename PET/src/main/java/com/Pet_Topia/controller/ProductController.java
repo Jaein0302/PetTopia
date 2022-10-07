@@ -1,6 +1,7 @@
 package com.Pet_Topia.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.security.Principal;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -10,6 +11,7 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +21,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -435,9 +436,24 @@ public class ProductController {
 		return "product/wish_list";
 	}
   
-  
+	/**찜목록에 상품이 있는지 확인하기**/
+	@RequestMapping(value = "/is_inmywish")
+	public void is_inmywish(@RequestParam(value="ITEM_ID") int ITEM_ID, Principal principal,
+							Wish newWishItem, HttpServletResponse response) throws Exception {
+		//지금 로그인된 아이디
+		String id = (String) principal.getName();
+		logger.info("!!!!Current Login id : " + id);
+		
+		//사용자의 찜목록에 아이템이 있는지 확인 있으면 1 , 없으면 0
+		//1이면 아이템이 있다고 알리고
+		//0이면 찜하는 ajax 실행하면 된다
+		int result = productService.checkWish(ITEM_ID, id);
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
 	
-	/**찜 목록에 상품 추가하기**/
+	/** 찜 목록에 상품 추가하기
 	@RequestMapping(value = "/addToWish")
 	public ModelAndView addToWish(@RequestParam(value="ITEM_ID") int ITEM_ID, ModelAndView mv, Principal principal,
 									HttpServletRequest request, Wish newWishItem) {
@@ -479,7 +495,7 @@ public class ProductController {
 		}
 	} //addToWish 끝
 
-	
+	**/
 
 	
 }
