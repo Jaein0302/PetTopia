@@ -183,11 +183,6 @@ $(function() {
                      </form>
                   <hr>
 
-
-                  <p>총 상품 금액 <span class="total_price"></span>
-                     </p> 
-                  <hr style="opacity: 1; background-color: black; margin: 0 auto">
-                  <br>
                   <button type="button" class="btn btn-primary">관심상품 담기</button>
                   <button type="button" class="btn btn-primary purchase">바로 구매하기</button>
                   

@@ -29,24 +29,25 @@ public class Security_Config extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception{
 		
 		http.authorizeRequests()
-			.antMatchers("/resources/**/**").permitAll()//
-			.antMatchers("/main/**").permitAll()//
-			.antMatchers("/mypage/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/list").permitAll()//
-			.antMatchers("/community/detail").permitAll()//
-			.antMatchers("/community/write").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/modifyView").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/update").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/community/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/review_detail").permitAll()//
-			.antMatchers("/order/review_delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/list").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/review").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")//
-			.antMatchers("/order/myreview").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')");//
+			.antMatchers("/resources/**/**").permitAll()
+			.antMatchers("/main/**").permitAll()
+			.antMatchers("/mypage/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/list").permitAll()
+			.antMatchers("/community/detail").permitAll()
+			.antMatchers("/community/write").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/modifyView").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/update").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/community/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/review_detail").permitAll()
+			.antMatchers("/order/review_delete").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/list").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/review").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/order/myreview").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
+			.antMatchers("/product/**").permitAll();
 			//.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
 			//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 		
