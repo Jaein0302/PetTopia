@@ -118,4 +118,5 @@ $('#changePW').click(function(){
 })
 </script>
 </body>
+<jsp:include page="../member/footer.jsp" />
 </html>
