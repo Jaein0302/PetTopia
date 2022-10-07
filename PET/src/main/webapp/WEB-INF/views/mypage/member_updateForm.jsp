@@ -7,7 +7,8 @@
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <style>
-.mform{width:600px!important}
+form{margin:0!important}
+.mform{width:600px!important;}
 .clearfix {margin: 39px 57.5px!important}
 .text-dark{opacity:0.7}
 .text-dark:hover{opacity:1}
@@ -18,10 +19,19 @@
 
 </head>
 <body>
-<jsp:include page="../member/header.jsp"/>
-<div class="container mb-5">
-	<div class="row">
-	<jsp:include page="./aside.jsp" />
+<!-- header -->
+<div class="header">
+<jsp:include page="../member/header.jsp" />
+</div>
+ <div class="container mb-5 mainbody" style="margin-top:220px;">
+  <div class="row px-xl-5">
+  
+   <!-- 사이드바 -->	  
+   <div class="col-md-3 pb-3 m-0">
+	  <jsp:include page="../mypage/aside.jsp" />
+   </div>
+   
+   <div class="col-md-9 pb-3" style='padding: 0 5%;'>
 			
    <form class="mform" name="updateform" action="updateProcess" method="post">
 	<h1>회원 정보 수정</h1>
@@ -60,6 +70,7 @@
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 	</div>
+</div>
 </div>
 <script>
 $('#postcode').click(function(){

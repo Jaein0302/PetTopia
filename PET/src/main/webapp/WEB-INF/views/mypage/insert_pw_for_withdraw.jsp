@@ -6,15 +6,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../member/header.jsp"/>
-	<div class="container mb-5">
-		<div class="row">
-			<jsp:include page="./aside.jsp" />
+<!-- header -->
+<div class="header">
+<jsp:include page="../member/header.jsp" />
+</div>
+ <div class="container mb-5 mainbody" style="margin-top:220px;">
+  <div class="row px-xl-5">
+  
+   <!-- 사이드바 -->	  
+   <div class="col-md-3 pb-3 m-0">
+	  <jsp:include page="../mypage/aside.jsp" />
+   </div>
+   
+   <div class="col-md-9 pb-3">
 			<form class="mform" name="passcheck" action="withdraw_process" method="post" id="form">
 				<h1>회원 탈퇴</h1><hr>
 				
@@ -42,7 +50,7 @@
 			</form>
 		</div>
 	</div>
-	
+	</div>
 	<script>
 		$('#sbmbutton').click( function(){
 			
