@@ -115,10 +115,7 @@ td:nth-child(1) {
  </script>
 </head>
 <body>
-<a href="${pageContext.request.contextPath}/admin/export_excel"
-class="excel_link">Export to EXCEL</a>
-<a href="${pageContext.request.contextPath}/admin/export_pdf"
-class="pdf_link">Export to PDF</a>
+
 <div class="container">  
 	<form action="${pageContext.request.contextPath}/admin/admin_list" method="post">
 		<div class="input-group">
@@ -149,8 +146,12 @@ class="pdf_link">Export to PDF</a>
   <table class="table table-striped">
    <thead>
 	<tr>
-	   <th colspan="2">MVC 게시판 - 회원 정보 list</th>
-	   <th><font size=3>글 개수 : ${listcount}</font> </th>
+	   <th colspan="2">회원 목록 나오고 엑셀/pdf다운로드만 가능 다른것 안됨</th>
+	   <th><font size=3></font> </th>
+	   <a href="${pageContext.request.contextPath}/admin/export_excel"
+class="excel_link">Export to EXCEL</a><br>
+<a href="${pageContext.request.contextPath}/admin/export_pdf"
+class="pdf_link">Export to PDF</a>
 	</tr>
 	<tr>
 		<th><div>아이디</div></th>

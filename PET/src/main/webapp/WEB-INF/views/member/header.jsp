@@ -64,13 +64,10 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-             <sec:authorize access="hasRole('ROLE_MEMBER')">
-                <a
-                	href="${pageContext.request.contextPath }/product/goToMyWishList?member_id=<sec:authentication property="principal.Username"/>"
-                	class="btn border">
+                <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                 </a>
-             </sec:authorize>   
+                
             </div>
         </div>
 	</div>
@@ -218,7 +215,8 @@
                             <a href="${pageContext.request.contextPath}/main/main" class="nav-item nav-link me0 active">Home</a>
                             <a href="${pageContext.request.contextPath}/admin/admin_notice" class="nav-item nav-link me1">공지사항</a>
                             <a href="${pageContext.request.contextPath}/community/list" class="nav-item nav-link me2">커뮤니티</a>
-                            <a href="#" class="nav-item nav-link me3">고객센터</a>
+                            <a href="${pageContext.request.contextPath}/admin/admin_ask_list" class="nav-item nav-link me3">고객센터</a>
+                            
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                          
@@ -246,7 +244,7 @@
                         	 	<a href="#" class="dropdown-item mydrop">회원관리</a>
                         	 	</c:if>
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
-                        	 	<a href="${pageContext.request.contextPath}/order/list?member_id=${pinfo.username}" class="dropdown-item mydrop">예약내역</a>
+                        	 	<a href="${pageContext.request.contextPath}/order/list" class="dropdown-item mydrop">예약내역</a>
                         	 	<a href="#" class="dropdown-item mydrop">내가 남긴 문의</a>
                         	 	<a href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}" class="dropdown-item mydrop">내가 남긴 리뷰</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
@@ -304,7 +302,7 @@
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
-                        	 	<a href="#" class="dropdown-item">                     
+                        	 	<a href="${pageContext.request.contextPath}/admin/admin_list" class="dropdown-item mydrop">회원 목록</a>
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>
                         	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
