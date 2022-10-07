@@ -33,13 +33,6 @@
 var result = "${result}";
 
 $(function() {	
-	$(".amount").on('change', function(){
-		var p_price = $(".product_price").text().slice(0, -1);
-		console.log("p_price=" + p_price)
-		var t_price = $(".amount").val() * p_price;		
-		$(".total_price").html(t_price);
-	})//amount change function
-	
 	
 	if(result == 'addSuccess'){
 		alert("상품 문의 성공입니다.");
@@ -49,8 +42,10 @@ $(function() {
 		if($("#datetimepicker1Input").val() == ''){
 			alert("예약날짜와 시간을 설정해주세요");
 		} else {
-			location.href = "${pageContext.request.contextPath}/product/order_view?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		      	+ $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
+			location.href = "${pageContext.request.contextPath}/product/order_view?"
+					+"ITEM_ID=${productdata.ITEM_ID}&amount=" + $(".amount").val() 
+					+"&member_id=" + $("input[name='member_id']").val()
+					+"&order_date=" + $("#datetimepicker1Input").val();
 		}
 	})//purchase click function
 		   
@@ -65,12 +60,7 @@ $(function() {
 		}
 	})//button click function
 	
-	$(".amount").on('change', function(){
-		var p_price = $(".product_price").text().slice(0, -1);
-		console.log("p_price=" + p_price)
-		var t_price = $(".amount").val() * p_price;		
-		$(".total_price").html(t_price);
-	})//amount change function
+
 	
 	new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
 		stepping: 30,
@@ -104,8 +94,42 @@ $(function() {
 	        },
 	        sideBySide: true,
 	    },
-	});//temus dominus end
+	});//tempus dominus end
 	
+	
+	$('#wishButton').on('click',function(){
+		
+		var item_id = $('#hidden_itemID').val();
+		
+		$.ajax({
+			url: "is_inmywish",
+			data : {"ITEM_ID" : item_id }, //앞에는 파라미터로 넘길 이름 뒤에는 넣을 값
+			success: function(resp){
+				//console.log(resp);
+				if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
+					alert("해당 상품은 이미 찜한상품에 있습니다.");
+				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
+					
+					
+					$.ajax({
+						url:"addWish",
+						data: {"ITEM_ID" : item_id},
+						success: function(resp){
+							//console.log(resp)
+							if (resp != null) {
+								alert("상품이 성공적으로 찜목록에 담겼습니다.");
+							} else{
+								alert("상품을 찜목록에 담는중 오류가 발생했습니다.");
+							}
+						}//inner success
+					})//inner ajax
+					
+					
+					
+				}
+			},//outter success
+		})//outer ajax end
+	})//wish button click function
 
 });
 
@@ -139,26 +163,16 @@ $(function() {
 								상품명 <span>${productdata.ITEM_NAME}</span>
 							</p>
 							<hr>
+							
+							
 							<p>
 								판매가 <span class="product_price">${productdata.ITEM_PRICE}원</span>
 							</p>
 							<hr>
-							<p>
-								상품개수 <select class="amount" name="amount" id="size-select">
-									<option value="0">--[상품개수를 선택하세요]--</option>
-									<option value="1">1개</option>
-									<option value="2">2개</option>
-									<option value="3">3개</option>
-									<option value="4">4개</option>
-									<option value="5">5개</option>
-								</select>
-								<c:set var="amount1" value="amount" />
-							</p>
-							<hr>
 
+							<br>
 							<p>
 								예약 날짜/시간 정하기
-
 							<div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
   								<input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
    								<span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker'>
@@ -169,12 +183,9 @@ $(function() {
 							</form>
 						<hr>
 
-
-						<p>총 상품 금액 <span class="total_price"> </span>
-							</p> 
-						<hr style="opacity: 1; background-color: black; margin: 0 auto">
 						<br>
-						<button type="button" class="btn btn-primary">관심상품 담기</button>
+						<button type="button" class="btn btn-primary" id="wishButton">관심상품 담기</button>
+						<input type="hidden" value="${productdata.ITEM_ID}" id="hidden_itemID">
 						<button type="button" class="btn btn-primary purchase">바로 구매하기</button>
 						
 					</div>

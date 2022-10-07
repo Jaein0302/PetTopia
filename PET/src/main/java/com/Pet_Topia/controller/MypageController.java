@@ -132,19 +132,7 @@ public class MypageController {
 		
 	}
 	
-	/** 관심상품(찜한 상품) 리스트 **/
-	@RequestMapping(value ="/wishList")
-	public ModelAndView wish_list(ModelAndView mv) {	
-		mv.setViewName("mypage/wish_list");
-		return mv;
-	}	
-	
-	/** 장바구니 리스트 **/
-	@RequestMapping(value ="/cartList")
-	public ModelAndView cart_list(ModelAndView mv) {	
-		mv.setViewName("mypage/cart_list");
-		return mv;
-	}
+
 	
 
 

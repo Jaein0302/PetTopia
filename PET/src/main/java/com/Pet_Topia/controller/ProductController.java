@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
@@ -246,7 +247,7 @@ public class ProductController {
 		
 
 		
-		return "redirect:my_product";
+		return "redirect:my_product?member_id="+member_id;
 	}
 	
 	private String fileDBName(String fileName, String saveFolder) {
@@ -319,7 +320,7 @@ public class ProductController {
 	public String BoardModifyAction(Model mv, 
 						  RedirectAttributes rattr, 
 						  Product product, 
-						  HttpServletRequest request) throws Exception {
+						  HttpServletRequest request, Principal p) throws Exception {
 		
 		MultipartFile uploadfile = product.getUploadfile();
 		
@@ -355,7 +356,8 @@ public class ProductController {
 		logger.info("상품 수정 성공");		
 		rattr.addFlashAttribute("result","updateSuccess");
 		
-		return "redirect:my_product";
+		String id = (String) p.getName(); 
+		return "redirect:my_product?member_id="+id;
 		}
 
 	
@@ -363,7 +365,7 @@ public class ProductController {
 	public String delete(int ITEM_ID,
 						 Model mv, 
 						 HttpServletRequest request,
-						 RedirectAttributes rattr) {
+						 RedirectAttributes rattr, Principal p) {
 
 		int result = productService.productDelete(ITEM_ID);
 		
@@ -376,14 +378,16 @@ public class ProductController {
 		}
 		logger.info("게시판 삭제 성공");
 		rattr.addFlashAttribute("result","deleteSuccess");
-		return "redirect:my_product";
+		
+		String id = (String) p.getName();
+		return "redirect:my_product?member_id="+id;
 	}
 	
 	@GetMapping("/order_view")
 	public ModelAndView purchase_view(int ITEM_ID,
-									 String amount,
 									 String member_id,
 									 ModelAndView mv, 
+									 String order_date,
 									 HttpServletRequest request) {
 
 		Product productdata = productService.getDetail(ITEM_ID);		
@@ -408,7 +412,7 @@ public class ProductController {
 		mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
-		mv.addObject("amount", amount);
+		mv.addObject("order_date", order_date);
 		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}
@@ -432,70 +436,87 @@ public class ProductController {
   
 	/**나의 찜 목록으로 이동**/
 	@RequestMapping(value ="/goToMyWishList")
-	public String wish_list() {	
-		return "product/wish_list";
+	public ModelAndView my_wish_list(
+										@RequestParam(value = "member_id") String member_id,
+										@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+										ModelAndView mv
+									) {	
+		
+		int limit = 10; // 한 화면에 출력할 로우 갯수
+		int listcount = productService.getMyWishCount(member_id); // 나의 찜목록 갯수
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+		if (endpage > maxpage) endpage = maxpage;
+		
+		List<Wish> wishList = productService.getMyWishList(member_id, page, limit); //찜목록 리스트
+		mv.setViewName("product/wish_list");//order/review_mylist 참고
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("wishList", wishList);
+		mv.addObject("limit", limit);
+		
+		return mv;
+		
 	}
   
 	/**찜목록에 상품이 있는지 확인하기**/
 	@RequestMapping(value = "/is_inmywish")
-	public void is_inmywish(@RequestParam(value="ITEM_ID") int ITEM_ID, Principal principal,
-							Wish newWishItem, HttpServletResponse response) throws Exception {
+	public void is_inmywish(@RequestParam(value="ITEM_ID") int iTEM_ID, Principal principal,
+								HttpServletResponse response) throws Exception {
 		//지금 로그인된 아이디
-		String id = (String) principal.getName();
-		logger.info("!!!!Current Login id : " + id);
+		String member_id = (String) principal.getName();
+		logger.info("!!!!Current Login id : " + member_id);
 		
-		//사용자의 찜목록에 아이템이 있는지 확인 있으면 1 , 없으면 0
-		//1이면 아이템이 있다고 알리고
-		//0이면 찜하는 ajax 실행하면 된다
-		int result = productService.checkWish(ITEM_ID, id);
+		//사용자의 찜목록에 아이템이 있는지 확인, 없으면 null
+		Integer result = productService.checkWish(iTEM_ID, member_id);
+		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
 	
-	/** 찜 목록에 상품 추가하기
-	@RequestMapping(value = "/addToWish")
-	public ModelAndView addToWish(@RequestParam(value="ITEM_ID") int ITEM_ID, ModelAndView mv, Principal principal,
-									HttpServletRequest request, Wish newWishItem) {
-		//현재 로그인한 아이디
-		String member_id = (String) principal.getName();
-		logger.info("!!!!member_id : "+member_id);
-		//사용자의 찜목록에 아이템이 있는지 확인
-		Wish check = productService.checkWish(ITEM_ID, member_id);
-		logger.info("!!!!ITEM_ID : "+ITEM_ID);
-		if(check == null) { //WishList에 해당 아이템이 없을때
+	/** 찜 목록에 상품 추가 **/
+	@RequestMapping(value = "addWish")
+	public void addWish(@RequestParam(value = "ITEM_ID") int item_id, Principal principal,
+										HttpServletResponse response, Wish wishItem) throws Exception {
 		
-			Product productdata = productService.getDetail(ITEM_ID);//찜목록에 넣을 상품의 정보를 가져온다
-			
-			//wish id는 시퀀스로 넣고 , rsvdate는 sysdate로 넣자 
-			newWishItem.setWISH_ITEM_ID(productdata.getITEM_ID());//productdata.getter 메서드로 가져오자
-			newWishItem.setWISH_ITEM_IMAGE(productdata.getITEM_IMAGE_FILE());
-			newWishItem.setWISH_ITEM_NAME(productdata.getITEM_NAME());
-			newWishItem.setWISH_ITEM_PRICE(productdata.getITEM_PRICE());
-			newWishItem.setWISH_MEMBER_ID(member_id);
-			
-			int result = productService.WishInsert(newWishItem);		
-			
-			if(result != 1) { //찜목록 등록 실패
-				logger.info("!!!!찜 목록 등록 실패");
-				mv.setViewName("error/error");
-				mv.addObject("url",request.getRequestURL());
-				mv.addObject("message","찜 목록 등록에 실패하였습니다.");
-				return mv; // 현재페이지에서 등록 실패 alert을 띄우고 싶은데
-			} else { //찜목록 등록 성공
-				logger.info("!!!!찜 목록 등록 성공");
-				mv.setViewName("");//찜을 한 페이지로 리다이렉트하기
-				return mv; //현재페이지에서 등록성공 alert을 띄우고 싶은데
-			}
-		} else { //WishList에 해당 아이템이 있을때
-			 mv.setViewName("error/error");
-			 mv.addObject("url", request.getRequestURL());
-			 mv.addObject("message","이미 찜 목록에 있는 상품입니다");
-			 return mv; //현재 페이지에서 이미 있는 아이템이라고 alert을 띄우고 싶은데
-		}
-	} //addToWish 끝
-
-	**/
+		//현재 로그인 아이디
+		String member_id = (String) principal.getName();
+		
+		Product product = productService.getDetail(item_id);
+		
+		//매퍼에서 wish id는 시퀀스로 넣고 , rsvdate는 sysdate로 넣자 
+		wishItem.setWISH_ITEM_ID(product.getITEM_ID());//productdata.getter 메서드로 가져오자
+		wishItem.setWISH_ITEM_IMAGE(product.getITEM_IMAGE_FILE());
+		wishItem.setWISH_ITEM_NAME(product.getITEM_NAME());
+		wishItem.setWISH_ITEM_PRICE(product.getITEM_PRICE());
+		wishItem.setWISH_MEMBER_ID(member_id);
+		
+		int result = productService.WishInsert(wishItem);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
+	/**찜 목록에서 상품 삭제**/
+	@RequestMapping(value = "deleteWish")
+	public void addWish(@RequestParam(value="WISH_ID") int wish_id,
+							HttpServletResponse response) throws Exception{
+		
+		
+		int result = productService.deleteWish(wish_id);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
+	
 
 	
 }

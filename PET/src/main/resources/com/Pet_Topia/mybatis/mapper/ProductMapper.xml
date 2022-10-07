@@ -115,7 +115,7 @@
 	</select>
 	
 	
-	<select id="checkWish" resultType="int">
+	<select id="checkWish" resultType="integer">
 		select *
 		from wish
 		where WISH_ITEM_ID = #{iTEM_ID}
@@ -129,5 +129,28 @@
 		values
 		(wish_seq.NEXTVAL, #{WISH_ITEM_ID}, #{WISH_MEMBER_ID} , #{WISH_ITEM_NAME}, #{WISH_ITEM_IMAGE}, SYSDATE, #{WISH_ITEM_PRICE})
 	</insert>
+	
+	<select id="getMyWishCount" parameterType="String" resultType="int">
+		select count(*)
+		from wish
+		where WISH_MEMBER_ID = #{member_id}
+	</select>
+	
+	<select id="getMyWishList" parameterType="map" resultType="wish">
+		select * 
+			from ( select rownum rnum, b.*
+			  from (select wish.*
+					from wish 
+					where wish_member_id = #{member_id}
+					order by wish_rsv_date desc) b
+			  where rownum &lt;= #{end}
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<delete id="deleteWish" parameterType="int">
+		delete wish
+		where wish_id = #{wish_id}
+	</delete>
 	
 </mapper>

@@ -38,9 +38,15 @@ public interface ProductService {
 	
 	public int getmyListCount(String member_id);
 
-	public int checkWish(int iTEM_ID, String member_id);
+	public Integer checkWish(int iTEM_ID, String member_id);
 
 	public int WishInsert(Wish newWishItem);
+
+	public int getMyWishCount(String member_id);
+
+	public List<Wish> getMyWishList(String member_id, int page, int limit);
+
+	public int deleteWish(int wish_id);
 
 
 }

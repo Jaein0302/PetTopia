@@ -26,52 +26,73 @@
 
 <script>
 $(document).ready(function(){
+	
+	/*
+	예약하기 버튼을 클릭했을때
+	1. 결제방식이 현장결제라면 바로 예약해준다
+	2. 결제방식이 카카오페이라면 카카오페이 창을 띄운다
+	*/
     $(".purchase").click(function() {    	
     	var IMP = window.IMP;
         IMP.init('imp24704360');
         
-      // IMP.request_pay(param, callback) 결제창 호출
-      IMP.request_pay({ // param
-          pg: "kakaopay",
-          pay_method: "card",
-          order_uid: "${productdata.ITEM_ID}" + new Date().getTime(),
-          name: "${productdata.ITEM_NAME}",
-          item_id: "${productdata.ITEM_ID}",          
-          amount: "${productdata.ITEM_PRICE * amount}",
-          count : "${requestScope.amount}",
-          buyer_id: "${memberlist.member_id}",
-          buyer_addr: "${memberlist.member_address}"
-      }, function (rsp) { // callback
-          if (rsp.success) {    		
-    		$.ajax({
-    			url:'product/purchase', 
-    			method:'POST',
-    			dataType : 'json',
-    			data: {
-    				"order_id" : rsp.order_uid,
-    				"item_id" : rsp.item_id,
-    				"member_id" : rsp.buyer_id,
-    				"order_amount" : rsp.count,
-    				"order_price" : rsp.amount    				
-    			},
-    			success : function(result) {
-    				console.log(result);
-    				if(result == 1) {
-    					alert("결제 성공");
-    				} else {
-    					alert("결제 실패");
-    				}
-    			},
-   			    error:function(request,status,error){        
-   					alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-   			 	}
-    		})
-          } else {
-      		alert("결제 실패");
-          }
+        
+    	if( $('#select_pay').val() == 'KAKAO_PAY'){ //결제방식이 카카오페이 일때
+    		
+    		 // IMP.request_pay(param, callback) 결제창 호출
+    		 IMP.request_pay({ // param
+    			 pg: "kakaopay",
+    			 pay_method: "card",
+    			 order_uid: "${productdata.ITEM_ID}" + new Date().getTime(),
+    			 name: "${productdata.ITEM_NAME}",
+    			 item_id: "${productdata.ITEM_ID}",          
+    			 amount: "${productdata.ITEM_PRICE * amount}",
+    			 count : "${requestScope.amount}",
+    			 buyer_id: "${memberlist.member_id}",
+    			 buyer_addr: "${memberlist.member_address}"
+    		 }, function (rsp) { // callback
+
+			
+    			 if (rsp.success) {    		
+    				 $.ajax({
+    					 url:'product/purchase', 
+    					 method:'POST',
+    					 dataType : 'json',
+    					 data: {
+    						 "order_id" : rsp.order_uid,
+    						 "item_id" : rsp.item_id,
+    						 "member_id" : rsp.buyer_id,
+    						 "order_amount" : rsp.count,
+    						 "order_price" : rsp.amount
+    					 },
+    					 success : function(result) {
+    						 console.log(result);
+    						 if(result == 1) {
+    							 alert("결제 성공");
+    						 } else {
+    							 alert("결제 실패");
+    						 }
+    					 }, //success end
+    					 error:function(request,status,error){
+    						 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
+    					 } //error end
+    				 }) //ajax end
+    			 } else {
+    				 alert("결제 실패");
+    			 }
+    		 }
+    		 );
+    	} else { //결제방식이 현장결제일때
+    		
+    		
+    		
     	}
-      );
-    })
+    })//purchase click function
+    
+    
+    
+    
+    
 })
 	
   </script>
@@ -104,11 +125,9 @@ $(document).ready(function(){
 					<td>상품명<span>${productdata.ITEM_NAME}</span></td>
 		   		</tr>
 		   		<tr>
-					<td>예약날짜<span>2022.02.02</span></td>
+					<td>예약날짜<span id="date">${order_date }</span></td>
 		   		</tr>
-		   		<tr>
-					<td>개수<span> ${amount}개</span></td>
-		   		</tr> 		
+		   		
 		   		<tr>
 					<td>가격<span>${productdata.ITEM_PRICE}원</span></td>
 		   		</tr> 		
@@ -116,7 +135,7 @@ $(document).ready(function(){
 	   	</table>
 		   
 		<div class="mt-4 mb-4 total">	   		
-			<h5>총 합계금액</h5><h4><c:out value = "${productdata.ITEM_PRICE * amount}"/>원</h4>
+			<h5>총 합계금액</h5><h4><c:out value = "${productdata.ITEM_PRICE}"/>원</h4>
 		</div>
 		
 		<table class="table text-left mt-5 item">
@@ -126,18 +145,31 @@ $(document).ready(function(){
 				</tr>
 			</thead>
 			<tbody>
+				
 				<tr>
 				 	<td>이름</td>
 				 	<td>${memberlist.member_name}</td>
 				</tr>		
+				
 				<tr>
 				 	<td>휴대폰 전화</td>
 				 	<td>${memberlist.member_tell}</td>
 				</tr>		
+				
 				<tr>
 				 	<td>이메일 주소</td>
 				 	<td>${memberlist.member_email}</td>
-				</tr>		
+				</tr>	
+				
+				<tr>
+					<td>결제방식</td>
+					<td>
+						<select name="select_pay" id="select_pay">
+							<option value="CASH">현장결제</option>
+							<option value="KAKAO_PAY">카카오페이</option>
+						</select>
+					</td>
+				</tr>	
 			</tbody>	
 		</table>	
 		<div class="purchase">			
