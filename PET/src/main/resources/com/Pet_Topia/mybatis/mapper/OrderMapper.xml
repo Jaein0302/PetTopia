@@ -108,7 +108,7 @@
 			  										from review
 			  										group by review.review_num)r
 			  		on orderinfo.order_id = r.review_num
-					where orderinfo.order_member_id = 'user1'
+					where orderinfo.order_member_id = #{member_id}
 					order by orderinfo.order_id desc) b
 			  where rownum &lt;= #{end}
 			  and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time
