@@ -15,6 +15,7 @@ public class Review {
 	private String order_name;		// 주문이름 
 	private String seller;			// 상호
 	private String order_date;		// 주문날짜
+	private String order_image;		// 썸네일
 	
 	
 	public int getReview_num() {
@@ -88,6 +89,12 @@ public class Review {
 	}
 	public void setOrder_date(String order_date) {
 		this.order_date = order_date;
+	}
+	public String getOrder_image() {
+		return order_image;
+	}
+	public void setOrder_image(String order_image) {
+		this.order_image = order_image;
 	}
 	
 	

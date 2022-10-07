@@ -74,6 +74,7 @@
 		<button type="submit" class="button-5 cancelbtn updateb">가입</button>
 		<button type="reset" class="button-5 submitbtn signoutb">취소</button>
 	</div>
+	 <input type="hidden" name="auth" value="">
 	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</form>
 	</div>

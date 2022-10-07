@@ -8,6 +8,7 @@ public class ItemAsk {
 	private String ITEM_ASK_SUBJECT;
 	private String ITEM_ASK_CONTENT;
 	private String ITEM_ASK_DATE;
+	
 	public int getITEM_ASK_NUM() {
 		return ITEM_ASK_NUM;
 	}

@@ -1,3 +1,20 @@
+.text-order{
+	font-size:16px;
+	color:#464646;
+}
+.text-order:hover{
+	color:#f1d678;
+}
+.text-order:hover ~ .text-seller {
+	color:#f1d678;
+}
+.order_image{
+	border-radius:50%;
+	width:30px;
+	height:30px;
+	object-fit: cover;
+	margin:3px
+}
 .review_img {
 	width: 130px !important;
 	height: 110px;

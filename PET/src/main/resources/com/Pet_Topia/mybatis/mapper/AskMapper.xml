@@ -35,11 +35,12 @@
 		and ITEM_ASK_ITEMID = #{product.ITEM_ID}		
 	</select>
 	
-	<select id="getaskDetail" parameterType="int" resultType="ItemAsk">
-		select *
-		from ItemAsk
+	<update id="updateAsk" parameterType="ItemAsk">
+		update ITEM_ASK
+		set ITEM_ASK_SUBJECT = #{ITEM_ASK_SUBJECT},
+			ITEM_ASK_CONTENT = #{ITEM_ASK_CONTENT}	
 		where ITEM_ASK_NUM = #{ITEM_ASK_NUM}	
-	</select>
+	</update>
 	
    
 </mapper>

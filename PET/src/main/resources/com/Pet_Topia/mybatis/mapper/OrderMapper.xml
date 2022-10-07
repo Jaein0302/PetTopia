@@ -5,9 +5,6 @@
 <mapper namespace="com.Pet_Topia.mybatis.mapper.OrderMapper">
 
 	<insert id="insert" parameterType="review">
-		<selectKey resultType="int" order="BEFORE" keyProperty="review_num">
-			select nvl(max(review_num),0)+1 from review
-		</selectKey>
 		insert into review
 		values
 		(#{review_num},
@@ -40,12 +37,14 @@
 	</select>
 
 	<select id="mygetBoardList" parameterType="java.util.Map"	resultType="review">
-		select * 
+	select * 
 			from ( select rownum rnum, b.*
-			  from (select review.* , item.*
-					from review left outer join item
-	 				on review.review_item_id = item.item_id
-					where review_id = #{member_id}
+			  from (select review.* , orderinfo.order_item_name order_name,
+			  		orderinfo.order_time order_date, order_item_sellerName seller,
+			  		orderinfo.order_image order_image
+					from review left outer join orderinfo
+	 				on orderinfo.order_id = review.review_num
+					where review.review_id = #{member_id}
 					order by review.review_reg_date desc) b
 			  where rownum &lt;= #{end}
 			)
@@ -81,4 +80,44 @@
 		where review_num = #{review_num}
 	</delete>
 	
+	<select id="OrderListCount" resultType="int">
+		select count(*) from orderinfo
+		where order_member_id = #{member_id}
+		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+	</select>
+
+	<select id="OrderList" parameterType="String" resultType="OrderInfo">
+		select b.* 
+		from (select * from orderinfo
+			  where order_member_id = #{member_id}
+			  order by order_time asc) b
+		where to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+	</select>
+	
+	<select id="LastCount" resultType="int">
+		select count(*) from orderinfo
+		where order_member_id = #{member_id}
+		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time
+	</select>
+
+	<select id="LastList" parameterType="java.util.Map"	resultType="OrderInfo">
+		select * 
+			from ( select rownum rnum, b.*
+			  from (select orderinfo.* , nvl(cnt,0) cnt
+			  		from orderinfo left outer join (select review.review_num, count(*) cnt 
+			  										from review
+			  										group by review.review_num)r
+			  		on orderinfo.order_id = r.review_num
+					where orderinfo.order_member_id = 'user1'
+					order by orderinfo.order_id desc) b
+			  where rownum &lt;= #{end}
+			  and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time
+			)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<delete id="order_delete" parameterType="int">
+		delete orderinfo
+		where order_id = #{order_id}
+	</delete>
 </mapper>
