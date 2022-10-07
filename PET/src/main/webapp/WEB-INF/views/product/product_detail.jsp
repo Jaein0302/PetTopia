@@ -183,7 +183,8 @@ $(function() {
                      </form>
                   <hr>
 
-                  <button type="button" class="btn btn-primary">관심상품 담기</button>
+                  <button type="button" class="btn btn-primary" id="wishButton">관심상품 담기</button>
+                  <input id="hidden_itemID" type="hidden" value="${productdata.ITEM_ID }">
                   <button type="button" class="btn btn-primary purchase">바로 구매하기</button>
                   
                </div>
