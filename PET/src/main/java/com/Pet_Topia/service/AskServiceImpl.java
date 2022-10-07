@@ -46,8 +46,8 @@ public class AskServiceImpl implements AskService {
 	}
 	
 	@Override
-	public ItemAsk getaskDetail(int ITEM_ASK_NUM) {
-		return dao.getaskDetail(ITEM_ASK_NUM);
+	public int updateAsk(ItemAsk itemask) {
+		return dao.updateAsk(itemask);
 	}
 
 }
