@@ -11,12 +11,10 @@
    .rows {
       text-align: right;
    }
-   
-    body > div > table > thead > tr:nth-child(2) > th:nth-child(1){width:10%}
-    body > div > table > thead > tr:nth-child(2) > th:nth-child(2){width:40%}
-    body > div > table > thead > tr:nth-child(2) > th:nth-child(3){width:50%}
 
    .ask { float : right }
+   
+   #detail_button{ color : brown }
 
 </style>
 
@@ -37,12 +35,19 @@
                <input type="hidden" value="${a.ITEM_ASK_ITEMID}">              
                <tr>
                   <td>${a.ITEM_ASK_NUM}</td>
-                  <td>
-                     ${a.ITEM_ASK_SUBJECT}                 
+                  <td><strong id="detail_button" style="color:darkbrown; cursor:pointer;">
+                     ${a.ITEM_ASK_SUBJECT} 
+                     </strong>                
                   </td>
                   <td>${a.ITEM_ASK_USERNAME}</td>
                   <td>${a.ITEM_ASK_DATE}</td>
-                  <td><button id="detail_button" class="btn-dark">상세보기</button></td>
+         		  <sec:authentication property="principal" var="pinfo"/>
+         		  <c:choose>
+	         	  	<c:when test="${pinfo.username == productdata.MEMBER_ID || pinfo.username == 'admin'}">
+                  		<td><button type="button" class="btn btn-danger">삭제</button></td>
+		            </c:when>
+	            </c:choose>
+                  
                </tr>
             </c:forEach>
          </thead>
@@ -122,13 +127,20 @@
 	                <h6>내용</h6>
 	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT"></textarea>
                 </div>    
-             
-	             	<button type="submit" class="btn btn-primary a_update">문의 수정</button>
-	             	<button type="button" class="btn btn-primary a_delete">문의 삭제</button>             	
-	                <button type="button" class="btn btn-danger a_cancel">취소</button>
-             
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">      
-                                      
+             	<sec:authorize access="isAuthenticated()">
+         		<sec:authentication property="principal" var="pinfo"/>
+         		<c:choose>
+	         		<c:when test="${pinfo.username == productdata.MEMBER_ID || pinfo.username == 'admin'}">
+		             	<button type="submit" class="btn btn-primary a_update">문의 수정</button>
+		             	<button type="button" class="btn btn-primary a_delete">문의 삭제</button>             	
+		                <button type="button" class="btn btn-danger a_cancel">취소</button>
+		            </c:when>
+	           	 	<c:otherwise>
+	            	 	<button type="button" class="btn btn-danger a_cancel">취소</button>
+	            	</c:otherwise>
+	            </c:choose>
+	            </sec:authorize>
+             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                                            
             </form>
          </div>           
        </div>

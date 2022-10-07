@@ -6,6 +6,7 @@ $(function(){
   
   //상세보기
   $("#detail").on('click',"#detail_button",function(){
+	$(this).hover();
 	$("#ask_detail").show();
 	var ITEM_ASK_NUM = $(this).parent().prev().prev().prev().prev().text();
 	var ITEM_ASK_SUBJECT = $(this).parent().prev().prev().prev().text();
@@ -20,6 +21,7 @@ $(function(){
 	$("#ASK_DATE").val(ITEM_ASK_DATE);
 	$("#CONTENT").text(ITEM_ASK_CONTENT);
 	$("#ASK_ITEMID").val(ITEM_ASK_ITEMID);
+	$("#member_id").val(ITEM_ASK_USERNAME);
 	
 	console.log("ITEM_ASK_NUM=" + ITEM_ASK_NUM);
 	console.log("ITEM_ASK_SUBJECT=" + ITEM_ASK_SUBJECT);
@@ -43,7 +45,7 @@ $(function(){
 
   })
 	
-
+	
 	
 	$(".a_delete").on('click', function(){
 		location.href("${pageContext.request.contextPath}/ask/delete")
