@@ -187,7 +187,7 @@ $(function() {
         </c:if>
          <c:if test="${page > 1 }">
          <li class="page-item">
-          <a  href="${pageContext.request.contextPath}/product/my_product?page=${page-1}" 
+          <a  href="${pageContext.request.contextPath}/product/my_product?page=${page-1}&member_id=<sec:authentication property="principal.Username"/>" 
               class="page-link">이전&nbsp;</a>
          </li>
         </c:if>
@@ -200,7 +200,7 @@ $(function() {
          </c:if>
          <c:if test="${a != page }"> 
            <li class="page-item">
-            <a href="${pageContext.request.contextPath}/product/my_product?page=${a}" 
+            <a href="${pageContext.request.contextPath}/product/my_product?page=${a}&member_id=<sec:authentication property="principal.Username"/>" 
                class="page-Link">${a}</a>
           </li>
          </c:if>
@@ -213,7 +213,7 @@ $(function() {
         </c:if>
          <c:if test="${page < maxpage }">
          <li class="page-item">
-          <a  href="${pageContext.request.contextPath}/product/my_product?page=${page+1}" 
+          <a  href="${pageContext.request.contextPath}/product/my_product?page=${page+1}&member_id=<sec:authentication property="principal.Username"/>" 
               class="page-link">&nbsp;다음</a>
          </li>
         </c:if>
