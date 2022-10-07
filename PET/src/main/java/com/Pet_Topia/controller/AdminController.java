@@ -306,7 +306,11 @@ public class AdminController {
 		
 		
 		
-	
+		//이동하기(이벤트 페이지)
+		@RequestMapping(value = "/admin_eventlist", method = RequestMethod.GET)
+		public String admin_eventlist() {
+			return "admin/admin_eventlist";
+		}
 	
 	
 	
