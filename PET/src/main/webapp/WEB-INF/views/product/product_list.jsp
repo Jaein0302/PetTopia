@@ -25,29 +25,41 @@
 </style>
 
 <script>
+
+
 $(function(){
-	
 	/*
 		첫번째. 위시버튼을 눌렀을때 에이잭스에서 사용자 아이디로 찜한 상품이 있는지 확인한다. 있으면 있다고 alert창 띄우기
 		두번째. 없으면 에이잭스에서 사용자 아이디로 상품을 찜한다. 완료되면 완료되었다고 alert창 띄우기
 	*/
-	$('#wishbutton').on('click', function(){
+	$('body').on('click','.wishbutton', function(){
+
+		var item_id = $(this).next();
 		
-		var item_id = $('#hidden_itemID').val()
 		
 		$.ajax({
+			type : "POST",
 			url: "is_inmywish",
-			data : {"ITEM_ID" : item_id }, //앞에는 파라미터로 넘길 이름 뒤에는 넣을 값
+			data : {"ITEM_ID" : item_id.val() }, 
+			beforeSend : function(xhr)
+            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
 			success: function(resp){
-				//console.log(resp);
+				console.log(resp);
 				if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
 					alert("해당 상품은 이미 찜한상품에 있습니다.");
 				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
 					
 					
 					$.ajax({
+						type: "POST",
 						url:"addWish",
-						data: {"ITEM_ID" : item_id},
+						data: {"ITEM_ID" : item_id.val() },
+						beforeSend : function(xhr)
+			            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			            },
 						success: function(resp){
 							//console.log(resp)
 							if (resp != null) {
@@ -131,12 +143,12 @@ $(function(){
                          <i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
-                    	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
+                    	<span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
                     	<!-- 찜하기 버튼 -->
-                    	<a href="javascript:void(0)" class="btn border" id="wishbutton">
-                  			<input type="hidden" value="${p.ITEM_ID }" id="hidden_itemID">
+                    	<a href="javascript:void(0)" class="btn border wishbutton">
                   			<i class="fas fa-heart text-primary"></i>
                			</a>
+               			<input type="hidden" value="${p.ITEM_ID}">
                     </div>
                 </div>
             </div>
