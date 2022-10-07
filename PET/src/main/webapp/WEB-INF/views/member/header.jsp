@@ -303,6 +303,7 @@
                         	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
                         	 	<a href="${pageContext.request.contextPath}/admin/admin_list" class="dropdown-item mydrop">회원 목록</a>
+                        	 	<a href="#" class="dropdown-item">              
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>
                         	 </div>
                         	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
