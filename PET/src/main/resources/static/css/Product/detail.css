@@ -5,44 +5,28 @@
     background: #aaa;
   }
   
- b{font-size:1.5rem;}
  p{text-align:left;font-weight:bold;}
- .total td{width:42%}
- .explain{width:auto;text-align:center;font-weight:bold;font-size:1.5rem;}
 
-.tab body {
-            color: #555;
-            background: #eeeeee;
-            margin:0;
-            padding: 0;
-            box-sizing: border-box;}
-
-.tab h1 {
-            padding: 50px 0;
-            font-weight: 400;
-            text-align: center;}
-
-.tab p {
+.tab > sectino > p {
             margin: 0 0 20px;
             line-height: 1.5;}
-
-.tab .main {
-            min-width: 320px;
-            max-width: 800px;
-            padding: 50px;
-            margin: 0 auto;
-            background: #ffffff;}
-            
-.tab section {
+                
+.tab > section {
             display: none;
             padding: 20px 0 0;
             border-top: 1px solid #ddd;}
 
         /*라디오버튼 숨김*/
-.tab input {
+#tab1  {
+              display: none;}
+#tab2  {
+              display: none;}
+#tab3  {
+              display: none;}
+#tab4  {
               display: none;}
 
-.tab label {
+.tab > label {
             display: inline-block;
             margin: 0 0px -1px;
             padding: 15px 76px;
@@ -51,7 +35,7 @@
             color: #bbb;
             border: 1px solid transparent;}
 
-.tab label:hover {
+.tab > label:hover {
             color: #2e9cdf;
             cursor: pointer;}
 

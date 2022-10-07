@@ -5,7 +5,7 @@
 <style>
    select.form-control {
       width: auto;
-      display: inline-block
+      display: inline-block      
    }
    
    .rows {
@@ -19,40 +19,12 @@
    .ask { float : right }
 
 </style>
-<script>
-   $(function(){
- 
-      $(".ask_denied").click(function(){
-         alert("로그인 후 이용가능합니다.")            
-      });
-      
-
-
-      $(".a_detail").click(function(){
-    	  var ITEM_ASK_NUM = $('#ask_num').text();
-    	  console.log("ITEM_ASK_NUM=" + ITEM_ASK_NUM);
-    	  
-    	  $.ajax({
-    		url : 'ask/detail',
-    		type : 'GET',
-    		data : {"ITEM_ASK_NUM" : ITEM_ASK_NUM},
-    		dataType : "json",
-    		success : function(data) {
-    			
-				console.log("성공")
-    			
-    			
-    		}
-    	  })
-      })      
-   })
-</script>
 
 </head>
 <body>
    <div class="container">
       <span class="ask" style="display:inline">문의 목록 ( ${listcount} )</span>   
-      <table class="table table-striped">
+      <table class="table table-striped" id="detail">
          <thead>
             <tr>
                <th><div>글 번호</div></th>            
@@ -60,15 +32,17 @@
                <th><div>작성자</div></th>         
                <th><div>날짜</div></th>         
             </tr>
-              <c:forEach var="a" items="${asklist}">   
+              <c:forEach var="a" items="${asklist}">  
+               <input type="hidden" value="${a.ITEM_ASK_CONTENT}">              
+               <input type="hidden" value="${a.ITEM_ASK_ITEMID}">              
                <tr>
-                  <td id="ask_num">${a.ITEM_ASK_NUM}</td>
+                  <td>${a.ITEM_ASK_NUM}</td>
                   <td>
                      ${a.ITEM_ASK_SUBJECT}                 
                   </td>
                   <td>${a.ITEM_ASK_USERNAME}</td>
                   <td>${a.ITEM_ASK_DATE}</td>
-                  <td><button class="btn-dark a_detail" data-toggle="modal" data-target="#ask_detail">상세보기</button></td>
+                  <td><button id="detail_button" class="btn-dark">상세보기</button></td>
                </tr>
             </c:forEach>
          </thead>
@@ -94,20 +68,23 @@
             <form  action="${pageContext.request.contextPath}/ask/add" method="post">   
                <sec:authorize access="isAuthenticated()">               
                <sec:authentication property="principal" var="pinfo"/>
-               	               
-                <input type="text" class="form-control" name="ITEM_ASK_ITEMID"  value="${param.ITEM_ID}">
-            
-             	<input type="text" class="form-control" name="ITEM_ASK_USERNAME" value="${pinfo.username}" readOnly>
+             
+                <input type="hidden" class="form-control" name="ITEM_ASK_ITEMID"  value="${param.ITEM_ID}">
                 
-                 <div>                 
-                   <p>제목</p>
-               <textarea name="ITEM_ASK_SUBJECT" class="form-control" rows="1"></textarea>                
-                 </div>
+               	<div class=m-3>                 
+	                <h6>작성자</h6>            
+	             	<input type="text" class="form-control" name="ITEM_ASK_USERNAME" value="${pinfo.username}" readOnly>
+                </div>
                 
-                <div>
-                   <p>내용</p>
-               <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>                
-             </div>    
+                <div class=m-3>                 
+                  	<h6>제목</h6>
+              	 	<input type="text" name="ITEM_ASK_SUBJECT" class="form-control">           
+                </div>
+                
+                <div class=m-3>
+                   	<h6>내용</h6>
+               		<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>                
+             	</div>    
              
              <button type="submit" class="btn btn-primary" id="p_add">상품 등록</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
@@ -127,16 +104,28 @@
          <div class="modal-body">
             <form id="update" action="${pageContext.request.contextPath}/ask/update" method="post">              
                 
-                <div><p>제목</p><textarea name="ITEM_ASK_SUBJECT" class="form-control" rows="1"></textarea></div>
+                <input type="hidden" class="form-control" name="ITEM_ASK_NUM" id="ASK_NUM">
+                <input type="hidden" class="form-control" name="ITEM_ASK_DATE" id="ASK_DATE">
+                <input type="hidden" class="form-control" name="ITEM_ASK_ITEMID" id="ASK_ITEMID">
                 
-                <div><p>내용</p><textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea></div>    
+                <div class=m-3>
+                	<h6>작성자</h6>                	
+                    <input type="text" class="form-control" name="ITEM_ASK_USERNAME" id="USERNAME" readOnly>
+                </div>
+                
+                <div class=m-3>
+	                <h6>제목</h6>
+	                <input type="text" name="ITEM_ASK_SUBJECT" class="form-control" id="SUBJECT">
+                </div>
+                
+                <div class=m-3>
+	                <h6>내용</h6>
+	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT"></textarea>
+                </div>    
              
-             	<sec:authentication property="principal" var="pinfo"/>         
-             	<c:if  test="${pinfo.username} !=  ${ITEM_ASK_USERNAME}">       
-	             	<button type="button" class="btn btn-primary">문의 수정</button>
-	             	<button type="button" class="btn btn-primary">문의 삭제</button>             	
-	                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	            </c:if>
+	             	<button type="submit" class="btn btn-primary a_update">문의 수정</button>
+	             	<button type="button" class="btn btn-primary a_delete">문의 삭제</button>             	
+	                <button type="button" class="btn btn-danger a_cancel">취소</button>
              
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">      
                                       
@@ -145,8 +134,6 @@
        </div>
      </div>
    </div>   
-   
- 
-   
+<script src="${pageContext.request.contextPath}/resources/js/Product/ask_view.js"></script>
    
 </body>

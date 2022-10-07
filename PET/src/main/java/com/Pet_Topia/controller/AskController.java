@@ -73,19 +73,21 @@ public class AskController {
 		return "redirect:" + beforeURL;		
 	}
 	
-	@GetMapping(value = "/detail")
-	public String modifyView(int ITEM_ASK_NUM,
-							 Model mv,
+	@PostMapping(value = "/update")
+	public String updateAsk(
+							 ItemAsk itemask,
+							 RedirectAttributes rattr,
 							 @RequestHeader(value = "referer") String beforeURL)throws Exception {
 		
-		ItemAsk itemask = askService.getaskDetail(ITEM_ASK_NUM); 		
-		logger.info(itemask.getITEM_ASK_SUBJECT());		
-	
-		mv.addAttribute("itemask",itemask);
+		int result = askService.updateAsk(itemask); 
+		logger.info("result=" + result);
+		
+		if (result == '1') {
+			rattr.addFlashAttribute("result", "updatesuccess");
+		}		
 
 		return "redirect:" + beforeURL;		
 	}
-
 }
 	
 	

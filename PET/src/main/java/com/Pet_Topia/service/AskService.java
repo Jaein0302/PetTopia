@@ -13,6 +13,6 @@ public interface AskService {
 
 	public List<ItemAsk> getAskList(int page, int limit, Product product);
 	
-	public ItemAsk getaskDetail(int ITEM_ASK_NUM);
+	public int updateAsk(ItemAsk itemask); 
 
 }
