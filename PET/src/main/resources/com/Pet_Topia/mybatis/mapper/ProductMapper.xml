@@ -38,27 +38,26 @@
    </select> 
    
    	<insert id="insertProduct" parameterType="product">
-   		<selectKey resultType="int" order="BEFORE" keyProperty="ITEM_ID">
-   			<choose>  			
-	   			<when test ='ITEM_CATEGORY == "treat"'>
-					select nvl(max(ITEM_ID),10000)+1 from item where ITEM_CATEGORY = 'treat'
-				</when>
-	   			<when test ='ITEM_CATEGORY == "education"'>
-					select nvl(max(ITEM_ID),20000)+1 from item where ITEM_CATEGORY = 'education'
-				</when>
-	   			<when test ='ITEM_CATEGORY == "beauty"'>
-					select nvl(max(ITEM_ID),30000)+1 from item where ITEM_CATEGORY = 'beauty'
-				</when>
-			</choose>		
-		</selectKey>
-		insert into item
-		(ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_IMAGE_ORIGINAL, ITEM_IMAGE_FILE, ITEM_REG_DATE,
-		 ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER, MEMBER_ID)
-		values
-		(#{ITEM_ID}, #{ITEM_NAME}, #{ITEM_CATEGORY}, #{ITEM_PRICE}, #{ITEM_CONTENT}, #{ITEM_IMAGE_ORIGINAL}, #{ITEM_IMAGE_FILE}, sysdate,
-		#{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER}, #{MEMBER_ID})		
-	</insert>
-	
+         <selectKey resultType="int" order="BEFORE" keyProperty="ITEM_ID">
+            <choose>           
+               <when test ='ITEM_CATEGORY == "treat"'>
+               select nvl(max(ITEM_ID),10000)+1 from item where ITEM_CATEGORY = 'treat'
+            </when>
+               <when test ='ITEM_CATEGORY == "education"'>
+               select nvl(max(ITEM_ID),20000)+1 from item where ITEM_CATEGORY = 'education'
+            </when>
+               <when test ='ITEM_CATEGORY == "beauty"'>
+               select nvl(max(ITEM_ID),30000)+1 from item where ITEM_CATEGORY = 'beauty'
+            </when>
+         </choose>      
+      </selectKey>
+      insert into item
+      (ITEM_ID, ITEM_NAME, ITEM_CATEGORY, ITEM_PRICE, ITEM_CONTENT, ITEM_IMAGE_ORIGINAL, ITEM_IMAGE_FILE, ITEM_REG_DATE,
+       ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES, ITEM_ADDRESS, ITEM_SELLER, MEMBER_ID)
+      values
+      (#{ITEM_ID}, #{ITEM_NAME}, #{ITEM_CATEGORY}, #{ITEM_PRICE}, #{ITEM_CONTENT}, #{ITEM_IMAGE_ORIGINAL}, #{ITEM_IMAGE_FILE}, sysdate,
+      #{ITEM_SEX, jdbcType=VARCHAR}, #{ITEM_WEIGHT, jdbcType=VARCHAR}, #{ITEM_SPECIES, jdbcType=VARCHAR}, #{ITEM_ADDRESS}, #{ITEM_SELLER}, #{MEMBER_ID})      
+   </insert>
 	
    	<select id="getDetail" parameterType="int" resultType="product">
 		select * from item where ITEM_ID = 	#{ITEM_ID}

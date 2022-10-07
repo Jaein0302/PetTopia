@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.service.OrderService;
 import com.Pet_Topia.service.ReviewService;
@@ -46,21 +48,54 @@ public class OrderController {
 	
 	// 예약내역
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list(ModelAndView mv) {
+	public ModelAndView list(
+			@RequestParam("member_id") String member_id,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+			ModelAndView mv) {
+
+		int limit = 5; // 한 화면에 출력할 로우 갯수
+		
+		//예약중
+		int listcount = oservice.OrderListCount(member_id);
+		List<OrderInfo> boardlist = oservice.OrderList(member_id); 
+		
+		//지난예약
+		int lastcount = oservice.LastCount(member_id);
+		int maxpage = (lastcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+		if (endpage > maxpage) endpage = maxpage;
+		List<OrderInfo> last = oservice.Lastlist(member_id, page, limit);  
+		
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("boardlist", boardlist);
+		mv.addObject("lastcount", lastcount);
+		mv.addObject("last", last);
+		mv.addObject("limit", limit);
 		mv.setViewName("order/list");
 		return mv;
 	}
 	
 	// 리뷰 작성 폼
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
-	public ModelAndView review(ModelAndView mv) {
+	public ModelAndView review(ModelAndView mv, int review_item_id,
+								String date, String name, int order) {
+		System.out.println("review_item_id= "+review_item_id+" / date= "+date+" / name= "+name);
+		mv.addObject("review_item_id", review_item_id);
+		mv.addObject("date", date);
+		mv.addObject("name", name);
+		mv.addObject("order", order);
 		mv.setViewName("order/review_write");
 		return mv;
 	}
 	
 	// 리뷰 쓰기
 	@PostMapping("/add")
-	public String add(Review review, HttpServletRequest request) throws Exception {
+	public String add(int order,String review_id,Review review, HttpServletRequest request) throws Exception {
 		
 		// 이미지 태그를 추출하기 위한 정규식.
 		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
@@ -81,6 +116,9 @@ public class OrderController {
 		System.out.println("textTag : " + textTag);
 		review.setReview_text(textTag);
 		
+		//리뷰넘버 == 오더넘버
+		review.setReview_num(order);
+		
 		rservice.insert(review); // 저장 메서드 호출
 		
 		int review_item_id = review.getReview_item_id();
@@ -92,7 +130,7 @@ public class OrderController {
 		//별점 Update
 		rservice.starUpdate(review_item_id);
 		
-		return "redirect:list";
+		return "redirect:list?member_id="+review_id;
 	}
 	
 	// 썸머노트 이미지 업로드
@@ -165,5 +203,17 @@ public class OrderController {
 		public int review_delete(@RequestParam("review_num") String review_num) {
 			int r = rservice.review_del(review_num);
 			return r;
+		}
+		
+		//예약 취소
+		@GetMapping(value="/order_delete")
+		public String order_delete(String member_id,int order_id, Model model) {
+			int result = oservice.order_delete(order_id);
+			if(result > 0) {
+				model.addAttribute("message","삭제성공");
+			}else {
+				model.addAttribute("message","삭제실패");
+			}
+			return "redirect:list?member_id="+member_id;
 		}
 }

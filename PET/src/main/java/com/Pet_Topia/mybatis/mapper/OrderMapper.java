@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
 
@@ -30,6 +31,17 @@ public interface OrderMapper {
 	Review getDetail(String review_num);
 
 	int review_del(String review_num);
+
+	int OrderListCount(String member_id);
+
+	List<OrderInfo> OrderList(String member_id);
+
+	int LastCount(String member_id);
+
+	List<OrderInfo> LastList(Map<String, Object> map);
+
+	int order_delete(int order_id);
+
 
 
 }
