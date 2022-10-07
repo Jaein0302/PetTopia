@@ -64,9 +64,14 @@
             
             <div class="col-lg-3 col-6 text-right">
              <!-- 찜 -->
-                <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
+             <sec:authorize access="hasRole('ROLE_MEMBER')">
+             	<a
+             	href="${pageContext.request.contextPath }/product/goToMyWishList?member_id=<sec:authentication property="principal.Username"/>"
+             	class="btn border">
                     <i class="fas fa-heart text-primary"></i>
                 </a>
+             </sec:authorize>
+                
                 
             </div>
         </div>
