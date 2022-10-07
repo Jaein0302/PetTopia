@@ -1,8 +1,13 @@
 package com.Pet_Topia.service;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.mybatis.mapper.OrderMapper;
 
 @Service
@@ -14,6 +19,38 @@ public class OrderServiceImpl implements OrderService {
 	public OrderServiceImpl(OrderMapper dao) {
 		this.dao = dao;
 	}
+
+	@Override
+	public int OrderListCount(String member_id) {
+		return dao.OrderListCount(member_id);
+	}
+
+	@Override
+	public List<OrderInfo> OrderList(String member_id) {
+		return dao.OrderList(member_id);
+	}
+
+	@Override
+	public int LastCount(String member_id) {
+		return dao.LastCount(member_id);
+	}
+
+	@Override
+	public List<OrderInfo> Lastlist(String member_id, int page, int limit) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("member_id", member_id);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		return dao.LastList(map);
+	}
+
+	@Override
+	public int order_delete(int order_id) {
+		return dao.order_delete(order_id);
+	}
+
 
 
 }

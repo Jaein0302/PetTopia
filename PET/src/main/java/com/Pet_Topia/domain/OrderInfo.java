@@ -2,11 +2,17 @@ package com.Pet_Topia.domain;
 
 public class OrderInfo {
 	
-	private int order_id;		// 주문번호
-	private int item_id;		// 상품번호
-	private String member_id;	// 아이디
-	private int order_amount;	// 수량
-	private int order_price;	// 가격
+	private int order_id;				// 주문번호
+	private String order_member_id; 	//아이디
+	private int order_item_id;			//상품번호
+	private String order_item_sellerName; //판매자
+	private String order_item_name;		//상품이름
+	private int order_item_price;	//상품가격
+	private String order_time;			//예약시간
+	private String order_location;		//장소
+	private String order_image;			//썸네일
+	
+	private int cnt;			//리뷰갯수
 	
 	
 	public int getOrder_id() {
@@ -15,30 +21,62 @@ public class OrderInfo {
 	public void setOrder_id(int order_id) {
 		this.order_id = order_id;
 	}
-	public int getItem_id() {
-		return item_id;
+	public String getOrder_member_id() {
+		return order_member_id;
 	}
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setOrder_member_id(String order_member_id) {
+		this.order_member_id = order_member_id;
 	}
-	public String getMember_id() {
-		return member_id;
+	public int getOrder_item_id() {
+		return order_item_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setOrder_item_id(int order_item_id) {
+		this.order_item_id = order_item_id;
 	}
-	public int getOrder_amount() {
-		return order_amount;
+	public String getOrder_item_sellerName() {
+		return order_item_sellerName;
 	}
-	public void setOrder_amount(int order_amount) {
-		this.order_amount = order_amount;
+	public void setOrder_item_sellerName(String order_item_sellerName) {
+		this.order_item_sellerName = order_item_sellerName;
 	}
-	public int getOrder_price() {
-		return order_price;
+	public String getOrder_item_name() {
+		return order_item_name;
 	}
-	public void setOrder_price(int order_price) {
-		this.order_price = order_price;
+	public void setOrder_item_name(String order_item_name) {
+		this.order_item_name = order_item_name;
 	}
+	public int getOrder_item_price() {
+		return order_item_price;
+	}
+	public void setOrder_item_price(int order_item_price) {
+		this.order_item_price = order_item_price;
+	}
+	public String getOrder_time() {
+		return order_time;
+	}
+	public void setOrder_time(String order_time) {
+		this.order_time = order_time;
+	}
+	public String getOrder_location() {
+		return order_location;
+	}
+	public void setOrder_location(String order_location) {
+		this.order_location = order_location;
+	}
+	public String getOrder_image() {
+		return order_image;
+	}
+	public void setOrder_image(String order_image) {
+		this.order_image = order_image;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	
+	
 	
 	
 	

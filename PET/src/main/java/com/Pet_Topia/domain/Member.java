@@ -10,7 +10,7 @@ public class Member {
 	private String member_tell      ;
 	private String member_btype     ;
 	private String member_regnum    ;
-	private String auth="ROLE_MEMBER";
+	private String auth				;
 	
 	
 	public String getMember_id() {

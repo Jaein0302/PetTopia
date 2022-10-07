@@ -176,7 +176,7 @@ public class MemberController {
 	
 	//회원가입
 	@RequestMapping(value = "/joinProcess", method = RequestMethod.POST)
-	public String joinProcess(Member m,
+	public String joinProcess(Member m, String auth,
 							RedirectAttributes rattr,
 							Model model,
 							HttpServletRequest request) {
@@ -185,6 +185,10 @@ public class MemberController {
 		String encPassword = passwordEncoder.encode(m.getMember_password());
 		Logger.info(encPassword);
 		m.setMember_password(encPassword);
+		
+		if(auth=="") {
+			m.setAuth("ROLE_SELLER");
+		}
 		
 		int result = memberservice.insert(m);
 		

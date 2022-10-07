@@ -31,7 +31,7 @@
 	     </th>
      	 <th colspan="2" class="text-right">
      	 <span class='pr-5'>
-	     	&lt; 반려견 놀이훈련 &gt; <span class='text-small pl-1'>2022.10.1(토) 방문</span>
+	     	&lt; ${name} &gt; <span class='text-small pl-1'>${date} 방문</span>
 	     </span>
      	 </th>
      	</tr> 
@@ -42,7 +42,8 @@
 	<sec:authorize access="isAuthenticated()">
 	<sec:authentication property="principal" var="pinfo"/>
 	  <input type="hidden" name="review_id" value="${pinfo.username}">
-	  <input type="hidden" name="review_item_id" value="10001">
+	  <input type="hidden" name="review_item_id" value="${review_item_id}">
+	  <input type="hidden" name="order" value="${order}">
 	  <div class="rating-message">
 	  	 <span class="bounce arrow-bounce pr-1"><i class="fa fa-2x fa-chevron-down"></i></span>
 	  	 별점을 남겨주세요

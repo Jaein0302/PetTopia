@@ -63,9 +63,16 @@
 	
    <c:if test="${!empty boardlist}">
      <c:forEach var="b" items="${boardlist}">
+    <%-- order정보 --%> 
+     <a class="text-body" href="${pageContext.request.contextPath}/product/detail?ITEM_ID=${b.review_item_id}">
+     <img class='order_image' src="/pet_topia/upload${b.order_image}">  
+	     <span class='text-order'>${b.order_name}</span>
+	     <span class='text-small pr-3 text-seller'>&ensp;${b.seller}</span>
+	 </a>
+    
     <input type="hidden" id="reviewnum" value="${b.review_num}">
     <div class="w-100 rdetail" style="cursor:pointer">
-   <table class="m-0 table text-left">
+   <table class="m-0 mb-3 table text-left">
     <!-- 테이블 간격 -->
 	<colgroup>
 	<col width="70%" />
@@ -74,10 +81,9 @@
       <tr class='rborder'>
 		<td class="p-2" style='vertical-align:top!important;'>
 		  <%-- 아이디, 날짜, 별점 --%>
+		  
 		  <span class='text-small pr-3'>
-		  	<i style="color:#4a4c4b;"class="fa fa-user"></i> ${b.review_id}</span>
-		  <span class='text-small pr-3'>
-		  	<i style="color:#4a4c4b;"class="fa fa-clock-o"></i> ${b.review_reg_date}</span>
+		  	<i style="color:#4a4c4b;"class="fa fa-clock-o"></i> ${fn:substring(b.order_date,2,12)} 방문</span>
 		  <c:if test="${b.review_score==1}">
 		  <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 		  </c:if>
