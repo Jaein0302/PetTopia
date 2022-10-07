@@ -17,17 +17,17 @@ select * from COMMUNITY;
 select nvl(max(commu_num),0)+1 from community;
 
 insert into community values(1,'user1','테스트 - 제목 1','테스트 - 내용 1',0,sysdate,null,null,null);
-insert into community values(2,'admin','테스트 - 제목 2','테스트 - 내용 2',0,sysdate,null,null,null);
-insert into community values(3,'admin','테스트 - 제목 3','테스트 - 내용 3',0,sysdate,null,null,null);
-insert into community values(4,'admin','테스트 - 제목 4','테스트 - 내용 4',0,sysdate,null,null,null);
-insert into community values(5,'admin','테스트 - 제목 5','테스트 - 내용 5',0,sysdate,null,null,null);
-insert into community values(6,'admin','테스트 - 제목 6','테스트 - 내용 6',0,sysdate,null,null,null);
-insert into community values(7,'admin','테스트 - 제목 7','테스트 - 내용 7',0,sysdate,null,null,null);
-insert into community values(8,'admin','테스트 - 제목 8','테스트 - 내용 8',0,sysdate,null,null,null);
-insert into community values(9,'admin','테스트 - 제목 9','테스트 - 내용 9',0,sysdate,null,null,null);
-insert into community values(10,'admin','테스트 - 제목 10','테스트 - 내용 10',0,sysdate,null,null,null);
-insert into community values(11,'admin','테스트 - 제목 11','테스트 - 내용 11',0,sysdate,null,null,null);
-insert into community values(12,'admin','테스트 - 제목 12','테스트 - 내용 12',0,sysdate,null,null,null);
+insert into community values(2,'user1','테스트 - 제목 2','테스트 - 내용 2',0,sysdate,null,null,null);
+insert into community values(3,'user1','테스트 - 제목 3','테스트 - 내용 3',0,sysdate,null,null,null);
+insert into community values(4,'user1','테스트 - 제목 4','테스트 - 내용 4',0,sysdate,null,null,null);
+insert into community values(5,'user1','테스트 - 제목 5','테스트 - 내용 5',0,sysdate,null,null,null);
+insert into community values(6,'user1','테스트 - 제목 6','테스트 - 내용 6',0,sysdate,null,null,null);
+insert into community values(7,'user1','테스트 - 제목 7','테스트 - 내용 7',0,sysdate,null,null,null);
+insert into community values(8,'user1','테스트 - 제목 8','테스트 - 내용 8',0,sysdate,null,null,null);
+insert into community values(9,'user1','테스트 - 제목 9','테스트 - 내용 9',0,sysdate,null,null,null);
+insert into community values(10,'user1','테스트 - 제목 10','테스트 - 내용 10',0,sysdate,null,null,null);
+insert into community values(11,'user1','테스트 - 제목 11','테스트 - 내용 11',0,sysdate,null,null,null);
+insert into community values(12,'user1','테스트 - 제목 12','테스트 - 내용 12',0,sysdate,null,null,null);
 
 
 
