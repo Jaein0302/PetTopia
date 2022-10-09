@@ -61,13 +61,22 @@
                 </form>
             </div>
          <!-- 검색바 끝 -->
-            
-            <div class="col-lg-3 col-6 text-right">
+
+            <div class="col-lg-3 col-6 text-right pl-0" style='position:relative'>
+             <!-- 추천 검색어 -->
+            <span class='best_search'>추천 검색어</span>
+            <div class='block1'>
+             	<ul id="ticker1">
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=중성화'>중성화</a></li>
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=스케일링'>스케일링</a></li>
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=애견 유치원'>애견유치원</a></li>
+             	</ul>
+                </div>
+             
              <!-- 찜 -->
-                <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                </a>
-                
+             <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="border" style='padding: 9px 10px;'>
+              <i class="fas fa-heart text-primary" style='font-size: 19px; line-height: 1.684;'></i>
+             </a>
             </div>
         </div>
 	</div>

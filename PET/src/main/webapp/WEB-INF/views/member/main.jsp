@@ -51,7 +51,7 @@ if (withdraw_message == "withdraw_success"){
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">반려견에게 눈높이를 맞춘</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">애견 유치원</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=유치원" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@ if (withdraw_message == "withdraw_success"){
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">반려견, 반려묘를 위한</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">필수 예방접종</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">중성화 수술</h3>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=중성화" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ if (withdraw_message == "withdraw_success"){
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">지금도 귀엽지만 더 귀엽게!</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">애견 미용</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=미용" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>

@@ -1,10 +1,10 @@
-* {box-sizing: border-box}
+input, select {
+	border-radius: 3px;
+	border: 1px solid lightgray
+}
 
-input, select{border-radius:3px;border:1px solid lightgray}
-
-select:focus{outline:none}
+select:focus {outline:none}
 select{color: #6F6F6F;}
-
 .jinput {
     width: 100%;
     padding: 10px;
@@ -20,8 +20,6 @@ select{color: #6F6F6F;}
     box-shadow: inset 0px 2px 3px rgba( 0,0,0,0.08 );
     clear: both;
 }
-
-
 
 .mform {
     background-color: #fefefe;
