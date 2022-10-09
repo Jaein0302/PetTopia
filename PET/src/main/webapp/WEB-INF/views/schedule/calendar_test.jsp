@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	<jsp:include page="../member/header.jsp" />
 </div>
 
+<div class="container mb-5 mainbody" style="margin-top:220px;">
+ <div class="row px-xl-5">
+
 <!-- side menu -->
 <div class="col-md-3 pb-3 m-0">
 	  <jsp:include page="../mypage/aside.jsp" />
@@ -145,9 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
     </div>
     <br>
 	<div class="fc">
-	<button class="fc-button-primary" style="height:50px" onClick="javascript:allSave();">예약하기</button>
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 	</div>
   </div>
+ </div>
+</div>
 </body>
 </html>
