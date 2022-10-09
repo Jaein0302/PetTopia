@@ -16,6 +16,11 @@ public interface OrderService {
 
 	int order_delete(int order_id);
 
+	List<OrderInfo> findScheduleListBySeller(String seller_id);
+
+	List<OrderInfo> allScheduleList();
+
+
 
 
 }

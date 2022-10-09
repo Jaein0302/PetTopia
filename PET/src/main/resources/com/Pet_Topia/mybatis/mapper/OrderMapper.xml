@@ -120,4 +120,13 @@
 		delete orderinfo
 		where order_id = #{order_id}
 	</delete>
+	
+	<select id="findScheduleListBySeller" parameterType="String" resultType="OrderInfo">
+		select * from orderinfo
+		where order_seller = #{seller_id}
+	</select>
+	
+	<select id="allScheduleList" resultType="OrderInfo">
+		select * from orderinfo
+	</select>
 </mapper>

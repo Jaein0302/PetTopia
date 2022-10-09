@@ -51,6 +51,16 @@ public class OrderServiceImpl implements OrderService {
 		return dao.order_delete(order_id);
 	}
 
+	@Override
+	public List<OrderInfo> findScheduleListBySeller(String seller_id) {
+		return dao.findScheduleListBySeller(seller_id);
+	}
+
+	@Override
+	public List<OrderInfo> allScheduleList() {
+		return dao.allScheduleList();
+	}
+
 
 
 }
