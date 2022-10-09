@@ -12,8 +12,9 @@ public class OrderInfo {
 	private String order_location;		//장소
 	private String order_image;			//썸네일
 	
-	private int cnt;			//리뷰갯수
-	
+	private int cnt;				//리뷰갯수
+	private String order_item_tell; //판매자 연락처
+	private String order_member_tell; //고객 연락처
 	
 	public int getOrder_id() {
 		return order_id;
@@ -74,6 +75,18 @@ public class OrderInfo {
 	}
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	public String getOrder_item_tell() {
+		return order_item_tell;
+	}
+	public void setOrder_item_tell(String order_item_tell) {
+		this.order_item_tell = order_item_tell;
+	}
+	public String getOrder_member_tell() {
+		return order_member_tell;
+	}
+	public void setOrder_member_tell(String order_member_tell) {
+		this.order_member_tell = order_member_tell;
 	}
 	
 	

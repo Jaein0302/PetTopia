@@ -216,4 +216,15 @@ public class OrderController {
 			}
 			return "redirect:list?member_id="+member_id;
 		}
+		
+		@RequestMapping(value="/order_info")
+		public ModelAndView order_info(OrderInfo o, ModelAndView mv) {
+			int order_id = o.getOrder_id();
+			OrderInfo order = oservice.order_info(order_id);
+			OrderInfo last = oservice.order_info_last(order_id);
+			mv.setViewName("order/order_info");
+			mv.addObject("order", order);
+			mv.addObject("last", last);
+			return mv;
+		}
 }

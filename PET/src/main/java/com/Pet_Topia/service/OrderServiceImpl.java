@@ -51,6 +51,16 @@ public class OrderServiceImpl implements OrderService {
 		return dao.order_delete(order_id);
 	}
 
+	@Override
+	public OrderInfo order_info(int order_id) {
+		return dao.order_info(order_id);
+	}
+
+	@Override
+	public OrderInfo order_info_last(int order_id) {
+		return dao.order_info_last(order_id);
+	}
+
 
 
 }

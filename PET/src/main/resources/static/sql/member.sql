@@ -30,5 +30,5 @@ insert into member values ('beauty1','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ
 insert into member values ('beauty2','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 서대문구 홍은중앙로3길 22','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_SELLER');
 
 
-insert into member values ('seller10','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 서대문구 홍은중앙로3길 22','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_SELLER');
+insert into member values ('seller1','$2a$10$sX/mIDAPPnFr5CZJ.zV0m.k2p5urxQXEobZ3n4yQaYciajryqIzVe','도그스푼','12345','서울 종로구 종로 1 (종로1가)','dogspoon@pet-topia.pet','010-1234-5678','애견미용','1234567890','ROLE_SELLER');
 
