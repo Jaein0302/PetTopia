@@ -372,6 +372,10 @@ $(window).on('load', function(){ //load가 되었을때 실행
         $('.me4').addClass('active');
     }else if (pageUrl.indexOf('community') > -1) { 
         $('.me2').addClass('active');
+    }else if (pageUrl.indexOf('admin_notice') > -1) { 
+        $('.me1').addClass('active');
+    }else if (pageUrl.indexOf('admin_ask_list') > -1) { 
+        $('.me3').addClass('active');
     }else {
         $('.me0').addClass('active'); 
     }

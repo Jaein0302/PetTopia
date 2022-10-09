@@ -95,7 +95,7 @@ public class OrderController {
 	
 	// 리뷰 쓰기
 	@PostMapping("/add")
-	public String add(int order,String review_id,Review review, HttpServletRequest request) throws Exception {
+	public String add(int order,String review_id,Review review, HttpServletRequest request, Model m) throws Exception {
 		
 		// 이미지 태그를 추출하기 위한 정규식.
 		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");

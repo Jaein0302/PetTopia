@@ -1,4 +1,5 @@
 $(document).ready(function() {
+var member_id = $('input[name="review_id"]').val();
 	//취소 버튼 누르면 뒤로가기
 		 $(".signoutb").click(function(){
 			 Swal.fire({
@@ -9,7 +10,7 @@ $(document).ready(function() {
 				  cancelButtonColor: '#d33'
 				}).then((result) => {
 				  if (result.isConfirmed) {
-					  $(location).attr('href','list');
+					  $(location).attr('href','list?member_id='+member_id);
 				  }
 				})
 			});
