@@ -406,7 +406,6 @@ public class ProductController {
     mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
-		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}
 	

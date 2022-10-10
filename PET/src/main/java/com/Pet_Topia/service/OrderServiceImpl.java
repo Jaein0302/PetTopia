@@ -57,12 +57,12 @@ public class OrderServiceImpl implements OrderService {
     }
     
   @Override  
-	public OrderInfo order_info(int order_id) {
+	public OrderInfo order_info(String order_id) {
 		return dao.order_info(order_id);
 	}
 
 	@Override
-	public OrderInfo order_info_last(int order_id) {
+	public OrderInfo order_info_last(String order_id) {
 		return dao.order_info_last(order_id);
 	}
 
