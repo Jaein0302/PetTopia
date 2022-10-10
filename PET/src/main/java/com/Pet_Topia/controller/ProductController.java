@@ -31,6 +31,7 @@ import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.domain.Wish;
@@ -386,8 +387,8 @@ public class ProductController {
 	@GetMapping("/order_view")
 	public ModelAndView purchase_view(int ITEM_ID,
 									 String member_id,
-									 ModelAndView mv, 
 									 String order_date,
+									 ModelAndView mv, 
 									 HttpServletRequest request) {
 
 		Product productdata = productService.getDetail(ITEM_ID);		
@@ -404,29 +405,23 @@ public class ProductController {
 		logger.info("구매페이지보기 성공");		
 		Member memberlist = memberservice.member_info(member_id);		
 		
-		//UID 만들기
-		
-		String order_uid = UUID.randomUUID().toString();		
-		logger.info("order_uid=" + order_uid);
+		//UID 만들기		
+//		String order_uid = UUID.randomUUID().toString();		
+//		logger.info("order_uid=" + order_uid);
 
 		mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
 		mv.addObject("order_date", order_date);
-		mv.addObject("order_uid", order_uid);		
+//		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/purchase")
-	public int purchase_view(@RequestParam(value="order_id") int order_id,
-							 @RequestParam(value="item_id") int item_id,
-							 @RequestParam(value="member_id") String member_id,
-							 @RequestParam(value="order_amount") int order_amount,
-							 @RequestParam(value="order_price") int order_price) {
+	@PostMapping(value = "/purchase")
+	public int purchase_view(OrderInfo orderinfo) {
 
-
-		int result = productService.OrderInsert(order_id, item_id, member_id, order_amount, order_price);
+		int result = productService.OrderInsert(orderinfo);
 		
 		return result;
 	}

@@ -30,12 +30,18 @@
 </style>
 
 <script>
-var result = "${result}";
 
 $(function() {	
+	var result = "${result}";
 	
 	if(result == 'addSuccess'){
 		alert("상품 문의 성공입니다.");
+	}
+	if(result == 'deleteSuccess'){
+		alert("문의 삭제 성공입니다.");
+	}		
+	if(result == "updateSuccess") {
+		alert("문의 수정 성공입니다.");
 	}
 	
 	$(".purchase").on('click', function(){
@@ -43,12 +49,16 @@ $(function() {
 			alert("예약날짜와 시간을 설정해주세요");
 		} else {
 			location.href = "${pageContext.request.contextPath}/product/order_view?"
-					+"ITEM_ID=${productdata.ITEM_ID}&amount=" + $(".amount").val() 
+					+"ITEM_ID=" + ${productdata.ITEM_ID}
 					+"&member_id=" + $("input[name='member_id']").val()
 					+"&order_date=" + $("#datetimepicker1Input").val();
+					
+					console.log("ITEM_ID=" + ${productdata.ITEM_ID} );
+					console.log("member_id=" + $("input[name='member_id']").val() );
+					console.log("order_date=" + $("#datetimepicker1Input").val() );
 		}
-	})//purchase click function
-		   
+	})
+		
 	$(".cart").on('click', function(){
 		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
 		+ $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
@@ -124,14 +134,6 @@ $(function() {
 			},//outter success
 		})//outer ajax end
 	})//wish button click function
-	
-	
-	
-	//수정성공하면 alert
-   	var result = "${result}";
-	if(result == "updatesuccess") {
-		alert("문의 수정이 완료되었습니다");
-	}
 	
 });
 

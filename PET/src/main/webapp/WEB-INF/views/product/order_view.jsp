@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<title>상품 등록</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
@@ -25,7 +24,10 @@
 </style>
 
 <script>
+
 $(document).ready(function(){
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
 	
 	/*
 	예약하기 버튼을 클릭했을때
@@ -34,65 +36,64 @@ $(document).ready(function(){
 	*/
     $(".purchase").click(function() {    	
     	var IMP = window.IMP;
-        IMP.init('imp24704360');
+        IMP.init('imp76641672');
         
         
     	if( $('#select_pay').val() == 'KAKAO_PAY'){ //결제방식이 카카오페이 일때
     		
     		 // IMP.request_pay(param, callback) 결제창 호출
-    		 IMP.request_pay({ // param
-    			 pg: "kakaopay",
-    			 pay_method: "card",
-    			 order_uid: "${productdata.ITEM_ID}" + new Date().getTime(),
-    			 name: "${productdata.ITEM_NAME}",
-    			 item_id: "${productdata.ITEM_ID}",          
-    			 amount: "${productdata.ITEM_PRICE * amount}",
-    			 count : "${requestScope.amount}",
-    			 buyer_id: "${memberlist.member_id}",
-    			 buyer_addr: "${memberlist.member_address}"
-    		 }, function (rsp) { // callback
-
-			
+    		IMP.request_pay({ // param
+   				pg: "kakaopay",
+   			 	pay_method: "card",
+   		        merchant_uid: "ORD20180131-0000012",
+   		        name: "노르웨이 회전 의자",
+   		        amount: 64900,
+   		        buyer_email: "gildong@gmail.com",
+   		        buyer_name: "홍길동",
+   		        buyer_tel: "010-4242-4242",
+   		        buyer_addr: "서울특별시 강남구 신사동",
+   		        buyer_postcode: "01181" 		
+    		 }, function (rsp) { // callback			
     			 if (rsp.success) {    		
-    				 $.ajax({
-    					 url:'product/purchase', 
-    					 method:'POST',
-    					 dataType : 'json',
-    					 data: {
-    						 "order_id" : rsp.order_uid,
-    						 "item_id" : rsp.item_id,
-    						 "member_id" : rsp.buyer_id,
-    						 "order_amount" : rsp.count,
-    						 "order_price" : rsp.amount
-    					 },
-    					 success : function(result) {
-    						 console.log(result);
-    						 if(result == 1) {
-    							 alert("결제 성공");
-    						 } else {
-    							 alert("결제 실패");
-    						 }
-    					 }, //success end
-    					 error:function(request,status,error){
-    						 alert("code = "+ request.status + " message = " + request.responseText + " error = " + error);
-    					 } //error end
-    				 }) //ajax end
+    				 alert("결제 성공");
     			 } else {
     				 alert("결제 실패");
     			 }
     		 }
     		 );
     	} else { //결제방식이 현장결제일때
-    		
-    		
-    		
+    		$.ajax({
+				 url:'purchase', 
+				 method:'POST',
+				 dataType : 'json',
+				 data: {
+	    			 "order_id" : Date.now() + Math.random(),
+	    			 "order_member_id" : "${memberlist.member_id}",
+	    			 "order_item_id" : "${productdata.ITEM_ID}",
+	    			 "order_item_sellerName" : "${memberlist.member_name}",
+	    			 "order_item_name" :"${productdata.ITEM_NAME}",
+	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
+	    			 "order_time" : "${order_date}",
+	    			 "order_location" : "${memberlist.member_address}",
+	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}"
+				 },
+				 beforeSend : function(xhr){
+						xhr.setRequestHeader(header, token);
+					},
+				 success : function(result) {
+					 console.log(result);
+					 if(result == 1) {
+						 alert("결제 성공");
+					 } else {
+						 alert("결제 실패");
+					 }
+				 }, //success end
+				 error:function(request, status, error){
+						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+					} // error end
+			 }) //ajax end    		
     	}
-    })//purchase click function
-    
-    
-    
-    
-    
+    })//purchase click function    
 })
 	
   </script>

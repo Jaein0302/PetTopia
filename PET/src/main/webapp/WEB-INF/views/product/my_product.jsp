@@ -32,7 +32,6 @@ $(function() {
 	      alert("삭제 성공 입니다.");
 	   }
 
-
 	   //checkbox 하나만 선택할 수 있도록 함
 	    $('input[name="ITEM_CATEGORY"]').click(function(){    
 	     if($(this).prop('checked')){    
@@ -76,8 +75,7 @@ $(function() {
 	   })   
 	   
 	   //모든 항목 클릭해야만 상품등록 가능
-	   $('#p_add').on('click',
-	      function() {
+	   $('#p_add').on('click', function() {
 	          
 	         var name = $.trim($('input[name="ITEM_NAME"]').val());
 	         if (name == '') {
@@ -101,30 +99,15 @@ $(function() {
 	         if (uploadfile == '') {
 	            alert("상품파일을 업로드해주세요");
 	            return false;
-	         }      
-	         
+	         }      	         
 	      })
-	   })
 
-	<%--
-	   //삭제하기 누르면 모달창 생김
-	   $("#delete").on('click', function(){
-	      
-	      $.ajax({
-	         url:'product/deleteconfirm',
-	         type:'POST',
-	         success:function(result)
-	      })
-	   })
+		//삭제 confirm창
+		$('#delete').on('click',function(){
+		    confirm("정말 삭제하시겠습니까?")
+		})
 	})
 
-
-	//삭제 confirm창
-	$('#delete').on('click',function(){
-	    if(!confirm("정말 삭제하시겠습니까?")) {
-	       return;
-	    }
-	    --%>
 </script>
 
 <body>
@@ -158,7 +141,7 @@ $(function() {
                <td>${p.ITEM_CATEGORY}</td>
                <td>${p.ITEM_REG_DATE}</td>
                <td>
-                  <a href="${pageContext.request.contextPath}/product/ask_reply?ITEM_ID=${p.ITEM_ID}">
+                  <a href="${pageContext.request.contextPath}/ask/answer_view?ITEM_ID=${p.ITEM_ID}">
                      <button class="btn btn-Secondary reply" >문의 답변하기</button>
                   </a>
                </td>
@@ -316,6 +299,5 @@ $(function() {
       </div>
    </div>
    </div>
-<script src="${pageContext.request.contextPath}/resources/js/Product/my_product.js"></script>
 
 </body>   

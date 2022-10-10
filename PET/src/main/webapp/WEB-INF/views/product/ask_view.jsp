@@ -15,6 +15,8 @@
    .ask { float : right }
    
    #detail_button{ color : brown }
+   
+   #check { float : left }
 
 </style>
 
@@ -33,6 +35,7 @@
               <c:forEach var="a" items="${asklist}">  
                <input type="hidden" value="${a.ITEM_ASK_CONTENT}">              
                <input type="hidden" value="${a.ITEM_ASK_ITEMID}">              
+               <input type="hidden" value="${a.ITEM_ASK_USERNAME}"> 
                <tr>
                   <td>${a.ITEM_ASK_NUM}</td>
                   <td><strong id="detail_button" style="color:darkbrown; cursor:pointer;">
@@ -41,12 +44,14 @@
                   </td>
                   <td>${a.ITEM_ASK_USERNAME}</td>
                   <td>${a.ITEM_ASK_DATE}</td>
-         		  <sec:authentication property="principal" var="pinfo"/>
-         		  <c:choose>
-	         	  	<c:when test="${pinfo.username == productdata.MEMBER_ID || pinfo.username == 'admin'}">
-                  		<td><button type="button" class="btn btn-danger">삭제</button></td>
-		            </c:when>
-	            </c:choose>
+                  
+                  <sec:authentication property="principal" var="pinfo"/>                  
+               
+        		  <td>  
+        		  	<c:if test="${pinfo.username == a.ITEM_ASK_USERNAME}"> 
+        		  		<button type="button" class="btn btn-danger a_delete">삭제</button>       		  
+					</c:if>
+	              </td>
                   
                </tr>
             </c:forEach>
@@ -91,9 +96,9 @@
                		<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>                
              	</div>    
              
-             <button type="submit" class="btn btn-primary" id="p_add">상품 등록</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
+             <button type="submit" class="btn btn-primary" id="p_add">문의 등록</button>
+                <button type="button" class="btn btn-danger a_delete" data-dismiss="modal">취소</button>
+            	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
              </sec:authorize>                   
             </form>
          </div>           
@@ -108,7 +113,9 @@
          <!-- Modal body -->
          <div class="modal-body">
             <form id="update" action="${pageContext.request.contextPath}/ask/update" method="post">              
-                
+                 
+                <sec:authentication property="principal" var="pinfo"/>                                                
+                <input type="hidden" class="form-control" name="id_now" id="id_now" value="${pinfo.username}">
                 <input type="hidden" class="form-control" name="ITEM_ASK_NUM" id="ASK_NUM">
                 <input type="hidden" class="form-control" name="ITEM_ASK_DATE" id="ASK_DATE">
                 <input type="hidden" class="form-control" name="ITEM_ASK_ITEMID" id="ASK_ITEMID">
@@ -120,26 +127,19 @@
                 
                 <div class=m-3>
 	                <h6>제목</h6>
-	                <input type="text" name="ITEM_ASK_SUBJECT" class="form-control" id="SUBJECT">
+	                <input type="text" class="form-control" name="ITEM_ASK_SUBJECT" id="SUBJECT" readOnly>
                 </div>
                 
                 <div class=m-3>
 	                <h6>내용</h6>
-	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT"></textarea>
+	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT" readOnly></textarea>
                 </div>    
-             	<sec:authorize access="isAuthenticated()">
-         		<sec:authentication property="principal" var="pinfo"/>
-         		<c:choose>
-	         		<c:when test="${pinfo.username == productdata.MEMBER_ID || pinfo.username == 'admin'}">
-		             	<button type="submit" class="btn btn-primary a_update">문의 수정</button>
-		             	<button type="button" class="btn btn-primary a_delete">문의 삭제</button>             	
-		                <button type="button" class="btn btn-danger a_cancel">취소</button>
-		            </c:when>
-	           	 	<c:otherwise>
-	            	 	<button type="button" class="btn btn-danger a_cancel">취소</button>
-	            	</c:otherwise>
-	            </c:choose>
-	            </sec:authorize>
+                <div>
+ 				<div id="check">
+             		
+             	</div>
+                <button type="button" class="btn btn-danger a_cancel">취소</button>
+				</div>
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                                            
             </form>
          </div>           
