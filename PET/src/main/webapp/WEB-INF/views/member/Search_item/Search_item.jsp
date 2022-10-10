@@ -28,7 +28,7 @@
   <div class="main">
 
 	<input id="tab1" type="radio" name="tabs" checked>
-	<label for="tab1"><i class="fas fa-border-all"></i>&ensp;전체보기 (
+	<label class='label-tab' for="tab1"><i class="fas fa-border-all"></i>&ensp;전체보기 (
 	        <c:if test="${!empty lc}">
             ${lc}
             </c:if>
@@ -37,7 +37,7 @@
             </c:if>)</label>
 	
 	<input id="tab2" type="radio" name="tabs">
-	<label for="tab2">수술/치료(
+	<label class='label-tab' for="tab2">수술/치료(
 	        <c:if test="${!empty tc}">
             ${tc}
             </c:if>
@@ -46,7 +46,7 @@
             </c:if>)</label>
 	
 	<input id="tab3" type="radio" name="tabs">
-	<label for="tab3">교육 (
+	<label class='label-tab' for="tab3">교육 (
 		    <c:if test="${!empty ec}">
             ${ec}
             </c:if>
@@ -55,7 +55,7 @@
             </c:if>)</label>
 	
 	<input id="tab4" type="radio" name="tabs">
-	<label for="tab4">미용 (
+	<label class='label-tab' for="tab4">미용 (
 			<c:if test="${!empty bc}">
             ${bc}
             </c:if>

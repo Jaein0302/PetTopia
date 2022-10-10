@@ -70,31 +70,51 @@
 	</select>
    
     <select id="search_item" resultType="product">
-      select *  
-      from item
+      select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
       where (ITEM_CONTENT like #{item}
       or ITEM_NAME like #{item})
     </select>
     
     <select id="search_treat" resultType="product">
-      select *  
-      from item
+      select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
       where ITEM_CATEGORY = 'treat'
       and (ITEM_CONTENT like #{item}
       or ITEM_NAME like #{item})
     </select> 
     
     <select id="search_edu" resultType="product">
-      select *  
-      from item
+      select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
       where ITEM_CATEGORY = 'education'
       and (ITEM_CONTENT like #{item}
       or ITEM_NAME like #{item})
     </select> 
     
     <select id="search_beauty" resultType="product">
-      select *  
-      from item
+      select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
       where ITEM_CATEGORY = 'beauty'
       and (ITEM_CONTENT like #{item}
       or ITEM_NAME like #{item})
@@ -132,11 +152,13 @@
     </select> 
     
     <select id="best_item" resultType="product">
-      select item.*,  nvl(cnt,0) cnt
+      select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
 	  from item left outer join (select review.review_item_id, count(*) cnt
 									from review
 									group by review_item_id) c
 	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
       order by item.ITEM_SCORE asc
     </select>
 </mapper>

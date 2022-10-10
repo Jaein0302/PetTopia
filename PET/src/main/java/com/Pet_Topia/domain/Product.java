@@ -23,6 +23,7 @@ public class Product {
 	private MultipartFile uploadfile		;
 	//리뷰 수
 	private int cnt					;
+	private String seller_name		;
 
 	public int getITEM_ID() {
 		return ITEM_ID;
@@ -166,6 +167,14 @@ public class Product {
 
 	public void setMEMBER_ID(String mEMBER_ID) {
 		MEMBER_ID = mEMBER_ID;
+	}
+
+	public String getSeller_name() {
+		return seller_name;
+	}
+
+	public void setSeller_name(String seller_name) {
+		this.seller_name = seller_name;
 	}
 	
 }

@@ -28,7 +28,7 @@
 <div class="header">
 <jsp:include page="../member/header.jsp" />
 </div>
- <div class="container mb-5 mainbody" style="margin-top:220px;">
+ <div class="container mb-5 mainbody" style="margin-top:220px;min-height:600px">
   <div class="row px-xl-5">
   
    <!-- 사이드바 -->	  
@@ -50,7 +50,7 @@
 			</tr>
 		</thead>
 	</table>
-   
+	
    <!-- 예약중 리스트 -->
    <c:if test="${!empty boardlist}">
      <c:forEach var="b" items="${boardlist}">
@@ -62,10 +62,13 @@
 	</colgroup>
    		<tr>
 	   		<th class='pb-0' colspan='2'>
-	   			<i class="far fa-calendar-check"></i>&ensp;
-	   				예약번호&ensp;:&ensp;Y${b.order_id} 
-	   			<span class='text-small2 pl-2'>
-	   			<i class="fas fa-angle-double-left"></i>&nbsp;상세보기</span>
+		   		<a class="order_info text-body"  href="javascript:void(window.open('order_info?order_id=${b.order_id}','주문 상세보기','width=500,height=600,top=200,left=650'))">
+		   			<input type="hidden" id="order_num" value="${b.order_id}">
+		   			<i class="far fa-calendar-check"></i>&ensp;
+		   				예약번호&ensp;:&ensp;Y${b.order_id} 
+		   			<span class='text-small2 pl-2'>
+		   			<i class="fas fa-angle-double-left"></i>&nbsp;상세보기</span>
+		   		</a>
 	   		</th>
 	   		<th class='text-right pb-0'>
 	   			<input type="hidden" value="${b.order_id}">
@@ -133,10 +136,13 @@
 	</colgroup>
    		<tr>
 	   		<th class='pb-0' colspan='2'>
+	   		<a class="order_info text-body"  href="javascript:void(window.open('order_info?order_id=${l.order_id}','주문 상세보기','width=500,height=550,top=200,left=650'))">
+	   			<input type="hidden" id="order_num" value="${l.order_id}">
 	   			<i class="far fa-calendar-check"></i>&ensp;
 	   				예약번호&ensp;:&ensp;Y${l.order_id}
 	   				<span class='text-small2 pl-2'>
 	   			<i class="fas fa-angle-double-left"></i>&nbsp;상세보기</span>
+	   		</a>
 	   		</th>
 	   		<th class='text-right pb-0'>
 	   		 <c:if test='${l.cnt == 0}'> 
@@ -240,7 +246,7 @@ $(document).ready(function() {
 			  $(location).attr('href','order_delete?member_id=${pinfo.username}&order_id='+order);
 		  }
 		})
-	});//click
+	});//order-cancel end
 });
 </script>
 </sec:authorize>

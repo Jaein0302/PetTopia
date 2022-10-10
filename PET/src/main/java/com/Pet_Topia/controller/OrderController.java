@@ -95,7 +95,7 @@ public class OrderController {
 	
 	// 리뷰 쓰기
 	@PostMapping("/add")
-	public String add(int order,String review_id,Review review, HttpServletRequest request) throws Exception {
+	public String add(int order,String review_id,Review review, HttpServletRequest request, Model m) throws Exception {
 		
 		// 이미지 태그를 추출하기 위한 정규식.
 		Pattern pattern  =  Pattern.compile("<img[^>]*src=[\\\"']?([^>\\\"']+)[\\\"']?[^>]*>");
@@ -215,5 +215,16 @@ public class OrderController {
 				model.addAttribute("message","삭제실패");
 			}
 			return "redirect:list?member_id="+member_id;
+		}
+		
+		@RequestMapping(value="/order_info")
+		public ModelAndView order_info(OrderInfo o, ModelAndView mv) {
+			int order_id = o.getOrder_id();
+			OrderInfo order = oservice.order_info(order_id);
+			OrderInfo last = oservice.order_info_last(order_id);
+			mv.setViewName("order/order_info");
+			mv.addObject("order", order);
+			mv.addObject("last", last);
+			return mv;
 		}
 }

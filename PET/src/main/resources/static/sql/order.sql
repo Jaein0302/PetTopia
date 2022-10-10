@@ -14,20 +14,27 @@ order_image      VARCHAR2(100) --썸네일
 
 delete ORDERINFO
 
-<<<<<<< HEAD
 select * from ORDERINFO
-=======
+
 insert into orderInfo values (10000001, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 05. 10:30','서울 종로구 종로 1 (종로1가)', null);
 insert into orderInfo values (10000002, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 07. 11:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000003, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 08. 14:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000004, 'user1', 10001, '해피동물병원', '예방주사4',20000,'2022. 10. 07. 16:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000005, 'user1', 10001, '해피동물병원', '예방주사5',20000,'2022. 10. 07. 11:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
 insert into orderInfo values (10000006, 'user1', 10001, '해피동물병원', '예방주사6',20000,'2022. 10. 07. 12:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000007, 'user1', 10001, '해피동물병원', '예방주사6',20000,'2022. 10. 07. 12:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-
+insert into orderInfo values (10000001, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 13:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
+insert into orderInfo values (10000002, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 14:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
+insert into orderInfo values (10000003, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 11:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
+insert into orderInfo values (10000004, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 16:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
+insert into orderInfo values (10000005, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 17:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
 
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
 select to_char(sysdate, 'YYYY. MM. DD. HH24:MI') from dual
 
->>>>>>> branch 'main' of https://github.com/ahslxj1993/Pet_Topia.git
-
+		select orderinfo.*, m1.member_tell order_item_tell,
+		m2.member_tell order_member_tell
+		from orderinfo left outer join member m1
+		on orderinfo.order_location = m1.member_address
+		 left outer join member m2
+		on order_member_id = m2.member_id
+		where order_id=10000003	
