@@ -74,9 +74,11 @@
                 </div>
              
              <!-- 찜 -->
+              <sec:authorize access="hasRole('ROLE_MEMBER')">
              <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="border" style='padding: 9px 10px;'>
               <i class="fas fa-heart text-primary" style='font-size: 19px; line-height: 1.684;'></i>
              </a>
+             </sec:authorize>
             </div>
         </div>
 	</div>
