@@ -410,7 +410,7 @@ public class ProductController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "/purchase")
+	@PostMapping(value = "/purchase" , produces = "application/x-www-form-urlencoded; charset=UTF-8")
 	public int purchase_view(OrderInfo orderinfo) {
 
 		int result = productService.OrderInsert(orderinfo);
