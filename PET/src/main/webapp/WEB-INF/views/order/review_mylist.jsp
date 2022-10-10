@@ -57,10 +57,12 @@
 	</div>
 	<%-- 리뷰 디테일 끝--%>
 	
-	<div class='w-100'>
-   		<h2 class='rlist' style='mb-4'>내가 남긴 리뷰</h2>
+	<div class='w-100 m-2'>
+   		 <span class="commu pr-4" style='font-weight: bold;'>내가 남긴 리뷰</span>
+   		 <span class='text-small1'>(&nbsp;총 
+   		 <span class='text-comment'>${listcount}</span>개의 리뷰를 작성하셨습니다.&nbsp;)</span>
   	</div>
-	
+	<br>
    <c:if test="${!empty boardlist}">
      <c:forEach var="b" items="${boardlist}">
     <%-- order정보 --%> 

@@ -40,7 +40,59 @@
 		set ITEM_ASK_SUBJECT = #{ITEM_ASK_SUBJECT},
 			ITEM_ASK_CONTENT = #{ITEM_ASK_CONTENT}	
 		where ITEM_ASK_NUM = #{ITEM_ASK_NUM}	
-	</update>
+	</update>	
 	
+	<delete id="askDelete" parameterType="int">
+		delete ITEM_ASK
+		where ITEM_ASK_NUM = #{ITEM_ASK_NUM}	
+	</delete>
+		
+	<select id = "getAnswerCount" parameterType="int" resultType="int">
+		select count(*) 
+		from ITEM_ASK, ITEM
+		where ITEM_ASK.ITEM_ASK_ITEMID = #{ITEM_ID}
+	</select>
+	
+	<select id="getAnswerList" parameterType="int" resultType="ItemAsk">
+		select *
+		from ITEM_ASK, ITEM
+		where ITEM_ASK.ITEM_ASK_ITEMID = #{ITEM_ID}
+		order by ITEM_ASK_NUM desc
+	</select>	
+	
+	<insert id="addAnswer" parameterType="ItemAnswer">
+		<selectKey resultType="int" order="BEFORE" keyProperty="ITEM_ANSWER_NUM">
+			select nvl(max(ITEM_ANSWER_NUM),0) +1
+			from ITEM_ANSWER
+		</selectKey>
+
+		insert into ITEM_ANSWER
+		(ITEM_ANSWER_NUM, ITEM_ANSWER_USERNAME, ITEM_ANSWER_CONTENT, ITEM_ANSWER_DATE, ITEM_ASK_NUM)
+		values
+		(#{ITEM_ANSWER_NUM}, #{ITEM_ANSWER_USERNAME}, #{ITEM_ANSWER_CONTENT}, sysdate, #{ITEM_ASK_NUM})
+	</insert>
+	
+	<select id="answerCheck" parameterType="int" resultType="Integer">
+		select count(*)
+		from ITEM_ANSWER, ITEM_ASK
+		where ITEM_ANSWER.ITEM_ASK_NUM = ITEM_ASK.ITEM_ASK_NUM
+		and ITEM_ASK_ITEMID = #{ITEM_ID}
+		group by ITEM_ASK.ITEM_ASK_NUM
+		order by ITEM_ASK.ITEM_ASK_NUM desc
+	</select>	
+	
+	<select id="answerlist" parameterType="int" resultType="ItemAnswer">
+		select ITEM_ANSWER_NUM, ITEM_ANSWER_CONTENT
+		from ITEM_ANSWER, ITEM_ASK
+		where ITEM_ANSWER.ITEM_ASK_NUM = ITEM_ASK.ITEM_ASK_NUM
+		and ITEM_ASK_ITEMID = #{ITEM_ID}
+		order by ITEM_ASK.ITEM_ASK_NUM desc
+	</select>	
+		
+	<update id="updateAnswer" parameterType="map">
+		update ITEM_ANSWER
+		set ITEM_ANSWER_CONTENT = #{ITEM_ANSWER_CONTENT}
+		where ITEM_ANSWER_NUM = #{ITEM_ANSWER_NUM}	
+	</update>	
    
 </mapper>

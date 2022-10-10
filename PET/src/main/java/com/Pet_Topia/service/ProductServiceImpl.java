@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.Cart;
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Wish;
 import com.Pet_Topia.mybatis.mapper.ProductMapper;
@@ -103,15 +104,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
-	public int OrderInsert(int order_id, int item_id, String member_id, int order_amount, int order_price) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("order_id", order_id);
-		map.put("item_id", item_id);
-		map.put("member_id", member_id);
-		map.put("order_amount", order_amount);
-		map.put("order_price", order_price);
-		
-		return dao.OrderInsert(map);
+	public int OrderInsert(OrderInfo orderinfo) {		
+		return dao.OrderInsert(orderinfo);
 	}
 	
 	@Override

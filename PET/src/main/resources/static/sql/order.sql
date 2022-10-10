@@ -1,7 +1,6 @@
 drop table ORDERINFO cascade constraints purge;
-
 create table ORDERINFO(
-order_id     	NUMBER(15) PRIMARY KEY,			--주문번호
+order_id     	varchar(30) PRIMARY KEY,			--주문번호
 order_member_id references member(member_id) on delete cascade, --주문아이디
 order_item_id   references item(item_id) on delete cascade,	 --상품번호
 order_item_sellerName varchar2(50), --판매자의 이름
@@ -42,5 +41,10 @@ insert into orderInfo values (
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
 select to_char(sysdate, 'YYYY. MM. DD. HH24:MI') from dual
 
-
-
+		select orderinfo.*, m1.member_tell order_item_tell,
+		m2.member_tell order_member_tell
+		from orderinfo left outer join member m1
+		on orderinfo.order_location = m1.member_address
+		 left outer join member m2
+		on order_member_id = m2.member_id
+		where order_id=10000003	

@@ -61,18 +61,24 @@
                 </form>
             </div>
          <!-- 검색바 끝 -->
-            
-            <div class="col-lg-3 col-6 text-right">
+
+            <div class="col-lg-3 col-6 text-right pl-0" style='position:relative'>
+             <!-- 추천 검색어 -->
+            <span class='best_search'>추천 검색어</span>
+            <div class='block1'>
+             	<ul id="ticker1">
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=중성화'>중성화</a></li>
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=스케일링'>스케일링</a></li>
+             	<li><a href='${pageContext.request.contextPath}/main/search_item?item=애견 유치원'>애견유치원</a></li>
+             	</ul>
+                </div>
+             
              <!-- 찜 -->
-             <sec:authorize access="hasRole('ROLE_MEMBER')">
-             	<a
-             	href="${pageContext.request.contextPath }/product/goToMyWishList?member_id=<sec:authentication property="principal.Username"/>"
-             	class="btn border">
-                    <i class="fas fa-heart text-primary"></i>
-                </a>
+              <sec:authorize access="hasRole('ROLE_MEMBER')">
+             <a href="${pageContext.request.contextPath }/product/goToMyWishList" class="border" style='padding: 9px 10px;'>
+              <i class="fas fa-heart text-primary" style='font-size: 19px; line-height: 1.684;'></i>
+             </a>
              </sec:authorize>
-                
-                
             </div>
         </div>
 	</div>
@@ -377,6 +383,10 @@ $(window).on('load', function(){ //load가 되었을때 실행
         $('.me4').addClass('active');
     }else if (pageUrl.indexOf('community') > -1) { 
         $('.me2').addClass('active');
+    }else if (pageUrl.indexOf('admin_notice') > -1) { 
+        $('.me1').addClass('active');
+    }else if (pageUrl.indexOf('admin_ask_list') > -1) { 
+        $('.me3').addClass('active');
     }else {
         $('.me0').addClass('active'); 
     }

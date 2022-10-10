@@ -51,7 +51,7 @@ if (withdraw_message == "withdraw_success"){
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">반려견에게 눈높이를 맞춘</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">애견 유치원</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=유치원" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -60,8 +60,8 @@ if (withdraw_message == "withdraw_success"){
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">반려견, 반려묘를 위한</h4>
-                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">필수 예방접종</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">중성화 수술</h3>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=중성화" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@ if (withdraw_message == "withdraw_success"){
                                 <div class="p-3" style="max-width: 700px;">
                                     <h4 class="text-light text-uppercase font-weight-medium mb-3">지금도 귀엽지만 더 귀엽게!</h4>
                                     <h3 class="display-4 text-white font-weight-semi-bold mb-4">애견 미용</h3>
-                                    <a href="" class="btn btn-light py-2 px-3">보러가기</a>
+                                    <a href="${pageContext.request.contextPath}/main/search_item?item=미용" class="btn btn-light py-2 px-3">보러가기</a>
                                 </div>
                             </div>
                         </div>
@@ -200,14 +200,13 @@ if (withdraw_message == "withdraw_success"){
                          <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span class="text-body"> ${p.ITEM_CONTENT}</span>
+                    	<span class="text-body"> ${p.seller_name}</span>
 						<h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
 						<i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
-                        <a href="" class="btn btn-sm text-dark p-0 shopping_cart"><i class="fas fa-shopping-cart text-primary mr-1"></i></a>
+                    	<a href="" class="btn btn-sm text-dark p-0 pr-2 zzim"><i class="fas fa-heart"></i></a>
                     </div>
                 </div>
             </div>

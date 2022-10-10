@@ -18,6 +18,9 @@ public interface OrderService {
 
 	List<OrderInfo> findScheduleListBySeller(String seller_id);
 
+	OrderInfo order_info(int order_id);
+
+	OrderInfo order_info_last(int order_id);
 
 
 

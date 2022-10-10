@@ -126,3 +126,17 @@ function toggleLayer( obj, s ) {
                     e.preventDefault();
                 }
             });
+            
+            
+   //추천 검색어
+	var ticker = function()
+	{
+	   setTimeout(function(){
+	       $('#ticker1 li:first').animate( {marginTop: '-27px'}, 400, function()
+	       {
+	           $(this).detach().appendTo('ul#ticker1').removeAttr('style');
+	       });
+	       ticker();
+	   }, 2500);
+	};
+	ticker();
