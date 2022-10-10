@@ -5,13 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.Abn;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.mybatis.mapper.AdminMapper;
-import com.Pet_Topia.mybatis.mapper.MemberMapper;
 
 @Service
 public class AdminServiceImpl implements AdminService {

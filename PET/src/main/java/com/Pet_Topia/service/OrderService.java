@@ -18,8 +18,6 @@ public interface OrderService {
 
 	List<OrderInfo> findScheduleListBySeller(String seller_id);
 
-	List<OrderInfo> allScheduleList();
-
 
 
 

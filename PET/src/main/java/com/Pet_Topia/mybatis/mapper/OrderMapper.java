@@ -44,7 +44,7 @@ public interface OrderMapper {
 
 	List<OrderInfo> findScheduleListBySeller(String seller_id);
 
-	List<OrderInfo> allScheduleList();
+
 
 
 

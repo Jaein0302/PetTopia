@@ -8,15 +8,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.Pet_Topia.domain.Abn;
@@ -28,9 +24,6 @@ import com.Pet_Topia.task.UserPdfExporter;
 @Controller
 @RequestMapping(value = "/admin") 
 public class AdminController {
-	// import org.slf4j.Logger;
-	// import org.slf4j.LoggerFactory;
-	private static final Logger Logger = LoggerFactory.getLogger(AdminController.class);
 
 	//멤버 리스트 부르기 위해서 필드값,생성자 생성
 	//오토와이러를 안쓴다면?..

@@ -126,7 +126,4 @@
 		where order_seller = #{seller_id}
 	</select>
 	
-	<select id="allScheduleList" resultType="OrderInfo">
-		select * from orderinfo
-	</select>
 </mapper>

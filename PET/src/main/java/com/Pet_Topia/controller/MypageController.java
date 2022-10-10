@@ -20,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -144,41 +145,51 @@ public class MypageController {
 	}
 	
 	
-	//스케줄 
+	//판매자-스케줄확인 
 	@RequestMapping(value = "/SCH")
 	public ModelAndView sch(@RequestParam (value = "member_id") String member_id,
 							ModelAndView mv) {
 		
 		mv.addObject("member_id", member_id);
-		mv.setViewName("schedule/calendar_test");
+		mv.setViewName("schedule/calendar_seller");
 		return mv;
 	}
 	
 	//ajax 에서 아이디로 스케줄 리스트 가져오기
-	@RequestMapping ("/getSchListByID")
+	//가져온 리스트를 json array로 파싱해아 한다
+	@GetMapping ("/getSchListByID")
 	@ResponseBody
-    public List<Map<String, Object>> ajax_schedule_list(@RequestParam(value = "seller_id") String seller_id) {
-        
+    public List<Map<String, Object>> ajax_schedule_list(String seller_id) {
+		
 		List<OrderInfo> list = orderservice.findScheduleListBySeller(seller_id);
-
-		JSONObject jsonObj = new JSONObject();
+		logger.info("!!!list 확인 : "+ list.toString());
+		
+        JSONObject jsonObj = new JSONObject();
         JSONArray jsonArr = new JSONArray();
         
-        HashMap<String, Object> hash = new HashMap<>();
- 
-        for (int i = 0; i < list.size(); i++) {
-            hash.put("title", list.get(i).getOrder_item_name());
-            hash.put("start", list.get(i).getOrder_time());
-        	// hash.put("time", list.get(i).getScheduleTime());
-            
-            jsonObj = new JSONObject(hash);
-            jsonArr.add(jsonObj);
+        
+        HashMap<String, Object> hashMap = new HashMap<>();
+        
+        
+        for (int i = 0 ; i < list.size() ; i ++) {
+        	hashMap.put("title", list.get(i).getOrder_item_name() + " // " + list.get(i).getOrder_member_id());
+        	hashMap.put("start", list.get(i).getOrder_time());
+
+        	logger.info("!!! hashMap 확인 : " +hashMap.toString());
+        	
+        	//hashMap 객체를 JSONObject로 바꾸고
+        	//그 JSONObject를 JSONArray에 넣어야 한다
+        	jsonObj = new JSONObject(hashMap);
+        	jsonArr.add(jsonObj);
         }
-        logger.info("jsonArrCheck: {}", jsonArr);
-        return jsonArr;
+        logger.info("!!! jsonArr 체크 : " + jsonArr.toString());
+		return jsonArr;
+ 
     }
+	
 
 	
+
 
 	
 

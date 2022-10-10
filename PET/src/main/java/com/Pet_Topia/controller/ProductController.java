@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
@@ -387,7 +386,6 @@ public class ProductController {
 	public ModelAndView purchase_view(int ITEM_ID,
 									 String member_id,
 									 ModelAndView mv, 
-									 String order_date,
 									 HttpServletRequest request) {
 
 		Product productdata = productService.getDetail(ITEM_ID);		
@@ -412,7 +410,6 @@ public class ProductController {
 		mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
-		mv.addObject("order_date", order_date);
 		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}

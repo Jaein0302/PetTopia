@@ -19,7 +19,6 @@
 	<dependencies>
 	
 		
-		
 	   <dependency>
 		<groupId>org.apache.poi</groupId>
 		<artifactId>poi-ooxml</artifactId>
@@ -130,7 +129,13 @@
     		<version>1.1.1</version>
 		</dependency>
 		
-
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+    		<groupId>com.fasterxml.jackson.core</groupId>
+    		<artifactId>jackson-databind</artifactId>
+    		<version>2.13.4</version>
+		</dependency>
+		
 		
 		
 		

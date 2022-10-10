@@ -1,4 +1,9 @@
-<!-- 이 페이지에서 날짜와 시간을 선택해서 상품 상세창으로 그 데이터를 보내야함 -->
+<!-- 
+판매자- 스케줄 확인
+
+1. 자신의 스케줄이 나온다.
+2. 일정을 수정해야 한다. --나중에 추가로하자
+ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -19,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	var member_id = $('#hidden_id').val()
     	
         var request = $.ajax({
-            url: "/mypage/getSchListByID",
+            url: "getSchListByID",
             data : {"seller_id" : member_id},
             beforeSend : function(xhr)
             {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
@@ -35,13 +40,18 @@ document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
+            	locale: 'ko',
+            	timeZone : 'Asia/Seoul',
                 initialView: 'timeGridWeek',
+                slotMinTime: '08:00',
+                slotMaxTime: '23:00',
+                eventDurationEditable : false,
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'timeGridWeek,timeGridDay'
                 },
-                editable: true,
+                editable: false,
                 droppable: true, // this allows things to be dropped onto the calendar
                 drop: function (arg) {
                     // is the "remove after drop" checkbox checked?
@@ -112,13 +122,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   #calendar {
-    max-width: 1100px;
-    margin: 0 auto;
+    width: 1100px;
   }
   
   #calendar > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr:nth-child(1) > td{
   	display: none
   }
+  
+ 
   
 
 
@@ -140,12 +151,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- calendar -->
 <input type="hidden" value="${member_id }" id="hidden_id">
-  <div id='wrap'>
+  <div id='wrap' style="width: 600px!important; height: 600px!important">
 
 
-    <div id='calendar-wrap'>
       <div id='calendar'></div>
-    </div>
     <br>
 	<div class="fc">
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
