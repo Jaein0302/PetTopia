@@ -72,7 +72,6 @@ $(document).ready(function(){
     						 url: 'product/purchase',
     						 method: 'POST',
     						 data : {
-    							 "order_id": rsp.order_uid,
     							 "item_id": rsp.item_id,
     							 "member_id": rsp.buyer_id,
     							 "order_amount": rsp.count,

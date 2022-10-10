@@ -127,7 +127,7 @@
 	</select>
 	
 	
-	<select id="order_info" parameterType="int"	resultType="OrderInfo">
+	<select id="order_info" parameterType="String"	resultType="OrderInfo">
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell
 		from orderinfo left outer join member m1
@@ -135,10 +135,10 @@
 		left outer join member m2
 		on order_member_id = m2.member_id
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time		
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time		
 	</select>
 	
-	<select id="order_info_last" parameterType="int"	resultType="OrderInfo">
+	<select id="order_info_last" parameterType="String"	resultType="OrderInfo">
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell, nvl(cnt,0) cnt
 		from orderinfo left outer join member m1
@@ -150,7 +150,7 @@
 			  			 group by review.review_num)r
 		on orderinfo.order_id = r.review_num
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time		
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time		
 	</select>
   
   

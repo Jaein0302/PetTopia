@@ -39,7 +39,7 @@ insert into orderInfo values (
 
 
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
-select to_char(sysdate, 'YYYY. MM. DD. HH24:MI') from dual
+select to_char(sysdate, 'YYYY-MM-DD HH24:MI') from dual
 
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell
