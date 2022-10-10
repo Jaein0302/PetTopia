@@ -1,6 +1,5 @@
 package com.Pet_Topia.domain;
 
-import org.springframework.web.multipart.MultipartFile;
 public class Abn {
 	
 	private int ADN_NUMBER;

@@ -30,18 +30,12 @@
 </style>
 
 <script>
+var result = "${result}";
 
 $(function() {	
-	var result = "${result}";
 	
 	if(result == 'addSuccess'){
 		alert("상품 문의 성공입니다.");
-	}
-	if(result == 'deleteSuccess'){
-		alert("문의 삭제 성공입니다.");
-	}		
-	if(result == "updateSuccess") {
-		alert("문의 수정 성공입니다.");
 	}
 	
 	$(".purchase").on('click', function(){
@@ -49,56 +43,12 @@ $(function() {
 			alert("예약날짜와 시간을 설정해주세요");
 		} else {
 			location.href = "${pageContext.request.contextPath}/product/order_view?"
-					+"ITEM_ID=" + ${productdata.ITEM_ID}
-					+"&member_id=" + $("input[name='member_id']").val()
-					+"&order_date=" + $("#datetimepicker1Input").val();
-					
-					console.log("ITEM_ID=" + ${productdata.ITEM_ID} );
-					console.log("member_id=" + $("input[name='member_id']").val() );
-					console.log("order_date=" + $("#datetimepicker1Input").val() );
+					+"ITEM_ID=${productdata.ITEM_ID}"
+					+"&member_id=" + $("input[name='member_id']").val();
 		}
-	})
-		
-	$(".cart").on('click', function(){
-		location.href = "${pageContext.request.contextPath}/product/cart?ITEM_ID=${productdata.ITEM_ID}&amount=" 
-		+ $(".amount").val() + "&member_id=" + $("input[name='member_id']").val();
-	});//cart click function
+	})//purchase click function
+		   
 	
-	
-	
-	new tempusDominus.TempusDominus(document.getElementById('datetimepicker1'), {
-		stepping: 30,
-		restrictions: {
-	          minDate: undefined,
-	          maxDate: undefined,
-	          disabledDates: [],
-	          enabledDates: [],
-	          daysOfWeekDisabled: [],
-	          disabledTimeIntervals: [],
-	          disabledHours: [0,1,2,3,4,5,6,7,22,23,24],
-	          enabledHours: []
-	      },
-		display: { 
-	        components: {
-	        	minutes: true,
-	            seconds: false,
-	            useTwentyfourHour: true,
-	        },
-	        icons: {
-	            type: 'icons',
-	            time: 'fa fa-solid fa-clock',
-	            date: 'fa fa-solid fa-calendar',
-	            up: 'fa fa-solid fa-arrow-up',
-	            down: 'fa fa-solid fa-arrow-down',
-	            previous: 'fa fa-solid fa-chevron-left',
-	            next: 'fa fa-solid fa-chevron-right',
-	            today: 'fa fa-solid fa-calendar-check',
-	            clear: 'fa fa-solid fa-trash',
-	            close: 'fas fa-solid fa-xmark'
-	        },
-	        sideBySide: true,
-	    },
-	});//temus dominus end
 	
 	
 	$('#wishButton').on('click',function(){
@@ -135,6 +85,16 @@ $(function() {
 		})//outer ajax end
 	})//wish button click function
 	
+	
+	
+	//수정성공하면 alert
+   	var result = "${result}";
+	if(result == "updatesuccess") {
+		alert("문의 수정이 완료되었습니다");
+	}
+	
+	
+	
 });
 
 </script>
@@ -161,31 +121,47 @@ $(function() {
                        <img class='img-fluid w-30' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}">
                </div>
                   <div class="col-md-7">
-                     <form>
                      
                      <p>
                         상품명 <span>${productdata.ITEM_NAME}</span>
                      </p>
                      <hr>
+                     
                      <p>
                         판매가 <span class="product_price">${productdata.ITEM_PRICE}원</span>
                      </p>
                      <hr>
-
-                     <p>
-                        예약 날짜/시간 정하기
-
-                     <div class='input-group' id='datetimepicker1' data-td-target-input='nearest' data-td-target-toggle='nearest'>
-                          <input id='datetimepicker1Input' type='text' class='form-control' data-td-target='#datetimepicker1' />
-                           <span class='input-group-text' data-td-target='#datetimepicker1' data-td-toggle='datetimepicker'>
-                            <span class='fa fa-solid fa-calendar'></span>
-                          </span>
-                      </div>
                      
-                     </form>
-                  <hr>
+                     <p>
+                     	판매자 <span>${productdata.MEMBER_ID }</span>
+                     </p>
+                     <hr>
+                     
+                     <p>
+                     	카테고리 <span>
+                     			<c:if test="${productdata.ITEM_CATEGORY eq 'treat'}">
+                     				수술/치료
+                     			</c:if>
+                     			
+                     			<c:if test="${productdata.ITEM_CATEGORY eq 'beauty'}">
+                     				미용
+                     			</c:if>
+                     			
+                     			<c:if test="${productdata.ITEM_CATEGORY eq 'education'}">
+                     				교육
+                     			</c:if>
+                     		   </span>
+                     </p>
+                     <hr>
+                     
+                     <p>
+                     	주소 <span>${productdata.ITEM_ADDRESS }</span>
+                     </p>
+                     <hr>
+						
 
-                  <button type="button" class="btn btn-primary">관심상품 담기</button>
+                  <button type="button" class="btn btn-primary" id="wishButton">관심상품 담기</button>
+                  <input id="hidden_itemID" type="hidden" value="${productdata.ITEM_ID }">
                   <button type="button" class="btn btn-primary purchase">바로 구매하기</button>
                   
                </div>

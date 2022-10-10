@@ -1,10 +1,17 @@
 package com.Pet_Topia.controller;
 
+
+
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +20,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.Member;
+import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.service.MemberService;
+import com.Pet_Topia.service.OrderService;
 
 @Controller
 @RequestMapping(value = "/mypage")
@@ -30,11 +41,13 @@ public class MypageController {
 	
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
+	private OrderService orderservice;
 	
 	@Autowired
-	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder) {
+	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder, OrderService orderservice) {
 		this.memberservice = memberservice;
 		this.passwordEncoder = passwordEncoder;
+		this.orderservice = orderservice;
 	}
 	
 	//회원정보폼으로 이동
@@ -114,7 +127,6 @@ public class MypageController {
 									HttpServletResponse response) {
 		
 		String id = (String) principal.getName();
-		
 		Member rmember = memberservice.getMemberdata(id);
 		
 		//로그아웃을 위해서 필요
@@ -132,6 +144,52 @@ public class MypageController {
 		
 	}
 	
+	
+	//판매자-스케줄확인 
+	@RequestMapping(value = "/SCH")
+	public ModelAndView sch(@RequestParam (value = "member_id") String member_id,
+							ModelAndView mv) {
+		
+		mv.addObject("member_id", member_id);
+		mv.setViewName("schedule/calendar_seller");
+		return mv;
+	}
+	
+	//ajax 에서 아이디로 스케줄 리스트 가져오기
+	//가져온 리스트를 json array로 파싱해아 한다
+	@GetMapping ("/getSchListByID")
+	@ResponseBody
+    public List<Map<String, Object>> ajax_schedule_list(String seller_id) {
+		
+		List<OrderInfo> list = orderservice.findScheduleListBySeller(seller_id);
+		logger.info("!!!list 확인 : "+ list.toString());
+		
+        JSONObject jsonObj = new JSONObject();
+        JSONArray jsonArr = new JSONArray();
+        
+        
+        HashMap<String, Object> hashMap = new HashMap<>();
+        
+        
+        for (int i = 0 ; i < list.size() ; i ++) {
+        	hashMap.put("title", list.get(i).getOrder_item_name() + " // " + list.get(i).getOrder_member_id());
+        	hashMap.put("start", list.get(i).getOrder_time());
+
+        	logger.info("!!! hashMap 확인 : " +hashMap.toString());
+        	
+        	//hashMap 객체를 JSONObject로 바꾸고
+        	//그 JSONObject를 JSONArray에 넣어야 한다
+        	jsonObj = new JSONObject(hashMap);
+        	jsonArr.add(jsonObj);
+        }
+        logger.info("!!! jsonArr 체크 : " + jsonArr.toString());
+		return jsonArr;
+ 
+    }
+	
+
+	
+
 
 	
 

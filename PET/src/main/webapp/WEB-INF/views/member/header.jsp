@@ -285,7 +285,7 @@
                         	 	<a href="${pageContext.request.contextPath}/mypage/update" class="dropdown-item mydrop">회원정보 수정</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}" class="dropdown-item mydrop">내 글</a>
                         	 	<a href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}" class="dropdown-item mydrop">내 댓글</a>
-                        	 	<a href="#" class="dropdown-item mydrop">나의 일정확인</a>
+                        	 	<a href="${pageContext.request.contextPath}/mypage/SCH?member_id=${pinfo.username}" class="dropdown-item mydrop">나의 일정확인</a>
                         	 	<a href="${pageContext.request.contextPath}/product/my_product?member_id=${pinfo.username}" class="dropdown-item mydrop">내 상품 관리</a>                     	 		
                         	 	<a href="#" class="dropdown-item">                     
                         	 	<span id="logout"><i class="fas fa-sign-out-alt"></i>&ensp;로그아웃</span></a>

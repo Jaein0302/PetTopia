@@ -121,6 +121,11 @@
 		where order_id = #{order_id}
 	</delete>
 	
+	<select id="findScheduleListBySeller" parameterType="String" resultType="OrderInfo">
+		select * from orderinfo
+		where order_seller = #{seller_id}
+	</select>
+	
 	
 	<select id="order_info" parameterType="int"	resultType="OrderInfo">
 		select orderinfo.*, m1.member_tell order_item_tell,
@@ -147,4 +152,6 @@
 		where order_id=#{order_id}
 		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time		
 	</select>
+  
+  
 </mapper>

@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
 import com.Pet_Topia.mybatis.mapper.OrderMapper;

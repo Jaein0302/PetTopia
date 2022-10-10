@@ -27,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.Pet_Topia.domain.Community;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
@@ -387,7 +386,6 @@ public class ProductController {
 	@GetMapping("/order_view")
 	public ModelAndView purchase_view(int ITEM_ID,
 									 String member_id,
-									 String order_date,
 									 ModelAndView mv, 
 									 HttpServletRequest request) {
 
@@ -404,16 +402,11 @@ public class ProductController {
 		
 		logger.info("구매페이지보기 성공");		
 		Member memberlist = memberservice.member_info(member_id);		
-		
-		//UID 만들기		
-//		String order_uid = UUID.randomUUID().toString();		
-//		logger.info("order_uid=" + order_uid);
-
-		mv.setViewName("product/order_view");
+  
+    mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
-		mv.addObject("order_date", order_date);
-//		mv.addObject("order_uid", order_uid);		
+		mv.addObject("order_uid", order_uid);		
 		return mv;
 	}
 	

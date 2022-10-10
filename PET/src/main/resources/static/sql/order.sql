@@ -8,24 +8,35 @@ order_item_name varchar2(50), --상품이름
 order_item_price number(10), --상품가격
 order_time varchar2(100), --예약 시간
 order_location varchar2(100), --장소
-order_image      VARCHAR2(100) --썸네일
+order_image      VARCHAR2(100), --썸네일
+order_seller varchar2(100) --주문할 상품을 판매하는사람, 판매자가 자신의 일정을 확인할때 필요
 )
 
 delete ORDERINFO
-
 select * from ORDERINFO
 
-insert into orderInfo values (10000001, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 05. 10:30','서울 종로구 종로 1 (종로1가)', null);
-insert into orderInfo values (10000002, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 07. 11:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000003, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 08. 14:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000004, 'user1', 10001, '해피동물병원', '예방주사4',20000,'2022. 10. 07. 16:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000005, 'user1', 10001, '해피동물병원', '예방주사5',20000,'2022. 10. 07. 11:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000006, 'user1', 10001, '해피동물병원', '예방주사6',20000,'2022. 10. 07. 12:08','서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg');
-insert into orderInfo values (10000001, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 13:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
-insert into orderInfo values (10000002, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 14:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
-insert into orderInfo values (10000003, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 11:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
-insert into orderInfo values (10000004, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 16:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
-insert into orderInfo values (10000005, 'user1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 17:30','서울 종로구 종로 1 (종로1가)','\2022-10-9\bbs202210983164857.jpg');
+insert into orderInfo values (
+	10000001, 'buyer1', 10001, '해피동물병원', '예방주사',20000, to_char( sysdate , 'YYYY-MM-DD HH24:mm'),
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg', 'seller10');
+insert into orderInfo values (
+	10000002, 'buyer1', 10001, '해피동물병원', '예방주사2',20000,'2022-10-09 16:30',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+insert into orderInfo values (
+	10000003, 'buyer1', 10001, '해피동물병원', '예방주사',20000,'2022. 10. 09. 14:30',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+insert into orderInfo values (
+	10000004, 'buyer1', 10001, '해피동물병원', '예방주사4',20000,'2022. 10. 23. 16:30',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+insert into orderInfo values (
+	10000005, 'buyer1', 10001, '해피동물병원', '예방주사5',20000,'2022. 10. 24. 11:30',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+insert into orderInfo values (
+	10000006, 'buyer1', 10001, '해피동물병원', '예방주사6',20000, '2022. 10. 30. 12:00',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+insert into orderInfo values (
+	10000007, 'buyer1', 10001, '해피동물병원', '예방주사6',20000,'2022. 11. 07. 12:30',
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
+
 
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
 select to_char(sysdate, 'YYYY. MM. DD. HH24:MI') from dual

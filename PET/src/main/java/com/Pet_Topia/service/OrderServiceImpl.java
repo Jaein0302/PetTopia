@@ -52,6 +52,11 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
+	public List<OrderInfo> findScheduleListBySeller(String seller_id) {
+		return dao.findScheduleListBySeller(seller_id);
+    }
+    
+  @Override  
 	public OrderInfo order_info(int order_id) {
 		return dao.order_info(order_id);
 	}
