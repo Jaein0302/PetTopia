@@ -100,11 +100,13 @@
 		where  ITEM_ID = #{ITEM_ID}	
 	</delete>
 	
-	<insert id="OrderInsert"  parameterType="map">
+	<insert id="OrderInsert"  parameterType="OrderInfo" >
 		insert into ORDERINFO
-		(ORDER_ID, ITEM_ID, MEBER_ID, order_amount, order_price)
+		(order_id, order_member_id, order_item_id, order_item_sellerName, 
+		order_item_name, order_item_price, order_time, order_location, order_image )
 		values
-		(#{order_id}, #{item_id}, #{member_id}, #{order_amount}, #{order_price})		
+		(#{order_id}, #{order_member_id}, #{order_item_id}, #{order_item_sellerName}, 
+		#{order_item_name}, #{order_item_price}, #{order_time}, #{order_location}, #{order_image})		
 	</insert>
 	
 	<select id="getmyListCount" parameterType="String" resultType="int">

@@ -2,7 +2,7 @@ package com.Pet_Topia.domain;
 
 public class OrderInfo {
 	
-	private int order_id;				// 주문번호
+	private String order_id;				// 주문번호
 	private String order_member_id; 	//아이디
 	private int order_item_id;			//상품번호
 	private String order_item_sellerName; //판매자
@@ -16,10 +16,10 @@ public class OrderInfo {
 	private String order_item_tell; //판매자 연락처
 	private String order_member_tell; //고객 연락처
 	
-	public int getOrder_id() {
+	public String getOrder_id() {
 		return order_id;
 	}
-	public void setOrder_id(int order_id) {
+	public void setOrder_id(String order_id) {
 		this.order_id = order_id;
 	}
 	public String getOrder_member_id() {

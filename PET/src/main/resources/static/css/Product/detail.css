@@ -5,7 +5,6 @@
     background: #aaa;
   }
   
- p{text-align:left;font-weight:bold;}
 
 .tab > section > p {
             margin: 0 0 20px;
@@ -40,7 +39,7 @@
             cursor: pointer;}
 
         /*input 클릭시, label 스타일*/
-.tab input:checked + label {
+.tab > input:checked + label {
               color: #555;
               border: 1px solid #ddd;
               border-top: 1px solid black;

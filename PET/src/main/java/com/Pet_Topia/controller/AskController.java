@@ -3,6 +3,7 @@ package com.Pet_Topia.controller;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.security.Principal;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +31,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Pet_Topia.domain.ItemAnswer;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.MySaveFolder;
 import com.Pet_Topia.domain.Product;
@@ -57,7 +59,7 @@ public class AskController {
 						  @RequestHeader(value = "referer") String beforeURL)throws Exception {
 		
 		logger.info("referer:" + beforeURL);
-		
+				
 		int result = askService.insertAsk(itemask); 
 		
 		if(result == 0) {
@@ -82,8 +84,78 @@ public class AskController {
 		int result = askService.updateAsk(itemask); 
 		logger.info("result=" + result);
 		
-		if (result == '1') {
-			rattr.addFlashAttribute("result", "updatesuccess");
+		if (result == 1) {
+			rattr.addFlashAttribute("result", "updateSuccess");
+		}		
+
+		return "redirect:" + beforeURL;		
+	}
+	
+	@GetMapping("/delete")
+	public String delete(int ITEM_ASK_NUM,
+						 Model mv, 
+						 HttpServletRequest request,
+						 RedirectAttributes rattr,
+						 @RequestHeader(value = "referer") String beforeURL)throws Exception {
+
+		int result = askService.askDelete(ITEM_ASK_NUM);
+		
+		//삭제 처리 실패한 경우
+		if(result == 0) {
+			logger.info("문의 삭제 실패");
+			mv.addAttribute("url",request.getRequestURL());
+			mv.addAttribute("message", "문의 삭제 실패");
+			return "error/error";
+		}
+		logger.info("문의 삭제 성공");
+		rattr.addFlashAttribute("result","deleteSuccess");
+		
+		return "redirect:" + beforeURL;
+	}
+	
+	@GetMapping("/answer_view")
+	public ModelAndView getreplyview(int ITEM_ID,
+									ModelAndView mv
+								   ) {
+				
+		int listcount = askService.getAnswerCount(ITEM_ID); //  ask 총 리스트 수	
+		List<ItemAsk> asklist = askService.getAnswerList(ITEM_ID); // ask 리스트	
+		List<Integer> answercheck = askService.answerCheck(ITEM_ID);  // 답변 유무
+		List<ItemAnswer> answerlist = askService.answerlist(ITEM_ID);  // 답변 번호, 답변 내용
+				
+		logger.info(asklist.toString());
+		logger.info(answercheck.toString());
+		
+		mv.addObject("listcount", listcount);
+		mv.addObject("asklist", asklist);
+		mv.addObject("answercheck", answercheck);
+		mv.addObject("answerlist", answerlist);
+		mv.setViewName("product/answer_view");
+		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "/add_answer")
+	public int addAnswer( ItemAnswer answer ) {
+		
+		int result = askService.addAnswer(answer); 
+		logger.info("result=" + result);
+
+		return result;	
+	}
+	
+	@GetMapping(value = "/update_answer")
+	public String updateAnswer(
+							 int ITEM_ANSWER_NUM,
+							 String ITEM_ANSWER_CONTENT,
+							 RedirectAttributes rattr,
+							 @RequestHeader(value = "referer") String beforeURL)throws Exception {
+		
+		int result = askService.updateAnswer(ITEM_ANSWER_NUM, ITEM_ANSWER_CONTENT); 
+		logger.info("result=" + result);
+		
+		if (result == 1) {
+			rattr.addFlashAttribute("result", "updateSuccess");
 		}		
 
 		return "redirect:" + beforeURL;		
