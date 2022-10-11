@@ -43,16 +43,14 @@ public class MypageController {
 	private MemberService memberservice;
 	private PasswordEncoder passwordEncoder;
 	private OrderService orderservice;
-	private ScheduleService scheduleService;
 	
 	
 	@Autowired
 	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder,
-							OrderService orderservice, ScheduleService scheduleService) {
+							OrderService orderservice) {
 		this.memberservice = memberservice;
 		this.passwordEncoder = passwordEncoder;
 		this.orderservice = orderservice;
-		this.scheduleService = scheduleService;
 	}
 	
 	//회원정보폼으로 이동
@@ -192,6 +190,8 @@ public class MypageController {
 		return jsonArr;
  
     }
+	
+	
 	
 
 	

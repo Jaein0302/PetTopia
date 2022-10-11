@@ -274,7 +274,6 @@ $(document).ready(function(){
 	
 	$("#confirm").click(function(){
 		
-		var add_event_count = 0;
 		var member_id = $('#seller_id').html()
 		
 	    var request = $.ajax({
@@ -292,98 +291,40 @@ $(document).ready(function(){
             console.log(data); // log 로 데이터 찍어주기.
 
             var calendarEl = document.getElementById('calendar');
-            calendar = new FullCalendar.Calendar(calendarEl, {
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
             	locale: 'ko',
-            	timeZone: 'Asia/Seoul',
+            	timeZone : 'Asia/Seoul',
                 initialView: 'timeGridWeek',
                 slotMinTime: '08:00',
                 slotMaxTime: '23:00',
-                eventDurationEditable: false,
+                eventDurationEditable : false,
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'timeGridWeek,timeGridDay'
                 },
                 editable: false,
-                selectable: true,
                 droppable: true, // this allows things to be dropped onto the calendar
-				events: data,
-                eventAdd: function () { // 이벤트가 추가되면 발생하는 이벤트
-                    console.log()
+                drop: function (arg) {
+                    // is the "remove after drop" checkbox checked?
+                    if (document.getElementById('drop-remove').checked) {
+                        // if so, remove the element from the "Draggable Events" list
+                        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                    }
                 },
-
-                // eventChange: function (obj) { // 이벤트가 수정되면 발생하는 이벤트
-                //     allEvent = calendar.getEvents();
-                //     console.log(allEvent);
-                // },
-                // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
-                //     console.log(obj);
-                // },
                 /**
-                 * 드래그로 이벤트 추가하기
+                 * data 로 값이 넘어온다. log 값 전달.
                  */
-                select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-
-
-                    var title = "${productdata.ITEM_NAME}";
-                    if (title) {
-                        calendar.addEvent({
-                            title: title,
-                            start: arg.start,
-                        })
-                        add_event_count++ 
-                    } else {
-                    	alert("일정은 한번만 추가 할 수 있습니다.\n잘못입력하셨다면 새로고침 후 이용해주세요.");
-                    	return false;
-                    }
-                    var allEvent = calendar.getEvents(); // .getEvents() 함수로 모든 이벤트를 Array 형식으로 가져온다. (FullCalendar 기능 참조)
-
-                    var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                    for (var i = 0; i < allEvent.length; i++) {
-                        var obj = new Object();     // Json 을 담기 위해 Object 선언
-                        // alert(allEvent[i]._def.title); // 이벤트 명칭 알람
-                        obj.title = allEvent[i]._def.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
-                        obj.start = allEvent[i]._instance.range.start; // 시작
-                        obj.end = allEvent[i]._instance.range.end; // 끝
-
-                        events.push(obj);
-                    }
-                    var jsondata = JSON.stringify(events);
-                    console.log(jsondata);
-                    // saveData(jsondata);
-
-                    $(function saveData(jsondata) {
-                        $.ajax({
-                            url: "/full-calendar/calendar-admin-update",
-                            method: "POST",
-                            dataType: "json",
-                            data: JSON.stringify(events),
-                            contentType: 'application/json',
-                        })
-                            .done(function (result) {
-                                // alert(result);
-                            })
-                            .fail(function (request, status, error) {
-                                 alert("일정표를 데이터베이스에 입력하는중 오류가 발생했습니다. : " + error);
-                            });
-                        calendar.unselect()
-                    });
-                },
-
-                // drop: function (arg) {
-                //     // is the "remove after drop" checkbox checked?
-                //     if (document.getElementById('drop-remove').checked) {
-                //         // if so, remove the element from the "Draggable Events" list
-                //         arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                //     }
-                // }
+                events: data
             });
+
             calendar.render();
         });
         
         
         request.fail(function( jqXHR, textStatus ) {
-            alert( "일정표를 불러오는중 에러가 발생했습니다.: " + textStatus);
+            alert( "Request failed: " + textStatus);
         });
 		
 		
