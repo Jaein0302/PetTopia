@@ -121,9 +121,9 @@
 		where order_id = #{order_id}
 	</delete>
 	
-	<select id="findScheduleListBySeller" parameterType="String" resultType="OrderInfo">
-		select * from orderinfo
-		where order_seller = #{seller_id}
+	<select id="findScheduleListBySeller" parameterType="String" resultType="Sch">
+		select * from sch
+		where sch_seller = #{seller_id}
 	</select>
 	
 	

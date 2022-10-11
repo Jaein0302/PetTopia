@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.Pet_Topia.domain.OrderInfo;
 import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.domain.Review;
+import com.Pet_Topia.domain.Sch;
 
 @Mapper
 public interface OrderMapper {
@@ -42,7 +43,7 @@ public interface OrderMapper {
 
 	int order_delete(int order_id);
 
-	List<OrderInfo> findScheduleListBySeller(String seller_id);
+	List<Sch> findScheduleListBySeller(String seller_id);
 
 	OrderInfo order_info(int order_id);
 

@@ -114,25 +114,30 @@
 				<tr>
 					<td>예약 일자 정하기</td>
 					<td>
-						<button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#open_sch" id="confirm" >예약 일자를 설정해주세요</button>
-						<input type="hidden" value="2022-10-10 19:00" id="hidden_time">
+						<!-- 예약 일자를 설정해주세요 -->
+						<button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#open_sch" id="confirm" >지금은 테스트중입니다</button>
 					</td>
 				</tr>	
 			</tbody>	
 		</table>	
 		
-		<form action="${pageContext.request.contextPath}/product/purchase2" method="POST">
-   			<input type='hidden' name='order_member_id' value='${memberlist.member_id}'>
-  			<input type="hidden" name="order_item_id" value="${productdata.ITEM_ID}">
-   			<input type="hidden" name="order_item_sellerName" value="${productdata.seller_name}">
-   			<input type="hidden" name="order_item_name" value="${productdata.ITEM_NAME}">
-   			<input type="hidden" name="order_item_price" value="${productdata.ITEM_PRICE}">
-   			<input type="hidden" name="order_time" value="2022-10-10 19:00">
-   			<input type="hidden" name="order_location" value="${productdata.ITEM_ADDRESS}">
-   			<input type="hidden" name="order_image" value="${productdata.ITEM_IMAGE_FILE}">
-   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-   			<button type="submit">결제하기</button>
-		</form>
+			<form action="${pageContext.request.contextPath}/product/purchase2" method="POST" class="purchase2">
+   				<input type='hidden' name='order_member_id' value='${memberlist.member_id}'>
+  				<input type="hidden" name="order_item_id" value="${productdata.ITEM_ID}">
+   				<input type="hidden" name="order_item_sellerName" value="${productdata.seller_name}">
+   				<input type="hidden" name="order_item_name" value="${productdata.ITEM_NAME}">
+   				<input type="hidden" name="order_item_price" value="${productdata.ITEM_PRICE}">
+   				<input type="hidden" name="order_time" value="2022-10-10 19:00">
+   				<input type="hidden" name="order_location" value="${productdata.ITEM_ADDRESS}">
+   				<input type="hidden" name="order_image" value="${productdata.ITEM_IMAGE_FILE}">
+   				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+   				<button type="submit" class="btn btn-primary">form 태그로 바로 orderInfo 테이블로 넘기는 중입니다 !!지울꺼에요!!</button>
+			</form>
+			
+			
+				<button class="btn btn-primary purchase">여기서는 ajax로 넘깁니다</button>
+				<input type="hidden" value="2022-10-11 11:00" id="hidden_time">
+		
 	</div>
 	
 <!-- open_sch modal -->
@@ -156,8 +161,6 @@
 <script>
 $(document).ready(function(){
 	
-	console.log("${productdata.ITEM_IMAGE_FILE}")
-	
 	/*
 	예약하기 버튼을 클릭했을때
 	
@@ -171,8 +174,9 @@ $(document).ready(function(){
 		var IMP = window.IMP;
         IMP.init('imp24704360');
         
-        if($("#confirm").html() =='테스트중'){//예약설정 안했을때 
+        if($("#confirm").html() =='예약 일자를 설정해주세요'){//예약설정 안했을때 
     		alert("예약 일자를 설정해주세요");
+        	return false;
     	} else { //예약설정했을때
     		
     		if( $('#select_pay').val() == 'KAKAO_PAY'){//결제방식이 카카오페이 일때
@@ -196,7 +200,7 @@ $(document).ready(function(){
     						 method: 'POST',
     						 contentType: "application/json; charset=UTF-8",
     						 data : {
-    							 "order_id" : Date.now() + Math.random(),
+    							 "order_id" : Math.floor(Math.random()),
     		   	    			 "order_member_id" : "${memberlist.member_id}",
     		   	    			 "order_item_id" : "${productdata.ITEM_ID}",
     		   	    			 "order_item_sellerName" : "${memberlist.member_name}",
@@ -228,37 +232,39 @@ $(document).ready(function(){
     			 })
     		} else { //결제 방식이 현장 결제일때 바로 예약 테이블로 넣어버리기
     			
-    			 $.ajax({
-					 url: 'purchase',
-					 method: 'POST',
-					 contentType: "application/json; charset=UTF-8",
-					 data : {
-						 "order_id" : Date.now() + Math.random(),
-	   	    			 "order_member_id" : "${memberlist.member_id}",
-	   	    			 "order_item_id" : "${productdata.ITEM_ID}",
-	   	    			 "order_item_sellerName" : "${memberlist.member_name}",
-	   	    			 "order_item_name" :"${productdata.ITEM_NAME}",
-	   	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
-	   	    			 "order_time" : $('#hidden_time').val(),
-	   	    			 "order_location" : "${memberlist.member_address}",
-	   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}" //json으로 값을 넘길때 \가 깨지고 있음
-					 }, //data
-	   				 beforeSend : function(xhr){
-	   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	   				 },
-					 success: function(result){
-						 console.log(result);
-						 
-						 if(result ==1){
-							 alert("결제 성공");
-						 } else {
-							 alert("결제 실패");
-						 }
-					 }, //success
-					 error: function(request, status, error){
-						 alert("code : "+ request.status + "\n message : "+ request.responseText + "\n error : " + error);
-					 }//error
-				 })//ajax
+        	
+    			$.ajax({
+   				
+    			 url:'purchase', 
+   				 method:'POST',
+   				 dataType : 'json',
+   				 data: {
+   	    			 "order_id" : Math.floor(Math.random()) ,
+   	    			 "order_member_id" : "${memberlist.member_id}",
+   	    			 "order_item_id" : "${productdata.ITEM_ID}",
+   	    			 "order_item_sellerName" : "${memberlist.member_name}",
+   	    			 "order_item_name" :"${productdata.ITEM_NAME}",
+   	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
+   	    			 "order_time" : $('#hidden_time').val(),
+   	    			 "order_location" : "${memberlist.member_address}",
+   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}",
+   	    			 "order_seller" : "${productdata.ITEM_IMAGE_FILE}"
+   				 },
+   				 beforeSend : function(xhr){
+   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+   					},
+   				 success : function(result) {
+   					 console.log(result);
+   					 if(result == 1) {
+   						 alert("결제 성공");
+   					 } else {
+   						 alert("결제 실패");
+   					 }
+   				 }, //success end
+   				 error:function(request, status, error){
+   						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   					} // error end
+   			 }) //ajax end   
     		}
     	}//예약설정 했을때 end
 	})//purchase button click function

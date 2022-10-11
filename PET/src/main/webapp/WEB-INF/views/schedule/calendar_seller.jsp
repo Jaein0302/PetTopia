@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $(function () {
     	
     	var member_id = $('#hidden_id').val()
-    	
+    	console.log(member_id);
         var request = $.ajax({
             url: "getSchListByID",
             data : {"seller_id" : member_id},
