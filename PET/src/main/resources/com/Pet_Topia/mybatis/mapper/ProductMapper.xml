@@ -60,7 +60,14 @@
    </insert>
 	
    	<select id="getDetail" parameterType="int" resultType="product">
-		select * from item where ITEM_ID = 	#{ITEM_ID}
+		select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	  from item left outer join (select review.review_item_id, count(*) cnt
+									from review
+									group by review_item_id) c
+	  on item.item_id = c.review_item_id
+	  join member m
+	  on item.item_seller = m.member_id
+      where ITEM_ID = #{ITEM_ID}
 	</select>
 	
 	<select id="getListCount" resultType="int">
@@ -101,6 +108,9 @@
 	</delete>
 	
 	<insert id="OrderInsert"  parameterType="OrderInfo">
+		<selectKey resultType="int" order="BEFORE" keyProperty="order_id">
+			select nvl(max(order_id),0)+1 from ORDERINFO
+		</selectKey>
 		insert into ORDERINFO
 		(order_id, order_member_id, order_item_id, order_item_sellerName, 
 		order_item_name, order_item_price, order_time, order_location, order_image )

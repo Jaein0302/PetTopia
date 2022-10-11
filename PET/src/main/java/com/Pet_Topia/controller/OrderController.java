@@ -219,7 +219,7 @@ public class OrderController {
 		
 		@RequestMapping(value="/order_info")
 		public ModelAndView order_info(OrderInfo o, ModelAndView mv) {
-			String order_id = o.getOrder_id();
+			int order_id = o.getOrder_id();
 			OrderInfo order = oservice.order_info(order_id);
 			OrderInfo last = oservice.order_info_last(order_id);
 			mv.setViewName("order/order_info");

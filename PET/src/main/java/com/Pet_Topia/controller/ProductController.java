@@ -403,7 +403,7 @@ public class ProductController {
 		logger.info("구매페이지보기 성공");		
 		Member memberlist = memberservice.member_info(member_id);		
   
-    mv.setViewName("product/order_view");
+		mv.setViewName("product/order_view");
 		mv.addObject("productdata", productdata);
 		mv.addObject("memberlist", memberlist);
 		return mv;
@@ -419,11 +419,10 @@ public class ProductController {
 	}
 	
 	@PostMapping(value = "/purchase2")
-	 public int purchase_view2(OrderInfo orderinfo) {
-	      
-	   int result = productService.OrderInsert(orderinfo);
-	      
-	   return result;
+	 public String purchase_view2(OrderInfo orderinfo) {
+	  logger.info("아이템ID = "+orderinfo.getOrder_id());
+	  productService.OrderInsert(orderinfo);
+	  return "main/main";
 	 }
 
   

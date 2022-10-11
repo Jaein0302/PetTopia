@@ -83,7 +83,7 @@
 	<select id="OrderListCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
 	</select>
 
 	<select id="OrderList" parameterType="String" resultType="OrderInfo">
@@ -91,13 +91,13 @@
 		from (select * from orderinfo
 			  where order_member_id = #{member_id}
 			  order by order_time asc) b
-		where to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+		where to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
 	</select>
 	
 	<select id="LastCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time
 	</select>
 
 	<select id="LastList" parameterType="java.util.Map"	resultType="OrderInfo">
@@ -111,7 +111,7 @@
 					where orderinfo.order_member_id = #{member_id}
 					order by orderinfo.order_id desc) b
 			  where rownum &lt;= #{end}
-			  and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &gt;= order_time
+			  and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time
 			)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
@@ -127,7 +127,7 @@
 	</select>
 	
 	
-	<select id="order_info" parameterType="String"	resultType="OrderInfo">
+	<select id="order_info" parameterType="int"	resultType="OrderInfo">
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell
 		from orderinfo left outer join member m1
@@ -138,7 +138,7 @@
 		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time		
 	</select>
 	
-	<select id="order_info_last" parameterType="String"	resultType="OrderInfo">
+	<select id="order_info_last" parameterType="int" resultType="OrderInfo">
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell, nvl(cnt,0) cnt
 		from orderinfo left outer join member m1

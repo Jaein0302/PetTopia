@@ -47,4 +47,14 @@ select to_char(sysdate, 'YYYY-MM-DD HH24:MI') from dual
 		on orderinfo.order_location = m1.member_address
 		 left outer join member m2
 		on order_member_id = m2.member_id
-		where order_id=10000003	
+		where order_id=1
+
+		
+		select orderinfo.*, m1.member_tell order_item_tell,
+		m2.member_tell order_member_tell
+		from orderinfo left outer join member m1
+		on orderinfo.order_location = m1.member_address
+		left outer join member m2
+		on order_member_id = m2.member_id
+		where order_id=1
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') <= order_time	

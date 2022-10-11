@@ -9812,3 +9812,7 @@ button.print-button:hover .print-icon::after {
 	vertical-align:center;
 	line-height: 2.9;
 }
+@media ( max-width : 992px) {
+	.dheart, .dwon{display:none}
+	.dadd{font-size:13px;}
+}

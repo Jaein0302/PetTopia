@@ -1,8 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="sec"
-   uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,15 +17,14 @@
 <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@master/dist/css/tempus-dominus.css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 <style>
-   p > span, p> select { 
-                     float : right;
-                     position : relative;
-                     right : 60px;
-                     }
    #tab1, #tab2, #tab3, #tab4 {position : relative;
                         left : 20px;
                         }
    span img { width : 30px}
+   .btn-primary:hover, .btn-primary:active{
+   	color:#404040!important;
+   	opacity:0.7
+   }
 </style>
 
 <script>
@@ -109,67 +107,94 @@ $(function() {
       <div class="col-sm-11">
          <br>
          <div>
-            <b>상품 상세보기</b>
+          	<a href="${pageContext.request.contextPath}/main/main" class='text-body'>
+	         	<i class="fas fa-home"></i>
+	         </a>
+	         &ensp;&gt;&ensp;
+	             			<b>
+	             				<c:if test="${productdata.ITEM_CATEGORY eq 'treat'}">
+	                     	 	<a href="${pageContext.request.contextPath}/product/product_list?item_category=treat" class='text-body'>
+	                     	 	수술/치료
+	                     	 	</a>
+	                     	 	</c:if>
+	                     	 	<c:if test="${productdata.ITEM_CATEGORY eq 'beauty'}">
+	                     	 	<a href="${pageContext.request.contextPath}/product/product_list?item_category=beauty" class="text-body">
+	                     	 	미용
+	                     	 	</a>
+	                     	 	</c:if>
+	                     	 	<c:if test="${productdata.ITEM_CATEGORY eq 'education'}">
+	                     	 	<a href="${pageContext.request.contextPath}/product/product_list?item_category=education" class="text-body">
+	                     	 	교육
+	                     	 	</a>
+	                     	 	</c:if>
+	                     	</b>
+	        &ensp;&gt;&ensp;
+	        <b>상품 상세보기</b>
          </div>
-         <hr   style="height: 2px; opacity: 1; background-color: black; margin: 0 auto">
+         <hr style="height: 2px; opacity: 1; background-color:#404040; margin: 0 auto">
          <br>
          
          
          <div class="container">
-            <div class="row px-xl-5 text-center detailbox">
-               <div class="uploadResult col-md-5">
+            <div class="row px-xl-5 detailbox">
+               <div class="uploadResult col-md-6">
                        <img class='img-fluid w-30' src="/pet_topia/upload${productdata.ITEM_IMAGE_FILE}">
                </div>
-                  <div class="col-md-7">
-                     
-                     <p>
-                        상품명 <span>${productdata.ITEM_NAME}</span>
-                     </p>
-                     <hr>
-                     
-                     <p>
-                        판매가 <span class="product_price">${productdata.ITEM_PRICE}원</span>
-                     </p>
-                     <hr>
-                     
-                     <p>
-                     	판매자 <span>${productdata.MEMBER_ID }</span>
-                     </p>
-                     <hr>
-                     
-                     <p>
-                     	카테고리 <span>
-                     			<c:if test="${productdata.ITEM_CATEGORY eq 'treat'}">
-                     				수술/치료
-                     			</c:if>
-                     			
-                     			<c:if test="${productdata.ITEM_CATEGORY eq 'beauty'}">
-                     				미용
-                     			</c:if>
-                     			
-                     			<c:if test="${productdata.ITEM_CATEGORY eq 'education'}">
-                     				교육
-                     			</c:if>
-                     		   </span>
-                     </p>
-                     <hr>
-                     
-                     <p>
-                     	주소 <span>${productdata.ITEM_ADDRESS }</span>
-                     </p>
-                     <hr>
-						
-
-                  <button type="button" class="btn btn-primary" id="wishButton">관심상품 담기</button>
-                  <input id="hidden_itemID" type="hidden" value="${productdata.ITEM_ID }">
-                  <button type="button" class="btn btn-primary purchase">바로 구매하기</button>
-                  
+                  <div class="col-md-6 text-left" style='position:relative'>
+                        
+                      <div class='border-bottom pb-3'>
+	                       <span>${productdata.ITEM_CONTENT}</span>
+	                       <h2 class='m-0'>${productdata.ITEM_NAME}</h2>
+	                       
+	                       <c:if test="${productdata.cnt>=0}">
+					          <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+					          </c:if>
+					          <c:if test="${productdata.cnt>=1}">
+							  <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.cnt>=2}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.cnt>=3}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.cnt>=4}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.cnt>=5}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+							  </c:if>
+							  <span class='text-small'> <c:if test="${productdata.cnt==0}">0.0</c:if>
+							  							<c:if test="${productdata.cnt>0}">${productdata.cnt}</c:if></span>
+							  <span class='text-small pl-2'>후기 ${rlistcount}건</span>
+                       </div>
+		  
+						<div class='text-left border-bottom pt-3 pb-3 w-100' style='float:left'>판매가 
+                        	<b class='text-dark' style='padding-left:25px;font-size:1.3em'><fmt:formatNumber value="${productdata.ITEM_PRICE}" pattern="#,###" /></b>원
+						</div>
+                      
+						<div class='text-left border-bottom pt-3 pb-3 w-100' style='float:left'>업체명 
+	                        <span style='padding-left:25px;'>${productdata.seller_name}</span>
+	                        <input type="hidden" name='member_id' value='${productdata.MEMBER_ID }'>
+                        </div>
+                      
+                       <div class='text-left border-bottom pt-3 pb-3 w-100' style='float:left'>주소
+                       		<span class='dadd' style='padding-left:38px;'>${productdata.ITEM_ADDRESS}</span>
+                       </div>
+				
+					<div class='text-center pt-3 w-100' style='float:left'>
+	                  <button type="button" class="btn btn-primary p-2 pl-3 pr-3 mr-3" id="wishButton">
+	                  	<i class="fas fa-heart dheart pr-1" style='color:#404040!important'></i>관심상품 담기</button>
+	                  <input id="hidden_itemID" type="hidden" value="${productdata.ITEM_ID }">
+	                  <button type="button" class="btn btn-primary p-2 pl-3 pr-3 purchase">
+	                  <i class="fas fa-won-sign dwon pr-1" style='color:#404040!important'></i>바로 구매하기</button>
+	                </div>
+                
                </div>
             </div>
             <br>
          </div>
-         <hr
-            style="height: 2px; opacity: 1; background-color: black; margin: 0 auto">
+         <hr style="height: 2px; opacity: 1; background-color:#404040; margin: 0 auto">
          <br>
 
          <div class="tab">
