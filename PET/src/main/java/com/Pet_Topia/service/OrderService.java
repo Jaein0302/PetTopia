@@ -3,6 +3,7 @@ package com.Pet_Topia.service;
 import java.util.List;
 
 import com.Pet_Topia.domain.OrderInfo;
+import com.Pet_Topia.domain.Sch;
 
 public interface OrderService {
 
@@ -16,7 +17,7 @@ public interface OrderService {
 
 	int order_delete(int order_id);
 
-	List<OrderInfo> findScheduleListBySeller(String seller_id);
+	List<Sch> findScheduleListBySeller(String seller_id);
 
 	OrderInfo order_info_last(int order_id);
 

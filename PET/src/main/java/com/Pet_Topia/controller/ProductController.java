@@ -224,13 +224,15 @@ public class ProductController {
 			  "/upload";
 			 */
 			String fileDBName = fileDBName(fileName, saveFolder);
+			String fileDBNameReplace = fileDBName.replace("\\","/");
 			logger.info("fileDBName = " + fileDBName);
+			logger.info("fileDBNameReplace = "+ fileDBNameReplace);
 
 			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
 			uploadfile.transferTo(new File(saveFolder + fileDBName));
 			logger.info("transferTo path = " + saveFolder + fileDBName);
 			// 바뀐 파일명으로 저장
-			product.setITEM_IMAGE_FILE(fileDBName);
+			product.setITEM_IMAGE_FILE(fileDBNameReplace);
 		}
 		
 		logger.info(product.toString());
@@ -417,12 +419,12 @@ public class ProductController {
 		return mv;
 	}
 	
+	
 	@ResponseBody
-	@PostMapping(value = "/purchase" , produces = "application/x-www-form-urlencoded; charset=UTF-8")
+	@PostMapping(value = "/purchase")
 	public int purchase_view(OrderInfo orderinfo) {
 
 		int result = productService.OrderInsert(orderinfo);
-		
 		return result;
 	}
 	

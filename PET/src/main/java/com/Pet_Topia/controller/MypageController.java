@@ -29,9 +29,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.Member;
-import com.Pet_Topia.domain.OrderInfo;
+import com.Pet_Topia.domain.Sch;
 import com.Pet_Topia.service.MemberService;
 import com.Pet_Topia.service.OrderService;
+import com.Pet_Topia.service.ScheduleService;
 
 @Controller
 @RequestMapping(value = "/mypage")
@@ -43,8 +44,10 @@ public class MypageController {
 	private PasswordEncoder passwordEncoder;
 	private OrderService orderservice;
 	
+	
 	@Autowired
-	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder, OrderService orderservice) {
+	public MypageController(MemberService memberservice, PasswordEncoder passwordEncoder,
+							OrderService orderservice) {
 		this.memberservice = memberservice;
 		this.passwordEncoder = passwordEncoder;
 		this.orderservice = orderservice;
@@ -161,7 +164,8 @@ public class MypageController {
 	@ResponseBody
     public List<Map<String, Object>> ajax_schedule_list(String seller_id) {
 		
-		List<OrderInfo> list = orderservice.findScheduleListBySeller(seller_id);
+		
+		List<Sch> list = orderservice.findScheduleListBySeller(seller_id);
 		logger.info("!!!list 확인 : "+ list.toString());
 		
         JSONObject jsonObj = new JSONObject();
@@ -172,8 +176,8 @@ public class MypageController {
         
         
         for (int i = 0 ; i < list.size() ; i ++) {
-        	hashMap.put("title", list.get(i).getOrder_item_name() + " // " + list.get(i).getOrder_member_id());
-        	hashMap.put("start", list.get(i).getOrder_time());
+        	hashMap.put("title", list.get(i).getSch_title());
+        	hashMap.put("start", list.get(i).getSch_start());
 
         	logger.info("!!! hashMap 확인 : " +hashMap.toString());
         	
@@ -186,6 +190,8 @@ public class MypageController {
 		return jsonArr;
  
     }
+	
+	
 	
 
 	

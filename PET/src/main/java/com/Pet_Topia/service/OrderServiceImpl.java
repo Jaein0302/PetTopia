@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Pet_Topia.domain.OrderInfo;
+import com.Pet_Topia.domain.Sch;
 import com.Pet_Topia.mybatis.mapper.OrderMapper;
 
 @Service
@@ -52,9 +53,9 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public List<OrderInfo> findScheduleListBySeller(String seller_id) {
+	public List<Sch> findScheduleListBySeller(String seller_id) {
 		return dao.findScheduleListBySeller(seller_id);
-    }
+	}
     
   @Override  
 	public OrderInfo order_info(int order_id) {
