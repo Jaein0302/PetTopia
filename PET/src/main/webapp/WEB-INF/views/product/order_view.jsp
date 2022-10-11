@@ -211,7 +211,8 @@ $(document).ready(function(){
     							 console.log(result);
     							 
     							 if(result ==1){
-    								 alert("결제 성공");
+    		   						 alert("카카오페이 결제 완료되었습니다.\n예약페이지로 이동합니다.");
+    		   						 location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
     							 } else {
     								 alert("결제 실패");
     							 }
@@ -254,7 +255,7 @@ $(document).ready(function(){
    				 success : function(result) {
    					 console.log(result);
    					 if(result == 1) {
-   						 alert("결제 성공!\n예약페이지로 이동합니다.");
+   						 alert("현장결제입니다.\n예약페이지로 이동합니다.");
    						 location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
    					 } else {
    						 alert("결제 실패");
