@@ -103,12 +103,13 @@ public class AskController {
 								   ) {
 				
 		int listcount = askService.getAnswerCount(ITEM_ID); //  ask 총 리스트 수	
-		List<ItemAsk> asklist = askService.getAnswerList(ITEM_ID); // ask 리스트	
-		List<Integer> answercheck = askService.answerCheck(ITEM_ID);  // 답변 유무
-		List<ItemAnswer> answerlist = askService.answerlist(ITEM_ID);  // 답변 번호, 답변 내용
+		List<ItemAsk> asklist = askService.getAskList2(ITEM_ID); // ask 리스트	
+		List<String> answercheck = askService.answerCheck(ITEM_ID);  // 답변 유무
+		List<ItemAnswer> answerlist = askService.getAnswerList(ITEM_ID);  // 답변 번호, 답변 내용
 				
 		logger.info(asklist.toString());
 		logger.info(answercheck.toString());
+		logger.info(answerlist.toString());
 		
 		mv.addObject("listcount", listcount);
 		mv.addObject("asklist", asklist);
@@ -128,7 +129,7 @@ public class AskController {
 		return result;	
 	}
 	
-	@GetMapping(value = "/update_answer")
+	@PostMapping(value = "/updateProcess")
 	public String updateAnswer(
 							 int ITEM_ANSWER_NUM,
 							 String ITEM_ANSWER_CONTENT,

@@ -13,7 +13,7 @@ public interface AskService {
 	//ask list
 	public int getListCount(Product product);
 
-	public List<ItemAsk> getAskList(int page, int limit, Product product);
+	public List<ItemAsk> getAskList(int page, int limit, Product product);  // ask에서 asklist 부르기
 	
 	
 	public int updateAsk(ItemAsk itemask); 
@@ -23,14 +23,14 @@ public interface AskService {
 	//answer list
 	public int getAnswerCount(int ITEM_ID);	
 	
-	public List<ItemAsk> getAnswerList(int ITEM_ID);
+	public List<ItemAsk> getAskList2(int ITEM_ID);  // answer에서 asklist 부르기
 	
 	
 	public int addAnswer(ItemAnswer answer);
 	
-	public List<Integer> answerCheck(int ITEM_ID);
+	public List<String> answerCheck(int ITEM_ID);
 	
-	public List<ItemAnswer> answerlist(int ITEM_ID);
+	public List<ItemAnswer> getAnswerList(int ITEM_ID);
 	
 	public int updateAnswer(int ITEM_ANSWER_NUM, String ITEM_ANSWER_CONTENT);
 	

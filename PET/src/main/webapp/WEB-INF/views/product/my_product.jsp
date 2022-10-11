@@ -257,7 +257,7 @@ $(function() {
               <div class="form-group">
               	<label for="upfile">파일 첨부</label>
               	<label for="upfile">
-              	<img src="${pageContext.request.contextPath}/resources/img/Main/attach.png" alt="파일첨부" style="width:20px"> 
+              		<img src="${pageContext.request.contextPath}/resources/img/Main/attach.png" alt="파일첨부" style="width:20px"> 
               	</label>             	
                	<input type="file" id="upfile" name="uploadfile">
               </div>                 

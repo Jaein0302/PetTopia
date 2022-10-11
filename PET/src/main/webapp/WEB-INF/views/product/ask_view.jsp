@@ -31,8 +31,10 @@
                <th><div>제목</div></th>         
                <th><div>작성자</div></th>         
                <th><div>날짜</div></th>         
+               <th><div>답변여부</div></th>         
             </tr>
-              <c:forEach var="a" items="${asklist}">  
+              <c:forEach var="a" items="${asklist}" varStatus="status">  
+               <input type="hidden" value="${answerlist[status.index].ITEM_ANSWER_CONTENT}">              
                <input type="hidden" value="${a.ITEM_ASK_CONTENT}">              
                <input type="hidden" value="${a.ITEM_ASK_ITEMID}">              
                <input type="hidden" value="${a.ITEM_ASK_USERNAME}"> 
@@ -48,9 +50,16 @@
                   <sec:authentication property="principal" var="pinfo"/>                  
                
         		  <td>  
+        		    <input type="hidden" value="${answercheck[status.index]}">             	
         		  	<c:if test="${pinfo.username == a.ITEM_ASK_USERNAME}"> 
         		  		<button type="button" class="btn btn-danger a_delete">삭제</button>       		  
 					</c:if>
+	              </td>
+	              
+	              <td> 
+	              	<c:if test = "${answercheck[status.index] eq '1'}" >
+                  		답변완료
+                  	</c:if>  
 	              </td>
                   
                </tr>
@@ -142,6 +151,14 @@
 				</div>
              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                                            
             </form>
+            
+            
+	        <div id="comment">
+	            <hr>	        
+	        	<h4>판매자 답변</h4>
+	        	<textarea class="form-control" name="ITEM_ANSWER_CONTENT" id="content" rows="6" readOnly></textarea>	
+			</div>
+			
          </div>           
        </div>
      </div>

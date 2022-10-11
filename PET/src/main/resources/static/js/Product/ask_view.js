@@ -15,6 +15,8 @@ $(function(){
 	var ITEM_ASK_SUBJECT = $(this).text().trim();
 	var ITEM_ASK_CONTENT = $(this).parent().parent().prev().prev().prev().val();
 	var ITEM_ASK_DATE = $(this).parent().next().text();
+	var ITEM_ANSWER_CONTENT = $(this).parent().parent().prev().prev().prev().prev().val();
+	var check = $(this).parent().next().next().next().children().val();
 	
 	$("#ASK_NUM").val(ITEM_ASK_NUM);
 	$("#SUBJECT").val(ITEM_ASK_SUBJECT);
@@ -22,6 +24,7 @@ $(function(){
 	$("#ASK_DATE").val(ITEM_ASK_DATE);
 	$("#CONTENT").text(ITEM_ASK_CONTENT);
 	$("#ASK_ITEMID").val(ITEM_ASK_ITEMID);
+	$("#content").text(ITEM_ANSWER_CONTENT);
 		
 	console.log("ITEM_ASK_NUM=" + ITEM_ASK_NUM);
 	console.log("ITEM_ASK_SUBJECT=" + ITEM_ASK_SUBJECT);
@@ -29,13 +32,22 @@ $(function(){
 	console.log("ITEM_ASK_DATE=" + ITEM_ASK_DATE);
 	console.log("ITEM_ASK_CONTENT=" + ITEM_ASK_CONTENT);
 	console.log("ITEM_ASK_ITEMID=" + ITEM_ASK_ITEMID);	
+	console.log("check=" + check);	
 	
 	var id_now = $("#id_now").val();
 	console.log("id_now=" + id_now);	
 	
+	//작성자일 경우 또는 답변완료 된경우
 	if( $("#id_now").val() == $("#USERNAME").val() ) {
-		$("#check").html('<button type="button" class="btn btn-primary a_update">문의 수정</button>')
-	}
+		if( check != 1 ) {
+			$("#check").show();
+			$("#check").html('<button type="button" class="btn btn-primary a_update">문의 수정</button>')
+			$("#comment").hide();
+		} else {
+			$("#check").hide();
+			$("#comment").show();
+		}
+	}	
 })
 
   	$("#update").on('click',".a_update",function(){
@@ -57,5 +69,7 @@ $(function(){
 
 		location.href = "../ask/delete?ITEM_ASK_NUM=" + ITEM_ASK_NUM;
 	})
+	
+	
             
 })

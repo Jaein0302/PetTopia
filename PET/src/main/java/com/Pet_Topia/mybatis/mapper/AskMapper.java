@@ -27,14 +27,14 @@ public interface AskMapper {
 	//answer list
 	public int getAnswerCount(int ITEM_ID);	
 	
-	public List<ItemAsk> getAnswerList(int ITEM_ID);
+	public List<ItemAsk> getAskList2(int ITEM_ID);  // answer에서 asklist부르기
 	
 	
 	public int addAnswer(ItemAnswer answer);
 	
-	public List<Integer> answerCheck(int ITEM_ID);
+	public List<String> answerCheck(int ITEM_ID);
 	
-	public List<ItemAnswer> answerlist(int ITEM_ID);
+	public List<ItemAnswer> getAnswerList(int ITEM_ID);
 	
 	public int updateAnswer(HashMap<String, Object> map);
 
