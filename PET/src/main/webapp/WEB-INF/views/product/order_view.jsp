@@ -120,9 +120,19 @@
 				</tr>	
 			</tbody>	
 		</table>	
-		<div class="purchase">			
-			<button class="btn btn-primary">결제하기</button> 
-		</div>
+		
+		<form action="${pageContext.request.contextPath}/product/purchase2" method="POST">
+   			<input type="hidden" name="order_id" value="1">
+  			<input type="hidden" name="order_item_id" value="${productdata.ITEM_ID}">
+   			<input type="hidden" name="order_item_sellerName" value="${memberlist.member_name}">
+   			<input type="hidden" name="order_item_name" value="${productdata.ITEM_NAME}">
+   			<input type="hidden" name="order_item_price" value="${productdata.ITEM_PRICE}">
+   			<input type="hidden" name="order_time" value="2022-10-10 19:00">
+   			<input type="hidden" name="order_location" value="${memberlist.member_address}">
+   			<input type="hidden" name="order_image" value="${productdata.ITEM_IMAGE_FILE}">
+   			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+   			<button type="submit">결제하기</button>
+		</form>
 	</div>
 	
 <!-- open_sch modal -->

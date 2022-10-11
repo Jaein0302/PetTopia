@@ -1,6 +1,6 @@
 drop table ORDERINFO cascade constraints purge;
 create table ORDERINFO(
-order_id     	varchar2(60) PRIMARY KEY,			--주문번호
+order_id     	number(20) PRIMARY KEY,			--주문번호
 order_member_id references member(member_id) on delete cascade, --주문아이디
 order_item_id   references item(item_id) on delete cascade,	 --상품번호
 order_item_sellerName varchar2(50), --판매자의 이름
@@ -17,7 +17,7 @@ select * from ORDERINFO
 
 insert into orderInfo values (
 	10000001, 'buyer1', 10001, '해피동물병원', '예방주사',20000, to_char( sysdate , 'YYYY-MM-DD HH24:mm'),
-	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg', 'seller10');
+	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg', 'beauty2');
 insert into orderInfo values (
 	10000002, 'buyer1', 10001, '해피동물병원', '예방주사2',20000,'2022-10-09 16:30',
 	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
