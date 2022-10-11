@@ -146,26 +146,49 @@ $(function() {
 	                       <span>${productdata.ITEM_CONTENT}</span>
 	                       <h2 class='m-0'>${productdata.ITEM_NAME}</h2>
 	                       
-	                       <c:if test="${productdata.cnt>=0}">
+	                          <c:if test="${productdata.ITEM_SCORE==0}">
 					          <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 					          </c:if>
-					          <c:if test="${productdata.cnt>=1}">
+					          <c:if test="${productdata.ITEM_SCORE>0 && productdata.ITEM_SCORE<1}">
+					          <i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+					          </c:if>
+					          <c:if test="${productdata.ITEM_SCORE==1}">
 							  <i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 							  </c:if>
-							  <c:if test="${productdata.cnt>=2}">
+							  <c:if test="${productdata.ITEM_SCORE>1 && productdata.ITEM_SCORE<2}">
+							  <i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.ITEM_SCORE==2}">
 							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 							  </c:if>
-							  <c:if test="${productdata.cnt>=3}">
+							  <c:if test="${productdata.ITEM_SCORE>2 && productdata.ITEM_SCORE<3}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.ITEM_SCORE==3}">
 							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
 							  </c:if>
-							  <c:if test="${productdata.cnt>=4}">
+							  <c:if test="${productdata.ITEM_SCORE>3 && productdata.ITEM_SCORE<4}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i><i class="far fa-star"></i>
+							  </c:if>
+							  <c:if test="${productdata.ITEM_SCORE==4}">
 							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
 							  </c:if>
-							  <c:if test="${productdata.cnt>=5}">
+							  <c:if test="${productdata.ITEM_SCORE>4 && productdata.ITEM_SCORE<5}">
+							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+							  </c:if>
+							  <c:if test="${productdata.ITEM_SCORE==5}">
 							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 							  </c:if>
-							  <span class='text-small'> <c:if test="${productdata.cnt==0}">0.0</c:if>
-							  							<c:if test="${productdata.cnt>0}">${productdata.cnt}</c:if></span>
+							  <span class='text-small'> <c:if test="${productdata.ITEM_SCORE==0}">0.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE==1}">${productdata.ITEM_SCORE}.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE==2}">${productdata.ITEM_SCORE}.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE==3}">${productdata.ITEM_SCORE}.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE==4}">${productdata.ITEM_SCORE}.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE==5}">${productdata.ITEM_SCORE}.0</c:if>
+														  <c:if test="${productdata.ITEM_SCORE>0 && productdata.ITEM_SCORE!=1 && productdata.ITEM_SCORE!=2 && productdata.ITEM_SCORE!=3 && productdata.ITEM_SCORE!=4 && productdata.ITEM_SCORE!=5}">
+														  ${productdata.ITEM_SCORE}
+														  </c:if>
+							  </span> 
 							  <span class='text-small pl-2'>후기 ${rlistcount}건</span>
                        </div>
 		  
