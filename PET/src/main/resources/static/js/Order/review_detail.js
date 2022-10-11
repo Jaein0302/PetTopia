@@ -78,6 +78,7 @@ $(document).on('click','.rdetail',function(){
 	$(document).on('click','.deletechk',function (event) {
 		event.stopPropagation();
 		var review_num = $(this).children().val();
+		var review_item_id = $(this).children().next().val();
 	    Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  icon: 'warning',
@@ -92,6 +93,7 @@ $(document).on('click','.rdetail',function(){
 						type : 'post',
 						data : {
 							review_num,
+							review_item_id
 						},
 						dataType : "json",
 						beforeSend : function(xhr){

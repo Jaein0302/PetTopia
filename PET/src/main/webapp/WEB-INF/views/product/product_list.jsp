@@ -138,7 +138,7 @@ $(function(){
                  		<img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
-                    	<span> ${p.ITEM_CONTENT}</span>
+                    	<span> ${p.seller_name}</span>
                          <h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
                          <i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>

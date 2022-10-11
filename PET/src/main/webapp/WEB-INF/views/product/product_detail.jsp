@@ -180,14 +180,7 @@ $(function() {
 							  <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
 							  </c:if>
 							  <span class='text-small'> <c:if test="${productdata.ITEM_SCORE==0}">0.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE==1}">${productdata.ITEM_SCORE}.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE==2}">${productdata.ITEM_SCORE}.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE==3}">${productdata.ITEM_SCORE}.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE==4}">${productdata.ITEM_SCORE}.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE==5}">${productdata.ITEM_SCORE}.0</c:if>
-														  <c:if test="${productdata.ITEM_SCORE>0 && productdata.ITEM_SCORE!=1 && productdata.ITEM_SCORE!=2 && productdata.ITEM_SCORE!=3 && productdata.ITEM_SCORE!=4 && productdata.ITEM_SCORE!=5}">
-														  ${productdata.ITEM_SCORE}
-														  </c:if>
+														  <c:if test="${productdata.ITEM_SCORE>0}">${productdata.ITEM_SCORE}</c:if>
 							  </span> 
 							  <span class='text-small pl-2'>후기 ${rlistcount}건</span>
                        </div>

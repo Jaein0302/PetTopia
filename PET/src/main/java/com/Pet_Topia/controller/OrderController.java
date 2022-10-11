@@ -200,8 +200,19 @@ public class OrderController {
 		//리뷰 삭제
 		@PostMapping(value="/review_delete")
 		@ResponseBody
-		public int review_delete(@RequestParam("review_num") String review_num) {
+		public int review_delete(@RequestParam("review_num") String review_num,
+								@RequestParam("review_item_id") int review_item_id) {
 			int r = rservice.review_del(review_num);
+			
+			if(r > 0) {
+			//별점 구하기
+			Double star_avg = rservice.starAVG(review_item_id);
+			logger.info("평균 별점 : "+star_avg);
+			
+			//별점 Update
+			rservice.starUpdate(review_item_id);
+			}
+			
 			return r;
 		}
 		
