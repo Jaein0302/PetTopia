@@ -1,16 +1,16 @@
 package com.Pet_Topia.domain;
 
 public class Sch {
-	private String sch_id;
+	private int sch_id;
 	private String sch_title;
 	private String sch_start;
 	private String sch_seller;
 	
 	
-	public String getSch_id() {
+	public int getSch_id() {
 		return sch_id;
 	}
-	public void setSch_id(String sch_id) {
+	public void setSch_id(int sch_id) {
 		this.sch_id = sch_id;
 	}
 	public String getSch_title() {

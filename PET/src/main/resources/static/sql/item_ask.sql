@@ -40,3 +40,5 @@ insert into item_ask
 		from ITEM_ASK, ITEM
 		where ITEM_ASK.ITEM_ASK_ITEMID = '10001'
 		order by ITEM_ASK_NUM desc
+
+

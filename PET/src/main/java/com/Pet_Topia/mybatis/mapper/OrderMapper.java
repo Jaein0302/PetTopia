@@ -1,5 +1,6 @@
 package com.Pet_Topia.mybatis.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,6 +49,8 @@ public interface OrderMapper {
 	OrderInfo order_info(int order_id);
 
 	OrderInfo order_info_last(int order_id);
+
+	int addEvent(HashMap<String, Object> schList);
 
 
 

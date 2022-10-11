@@ -115,29 +115,18 @@
 					<td>예약 일자 정하기</td>
 					<td>
 						<!-- 예약 일자를 설정해주세요 -->
-						<button type="button" class="btn btn-danger"  data-toggle="modal" data-target="#open_sch" id="confirm" >지금은 테스트중입니다</button>
+						<button type="button" class="btn btn-danger"
+							data-toggle="modal" data-target="#open_sch"
+							id="confirm" >예약 일자를 설정해주세요</button>
 					</td>
 				</tr>	
 			</tbody>	
 		</table>	
 		
-			<form action="${pageContext.request.contextPath}/product/purchase2" method="POST" class="purchase2">
-   				<input type='hidden' name='order_member_id' value='${memberlist.member_id}'>
-  				<input type="hidden" name="order_item_id" value="${productdata.ITEM_ID}">
-   				<input type="hidden" name="order_item_sellerName" value="${productdata.seller_name}">
-   				<input type="hidden" name="order_item_name" value="${productdata.ITEM_NAME}">
-   				<input type="hidden" name="order_item_price" value="${productdata.ITEM_PRICE}">
-   				<input type="hidden" name="order_time" value="2022-10-10 19:00">
-   				<input type="hidden" name="order_location" value="${productdata.ITEM_ADDRESS}">
-   				<input type="hidden" name="order_image" value="${productdata.ITEM_IMAGE_FILE}">
-   				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-   				<button type="submit" class="btn btn-primary">form 태그로 바로 orderInfo 테이블로 넘기는 중입니다 !!지울꺼에요!!</button>
-			</form>
-			
-			
-				<button class="btn btn-primary purchase">여기서는 ajax로 넘깁니다</button>
-				<input type="hidden" value="2022-10-11 11:00" id="hidden_time">
-		
+		<div class="purchase">		
+		<button class="btn btn-primary">결제하기</button>
+		<input type="hidden" id="hidden_time">
+		</div>
 	</div>
 	
 <!-- open_sch modal -->
@@ -200,15 +189,20 @@ $(document).ready(function(){
     						 method: 'POST',
     						 contentType: "application/json; charset=UTF-8",
     						 data : {
-    							 "order_id" : Math.floor(Math.random()),
-    		   	    			 "order_member_id" : "${memberlist.member_id}",
-    		   	    			 "order_item_id" : "${productdata.ITEM_ID}",
-    		   	    			 "order_item_sellerName" : "${memberlist.member_name}",
-    		   	    			 "order_item_name" :"${productdata.ITEM_NAME}",
-    		   	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
-    		   	    			 "order_time" : $('#hidden_time').val(),
-    		   	    			 "order_location" : "${memberlist.member_address}",
-    		   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}" //json으로 값을 넘길때 \가 깨지고 있음
+    		   	    			 "order_id" : Math.floor(Math.random()) , //예약 ID
+    		   	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
+    		   	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
+    		   	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
+    		   	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
+    		   	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
+    		   	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
+    		   	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
+    		   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
+    		   	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
+    		   	    			 /*
+    		   	    			order_item_tell varchar2(50), --구매자 연락처
+								order_member_tell varchar2(50),--판매자 연락처
+    		   	    			 */
     						 }, //data
     		   				 beforeSend : function(xhr){
     		   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
@@ -239,16 +233,20 @@ $(document).ready(function(){
    				 method:'POST',
    				 dataType : 'json',
    				 data: {
-   	    			 "order_id" : Math.floor(Math.random()) ,
-   	    			 "order_member_id" : "${memberlist.member_id}",
-   	    			 "order_item_id" : "${productdata.ITEM_ID}",
-   	    			 "order_item_sellerName" : "${memberlist.member_name}",
-   	    			 "order_item_name" :"${productdata.ITEM_NAME}",
-   	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
-   	    			 "order_time" : $('#hidden_time').val(),
-   	    			 "order_location" : "${memberlist.member_address}",
-   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}",
-   	    			 "order_seller" : "${productdata.ITEM_IMAGE_FILE}"
+   					 "order_id" : Math.floor(Math.random()) , //예약 ID
+  	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
+  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
+  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
+  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
+  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
+  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
+  	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
+  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
+  	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
+  	    			 /*
+  	    			order_item_tell varchar2(50), --구매자 연락처
+					order_member_tell varchar2(50),--판매자 연락처
+  	    			 */
    				 },
    				 beforeSend : function(xhr){
    						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
@@ -256,7 +254,8 @@ $(document).ready(function(){
    				 success : function(result) {
    					 console.log(result);
    					 if(result == 1) {
-   						 alert("결제 성공");
+   						 alert("결제 성공!\n예약페이지로 이동합니다.");
+   						 location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
    					 } else {
    						 alert("결제 실패");
    					 }
@@ -324,14 +323,22 @@ $(document).ready(function(){
                  */
                 select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 
-
+					var really = confirm("정말 이 시간에 예약하시겠습니까?")
                     var title = "${productdata.ITEM_NAME}";
-                    if (title) {
+
+                    if (really && add_event_count == 0) {
+	
+                    	//console.log(add_event_count)
                         calendar.addEvent({
                             title: title,
                             start: arg.start,
                         })
-                        add_event_count++ 
+                        add_event_count++
+                        //console.log(add_event_count)
+                        
+                        
+                        //여기서 hidden_time의 밸류를 yyyy-MM-dd hh24:mm 형식으로 치환해야 합니다
+                        $('#hidden_time').val(arg.start.toLocaleString('ko-kR', {timeZone: 'UTC'}))
                     } else {
                     	alert("일정은 한번만 추가 할 수 있습니다.\n잘못입력하셨다면 새로고침 후 이용해주세요.");
                     	return false;
@@ -339,12 +346,14 @@ $(document).ready(function(){
                     var allEvent = calendar.getEvents(); // .getEvents() 함수로 모든 이벤트를 Array 형식으로 가져온다. (FullCalendar 기능 참조)
 
                     var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+                    
+                    
                     for (var i = 0; i < allEvent.length; i++) {
                         var obj = new Object();     // Json 을 담기 위해 Object 선언
                         // alert(allEvent[i]._def.title); // 이벤트 명칭 알람
                         obj.title = allEvent[i]._def.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
                         obj.start = allEvent[i]._instance.range.start; // 시작
-                        obj.end = allEvent[i]._instance.range.end; // 끝
+                        obj.seller = "${productdata.MEMBER_ID}";
 
                         events.push(obj);
                     }
@@ -354,14 +363,21 @@ $(document).ready(function(){
 
                     $(function saveData(jsondata) {
                         $.ajax({
-                            url: "/full-calendar/calendar-admin-update",
+                            url: "../mypage/calendar-update",
                             method: "POST",
                             dataType: "json",
                             data: JSON.stringify(events),
                             contentType: 'application/json',
+                            beforeSend : function(xhr){
+                            	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+                            },
                         })
                             .done(function (result) {
-                                // alert(result);
+                                alert("예약이 설정되었습니다.");
+                                $('#confirm').removeClass('btn-danger')
+                                $('#confirm').addClass('btn-success')
+                                $('#confirm').html("예약이 설정되었습니다")
+                                $('#confirm').prop("disabled", true)
                             })
                             .fail(function (request, status, error) {
                                  alert("일정표를 데이터베이스에 입력하는중 오류가 발생했습니다. : " + error);
