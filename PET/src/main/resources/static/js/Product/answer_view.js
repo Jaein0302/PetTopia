@@ -2,12 +2,14 @@ var token = $("meta[name='_csrf']").attr("content");
 var header = $("meta[name='_csrf_header']").attr("content");
 
 $(function(){  
-	
+	  var result = "${result}";
+	  if(result == "updateSuccess") {
+		 alert("수정이 완료되었습니다.")
+	  }
+
   //상세보기 (답변 없을때 VS 답변 있을때)
   $("body").on('click',"#detail_button",function(){
 	
-	console.log("check=" + $("#check").val());	
-		
 	$("#ask_detail").show();
 
   	var ITEM_ASK_NUM = $(this).parent().prev().text();
@@ -18,6 +20,8 @@ $(function(){
 	var ITEM_ASK_DATE = $(this).parent().next().text();
 	var ITEM_ANSWER_CONTENT = $(this).parent().parent().prev().prev().prev().prev().val();
 	var ITEM_ANSWER_NUM = $(this).parent().parent().prev().prev().prev().prev().prev().val();
+	var check = $(this).parent().next().next().next().children().val();
+
 	
 	console.log("ITEM_ASK_NUM=" + ITEM_ASK_NUM);
 	console.log("ITEM_ASK_SUBJECT=" + ITEM_ASK_SUBJECT);
@@ -27,6 +31,8 @@ $(function(){
 	console.log("ITEM_ASK_ITEMID=" + ITEM_ASK_ITEMID);	
 	console.log("ITEM_ANSWER_NUM=" + ITEM_ANSWER_NUM);
 	console.log("ITEM_ANSWER_CONTENT=" + ITEM_ANSWER_CONTENT);
+	console.log("check=" + check);	
+
 	
 	$("#ASK_NUM").val(ITEM_ASK_NUM);
 	$("#SUBJECT").val(ITEM_ASK_SUBJECT);
@@ -37,12 +43,19 @@ $(function(){
 	$("#content").text(ITEM_ANSWER_CONTENT);
 	$("#answer_num").val(ITEM_ANSWER_NUM);
 	
-	if($("#check").val() == "") {		
+	
+	if(check == "0") {	
+		$("#comment").hide();	
+		$("#comment").children('h4').text('답변하기');
+		$("#write").show();
+		$("#u").hide();
 		$(".a_write").show();
 		$(".a_cancel").show();
-		$("#comment").hide();	
+		$("#content").attr("readOnly", false);			
+
+
 		
-	} else if ($("#check").val() == 1) {
+	} else {
 		$(".a_write").hide();
 		$(".a_cancel").hide();
 		$("#comment").show();	
@@ -108,28 +121,13 @@ $(function(){
 	})
 	
 	//수정 버튼
-	$("#comment").one('click', "#a_update", function(){	
+	$("#comment").on('click', "#a_update", function(){	
 		$(this).text('수정완료');
 		$("#content").attr("readOnly", false);	
 		$("#a_update").remove();
-		$("#u").html('<button id="updateProcess" class="btn btn-info float-left">수정완료</button>')
+		$("#u").html('<button type="submit" class="btn btn-info float-left">수정완료</button>')
 	})
-	
-	//답변여부 
-	if($("#check").val() == 1) {
-		$("#p_check").text('답변완료');
-	}
-	
-	$("#comment").on('click', "#updateProcess", function(){	
 
-		var ITEM_ANSWER_NUM = $("#answer_num").val();
-		var ITEM_ANSWER_CONTENT = $("#content").text();
-		
-		console.log("ITEM_ANSWER_NUM=" + ITEM_ANSWER_NUM);
-		console.log("ITEM_ANSWER_CONTENT=" + ITEM_ANSWER_CONTENT);
-
-		location.href = "update_answer?ITEM_ANSWER_CONTENT=" + ITEM_ANSWER_CONTENT +"&ITEM_ANSWER_NUM=" + ITEM_ANSWER_NUM;
-	})		
 })
 
             

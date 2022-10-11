@@ -27,6 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.Pet_Topia.domain.ItemAnswer;
 import com.Pet_Topia.domain.ItemAsk;
 import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.MySaveFolder;
@@ -137,6 +138,11 @@ public class ProductController {
 		
 		List<ItemAsk> asklist = askService.getAskList(page, limit, product); // 리스트를 받아옴
 		
+		//답변여부
+		List<String> answercheck = askService.answerCheck(ITEM_ID);  // 답변 유무
+		
+		//답변내용
+		List<ItemAnswer> answerlist = askService.getAnswerList(ITEM_ID);  // 답변 리스트 받아옴
 		
 		//리뷰게시판
 		int rlistcount = rservice.getListCount(ITEM_ID);
@@ -153,6 +159,8 @@ public class ProductController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("asklist", asklist);
 		mv.addObject("limit", limit);
+		mv.addObject("answercheck", answercheck);
+		mv.addObject("answerlist", answerlist);
 		
 		
 		return mv;

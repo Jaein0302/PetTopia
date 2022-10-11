@@ -59,9 +59,9 @@ public class AskServiceImpl implements AskService {
 		return dao.getAnswerCount(ITEM_ID);
 	}
 	
-	@Override	
-	public List<ItemAsk> getAnswerList(int ITEM_ID) {
-		return dao.getAnswerList(ITEM_ID);
+	@Override	//<answer에서 asklist부르기 
+	public List<ItemAsk> getAskList2(int ITEM_ID) {
+		return dao.getAskList2(ITEM_ID);
 	}
 	
 	@Override	
@@ -70,13 +70,13 @@ public class AskServiceImpl implements AskService {
 	}
 	
 	@Override	
-	public List<Integer> answerCheck(int ITEM_ID) {
+	public List<String> answerCheck(int ITEM_ID) {
 		return dao.answerCheck(ITEM_ID);
 	}
 	
 	@Override	
-	public List<ItemAnswer> answerlist(int ITEM_ID) {
-		return dao.answerlist(ITEM_ID);
+	public List<ItemAnswer> getAnswerList(int ITEM_ID) {
+		return dao.getAnswerList(ITEM_ID);
 	}
 	
 	@Override	

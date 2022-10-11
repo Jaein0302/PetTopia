@@ -77,9 +77,16 @@ $(function(){
 		})//outer ajax end
 
 	});//wishbutton click function
-	
+
+	//검색파트
+	$("input[name='ITEM_SEX']").click(function(){
+	if($("input[name='ITEM_SEX']").prop('checked')){
+		 $("input[name='ITEM_SEX']").prop('checked',false);
+		 $(this).prop('checked',true);
+		}
+	})
+
 })//ready function
-			
 </script>
 
 <body>
