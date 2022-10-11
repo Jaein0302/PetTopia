@@ -32,7 +32,7 @@
 <span class='p-2 text-small'>예약 변경을 원하시면 예약 취소 후 재 예약신청을 부탁드립니다.</span> 
 <table class='w-100 mt-3'>
 <tr>
-	<td><b>예약 정보</b></td>
+	<td><b>예약 정보</b> <span class='text-small'>( 예약 번호 : Y${order.order_id} )</span></td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>상품</td>
@@ -95,7 +95,7 @@
 	
 <table class='w-100 mt-3'>
 <tr>
-	<td><b>예약 정보</b></td>
+	<td><b>예약 정보</b> <span class='text-small'>( 예약 번호 : Y${last.order_id} )</span></td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>상품</td>

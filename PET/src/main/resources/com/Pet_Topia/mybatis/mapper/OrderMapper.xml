@@ -83,7 +83,7 @@
 	<select id="OrderListCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
 	</select>
 
 	<select id="OrderList" parameterType="String" resultType="OrderInfo">
@@ -91,7 +91,7 @@
 		from (select * from orderinfo
 			  where order_member_id = #{member_id}
 			  order by order_time asc) b
-		where to_char(sysdate, 'YYYY. MM. DD. HH24:MI') &lt; order_time
+		where to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
 	</select>
 	
 	<select id="LastCount" resultType="int">
