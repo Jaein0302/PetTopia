@@ -242,11 +242,11 @@ $(document).ready(function(){
    	    			 "order_id" : Math.floor(Math.random()) ,
    	    			 "order_member_id" : "${memberlist.member_id}",
    	    			 "order_item_id" : "${productdata.ITEM_ID}",
-   	    			 "order_item_sellerName" : "${memberlist.member_name}",
+   	    			 "order_item_sellerName" : "${productdata.seller_name}",
    	    			 "order_item_name" :"${productdata.ITEM_NAME}",
    	    			 "order_item_price" :"${productdata.ITEM_PRICE}",
    	    			 "order_time" : $('#hidden_time').val(),
-   	    			 "order_location" : "${memberlist.member_address}",
+   	    			 "order_location" : "${productdata.ITEM_ADDRESS}",
    	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}",
    	    			 "order_seller" : "${productdata.ITEM_IMAGE_FILE}"
    				 },
