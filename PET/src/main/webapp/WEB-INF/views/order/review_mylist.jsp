@@ -108,6 +108,7 @@
 			<c:if test="${b.review_id == pinfo.username || pinfo.username == 'admin' }">
 				<a style="color:tomato;font-size:15px;cursor:pointer" class="deletechk">
 				<input type="hidden" value="${b.review_num}">
+				<input type="hidden" value="${b.review_item_id}">
 					<i class="pl-3 fas fa-trash-alt"></i>&nbsp;삭제</a>
 				&ensp;
 				</c:if>

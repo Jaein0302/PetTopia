@@ -80,11 +80,11 @@
    	   	<tr>
 	   		<td class='border-left' rowspan='4'>
 	   			<img src="/pet_topia/upload${b.order_image}" 
-	   				 style="width:150px;hegith:150px;">
+	   				 style="width:130px;hegith:130px;">
 	   		</td>
    		</tr>
    		<tr>
-   			<td class='text-dark'>${b.order_item_name}</td>
+   			<td><a class="text-dark" href="${pageContext.request.contextPath}/product/detail?ITEM_ID=${b.order_item_id}">${b.order_item_name}</a></td>
    			<td class='border-left border-right text-center order-price' rowspan='4'><fmt:formatNumber value="${b.order_item_price}" pattern="#,###" />원</td>
    		</tr>
    		<tr>
@@ -128,7 +128,7 @@
    
     <!-- 지난 예약 리스트 -->
   <c:forEach var="l" items="${last}">
-   <table class="table text-left mt-3 order">
+   <table class="table text-left mt-4 order">
 	<colgroup>
 	<col width="20%" />
 	<col width="55%" />
@@ -158,11 +158,11 @@
    	   	<tr>
 	   		<td class='border-left' rowspan='4'>
 	   			<img src="/pet_topia/upload${l.order_image}" 
-	   				 style="width:150px;hegith:150px;">
+	   				 style="width:130px;hegith:130px;">
 	   		</td>
    		</tr>
    		<tr>
-   			<td class='text-dark'>${l.order_item_name}</td>
+   			<td><a class="text-dark" href="${pageContext.request.contextPath}/product/detail?ITEM_ID=${l.order_item_id}">${l.order_item_name}</a></td>
    			<td class='border-left border-right text-center order-price' rowspan='4'><fmt:formatNumber value="${l.order_item_price}" pattern="#,###" />원</td>
    		</tr>
    		<tr>
