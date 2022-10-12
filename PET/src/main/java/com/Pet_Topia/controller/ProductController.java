@@ -67,41 +67,43 @@ public class ProductController {
 	
 	@RequestMapping(value ="/product_list")
 	public ModelAndView productlist(
-			@RequestParam(value="item_category")String category,
+			@RequestParam(value="item_category") String category,
 			@RequestParam(value="search_field", defaultValue="-1", required = false) int index,
 			@RequestParam(value="search_word",  defaultValue="",   required = false) String search_word,
 			ModelAndView mv
 			) {
-		List<Product> list = productService.getSearchList(category, index, search_word);
 		logger.info("item_category= " + category);
 		logger.info("search_field= " + index);
 		logger.info("search_word= " + search_word);
 		
-		
+		List<Product> list = productService.getSearchList(category, index, search_word);
+
+		mv.addObject("category", category);
 		mv.addObject("productlist", list);
 		mv.setViewName("product/product_list");
 		return mv;
 	}	
 	
+	//productlist 검색기능
 	@ResponseBody
-	@RequestMapping(value ="/list_ajax")
-	public Map<String, Object> productListAjax(
-			@RequestParam(value="ITEM_SEX", defaultValue="", required = true) String sex,
-			@RequestParam(value="ITEM_WEIGHT", defaultValue="", required = true) String weight,
-			@RequestParam(value="ITEM_SPECIES", defaultValue="", required = true) String species
-			) {
+	@PostMapping(value ="/search") 
+	public Map<String, Object> search(
+				@RequestParam(value = "ITEM_SEX", defaultValue = "", required = false) String ITEM_SEX,
+				@RequestParam(value = "ITEM_WEIGHT", defaultValue = "", required = false) String ITEM_WEIGHT,
+				@RequestParam(value = "ITEM_SPECIES", defaultValue = "", required = false) String ITEM_SPECIES
+				) {
 		
-		logger.info("ITEM_SEX= " + sex);
-		logger.info("ITEM_WEIGHT= " + weight);
-		logger.info("ITEM_SPECIES= " + species);
-		
-		List<Product> list = productService.getListAjax(sex, weight, species);
-		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("productlist", list);
-
-		return map;
-	}	
+				logger.info("ITEM_SEX= " + ITEM_SEX);
+				logger.info("ITEM_WEIGHT= " + ITEM_WEIGHT);
+				logger.info("ITEM_SPECIES= " + ITEM_SPECIES);
+			
+				List<Product> list = productService.getListAjax(ITEM_SEX, ITEM_WEIGHT, ITEM_SPECIES);
+				
+				logger.info(list.toString());
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("list", list);
+				return map;
+			}
 	
 	@GetMapping(value ="/detail")
 	public ModelAndView productdetail(
@@ -434,8 +436,9 @@ public class ProductController {
 	  productService.OrderInsert(orderinfo);
 	  return "main/main";
 	 }
+	
 
-  
+	
   
 	/**나의 찜 목록으로 이동**/
 	@RequestMapping(value ="/goToMyWishList")

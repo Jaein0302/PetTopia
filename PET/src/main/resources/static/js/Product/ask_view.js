@@ -16,7 +16,7 @@ $(function(){
 	var ITEM_ASK_CONTENT = $(this).parent().parent().prev().prev().prev().val();
 	var ITEM_ASK_DATE = $(this).parent().next().text();
 	var ITEM_ANSWER_CONTENT = $(this).parent().parent().prev().prev().prev().prev().val();
-	var check = $(this).parent().next().next().next().children().val();
+	var check = $(this).parent().next().next().next().next().children().val();
 	
 	$("#ASK_NUM").val(ITEM_ASK_NUM);
 	$("#SUBJECT").val(ITEM_ASK_SUBJECT);
@@ -49,25 +49,31 @@ $(function(){
 		}
 	}	
 })
-
+	
+	//문의 수정 버튼
   	$("#update").on('click',".a_update",function(){
 		$(".a_update").remove();
-		$("#check").html('<button type="submit" class="btn btn-primary">문의 완료</button>');
+		$("#check").html('<button type="submit" class="btn btn-primary">수정 완료</button>');
 		$("#SUBJECT").attr("readOnly", false);
 		$("#CONTENT").attr("readOnly", false);
 	});	
 
-
+	//취소 누르면 모달 숨기기
 	$("#ask_detail").on('click', ".a_cancel", function(){
 		$("#ask_detail").hide();
 	})
 	
-	
+	//삭제버튼
 	$(".a_delete").click(function(){
 		confirm("정말 삭제하시겠습니까")
 		var ITEM_ASK_NUM = $("#detail_button").parent().prev().text();
 
 		location.href = "../ask/delete?ITEM_ASK_NUM=" + ITEM_ASK_NUM;
+	})
+	
+	//로그인 필요
+	$(".login_required").click(function(){
+		alert("로그인이 필요합니다.")
 	})
 	
 	

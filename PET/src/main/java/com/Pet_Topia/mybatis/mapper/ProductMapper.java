@@ -14,7 +14,7 @@ import com.Pet_Topia.domain.Wish;
 @Mapper
 public interface ProductMapper {
 
-	public List<Product> getSearchList(Map<String, String> map);
+	public List<Product> getSearchList(Map<String, Object> map);
 	
 	public List<Product> getListAjax(Map<String, String> map);
 	

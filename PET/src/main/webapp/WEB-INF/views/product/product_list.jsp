@@ -78,13 +78,67 @@ $(function(){
 
 	});//wishbutton click function
 
-	//검색파트
+	//검색 checkbox 한개만 선택
 	$("input[name='ITEM_SEX']").click(function(){
 	if($("input[name='ITEM_SEX']").prop('checked')){
 		 $("input[name='ITEM_SEX']").prop('checked',false);
 		 $(this).prop('checked',true);
 		}
 	})
+	
+	$(".search_select").on('click', "input[name='ITEM_WEIGHT']", function(){
+	    if(this.checked) {
+	        const checkboxes = $("input[name='ITEM_WEIGHT']");
+	        for(let ind = 0; ind < checkboxes.length; ind++){
+	            checkboxes[ind].checked = false;
+	        }
+	        this.checked = true;
+	    } else {
+	        this.checked = false;
+	    }
+	})
+	
+	$("input[name='ITEM_SPECIES']").click(function(){
+	if($("input[name='ITEM_SPECIES']").prop('checked')){
+		 $("input[name='ITEM_SPECIES']").prop('checked',false);
+		 $(this).prop('checked',true);
+		}
+	})
+	
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	//검색 ajax
+	$("input[type='checkbox']").on('change', function(){
+		var ITEM_SEX = $("input[name='ITEM_SEX']:checked").val();
+		var ITEM_WEIGHT = $("input[name='ITEM_WEIGHT']:checked").val();
+		var ITEM_SPECIES = $("input[name='ITEM_SPECIES']:checked").val();
+		
+		console.log("ITEM_SEX=" + ITEM_SEX);
+		console.log("ITEM_WEIGHT=" + ITEM_WEIGHT);
+		console.log("ITEM_SPECIES=" + ITEM_SPECIES);
+		
+		$.ajax({
+			type : "post",
+			url : "search",
+			data : {
+					"ITEM_SEX" : ITEM_SEX,
+					"ITEM_WEIGHT" : ITEM_WEIGHT,
+					"ITEM_SPECIES" : ITEM_SPECIES
+					},
+			beforeSend : function(xhr){
+				xhr.setRequestHeader(header, token);
+			},
+			success : function(productlist) {
+				if(productlist != "") {
+					alert("답변이 등록되었습니다");
+				}
+			},
+			error:function(request, status, error){
+				alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			}
+		})
+	})
+
 
 })//ready function
 </script>
@@ -102,7 +156,7 @@ $(function(){
 	 			<h5>결과내 재검색</h5>
 		    	<input name = "search_word" value="${search_word}" class="form-control" type="text" placeholder="검색어를 입력해 주세요" id="search_word">
 		    	<button class="search-btn" type="submit" id="search_button">검색</button><hr>
-		    	<input type="hidden" name="item_category" value="treat">
+		    	<input type="hidden" name="item_category" value="${category}">
 		    	<input type="hidden" name="search_field" value="1">
 		    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		    	
 		    </form>
