@@ -1,5 +1,6 @@
 package com.Pet_Topia.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.Pet_Topia.domain.OrderInfo;
@@ -22,6 +23,8 @@ public interface OrderService {
 	OrderInfo order_info_last(int order_id);
 
 	OrderInfo order_info(int order_id);
+
+	int addEvent(HashMap<String, Object> schList);
 
 
 

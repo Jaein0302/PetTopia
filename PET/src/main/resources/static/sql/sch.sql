@@ -10,4 +10,7 @@ sch_seller varchar2(100) --판매자id
 select * from sch
 
 insert into sch
-values (1, '예방주사', '2022-10-11 20:00', 'treat1')
+values (1, '예방주사', '2022-10-11 20:00', 'treat1');
+
+drop sequence sch_seq
+create sequence sch_seq start with 1000 increment by 1;

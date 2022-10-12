@@ -3,6 +3,7 @@ package com.Pet_Topia.controller;
 
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +35,6 @@ import com.Pet_Topia.domain.Member;
 import com.Pet_Topia.domain.Sch;
 import com.Pet_Topia.service.MemberService;
 import com.Pet_Topia.service.OrderService;
-import com.Pet_Topia.service.ScheduleService;
 
 @Controller
 @RequestMapping(value = "/mypage")
@@ -190,6 +192,33 @@ public class MypageController {
 		return jsonArr;
  
     }
+	
+	
+	/*
+	여러개의 sch 객체들을 한번에 넣어야 하는데...
+	 */
+	@PostMapping("/calendar-update")
+	@ResponseBody
+	public int addEvent(@RequestBody List<Map<String,Object>> param) throws Exception{
+		
+		HashMap<String, Object> schList = new HashMap<>();
+		
+		for (int i =0 ; i<param.size(); i++) {
+			schList.put("sch_title", (String) param.get(i).get("title"));
+        	schList.put("sch_start", (String) param.get(i).get("start"));
+        	schList.put("sch_seller", (String) param.get(i).get("seller") );
+			
+			
+			//String sch_title = (String) param.get(i).get("title");
+			//String sch_start = (String) param.get(i).get("start");
+			//String sch_seller = (String) param.get(i).get("seller"); 
+			
+		}
+		
+		int result = orderservice.addEvent(schList);
+		
+		return result;
+	}
 	
 	
 	

@@ -152,6 +152,12 @@
 		where order_id=#{order_id}
 		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time		
 	</select>
+	
+	<insert id="addEvent" parameterType="hashmap">
+		insert into sch
+		values
+		(sch_seq.NEXTVAL, #{sch_title}, #{sch_start}, #{sch_seller})
+	</insert>
   
   
 </mapper>

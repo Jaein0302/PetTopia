@@ -9,7 +9,9 @@ order_item_price number(10), --상품가격
 order_time varchar2(100), --예약 시간
 order_location varchar2(100), --장소
 order_image      VARCHAR2(100), --썸네일
-order_seller varchar2(100) --주문할 상품을 판매하는사람, 판매자가 자신의 일정을 확인할때 필요
+order_seller varchar2(100), --주문할 상품을 판매하는사람, 판매자가 자신의 일정을 확인할때 필요,
+order_item_tell varchar2(50), --구매자 연락처
+order_member_tell varchar2(50)--판매자 연락처
 )
 
 delete ORDERINFO
@@ -58,3 +60,17 @@ select to_char(sysdate, 'YYYY-MM-DD HH24:MI') from dual
 		on order_member_id = m2.member_id
 		where order_id=1
 		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') <= order_time	
+
+
+select orderinfo.*, m1.member_tell order_item_tell,
+      m2.member_tell order_member_tell, nvl(cnt,0) cnt
+      from orderinfo left outer join member m1
+      on orderinfo.order_location = m1.member_address
+      join member m2
+      on order_member_id = m2.member_id
+      left outer join (select review.review_num, count(*) cnt 
+                     from review
+                     group by review.review_num)r
+      on orderinfo.order_id = r.review_num
+      where order_id=1
+      and to_char(sysdate, 'YYYY-MM-DD HH24:MI') >= order_time  

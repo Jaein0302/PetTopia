@@ -1,11 +1,11 @@
-drop table ITEM_ANSWER
+drop table ITEM_ANSWER cascade constraints purge;
 
 create table ITEM_ANSWER(
-	ITEM_ANSWER_NUM number primary key, -- 답변 번호
-	ITEM_ANSWER_USERNAME varchar2(15) references member(MEMBER_ID) on delete cascade, -- 판매자(memberid 가져옴)
-	ITEM_ANSWER_CONTENT VARCHAR(1000) , -- 답변 내용
-	ITEM_ANSWER_DATE DATE DEFAULT SYSDATE,  -- 답변 날짜
-	ITEM_ASK_NUM number(15) references ITEM_ASK(ITEM_ASK_NUM) on delete cascade
+   ITEM_ANSWER_NUM          NUMBER(15)  primary key, -- 답변 번호
+   ITEM_ANSWER_USERNAME       references member(MEMBER_ID) on delete cascade, -- 판매자(memberid 가져옴)
+   ITEM_ANSWER_CONTENT       VARCHAR2(1000), -- 답변 내용
+   ITEM_ANSWER_DATE          DATE DEFAULT SYSDATE,  -- 답변 날짜
+   ITEM_ASK_NUM              references ITEM_ASK(ITEM_ASK_NUM) on delete cascade
 );
 
 select * from ITEM_ANSWER
