@@ -40,23 +40,36 @@
                <input type="hidden" value="${a.ITEM_ASK_USERNAME}"> 
                <tr>
                   <td>${a.ITEM_ASK_NUM}</td>
-                  <td><strong id="detail_button" style="color:darkbrown; cursor:pointer;">
-                     ${a.ITEM_ASK_SUBJECT} 
-                     </strong>                
-                  </td>
+                  <sec:authorize access="isAuthenticated()">               
+               	  <sec:authentication property="principal" var="pinfo"/>
+	                  <td>
+	                  	 <strong id="detail_button" style="color:darkbrown; cursor:pointer;">
+	                     ${a.ITEM_ASK_SUBJECT} 
+	                     </strong>                
+	                  </td>
+                  </sec:authorize>
+                  <sec:authorize access="isAnonymous()">
+                  	  <td>
+	                  	 <strong class="login_required" style="color:darkbrown; cursor:pointer;">
+	                     ${a.ITEM_ASK_SUBJECT} 
+	                     </strong>                
+	                  </td>
+                  </sec:authorize>
+                  
                   <td>${a.ITEM_ASK_USERNAME}</td>
                   <td>${a.ITEM_ASK_DATE}</td>
                   
-                  <sec:authentication property="principal" var="pinfo"/>                  
-               
-        		  <td>  
-        		    <input type="hidden" value="${answercheck[status.index]}">             	
-        		  	<c:if test="${pinfo.username == a.ITEM_ASK_USERNAME}"> 
-        		  		<button type="button" class="btn btn-danger a_delete">삭제</button>       		  
-					</c:if>
-	              </td>
+                  <sec:authorize access="isAuthenticated()">            
+                  <sec:authentication property="principal" var="pinfo"/>                
+	        		  <td>  
+	        		  	<c:if test="${pinfo.username == a.ITEM_ASK_USERNAME}"> 
+	        		  		<button type="button" class="btn btn-danger a_delete">삭제</button>       		  
+						</c:if>
+		              </td>
+	              </sec:authorize>
 	              
 	              <td> 
+	                <input type="hidden" value="${answercheck[status.index]}">    	
 	              	<c:if test = "${answercheck[status.index] eq '1'}" >
                   		답변완료
                   	</c:if>  
@@ -69,7 +82,7 @@
     
       <div class="text-right">
           <sec:authorize access="isAnonymous()">
-            <button type="button" class="btn btn-info floar-right ask_denied">문의하기</button>
+            <button type="button" class="btn btn-info floar-right login_required">문의하기</button>
           </sec:authorize>
           <sec:authorize access="isAuthenticated()">
             <button type="button" class="btn btn-info floar-right ask_access" data-toggle="modal" 
@@ -105,10 +118,11 @@
                		<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>                
              	</div>    
              
-             <button type="submit" class="btn btn-primary" id="p_add">문의 등록</button>
-                <button type="button" class="btn btn-danger a_delete" data-dismiss="modal">취소</button>
+             	<button type="submit" class="btn btn-primary" id="p_add">문의 등록</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">   
-             </sec:authorize>                   
+             </sec:authorize>       
+                              
             </form>
          </div>           
        </div>
@@ -122,7 +136,7 @@
          <!-- Modal body -->
          <div class="modal-body">
             <form id="update" action="${pageContext.request.contextPath}/ask/update" method="post">              
-                 
+                <sec:authorize access="isAuthenticated()">                           
                 <sec:authentication property="principal" var="pinfo"/>                                                
                 <input type="hidden" class="form-control" name="id_now" id="id_now" value="${pinfo.username}">
                 <input type="hidden" class="form-control" name="ITEM_ASK_NUM" id="ASK_NUM">
@@ -144,14 +158,12 @@
 	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT" readOnly></textarea>
                 </div>    
                 <div>
- 				<div id="check">
-             		
-             	</div>
+ 				<div id="check"></div>
                 <button type="button" class="btn btn-danger a_cancel">취소</button>
 				</div>
-             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">                                            
+             	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
+                </sec:authorize>                                   
             </form>
-            
             
 	        <div id="comment">
 	            <hr>	        

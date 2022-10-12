@@ -14,10 +14,14 @@
 	  join member m
 	  on item.item_seller = m.member_id
       where ITEM_CATEGORY = #{category}
-      <if test="search_field == 1">
-      	and ITEM_NAME = #{search_word}      
-      </if>
+      <include refid="search1"/>
    </select> 
+   
+   <sql id="search1">   
+     <if test='index == 1'>
+   	 	and ITEM_NAME like #{search_word}      
+     </if>
+   </sql>
    
    <select id="getListAjax" parameterType="map" resultType="product">
      select item.*,  nvl(cnt,0) cnt
@@ -26,28 +30,27 @@
 									group by review_item_id) c
 	  on item.item_id = c.review_item_id
       from item
-      where ITEM_CATEGORY = 'treat'
-		<if test='sex != ""'>
-			and ITEM_NAME = #{sex}      
-		</if>      
-		<if test='weight != ""'>
-			and ITEM_NAME = #{weight}      
-		</if>      
-		<if test='species != ""'>
-			and ITEM_NAME = #{species}      
-		</if>      
-
+      where ITEM_CATEGORY = 'treat'      
+      <include refid="search2"/>
    </select> 
+   
+   <sql id="search2">
+       <choose>
+          <when test="sex != ''">and ITEM_SEX like #{sex}</when>
+          <when test="weight != ''">and ITEM_WEIGHT like #{weight}</when>
+          <when test="species != ''">and ITEM_SPECIES like #{species}</when>
+       </choose>
+   </sql>
    
    	<insert id="insertProduct" parameterType="product">
          <selectKey resultType="int" order="BEFORE" keyProperty="ITEM_ID">
             <choose>           
                <when test ='ITEM_CATEGORY == "treat"'>
                select nvl(max(ITEM_ID),10000)+1 from item where ITEM_CATEGORY = 'treat'
-            </when>
+               </when>
                <when test ='ITEM_CATEGORY == "education"'>
                select nvl(max(ITEM_ID),20000)+1 from item where ITEM_CATEGORY = 'education'
-            </when>
+               </when>
                <when test ='ITEM_CATEGORY == "beauty"'>
                select nvl(max(ITEM_ID),30000)+1 from item where ITEM_CATEGORY = 'beauty'
             </when>
