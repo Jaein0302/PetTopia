@@ -201,7 +201,7 @@ $(document).ready(function(){
     		   	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
     		   	    			 /*
     		   	    			order_item_tell varchar2(50), --구매자 연락처
-								order_member_tell varchar2(50),--판매자 연락처
+							      	order_member_tell varchar2(50),--판매자 연락처
     		   	    			 */
     						 }, //data
     		   				 beforeSend : function(xhr){
@@ -246,7 +246,7 @@ $(document).ready(function(){
   	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
   	    			 /*
   	    			order_item_tell varchar2(50), --구매자 연락처
-					order_member_tell varchar2(50),--판매자 연락처
+					    order_member_tell varchar2(50),--판매자 연락처
   	    			 */
    				 },
    				 beforeSend : function(xhr){

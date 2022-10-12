@@ -27,23 +27,25 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public List<Product> getSearchList(String category,int index,String search_word) {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		
 		if(index == 1) {
-			map.put("search_word", search_word);
+			map.put("search_word", "%" + search_word + "%");
 		}
 		
 		map.put("category", category);
+		map.put("index", index);
 		
 		return dao.getSearchList(map);
 	}
 	
+	//검색
 	@Override
 	public List<Product> getListAjax(String sex, String weight, String species) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("sex", sex);
-		map.put("weight", weight);
-		map.put("species", species);
+		map.put("sex", "%" + sex + "%");
+		map.put("weight", "%" + weight + "%");
+		map.put("species", "%" + species + "%");
 		
 		return dao.getListAjax(map);
 	}
