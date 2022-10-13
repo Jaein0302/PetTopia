@@ -40,8 +40,8 @@ insert into orderInfo values (
 	'서울 종로구 종로 1 (종로1가)','\2022-10-7\bbs202210741029669.jpg','seller10');
 
 
-select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. HH:MI') > order_time
-select to_char(sysdate, 'YYYY-MM-DD HH24:MI') from dual
+select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') > order_time
+select to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') from dual
 
 		select orderinfo.*, m1.member_tell order_item_tell,
 		m2.member_tell order_member_tell

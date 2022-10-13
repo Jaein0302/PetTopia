@@ -48,7 +48,7 @@
 	  <textarea id="summernote" name="commu_content">${c.commu_content}</textarea>
 		
 		<div class="clearfix">
-			<button type="submit" class="button-5 cancelbtn updateb">수정</button>
+			<button type="submit" class="button-5 cancelbtn updateb" style='margin-right:2em!important'>수정</button>
 			<button type="reset" class="button-5 submitbtn signoutb">취소</button>
 		</div>
 	

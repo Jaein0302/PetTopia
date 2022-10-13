@@ -243,11 +243,9 @@ $(document).ready(function(){
   	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
   	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
-  	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
-  	    			 /*
-  	    			order_item_tell varchar2(50), --구매자 연락처
-					    order_member_tell varchar2(50),--판매자 연락처
-  	    			 */
+  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
+  	    			 "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
+  	    			 "order_member_tell" : "${memberlist.member_tell}"	// 구매자 연락처
    				 },
    				 beforeSend : function(xhr){
    						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");

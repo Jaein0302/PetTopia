@@ -26,4 +26,6 @@ public interface ReviewService {
 
 	int review_del(String review_num);
 
+	void starUpdate2(int review_item_id, Double star_avg);
+
 }
