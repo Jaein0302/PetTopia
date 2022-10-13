@@ -24,6 +24,7 @@ public class Product {
 	//리뷰 수
 	private int cnt					;
 	private String seller_name		;
+	private String seller_tell		;
 
 	public int getITEM_ID() {
 		return ITEM_ID;
@@ -175,6 +176,14 @@ public class Product {
 
 	public void setSeller_name(String seller_name) {
 		this.seller_name = seller_name;
+	}
+
+	public String getSeller_tell() {
+		return seller_tell;
+	}
+
+	public void setSeller_tell(String seller_tell) {
+		this.seller_tell = seller_tell;
 	}
 	
 }

@@ -65,7 +65,8 @@
    </insert>
 	
    	<select id="getDetail" parameterType="int" resultType="product">
-		select item.*,  nvl(cnt,0) cnt, m.member_name seller_name
+	 select item.*,  nvl(cnt,0) cnt, m.member_name seller_name,
+	  m.member_tell seller_tell
 	  from item left outer join (select review.review_item_id, count(*) cnt
 									from review
 									group by review_item_id) c
@@ -118,10 +119,10 @@
 		</selectKey>
 		insert into ORDERINFO
 		(order_id, order_member_id, order_item_id, order_item_sellerName, 
-		order_item_name, order_item_price, order_time, order_location, order_image )
+		order_item_name, order_item_price, order_time, order_location, order_image, order_item_tell, order_member_tell )
 		values
 		(#{order_id}, #{order_member_id}, #{order_item_id}, #{order_item_sellerName}, 
-		#{order_item_name}, #{order_item_price}, #{order_time}, #{order_location}, #{order_image})		
+		#{order_item_name}, #{order_item_price}, #{order_time}, #{order_location}, #{order_image}, #{order_item_tell},#{order_member_tell})		
 	</insert>
 	
 	<select id="getmyListCount" parameterType="String" resultType="int">

@@ -92,5 +92,11 @@ public class ReviewServiceImpl implements ReviewService {
 		return dao.review_del(review_num);
 	}
 
+	@Override
+	public void starUpdate2(int review_item_id, Double star_avg) {
+		dao.starUpdate2(review_item_id, star_avg);
+		
+	}
+
 
 }

@@ -208,11 +208,14 @@ public class OrderController {
 			//별점 구하기
 			Double star_avg = rservice.starAVG(review_item_id);
 			logger.info("평균 별점 : "+star_avg);
-			
-			//별점 Update
-			rservice.starUpdate(review_item_id);
+				if(star_avg == null) {
+					star_avg = 0.0;
+					rservice.starUpdate2(review_item_id, star_avg);
+				}else {
+					//별점 Update
+					rservice.starUpdate(review_item_id);
+				}
 			}
-			
 			return r;
 		}
 		

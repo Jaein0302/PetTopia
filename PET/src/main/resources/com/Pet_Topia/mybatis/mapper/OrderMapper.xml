@@ -62,6 +62,12 @@
 		set ITEM_SCORE = #{ITEM_SCORE}
 		where item_id = #{ITEM_ID}
 	</update>
+		
+	<update id="starUpdate2" parameterType="product">
+		update item 
+		set ITEM_SCORE = #{star_avg}
+		where item_id = #{review_item_id}
+	</update>
 	
 	<select id="getPhoto" resultType="review">
 		select * from review
@@ -83,7 +89,7 @@
 	<select id="OrderListCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
+		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time
 	</select>
 
 	<select id="OrderList" parameterType="String" resultType="OrderInfo">
@@ -91,13 +97,13 @@
 		from (select * from orderinfo
 			  where order_member_id = #{member_id}
 			  order by order_time asc) b
-		where to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time
+		where to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time
 	</select>
 	
 	<select id="LastCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time
+		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time
 	</select>
 
 	<select id="LastList" parameterType="java.util.Map"	resultType="OrderInfo">
@@ -111,7 +117,7 @@
 					where orderinfo.order_member_id = #{member_id}
 					order by orderinfo.order_id desc) b
 			  where rownum &lt;= #{end}
-			  and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time
+			  and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time
 			)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
@@ -128,29 +134,20 @@
 	
 	
 	<select id="order_info" parameterType="int"	resultType="OrderInfo">
-		select orderinfo.*, m1.member_tell order_item_tell,
-		m2.member_tell order_member_tell
-		from orderinfo left outer join member m1
-		on orderinfo.order_location = m1.member_address
-		left outer join member m2
-		on order_member_id = m2.member_id
+		select orderinfo.*
+		from orderinfo 
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &lt; order_time		
+		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time		
 	</select>
 	
 	<select id="order_info_last" parameterType="int" resultType="OrderInfo">
-		select orderinfo.*, m1.member_tell order_item_tell,
-		m2.member_tell order_member_tell, nvl(cnt,0) cnt
-		from orderinfo left outer join member m1
-		on orderinfo.order_location = m1.member_address
-		left outer join member m2
-		on order_member_id = m2.member_id
-		left outer join (select review.review_num, count(*) cnt 
-			  			 from review
-			  			 group by review.review_num)r
+		select orderinfo.*, nvl(cnt,0) cnt
+		from orderinfo left outer join (select review.review_num, count(*) cnt 
+							  			 from review
+							  			 group by review.review_num)r
 		on orderinfo.order_id = r.review_num
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') &gt;= order_time		
+		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time		
 	</select>
 	
 	<insert id="addEvent" parameterType="hashmap">
