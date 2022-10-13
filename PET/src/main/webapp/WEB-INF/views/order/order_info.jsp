@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +41,7 @@
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>예약 일시</td>
-	<td class='p-1 border text-dark'>${order.order_time}</td>
+	<td class='p-1 border text-dark'>${fn:substring(order.order_time,0,21)}</td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>가격</td>
@@ -103,7 +104,7 @@
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>예약 일시</td>
-	<td class='p-1 border text-dark'>${last.order_time}</td>
+	<td class='p-1 border text-dark'>${fn:substring(last.order_time,0,21)}</td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>가격</td>
