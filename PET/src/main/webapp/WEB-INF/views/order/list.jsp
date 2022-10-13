@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -97,7 +98,7 @@
    		</tr>
    		<tr>
    			<td>
-   				<span class="p-subTitle1">${b.order_time}</span>
+   				<span class="p-subTitle1">${fn:substring(b.order_time,0,21)}</span>
    			</td>
    		</tr>
    	</tbody>
@@ -175,7 +176,7 @@
    		</tr>
    		<tr>
    			<td>
-   				<span class="order-price">${l.order_time}</span>
+   				<span class="order-price">${fn:substring(l.order_time,0,21)}</span>
    			</td>
    		</tr>
    	</tbody>

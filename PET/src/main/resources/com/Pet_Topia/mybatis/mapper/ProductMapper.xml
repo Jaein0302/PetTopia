@@ -29,17 +29,14 @@
 									from review
 									group by review_item_id) c
 	  on item.item_id = c.review_item_id
-      from item
       where ITEM_CATEGORY = 'treat'      
       <include refid="search2"/>
    </select> 
    
    <sql id="search2">
-       <choose>
-          <when test="sex != ''">and ITEM_SEX like #{sex}</when>
-          <when test="weight != ''">and ITEM_WEIGHT like #{weight}</when>
-          <when test="species != ''">and ITEM_SPECIES like #{species}</when>
-       </choose>
+          <if test="sex!=''">and ITEM_SEX = #{sex}</if>
+          <if test="weight!=''">and ITEM_WEIGHT = #{weight}</if>
+          <if test="species!=''">and ITEM_SPECIES = #{species}</if>
    </sql>
    
    	<insert id="insertProduct" parameterType="product">

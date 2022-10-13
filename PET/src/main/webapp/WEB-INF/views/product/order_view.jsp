@@ -304,13 +304,11 @@ $(document).ready(function(){
     		  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
     		  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
     		  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
-    		  	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
+    		  	    			 "order_location" : "${productdata.ITEM_ADDRESS}", //예약하는 장소
     		  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
-    		  	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
-    		  	    			 /*
-    		  	    			order_item_tell varchar2(50), --구매자 연락처
-    							    order_member_tell varchar2(50),--판매자 연락처
-    		  	    			 */
+    		  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
+                       "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
+                       "order_member_tell" : "${memberlist.member_tell}"   // 구매자 연락처
     		   				 },
     		   				 beforeSend : function(xhr){
     		   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
@@ -373,19 +371,17 @@ $(document).ready(function(){
    				 dataType : 'json',
    				 data: {
    					 "order_id" : 1 , //예약 ID
-  	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
-  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
-  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
-  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
-  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
-  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
-  	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
-  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
-  	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
-  	    			 /*
-  	    			order_item_tell varchar2(50), --구매자 연락처
-					    order_member_tell varchar2(50),--판매자 연락처
-  	    			 */
+  	    			         "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
+    		  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
+    		  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
+    		  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
+    		  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
+    		  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
+    		  	    			 "order_location" : "${productdata.ITEM_ADDRESS}", //예약하는 장소
+    		  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
+    		  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
+                       "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
+                       "order_member_tell" : "${memberlist.member_tell}"   // 구매자 연락처
    				 },
    				 beforeSend : function(xhr){
    						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");

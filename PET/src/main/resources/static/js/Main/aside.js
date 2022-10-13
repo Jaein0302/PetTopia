@@ -4,19 +4,25 @@
 	    $('#myPageName').siblings('.nav-link').removeClass('navActive'); //다른 navActive가 있으면 지워준다.
 	   
 	    if (pageUrl.indexOf('update') > -1) {
-	        $('#myPageName > li > a').eq(0).addClass('navActive');
+	        $('.mn0 > a').addClass('navActive');
 	    } else if (pageUrl.indexOf('order/list') > -1) { 
-	        $('#myPageName > li > a').eq(1).addClass('navActive');
+	        $('.mn1 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('#') > -1) { 
-	        $('#myPageName > li > a').eq(2).addClass('navActive');
+	        $('.mn2 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('myreview') > -1) { 
-	        $('#myPageName > li > a').eq(3).addClass('navActive');
+	        $('.mn3 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('myPost') > -1) { 
-	        $('#myPageName > li > a').eq(4).addClass('navActive');
+	        $('.mn4 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('myComment') > -1) { 
-	        $('#myPageName > li > a').eq(5).addClass('navActive');
+	        $('.mn5 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('withdraw') > -1) { 
-	        $('#myPageName > li > a').eq(6).addClass('navActive');
+	        $('.mn6 > a').addClass('navActive');
+	    }else if (pageUrl.indexOf('mypage/SCH') > -1) { 
+	        $('.mn7 > a').addClass('navActive');
+	    }else if (pageUrl.indexOf('admin_list') > -1) { 
+	        $('.mn8 > a').addClass('navActive');
+	    }else if (pageUrl.indexOf('withdraw') > -1) { 
+	        $('.mn9 > a').addClass('navActive');
 	    }
 	    
 	});

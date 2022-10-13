@@ -43,9 +43,9 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getListAjax(String sex, String weight, String species) {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("sex", "%" + sex + "%");
-		map.put("weight", "%" + weight + "%");
-		map.put("species", "%" + species + "%");
+		map.put("sex", sex );
+		map.put("weight", weight );
+		map.put("species", species );
 		
 		return dao.getListAjax(map);
 	}
