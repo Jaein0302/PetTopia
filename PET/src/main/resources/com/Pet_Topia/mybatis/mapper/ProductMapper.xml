@@ -24,11 +24,13 @@
    </sql>
    
    <select id="getListAjax" parameterType="map" resultType="product">
-     select item.*,  nvl(cnt,0) cnt
+     select item.*,  nvl(cnt,0) cnt,  m.member_name seller_name
 	  from item left outer join (select review.review_item_id, count(*) cnt
 									from review
 									group by review_item_id) c
-	  on item.item_id = c.review_item_id
+	  on item.item_id = c.review_item_id	  
+	  join member m
+	  on item.item_seller = m.member_id
       where ITEM_CATEGORY = 'treat'      
       <include refid="search2"/>
    </select> 
