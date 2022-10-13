@@ -150,10 +150,12 @@
 		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time		
 	</select>
 	
+	
+	
 	<insert id="addEvent" parameterType="hashmap">
 		insert into sch
 		values
-		(sch_seq.NEXTVAL, #{sch_title}, #{sch_start}, #{sch_seller})
+		(sch_seq.NEXTVAL, order_seq.nextval -1 ,#{sch_title}, #{sch_start}, #{sch_seller})
 	</insert>
   
   

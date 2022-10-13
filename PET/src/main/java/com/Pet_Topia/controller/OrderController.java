@@ -223,7 +223,7 @@ public class OrderController {
 		@GetMapping(value="/order_delete")
 		public String order_delete(String member_id,int order_id, Model model) {
 			int result = oservice.order_delete(order_id);
-			if(result > 0) {
+			if(result > 0 ) {
 				model.addAttribute("message","삭제성공");
 			}else {
 				model.addAttribute("message","삭제실패");

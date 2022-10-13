@@ -1,6 +1,6 @@
 drop table ORDERINFO cascade constraints purge;
 create table ORDERINFO(
-order_id     	number(20) PRIMARY KEY,			--주문번호
+order_id     	number(30) PRIMARY KEY,			--주문번호
 order_member_id references member(member_id) on delete cascade, --주문아이디
 order_item_id   references item(item_id) on delete cascade,	 --상품번호
 order_item_sellerName varchar2(50), --판매자의 이름
@@ -16,6 +16,9 @@ order_member_tell varchar2(50)--판매자 연락처
 
 delete ORDERINFO
 select * from ORDERINFO
+
+drop sequence order_seq
+create sequence order_seq start with 80000 increment by 1;
 
 insert into orderInfo values (
 	10000010, 'buyer1', 10001, '해피동물병원', '예방주사',20000, to_char( sysdate , 'YYYY-MM-DD HH24:mm'),

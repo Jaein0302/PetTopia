@@ -123,10 +123,10 @@
 			</tbody>	
 		</table>	
 		
-		<div class="purchase">		
-		<button class="btn btn-primary">결제하기</button>
-		<input type="hidden" id="hidden_time">
-		</div>
+			<div class="purchase">		
+				<button class="btn btn-primary">결제하기</button>
+				<input type="hidden" id="hidden_time">
+			</div>
 	</div>
 	
 <!-- open_sch modal -->
@@ -137,11 +137,9 @@
 		<div class="modal-body">
 			<div id='wrap'>
 				<div id='calendar'></div>
-					<br>
-				<div class="fc">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-				</div>
 			</div>
+			<br>
+
 		</div>
   </div>
  </div>
@@ -150,145 +148,37 @@
 <script>
 $(document).ready(function(){
 	
-	/*
-	예약하기 버튼을 클릭했을때
+	var member_id = $('#seller_id').html()
+	var order_id = 1;
+	var add_event_count = 0;
+	var year = null;
+	var day= null;
+	var hours = null;
+	var minutes = null;
+	var seconds = null;
+	var changed_date = null;
+
 	
-	1. 우선 예약 일자가 설정 되었는지 확인한다 (빨강버튼을 클릭하면 예약모달을 띄우고 거기서 완료되면 초록버튼으로 바꿀것임)
-	2. 결제방식이 현장결제라면 바로 예약해준다
-	3. 결제방식이 카카오페이라면 카카오페이 창을 띄운다
-	*/
-	
-	$(".purchase").click(function (){
+    //예약 확인 버튼
+    $("#confirm").click(function(){
 		
-		var IMP = window.IMP;
-        IMP.init('imp24704360');
-        
-        if($("#confirm").html() =='예약 일자를 설정해주세요'){//예약설정 안했을때 
-    		alert("예약 일자를 설정해주세요");
-        	return false;
-    	} else { //예약설정했을때
-    		
-    		if( $('#select_pay').val() == 'KAKAO_PAY'){//결제방식이 카카오페이 일때
-    			
-    			 // IMP.request_pay(param, callback) 결제창 호출
-    			 IMP.request_pay({//param
-    				 pg: "kakaopay",
-    				 pay_method: "card",
-    				 order_id: "Y" + new Date().getTime(),
-    				 name: "${productdata.ITEM_NAME}",
-    				 item_id: "${productdata.ITEM_ID}",
-    				 amount: "${productdata.ITEM_PRICE}",
-    				 count: 1,
-    				 buyer_id: "${memberlist.member_id}",
-    				 buyer_addr: "${memberlist.member_address}"
-    			 }, function (rsp){//callback 함수
-    				 
-    				 if(rsp.success){
-    					 $.ajax({
-    						 url: 'purchase',
-    						 method: 'POST',
-    						 contentType: "application/json; charset=UTF-8",
-    						 data : {
-    		   	    			 "order_id" : Math.floor(Math.random()) , //예약 ID
-    		   	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
-    		   	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
-    		   	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
-    		   	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
-    		   	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
-    		   	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
-    		   	    			 "order_location" : "${memberlist.member_address}", //예약하는 장소
-    		   	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
-    		   	    			 "order_seller" : "${productdata.MEMBER_ID}" //판매하는 사람의 아이디
-    		   	    			 /*
-    		   	    			order_item_tell varchar2(50), --구매자 연락처
-							      	order_member_tell varchar2(50),--판매자 연락처
-    		   	    			 */
-    						 }, //data
-    		   				 beforeSend : function(xhr){
-    		   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-    		   				 },
-    						 success: function(result){
-    							 console.log(result);
-    							 
-    							 if(result ==1){
-    		   						 alert("카카오페이 결제 완료되었습니다.\n예약페이지로 이동합니다.");
-    		   						 location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
-    							 } else {
-    								 alert("결제 실패");
-    							 }
-    						 }, //success
-    						 error: function(request, status, error){
-    							 alert("code : "+ request.status + "\n message : "+ request.responseText + "\n error : " + error);
-    						 }//error
-    					 })//ajax
-    				 } else {
-    					 alert("결제 실패");
-    				 }
-    			 })
-    		} else { //결제 방식이 현장 결제일때 바로 예약 테이블로 넣어버리기
-    			
-        	
-    			$.ajax({
-   				
-    			 url:'purchase', 
-   				 method:'POST',
-   				 dataType : 'json',
-   				 data: {
-   					 "order_id" : Math.floor(Math.random()) , //예약 ID
-  	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
-  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
-  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
-  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
-  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
-  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
-  	    			 "order_location" : "${productdata.ITEM_ADDRESS}", //예약하는 장소
-  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
-  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
-  	    			 "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
-  	    			 "order_member_tell" : "${memberlist.member_tell}"	// 구매자 연락처
-   				 },
-   				 beforeSend : function(xhr){
-   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-   					},
-   				 success : function(result) {
-   					 console.log(result);
-   					 if(result == 1) {
-   						 alert("현장결제입니다.\n예약페이지로 이동합니다.");
-   						 location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
-   					 } else {
-   						 alert("결제 실패");
-   					 }
-   				 }, //success end
-   				 error:function(request, status, error){
-   						alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-   					} // error end
-   			 }) //ajax end   
-    		}
-    	}//예약설정 했을때 end
-	})//purchase button click function
-	
-	
-	
-	
-	$("#confirm").click(function(){
-		
-		var add_event_count = 0;
-		var member_id = $('#seller_id').html()
-		
-	    var request = $.ajax({
-	        url: "../mypage/getSchListByID",
-	        data : {"seller_id" : member_id},
-	        beforeSend : function(xhr)
-	        {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-	            xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-	        },
-	        method: "GET",
-	        dataType: "json"
-	    });
-		
+        //스케줄 리스트를 가져오는 요청
+    	var request = $.ajax({
+            url: "../mypage/getSchListByID",
+            data : {"seller_id" : member_id},
+            beforeSend : function(xhr)
+            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
+            method: "GET",
+            dataType: "json"
+        });
+
+		//일정표를 성공적으로 가져왔다면
         request.done(function (data) {
             console.log(data); // log 로 데이터 찍어주기.
-
+			
+            //캘린더를 렌더링한다
             var calendarEl = document.getElementById('calendar');
             calendar = new FullCalendar.Calendar(calendarEl, {
             	locale: 'ko',
@@ -317,14 +207,10 @@ $(document).ready(function(){
                 // eventRemove: function (obj) { // 이벤트가 삭제되면 발생하는 이벤트
                 //     console.log(obj);
                 // },
-                /**
-                 * 드래그로 이벤트 추가하기
-                 */
-                select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 
+                select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 					var really = confirm("정말 이 시간에 예약하시겠습니까?")
                     var title = "${productdata.ITEM_NAME}";
-
                     if (really && add_event_count == 0) {
 	
                     	//console.log(add_event_count)
@@ -335,54 +221,27 @@ $(document).ready(function(){
                         add_event_count++
                         //console.log(add_event_count)
                         
-                        
+                        year = arg.start.getFullYear();
+                    	month = ('0' + (arg.start.getMonth() + 1)).slice(-2);
+                    	day = ('0' + arg.start.getDate()).slice(-2);
+                    	hours = ('0' + arg.start.getHours()).slice(-2); 
+                    	minutes = ('0' + arg.start.getMinutes()).slice(-2);
+                    	seconds = ('0' + arg.start.getSeconds()).slice(-2); 
+                    	
+                    	changed_date = year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds
+
+						order_id = year+month+day+hours+minutes
                         //여기서 hidden_time의 밸류를 yyyy-MM-dd hh24:mm 형식으로 치환해야 합니다
                         $('#hidden_time').val(arg.start.toLocaleString('ko-kR', {timeZone: 'UTC'}))
+                        
+                        $('#confirm').removeClass('btn-danger')
+                        $('#confirm').addClass('btn-success')
+                        $('#confirm').html("예약이 설정되었습니다")
+                        $('#confirm').prop("disabled", true)
                     } else {
                     	alert("일정은 한번만 추가 할 수 있습니다.\n잘못입력하셨다면 새로고침 후 이용해주세요.");
                     	return false;
                     }
-                    var allEvent = calendar.getEvents(); // .getEvents() 함수로 모든 이벤트를 Array 형식으로 가져온다. (FullCalendar 기능 참조)
-
-                    var events = new Array(); // Json 데이터를 받기 위한 배열 선언
-                    
-                    
-                    for (var i = 0; i < allEvent.length; i++) {
-                        var obj = new Object();     // Json 을 담기 위해 Object 선언
-                        // alert(allEvent[i]._def.title); // 이벤트 명칭 알람
-                        obj.title = allEvent[i]._def.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
-                        obj.start = allEvent[i]._instance.range.start; // 시작
-                        obj.seller = "${productdata.MEMBER_ID}";
-
-                        events.push(obj);
-                    }
-                    var jsondata = JSON.stringify(events);
-                    console.log(jsondata);
-                    // saveData(jsondata);
-
-                    $(function saveData(jsondata) {
-                        $.ajax({
-                            url: "../mypage/calendar-update",
-                            method: "POST",
-                            dataType: "json",
-                            data: JSON.stringify(events),
-                            contentType: 'application/json',
-                            beforeSend : function(xhr){
-                            	xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-                            },
-                        })
-                            .done(function (result) {
-                                alert("예약이 설정되었습니다.");
-                                $('#confirm').removeClass('btn-danger')
-                                $('#confirm').addClass('btn-success')
-                                $('#confirm').html("예약이 설정되었습니다")
-                                $('#confirm').prop("disabled", true)
-                            })
-                            .fail(function (request, status, error) {
-                                 alert("일정표를 데이터베이스에 입력하는중 오류가 발생했습니다. : " + error);
-                            });
-                        calendar.unselect()
-                    });
                 },
 
                 // drop: function (arg) {
@@ -396,15 +255,184 @@ $(document).ready(function(){
             calendar.render();
         });
         
-        
+        //일정표를 못가져왔다면
         request.fail(function( jqXHR, textStatus ) {
             alert( "일정표를 불러오는중 에러가 발생했습니다.: " + textStatus);
         });
 		
-		
-		
-	})//confrim button click function
+        
+	})//confirm button click function
 	
+	//구매버튼 클릭
+	$(".purchase").click(function (){
+		
+		var IMP = window.IMP;
+        IMP.init('imp24704360');
+        
+        if($("#confirm").html() =='예약 일자를 설정해주세요'){//예약설정 안했을때 
+    		alert("예약 일자를 설정해주세요");
+        	return false;
+    	} else { //예약설정했을때
+    		
+    		if( $('#select_pay').val() == 'KAKAO_PAY'){//결제방식이 카카오페이 일때
+    			
+    			 // IMP.request_pay(param, callback) 결제창 호출
+    			 IMP.request_pay({//param
+    				 pg: "kakaopay",
+    				 pay_method: "card",
+    				 order_id: "Y" + new Date().getTime(),
+    				 name: "${productdata.ITEM_NAME}",
+    				 item_id: "${productdata.ITEM_ID}",
+    				 amount: "${productdata.ITEM_PRICE}",
+    				 count: 1,
+    				 buyer_id: "${memberlist.member_id}",
+    				 buyer_addr: "${memberlist.member_address}"
+    			 }, function (rsp){//callback 함수
+    				 
+    				 if(rsp.success){
+
+    					 $.ajax({
+    			   				
+    		    			 url:'purchase', 
+    		   				 method:'POST',
+    		   				 dataType : 'json',
+    		   				 data: {
+    		   					 "order_id" : 1 , //예약 ID
+    		  	    			 "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
+    		  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
+    		  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
+    		  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
+    		  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
+    		  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
+    		  	    			 "order_location" : "${productdata.ITEM_ADDRESS}", //예약하는 장소
+    		  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
+    		  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
+                       "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
+                       "order_member_tell" : "${memberlist.member_tell}"   // 구매자 연락처
+    		   				 },
+    		   				 beforeSend : function(xhr){
+    		   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+    		   					},
+    		   				 success : function(result) {
+    		   					 console.log(result);
+    		   					 if(result == 1) {
+    		   						 var allEvent = calendar.getEvents(); // .getEvents() 함수로 모든 이벤트를 Array 형식으로 가져온다. (FullCalendar 기능 참조)
+    		   						 var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+    		   						 for (var i = 0; i < allEvent.length; i++) {
+    		   							 var obj = new Object();     // Json 을 담기 위해 Object 선언
+    		   							 // alert(allEvent[i]._def.title); // 이벤트 명칭 알람
+    		   							 obj.title = allEvent[i]._def.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
+    		   							 obj.start = allEvent[i]._instance.range.start; // 시작
+    		   							 //obj.order_id = order_id;
+    		   							 obj.seller = "${productdata.MEMBER_ID}";
+    		   							 events.push(obj);
+    		   						 }
+    		   						 var jsondata = JSON.stringify(events);
+    		   						 console.log(jsondata);
+    		   						 // saveData(jsondata);
+    		   						 $(function saveData(jsondata) {
+    		   							 $.ajax({
+    		   								 url: "../mypage/calendar-update",
+    		   								 method: "POST",
+    		   								 dataType: "json",
+    		   								 data: JSON.stringify(events),
+    		   								 contentType: 'application/json',
+    		   								 beforeSend : function(xhr){
+    		   									 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+    		   								 },
+    		   							 })
+    		   							 .done(function (result) {
+    		   								 alert("예약과 구매가 성공적으로 완료되었습니다.\n나의 예약페이지로 이동합니다.");
+    		   								location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
+    		   							 })
+    		   							 .fail(function (request, status, error) {
+    		   								 alert("일정표를 데이터베이스에 입력하는중 오류가 발생했습니다. : " + error);
+    		   							 });
+    		   						 }); 
+    		   					 } else {
+    		   						 alert("결제프로세스 진행중 오류가 발생했습니다.");
+    		   					 }
+    		   				 }, //success end
+    		   					 error:function(request, status, error){
+    		   						 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    		   					 } // error end
+    		   				 }) //ajax end 
+    					 
+    				 } else {
+    					 alert("카카오톡 결제 실패");
+    				 }
+    			 })
+    		} else { //결제 방식이 현장 결제일때 바로 예약 테이블로 넣어버리기
+    			
+    			$.ajax({
+   				
+    			 url:'purchase', 
+   				 method:'POST',
+   				 dataType : 'json',
+   				 data: {
+   					 "order_id" : 1 , //예약 ID
+  	    			         "order_member_id" : "${memberlist.member_id}", //예약하는사람의 아이디
+    		  	    			 "order_item_id" : "${productdata.ITEM_ID}",//예약하는 상품의 아이디
+    		  	    			 "order_item_sellerName" : "${productdata.seller_name}", //판매자의 업체명
+    		  	    			 "order_item_name" :"${productdata.ITEM_NAME}", //예약하는 상품의 이름
+    		  	    			 "order_item_price" :"${productdata.ITEM_PRICE}", //예약하는 상품의 가격
+    		  	    			 "order_time" : $('#hidden_time').val(), //예약하는 시간
+    		  	    			 "order_location" : "${productdata.ITEM_ADDRESS}", //예약하는 장소
+    		  	    			 "order_image" : "${productdata.ITEM_IMAGE_FILE}", //예약하는 상품의 이미지
+    		  	    			 "order_seller" : "${productdata.MEMBER_ID}", //판매하는 사람의 아이디
+                       "order_item_tell" : "${productdata.seller_tell}", // 판매자 연락처
+                       "order_member_tell" : "${memberlist.member_tell}"   // 구매자 연락처
+   				 },
+   				 beforeSend : function(xhr){
+   						xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+   					},
+   				 success : function(result) {
+   					 console.log(result);
+   					 if(result == 1) {
+   						 var allEvent = calendar.getEvents(); // .getEvents() 함수로 모든 이벤트를 Array 형식으로 가져온다. (FullCalendar 기능 참조)
+   						 var events = new Array(); // Json 데이터를 받기 위한 배열 선언
+   						 for (var i = 0; i < allEvent.length; i++) {
+   							 var obj = new Object();     // Json 을 담기 위해 Object 선언
+   							 // alert(allEvent[i]._def.title); // 이벤트 명칭 알람
+   							 obj.title = allEvent[i]._def.title; // 이벤트 명칭  ConsoleLog 로 확인 가능.
+   							 obj.start = allEvent[i]._instance.range.start; // 시작
+   							 //obj.order_id = order_id;
+   							 obj.seller = "${productdata.MEMBER_ID}";
+   							 events.push(obj);
+   						 }
+   						 var jsondata = JSON.stringify(events);
+   						 console.log(jsondata);
+   						 // saveData(jsondata);
+   						 $(function saveData(jsondata) {
+   							 $.ajax({
+   								 url: "../mypage/calendar-update",
+   								 method: "POST",
+   								 dataType: "json",
+   								 data: JSON.stringify(events),
+   								 contentType: 'application/json',
+   								 beforeSend : function(xhr){
+   									 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+   								 },
+   							 })
+   							 .done(function (result) {
+   								 alert("예약과 구매가 성공적으로 완료되었습니다.\n나의 예약페이지로 이동합니다.");
+   								location.href="${pageContext.request.contextPath}/order/list?member_id=${memberlist.member_id}"
+   							 })
+   							 .fail(function (request, status, error) {
+   								 alert("일정표를 데이터베이스에 입력하는중 오류가 발생했습니다. : " + error);
+   							 });
+   						 }); 
+   					 } else {
+   						 alert("결제프로세스 진행중 오류가 발생했습니다.");
+   					 }
+   				 }, //success end
+   					 error:function(request, status, error){
+   						 alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   					 } // error end
+   				 }) //ajax end   
+    			}
+    		}//예약설정 했을때 end
+    	})//purchase button click function
 	
 })
 </script>

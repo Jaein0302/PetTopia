@@ -430,14 +430,6 @@ public class ProductController {
 		return result;
 	}
 	
-	@PostMapping(value = "/purchase2")
-	 public String purchase_view2(OrderInfo orderinfo) {
-	  logger.info("아이템ID = "+orderinfo.getOrder_id());
-	  productService.OrderInsert(orderinfo);
-	  return "main/main";
-	 }
-	
-
 	
   
 	/**나의 찜 목록으로 이동**/

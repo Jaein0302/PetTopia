@@ -111,14 +111,11 @@
 	</delete>
 	
 	<insert id="OrderInsert"  parameterType="OrderInfo">
-		<selectKey resultType="int" order="BEFORE" keyProperty="order_id">
-			select nvl(max(order_id),0)+1 from ORDERINFO
-		</selectKey>
 		insert into ORDERINFO
 		(order_id, order_member_id, order_item_id, order_item_sellerName, 
 		order_item_name, order_item_price, order_time, order_location, order_image, order_item_tell, order_member_tell )
 		values
-		(#{order_id}, #{order_member_id}, #{order_item_id}, #{order_item_sellerName}, 
+		(order_seq.nextval , #{order_member_id}, #{order_item_id}, #{order_item_sellerName}, 
 		#{order_item_name}, #{order_item_price}, #{order_time}, #{order_location}, #{order_image}, #{order_item_tell},#{order_member_tell})		
 	</insert>
 	
