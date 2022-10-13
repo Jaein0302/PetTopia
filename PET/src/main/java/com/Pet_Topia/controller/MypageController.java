@@ -205,14 +205,9 @@ public class MypageController {
 		
 		for (int i =0 ; i<param.size(); i++) {
 			schList.put("sch_title", (String) param.get(i).get("title"));
+			schList.put("sch_order_id", (String) param.get(i).get("order_id"));
         	schList.put("sch_start", (String) param.get(i).get("start"));
         	schList.put("sch_seller", (String) param.get(i).get("seller") );
-			
-			
-			//String sch_title = (String) param.get(i).get("title");
-			//String sch_start = (String) param.get(i).get("start");
-			//String sch_seller = (String) param.get(i).get("seller"); 
-			
 		}
 		
 		int result = orderservice.addEvent(schList);
