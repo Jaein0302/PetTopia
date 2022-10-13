@@ -98,7 +98,8 @@
    		</tr>
    		<tr>
    			<td>
-   				<span class="p-subTitle1">${fn:substring(b.order_time,0,21)}</span>
+    			<c:set var = "b_length" value = "${fn:length(b.order_time)}"/>
+   				<span class="p-subTitle1">${fn:substring(b.order_time, 0, b_length-3)}</span>
    			</td>
    		</tr>
    	</tbody>
@@ -176,7 +177,8 @@
    		</tr>
    		<tr>
    			<td>
-   				<span class="order-price">${fn:substring(l.order_time,0,21)}</span>
+   				<c:set var = "l_length" value = "${fn:length(l.order_time)}"/>
+   				<span class="order-price">${fn:substring(l.order_time, 0, l_length-3)}</span>
    			</td>
    		</tr>
    	</tbody>
