@@ -176,7 +176,7 @@
    		</tr>
    		<tr>
    			<td>
-   				<span class="order-price">${fn:substring(ㅣ.order_time,0,21)}</span>
+   				<span class="order-price">${fn:substring(l.order_time,0,21)}</span>
    			</td>
    		</tr>
    	</tbody>

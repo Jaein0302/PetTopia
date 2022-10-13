@@ -3,7 +3,7 @@ drop sequence comm_seq;
 
 create table COMMUNITY_COMM(
 COMMENT_NUM       number       primary key,
-COMMENT_NAME      references member(MEMBER_ID) on delete cascade,
+COMMENT_NAME      VARCHAR2(15) references member(MEMBER_ID),
 COMMENT_CONTENT      varchar2(200),
 COMMENT_DATE      date,
 COMMENT_COMMU_NUM  references community(COMMU_NUM) on delete cascade
