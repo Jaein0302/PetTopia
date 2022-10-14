@@ -315,5 +315,11 @@ public class MemberController {
 		return mv;
 	}
 	
-	
+	@GetMapping(value = "/chating")
+	public ModelAndView home() {
+		ModelAndView mv = new ModelAndView("chat");
+		mv.setViewName("member/chat");
+		return mv;
+	}
+
 }
