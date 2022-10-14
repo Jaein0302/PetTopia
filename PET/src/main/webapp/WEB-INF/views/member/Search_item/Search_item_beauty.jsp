@@ -8,9 +8,9 @@
         <div class="row px-xl-5 pb-3">
         <c:forEach var="p" items="${b}">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
+                <div class="card product-item border-0 mb-4" >
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                  	   <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
+                  	   <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
                     	<span class="text-body">${p.seller_name}</span>
@@ -19,7 +19,11 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0  zzim"><i class="fas fa-heart"></i></a>
+                    	<!-- 찜하기 버튼 -->
+                    	<a href="javascript:void(0)" class="btn border wishbutton">
+                  			<i class="fas fa-heart text-primary"></i>
+               			</a>
+               			<input type="hidden" value="${p.ITEM_ID}">
                     </div>
                 </div>
             </div>        

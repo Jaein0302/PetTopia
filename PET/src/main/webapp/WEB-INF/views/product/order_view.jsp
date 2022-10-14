@@ -149,14 +149,7 @@
 $(document).ready(function(){
 	
 	var member_id = $('#seller_id').html()
-	var order_id = 1;
 	var add_event_count = 0;
-	var year = null;
-	var day= null;
-	var hours = null;
-	var minutes = null;
-	var seconds = null;
-	var changed_date = null;
 
 	
     //예약 확인 버튼
@@ -181,6 +174,7 @@ $(document).ready(function(){
             //캘린더를 렌더링한다
             var calendarEl = document.getElementById('calendar');
             calendar = new FullCalendar.Calendar(calendarEl, {
+            	allDaySlot: false,
             	locale: 'ko',
             	timeZone: 'Asia/Seoul',
                 initialView: 'timeGridWeek',
@@ -211,26 +205,24 @@ $(document).ready(function(){
                 select: function (arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
 					var really = confirm("정말 이 시간에 예약하시겠습니까?")
                     var title = "${productdata.ITEM_NAME}";
+                    
+                    var today = new Date();
+                    
+                    if(arg.start < today) {
+                    	alert("지난 날짜는 선택할수 없습니다.")
+                    	return false;
+                    }
                     if (really && add_event_count == 0) {
 	
                     	//console.log(add_event_count)
                         calendar.addEvent({
                             title: title,
                             start: arg.start,
+                            color: 'green'
                         })
                         add_event_count++
                         //console.log(add_event_count)
                         
-                        year = arg.start.getFullYear();
-                    	month = ('0' + (arg.start.getMonth() + 1)).slice(-2);
-                    	day = ('0' + arg.start.getDate()).slice(-2);
-                    	hours = ('0' + arg.start.getHours()).slice(-2); 
-                    	minutes = ('0' + arg.start.getMinutes()).slice(-2);
-                    	seconds = ('0' + arg.start.getSeconds()).slice(-2); 
-                    	
-                    	changed_date = year+"-"+month+"-"+day+" "+hours+":"+minutes+":"+seconds
-
-						order_id = year+month+day+hours+minutes
                         //여기서 hidden_time의 밸류를 yyyy-MM-dd hh24:mm 형식으로 치환해야 합니다
                         $('#hidden_time').val(arg.start.toLocaleString('ko-kR', {timeZone: 'UTC'}))
                         

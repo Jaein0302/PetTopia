@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     $(function () {
     	
     	var member_id = $('#hidden_id').val()
-    	console.log(member_id);
+    	
         var request = $.ajax({
             url: "getSchListByID",
             data : {"seller_id" : member_id},
@@ -49,8 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 headerToolbar: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'timeGridWeek,timeGridDay'
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
                 },
+                selectable: true,
                 editable: false,
                 droppable: true, // this allows things to be dropped onto the calendar
                 drop: function (arg) {
@@ -63,14 +64,67 @@ document.addEventListener('DOMContentLoaded', function () {
                 /**
                  * data 로 값이 넘어온다. log 값 전달.
                  */
-                events: data
+                events: data,
+                select: function (arg) {
+
+                	var title = prompt('사유를 입력해주세요.');
+                	if (title) {
+                		calendar.addEvent({
+                			title: title,
+                			start: arg.start,
+                			color: 'red',
+                		})
+                	}
+                	
+                	var allEvent = calendar.getEvents();
+                	
+                	var events = new Array();
+                	
+                	
+                	for (var i=0; i< allEvent.length; i++){
+                		var obj = new Object();
+                		obj.title = allEvent[i]._def.title;
+                		obj.start = allEvent[i]._instance.range.start;
+                		obj.seller = "${member_id}";
+                		
+                		events.push(obj);
+                	}
+                	
+                	
+                	var jsondata = JSON.stringify(events);
+                	console.log(jsondata)
+                	
+                	$(function saveData(jsondata) {
+
+                	
+                		$.ajax({
+                			url:'add_red_event',
+                			method: 'POST',
+                			dataType: 'json',
+                			beforeSend : function(xhr){
+									 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+							},
+                			data: JSON.stringify(events),
+                			contentType: 'application/json',
+                		})
+                		
+                			.done(function(result){
+                				alert("일정이 생성되었습니다.")
+                			})
+                			
+                			.fail(function(request, status, error){
+                				alert("일정 생성중 오류가 발생했습니다 : " + error)
+                			})
+                	
+                	})
+                }
             });
 
             calendar.render();
         });
 
         request.fail(function( jqXHR, textStatus ) {
-            alert( "Request failed: " + textStatus);
+            alert( "일정을 가져오는도중 오류가 발생했습니다. :  " + textStatus);
         });
     });
 
@@ -125,10 +179,6 @@ document.addEventListener('DOMContentLoaded', function () {
     width: 1100px;
   }
   
-  #calendar > div.fc-view-harness.fc-view-harness-active > div > table > tbody > tr:nth-child(1) > td{
-  	display: none
-  }
-  
  
   
 
@@ -151,6 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- calendar -->
 <input type="hidden" value="${member_id }" id="hidden_id">
+<input type="hidden" id="hidden_time">
   <div id='wrap' style="width: 600px!important; height: 600px!important">
 
 

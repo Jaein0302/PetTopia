@@ -72,6 +72,11 @@ public class OrderServiceImpl implements OrderService {
 		return dao.addEvent(schList);
 	}
 
+	@Override
+	public int add_red_Event(HashMap<String, Object> schList) {
+		return dao.add_red_Event(schList);
+	}
+
 
 
 }

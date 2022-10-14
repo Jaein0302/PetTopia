@@ -215,6 +215,24 @@ public class MypageController {
 		return result;
 	}
 	
+	@PostMapping("/add_red_event")
+	@ResponseBody
+	public int add_red_event(@RequestBody List<Map<String,Object>> param) throws Exception{
+		
+		HashMap<String, Object> schList = new HashMap<>();
+		
+		for (int i =0 ; i<param.size(); i++) {
+			schList.put("sch_title", (String) param.get(i).get("title"));
+			schList.put("sch_order_id", (String) param.get(i).get("order_id"));
+        	schList.put("sch_start", (String) param.get(i).get("start"));
+        	schList.put("sch_seller", (String) param.get(i).get("seller") );
+		}
+		
+		int result = orderservice.add_red_Event(schList);
+		
+		return result;
+	}
+	
 	
 	
 
