@@ -33,7 +33,7 @@
 
 
 <body>
-
+<div class="container mb-5">
 
 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" id="hidden_token">   
 	
@@ -124,7 +124,7 @@
 		</table>	
 		
 			<div class="purchase">		
-				<button class="btn btn-primary">결제하기</button>
+				<button class="btn btn-primary">예약하기</button>
 				<input type="hidden" id="hidden_time">
 			</div>
 	</div>
@@ -144,7 +144,7 @@
   </div>
  </div>
 </div>
-
+</div>
 <script>
 $(document).ready(function(){
 	
@@ -436,4 +436,5 @@ $(document).ready(function(){
 	
 })
 </script>
+<jsp:include page="../member/footer.jsp" />
 </body>	

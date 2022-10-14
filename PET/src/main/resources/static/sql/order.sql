@@ -46,34 +46,18 @@ insert into orderInfo values (
 select * from ORDERINFO where to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') > order_time
 select to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') from dual
 
-		select orderinfo.*, m1.member_tell order_item_tell,
-		m2.member_tell order_member_tell
-		from orderinfo left outer join member m1
-		on orderinfo.order_location = m1.member_address
-		 left outer join member m2
-		on order_member_id = m2.member_id
-		where order_id=1
+
+select to_date(sysdate, 'YYYY. MM. DD. AM HH:MI:SS')-to_date(order_time, 'YYYY. MM. DD. AM HH:MI:SS') from ORDERINFO
+
+
+select to_date(sysdate, 'YYYY. MM. DD. AM HH:MI:SS')-to_date(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') from ORDERINFO
 
 		
-		select orderinfo.*, m1.member_tell order_item_tell,
-		m2.member_tell order_member_tell
-		from orderinfo left outer join member m1
-		on orderinfo.order_location = m1.member_address
-		left outer join member m2
-		on order_member_id = m2.member_id
-		where order_id=1
-		and to_char(sysdate, 'YYYY-MM-DD HH24:MI') <= order_time	
-
-
-select orderinfo.*, m1.member_tell order_item_tell,
-      m2.member_tell order_member_tell, nvl(cnt,0) cnt
-      from orderinfo left outer join member m1
-      on orderinfo.order_location = m1.member_address
-      join member m2
-      on order_member_id = m2.member_id
-      left outer join (select review.review_num, count(*) cnt 
-                     from review
-                     group by review.review_num)r
-      on orderinfo.order_id = r.review_num
-      where order_id=1
-      and to_char(sysdate, 'YYYY-MM-DD HH24:MI') >= order_time  
+		select orderinfo.*
+		from orderinfo
+		where to_date(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') <= to_date(order_time, 'YYYY. MM. DD. AM HH:MI:SS')
+		
+		
+SELECT  orderinfo.*
+FROM ORDERINFO
+where TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') < TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS') 

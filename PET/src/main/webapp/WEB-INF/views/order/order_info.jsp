@@ -41,7 +41,8 @@
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>예약 일시</td>
-	<td class='p-1 border text-dark'>${fn:substring(order.order_time,0,21)}</td>
+	<c:set var = "order_length" value = "${fn:length(order.order_time)}"/>
+	<td class='p-1 border text-dark'>${fn:substring(order.order_time, 0, order_length-3)}</td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>가격</td>
@@ -104,7 +105,8 @@
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>예약 일시</td>
-	<td class='p-1 border text-dark'>${fn:substring(last.order_time,0,21)}</td>
+	<c:set var = "last_length" value = "${fn:length(last.order_time)}"/>
+	<td class='p-1 border text-dark'>${fn:substring(last.order_time, 0, last_length-3)}</td>
 </tr>
 <tr>
 	<td class='p-1 border text-dark'>가격</td>

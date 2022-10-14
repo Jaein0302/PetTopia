@@ -227,7 +227,6 @@
                             <a href="${pageContext.request.contextPath}/admin/admin_notice" class="nav-item nav-link me1">공지사항</a>
                             <a href="${pageContext.request.contextPath}/community/list" class="nav-item nav-link me2">커뮤니티</a>
                             <a href="${pageContext.request.contextPath}/admin/admin_ask_list" class="nav-item nav-link me3">고객센터</a>
-                            
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                          
@@ -241,13 +240,16 @@
                   		  <sec:authorize access="hasRole('ROLE_MEMBER')">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
+                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
+    							<i class="far fa-comment-dots fa-flip-horizontal" style='opacity:0.6;font-size:1.2em'></i>
+    						</a>
+                        	
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         	   <img src="${pageContext.request.contextPath}/resources/img/Main/dogicon.png" style="width:23px">
                         	  &nbsp;
                         	  마이페이지
                         	  &ensp;<i class="fas fa-caret-down"></i></a>
-                        	 
                         	 
                         	 <form class="logout" action="${pageContext.request.contextPath}/main/logout" method="POST" name="logout" >
                         	 <div class="dropdown-menu rounded-0 m-0" style="min-width: 8.5rem !important;left: 12%;text-align:center">
@@ -272,6 +274,10 @@
                         <sec:authorize access="hasRole('ROLE_SELLER')">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
+                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
+    						<i class="far fa-comment-dots  fa-flip-horizontal" style='opacity:0.6;font-size:1.2em'></i>
+    						</a>
+                        	
                         	<div class="nav-item dropdown" >
                         	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         	   <img src="${pageContext.request.contextPath}/resources/img/Main/cat_icon.png" style="width:23px">
