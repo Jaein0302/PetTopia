@@ -157,6 +157,12 @@
 		values
 		(sch_seq.NEXTVAL, order_seq.nextval -1 ,#{sch_title}, #{sch_start}, #{sch_seller})
 	</insert>
+	
+	<insert id="add_red_Event">
+		insert into sch
+		values
+		(sch_seq.NEXTVAL, null, #{sch_title}, #{sch_start}, #{sch_seller})
+	</insert>
   
   
 </mapper>

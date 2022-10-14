@@ -10,6 +10,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
+    <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <script>
@@ -29,6 +30,56 @@ if (withdraw_message == "withdraw_success"){
 } else if (withdraw_message == "withdraw_fail") {
 	alert('탈퇴처리 과정중 문제가 발생하였습니다. \n 관리자에게 문의해주세요.')
 };
+
+$(function(){
+
+	$('body').on('click','.wishbutton', function(){
+
+		var item_id = $(this).next();
+		
+		
+		$.ajax({
+			type : "POST",
+			url: "../product/is_inmywish",
+			data : {"ITEM_ID" : item_id.val() }, 
+			beforeSend : function(xhr)
+            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+            },
+			success: function(resp){
+				console.log(resp);
+				if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
+					alert("해당 상품은 이미 찜한상품에 있습니다.");
+				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
+					
+					
+					$.ajax({
+						type: "POST",
+						url:"../product/addWish",
+						data: {"ITEM_ID" : item_id.val() },
+						beforeSend : function(xhr)
+			            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+			                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+			            },
+						success: function(resp){
+							//console.log(resp)
+							if (resp != null) {
+								alert("상품이 성공적으로 찜목록에 담겼습니다.");
+							} else{
+								alert("상품을 찜목록에 담는중 오류가 발생했습니다.");
+							}
+						}//inner success
+					})//inner ajax
+					
+					
+					
+				}
+			},//outter success
+		})//outer ajax end
+
+	});//wishbutton click function
+
+})
 </script>
 
 <body>
@@ -195,9 +246,9 @@ if (withdraw_message == "withdraw_success"){
         <div class="row px-xl-5 pb-3">
         <c:forEach var="p" items="${list}" end="7">	        
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">
+                <div class="card product-item border-0 mb-4" >
                     <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                         <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}">              	
+                         <img class='img-fluid w-100' src="/pet_topia/upload${p.ITEM_IMAGE_FILE}" onclick="location.href='${pageContext.request.contextPath}/product/detail?ITEM_ID=${p.ITEM_ID}'">              	
                     </div>
                     <div class="card-body border-left border-right p-0 pt-2 text-center">
                     	<span class="text-body"> ${p.seller_name}</span>
@@ -206,7 +257,10 @@ if (withdraw_message == "withdraw_success"){
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<a href="" class="btn btn-sm text-dark p-0 pr-2 zzim"><i class="fas fa-heart"></i></a>
+                    	<a href="javascript:void(0)" class="btn border wishbutton">
+                    		<i class="fas fa-heart text-primary"></i>
+                    	</a>
+                    	<input type="hidden" value="${p.ITEM_ID}">
                     </div>
                 </div>
             </div>

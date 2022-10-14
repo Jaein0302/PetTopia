@@ -54,6 +54,8 @@ public interface OrderMapper {
 
 	void starUpdate2(int review_item_id, Double star_avg);
 
+	int add_red_Event(HashMap<String, Object> schList);
+
 
 
 

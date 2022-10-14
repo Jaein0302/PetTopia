@@ -26,6 +26,8 @@ public interface OrderService {
 
 	int addEvent(HashMap<String, Object> schList);
 
+	int add_red_Event(HashMap<String, Object> schList);
+
 
 
 }
