@@ -99,5 +99,23 @@
 		set ITEM_ANSWER_CONTENT = #{ITEM_ANSWER_CONTENT}
 		where ITEM_ANSWER_NUM = #{ITEM_ANSWER_NUM}	
 	</update>	
+	
+	<select id = "getmyListCount" parameterType="String" resultType="int">
+		select count(*) 
+		from ITEM_ASK 
+		where ITEM_ASK_USERNAME = #{member_id}
+	</select>
    
+   	<select id="getAskList3" parameterType="map" resultType="ItemAsk">   	
+   		select *
+		from(select rownum rnum, a.*
+			 from (select ITEM_ASK.* , ITEM.ITEM_NAME  
+			   	   from ITEM_ASK, ITEM 
+			   	   where ITEM_ASK.ITEM_ASK_ITEMID = ITEM.ITEM_ID
+			   	   order by ITEM_ASK_DATE desc) a
+		 	 where rownum &lt;= #{end}
+		 	)
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+		and ITEM_ASK_USERNAME = #{member_id}		
+	</select>
 </mapper>

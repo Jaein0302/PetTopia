@@ -87,5 +87,22 @@ public class AskServiceImpl implements AskService {
 		
 		return dao.updateAnswer(map);
 	}
-
+	
+	//myask list
+	@Override	
+	public int getmyListCount(String member_id) {
+		return dao.getmyListCount(member_id);
+	}
+	
+	@Override
+	public List<ItemAsk> getAskList3(int page, int limit, String member_id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("member_id", member_id);
+		
+		return dao.getAskList3(map);
+	}
 }

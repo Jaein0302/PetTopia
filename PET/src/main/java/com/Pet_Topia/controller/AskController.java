@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.Pet_Topia.domain.ItemAnswer;
 import com.Pet_Topia.domain.ItemAsk;
+import com.Pet_Topia.domain.Product;
 import com.Pet_Topia.service.AskService;
 
 @Controller
@@ -145,6 +147,41 @@ public class AskController {
 
 		return "redirect:" + beforeURL;		
 	}
+	
+
+	//내 문의
+	@GetMapping(value ="/myask") 
+	public ModelAndView my_product(
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+						  String member_id,
+						  ModelAndView mv) {
+		
+		int listcount = askService.getmyListCount(member_id); // 해당하는 리스트만 받아옴
+
+		int limit = 5; // 한 화면에 출력할 로우 갯수
+		// 총 페이지 수
+		int maxpage = (listcount + limit - 1) / limit;
+		// 현재 페이지에 보여줄 시작 페이지 수 (1, 11, 21 등...)
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		// 현재 페이지에 보여줄 마지막 페이지 수 (10, 20, 30 등...)
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage)
+			endpage = maxpage;
+
+		List<ItemAsk> asklist = askService.getAskList3(page, limit, member_id); // 리스트를 받아옴		
+
+		mv.setViewName("product/my_ask");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("asklist", asklist);
+		mv.addObject("limit", limit);
+		return mv;
+	}
+	
 }
 	
 	
