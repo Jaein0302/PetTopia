@@ -34,6 +34,10 @@ public interface AskService {
 	
 	public int updateAnswer(int ITEM_ANSWER_NUM, String ITEM_ANSWER_CONTENT);
 	
+	//myask list
+	public int getmyListCount(String member_id);  
+	
+	public List<ItemAsk> getAskList3(int page, int limit, String member_id);  // myask에서 asklist 부르기
 	
 	
 	

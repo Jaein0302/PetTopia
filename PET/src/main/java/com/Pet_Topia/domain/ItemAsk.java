@@ -9,6 +9,14 @@ public class ItemAsk {
 	private String ITEM_ASK_CONTENT;
 	private String ITEM_ASK_DATE;
 	
+	private String ITEM_NAME;
+	
+	public String getITEM_NAME() {
+		return ITEM_NAME;
+	}
+	public void setITEM_NAME(String iTEM_NAME) {
+		ITEM_NAME = iTEM_NAME;
+	}
 	public int getITEM_ASK_NUM() {
 		return ITEM_ASK_NUM;
 	}

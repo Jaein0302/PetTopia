@@ -38,5 +38,9 @@ public interface AskMapper {
 	
 	public int updateAnswer(HashMap<String, Object> map);
 
-
+	//myask list
+	public int getmyListCount(String member_id);
+	
+	public List<ItemAsk> getAskList3(HashMap<String, Object> map);
+	
 }

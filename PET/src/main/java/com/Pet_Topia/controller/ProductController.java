@@ -515,10 +515,6 @@ public class ProductController {
 		PrintWriter out = response.getWriter();
 		out.print(result);
 	}
-	
-	
-
-	
 }
 	
 	
