@@ -200,10 +200,10 @@ $(function() {
 				
 					<div class='text-center pt-3 w-100' style='float:left'>
 	                  <button type="button" class="btn btn-primary p-2 pl-3 pr-3 mr-3" id="wishButton">
-	                  	<i class="fas fa-heart dheart pr-1" style='color:#404040!important'></i>관심상품 담기</button>
+	                  	<i class="fas fa-heart dheart pr-2" style='color:#404040!important'></i>관심상품 담기</button>
 	                  <input id="hidden_itemID" type="hidden" value="${productdata.ITEM_ID }">
 	                  <button type="button" class="btn btn-primary p-2 pl-3 pr-3 purchase">
-	                  <i class="fas fa-won-sign dwon pr-1" style='color:#404040!important'></i>바로 구매하기</button>
+	                  <i class="fas fa-calendar-check dwon pr-2" style='color:#404040!important'></i>바로 예약하기</button>
 	                </div>
                 
                </div>

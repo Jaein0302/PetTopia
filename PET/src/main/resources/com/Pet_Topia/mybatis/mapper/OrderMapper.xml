@@ -89,7 +89,7 @@
 	<select id="OrderListCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time
+		and TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &lt; TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS') 
 	</select>
 
 	<select id="OrderList" parameterType="String" resultType="OrderInfo">
@@ -97,13 +97,13 @@
 		from (select * from orderinfo
 			  where order_member_id = #{member_id}
 			  order by order_time asc) b
-		where to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time
+		where TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &lt; TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS') 
 	</select>
 	
 	<select id="LastCount" resultType="int">
 		select count(*) from orderinfo
 		where order_member_id = #{member_id}
-		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time
+		and TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &gt;= TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS') 
 	</select>
 
 	<select id="LastList" parameterType="java.util.Map"	resultType="OrderInfo">
@@ -117,7 +117,7 @@
 					where orderinfo.order_member_id = #{member_id}
 					order by orderinfo.order_id desc) b
 			  where rownum &lt;= #{end}
-			  and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time
+			  and TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &gt;= TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS') 
 			)
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
@@ -137,7 +137,7 @@
 		select orderinfo.*
 		from orderinfo 
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &lt; order_time		
+		and TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &lt; TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS')
 	</select>
 	
 	<select id="order_info_last" parameterType="int" resultType="OrderInfo">
@@ -147,7 +147,7 @@
 							  			 group by review.review_num)r
 		on orderinfo.order_id = r.review_num
 		where order_id=#{order_id}
-		and to_char(sysdate, 'YYYY. MM. DD. AM HH:MI:SS') &gt;= order_time		
+		and TO_TIMESTAMP(TO_CHAR(SYSTIMESTAMP, 'YYYY. MM. DD. AM HH:MI:SS'),'YYYY. MM. DD. AM HH:MI:SS') &gt;= TO_TIMESTAMP(order_time, 'YYYY. MM. DD. AM HH:MI:SS')
 	</select>
 	
 	
