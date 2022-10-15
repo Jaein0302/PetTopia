@@ -316,8 +316,9 @@ public class MemberController {
 	}
 	
 	@GetMapping(value = "/chating")
-	public ModelAndView home() {
+	public ModelAndView home(String member_id) {
 		ModelAndView mv = new ModelAndView("chat");
+		mv.addObject("member_id",member_id);
 		mv.setViewName("member/chat");
 		return mv;
 	}
