@@ -18,6 +18,7 @@
    
    #check { float : left }
 
+   .page-link { color : black !important; } 
 </style>
 
 </head>
@@ -30,10 +31,12 @@
                <th><div>글 번호</div></th>            
                <th><div>제목</div></th>         
                <th><div>작성자</div></th>         
-               <th><div>날짜</div></th>         
-               <th><div>답변여부</div></th>         
+               <th><div>날짜</div></th>   
+               <th><div>삭제</div></th>                        
+               <th><div>답변여부</div></th>  
             </tr>
               <c:forEach var="a" items="${asklist}" varStatus="status">  
+               <input type="hidden" value="${answercheck[status.index]}">    	
                <input type="hidden" value="${answerlist[status.index].ITEM_ANSWER_CONTENT}">              
                <input type="hidden" value="${a.ITEM_ASK_CONTENT}">              
                <input type="hidden" value="${a.ITEM_ASK_ITEMID}">              
@@ -69,7 +72,6 @@
 	              </sec:authorize>
 	              
 	              <td> 
-	                <input type="hidden" value="${answercheck[status.index]}">    	
 	              	<c:if test = "${answercheck[status.index] eq '1'}" >
                   		답변완료
                   	</c:if>  
@@ -158,7 +160,8 @@
 	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT" readOnly></textarea>
                 </div>    
                 <div>
- 				<div id="check"></div>
+				<button type="button" class="btn btn-primary a_update">문의 수정</button>
+				<button type="submit" class="btn btn-primary c_update">수정 완료</button>
                 <button type="button" class="btn btn-danger a_cancel">취소</button>
 				</div>
              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">  
