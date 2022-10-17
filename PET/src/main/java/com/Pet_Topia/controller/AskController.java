@@ -51,7 +51,7 @@ public class AskController {
 		if(result == 0) {
 			logger.info("상품문의 등록실패");
 			mv.addAttribute("url",request.getRequestURL());
-			mv.addAttribute("message", "상품 문의 실패");
+			mv.addAttribute("message", "상품문의 실패");
 			return "error/error";
 		}
 		

@@ -7,7 +7,7 @@
 
 <style>
    .m_product {
-      width : 400px;
+      width : 600px;
       margin : 0 auto;
       padding : 40px
    }
@@ -15,6 +15,9 @@
    .add { float : right }
    
    .m_product table tbody td {font-size : 10pt}
+
+   .page-link { color : darkgrey !important; } 
+
 </style>
 
 <script>
@@ -111,11 +114,28 @@ $(function() {
 </script>
 
 <body>
-   <jsp:include page="../member/header.jsp" />
-   <div class="container m_product">
-      <h3 style="display:inline">내 상품 ( ${listcount} )</h3>
-      <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#product_add">상품 등록하기</button>
-      <table class="table table-striped">
+<div class="header">
+<jsp:include page="../member/header.jsp" />
+</div>
+ <div class="container mb-5 mainbody" style="height:1500px;margin-top:220px;">
+  <div class="row px-xl-5">
+  
+   <!-- 사이드바 -->	  
+   <div class="col-md-3 pb-3 m-0">
+	  <jsp:include page="../mypage/aside.jsp" />
+   </div>
+   
+ <!-- 내가 등록한 상품 -->
+   <div class="col-md-9 pb-3">
+     
+   <div class='w-100 m-2'>
+   		 <span class="commu pr-4" style='font-weight: bold;'>내가 등록한 상품</span>
+   		 <span class='text-small1'>(&nbsp;총 
+   		 <span class='text-comment'>${listcount}</span>개의 상품을 등록하셨습니다.&nbsp;)</span>
+   </div>
+      
+   <div class="container m_product" style="width:900px">
+      <table class="table" >
          <thead>            
             <tr>
                <th>번호</th>            
@@ -123,7 +143,7 @@ $(function() {
                <th>상품이름</th>         
                <th>카테고리</th>   
                <th>등록날짜</th>                     
-               <th>문의글 답변 작성</th>      
+               <th>문의답변</th>      
                <th>수정</th>      
                <th>삭제</th>      
             </tr>
@@ -142,17 +162,17 @@ $(function() {
                <td>${p.ITEM_REG_DATE}</td>
                <td>
                   <a href="${pageContext.request.contextPath}/ask/answer_view?ITEM_ID=${p.ITEM_ID}">
-                     <button class="btn btn-Secondary reply" >문의 답변하기</button>
+                     <button class="btn btn-Secondary reply" >문의답변</button>
                   </a>
                </td>
                <td>
                   <a href="${pageContext.request.contextPath}/product/update_view?ITEM_ID=${p.ITEM_ID}">
-                     <button class="btn btn-info reply" >수정하기</button>
+                     <button class="btn btn-info reply" >수정</button>
                   </a>   
                </td>   
                <td>
                   <a href="${pageContext.request.contextPath}/product/delete?ITEM_ID=${p.ITEM_ID}">
-                     <button class="btn btn-Danger reply" id="delete">삭제하기</button>
+                     <button class="btn btn-Danger reply" id="delete" >삭제</button>
                   </a>                  
                </td>
             </tr>
@@ -202,7 +222,11 @@ $(function() {
         </c:if>
       </ul>    
    </div>
-</div>      
+   <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#product_add">상품 등록하기</button>
+</div>   
+</div>
+</div>
+</div>   
    
    <%-- add modal 시작 --%>
    <div class="modal" id="product_add">

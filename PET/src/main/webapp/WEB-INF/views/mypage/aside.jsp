@@ -15,7 +15,7 @@
             <ul class="nav nav-pills flex-column" id="myPageName" style="width: 200px">
                 <li class="nav-item mn0"><a class="nav-link" href="${pageContext.request.contextPath}/mypage/update">회원정보 수정</a></li>
                     <li class="nav-item mn1"><a class="nav-link" href="${pageContext.request.contextPath}/order/list?member_id=${pinfo.username}">예약내역</a></li>
-                    <li class="nav-item mn2"><a class="nav-link" href="#">내가 남긴 문의</a></li>
+                    <li class="nav-item mn2"><a class="nav-link" href="${pageContext.request.contextPath}/ask/myask?member_id=${pinfo.username}">내가 남긴 문의</a></li>
                     <li class="nav-item mn3"><a class="nav-link" href="${pageContext.request.contextPath}/order/myreview?member_id=${pinfo.username}">내가 남긴 리뷰</a></li>
                     <li class="nav-item mn4"><a class="nav-link" href="${pageContext.request.contextPath}/comment/myPost?member_id=${pinfo.username}">내 글</a></li>
                     <li class="nav-item mn5"><a class="nav-link" href="${pageContext.request.contextPath}/comment/myComment?member_id=${pinfo.username}">내 댓글</a></li>

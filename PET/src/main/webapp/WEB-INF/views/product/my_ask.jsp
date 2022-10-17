@@ -22,10 +22,29 @@
 </script>
 
 <body>
-   <jsp:include page="../member/header.jsp" />
+	<!-- header -->
+	<div class="header">
+		<jsp:include page="../member/header.jsp" />
+	</div>
+	
+   <div class="container mb-5 mainbody" style="height:1500px;margin-top:220px;">
+   <div class="row px-xl-5">
    
+   <!-- 사이드바 -->	  
+   <div class="col-md-3 pb-3 m-0">
+	  <jsp:include page="../mypage/aside.jsp" />
+   </div>
+   
+   <!-- 내가 남긴 리뷰 -->
+   <div class="col-md-9 pb-3">
+     
+   <div class='w-100 m-2'>
+   		 <span class="commu pr-4" style='font-weight: bold;'>내가 남긴 문의</span>
+   		 <span class='text-small1'>(&nbsp;총 
+   		 <span class='text-comment'>${listcount}</span>개의 문의를 작성하셨습니다.&nbsp;)</span>
+   </div>
+  	
    <div class="container m_product">
-      <h3 style="display:inline">내 문의 ( ${listcount} )</h3>
       <table class="table table-striped">
          <thead>            
             <tr>
@@ -96,6 +115,9 @@
         </c:if>
       </ul>    
    </div>
-</div>     
+</div> 
+</div> 
+</div>
+</div>   
 
 </body>   
