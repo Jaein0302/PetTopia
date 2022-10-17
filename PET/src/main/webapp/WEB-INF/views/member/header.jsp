@@ -241,7 +241,7 @@
                   		  <sec:authorize access="hasRole('ROLE_MEMBER')">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
-                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
+                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating?member_id=${pinfo.username}','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
     							<i class="far fa-comment-dots fa-flip-horizontal" style='opacity:0.6;font-size:1.2em'></i>
     						</a>
                         	
@@ -275,7 +275,7 @@
                         <sec:authorize access="hasRole('ROLE_SELLER')">
                   		  <sec:authentication property="principal" var="pinfo"/>
 	  						<input type="hidden" name="member_id" value="${pinfo.username}">
-                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
+                        	<a class="nav-item nav-link m-0" href="javascript:void(window.open('${pageContext.request.contextPath}/main/chating?member_id=${pinfo.username}','실시간 채팅','width=555,height=665,top=200,left=650'))" style='padding: 10px 0px;'>
     						<i class="far fa-comment-dots  fa-flip-horizontal" style='opacity:0.6;font-size:1.2em'></i>
     						</a>
                         	

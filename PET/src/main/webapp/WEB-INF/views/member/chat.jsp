@@ -119,7 +119,7 @@
 			<table class="inputTable" style='width:500px;'>
 				<tr>
 					<th><span class='text-body pr-2'>사용자명</span></th>
-					<th><input type="text" name="userName" id="userName"></th>
+					<th><input type="text" name="userName" id="userName" value='${member_id}'></th>
 					<th><button class='btn btn-primary' onclick="chatName()" id="startBtn">이름 등록</button></th>
 				</tr>
 			</table>
