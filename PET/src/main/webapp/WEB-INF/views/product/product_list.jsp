@@ -12,6 +12,43 @@
 	<title>펫토피아 - 수술/치료</title>
 </head>
 
+<style>
+.postb {
+    font-size: 17px;
+    width: 94px;
+    height: 17px!important;
+    margin: 0!important;
+    background-color: #f0c16a;
+}
+
+.button-5 {
+    align-items: center;
+    background-clip: padding-box;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: rgb(0 0 0 / 2%) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: "JUA",sans-serif;
+    font-size: 26px;
+    justify-content: center;
+    line-height: 1;
+    margin: 0 37px;
+    min-height: 42px;
+    padding: 10px 20px;
+    position: relative;
+    top: 5px;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 150px;
+}
+</style>
 
 <script>
 
@@ -183,7 +220,7 @@ $(function(){
 	 		<form action="${pageContext.request.contextPath}/product/product_list" method="post" > 
 	 			<h5>결과내 재검색</h5>
 		    	<input name = "search_word" value="${search_word}" class="form-control" type="text" placeholder="검색어를 입력해 주세요" id="search_word">
-		    	<button class="search-btn" type="submit" id="search_button">검색</button>
+		    	<input class="button-5 postb" type="submit" value="검색" id="search_button" style="padding:10px 20px">
 		    	<input type="hidden" name="item_category" value="${category}">
 		    	<input type="hidden" name="search_field" value="1">
 		    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">		    	

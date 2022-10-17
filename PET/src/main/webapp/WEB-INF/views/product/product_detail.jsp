@@ -227,7 +227,7 @@ $(function() {
             <label for="tab4">취소/ 환불</label>         
          
             <section id="content1">
-               <p>상세정보</p>
+               <jsp:include page='detail.jsp' />
             </section>
 
             <section id="content2">
@@ -239,7 +239,7 @@ $(function() {
             </section>
 
             <section id="content4">
-               <p>취소/ 환불</p>
+               <jsp:include page='refund.jsp' />
             </section>
 
          </div>

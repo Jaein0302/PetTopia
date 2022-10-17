@@ -16,7 +16,7 @@ $(function(){
 	var ITEM_ASK_CONTENT = $(this).parent().parent().prev().prev().prev().val();
 	var ITEM_ASK_DATE = $(this).parent().next().text();
 	var ITEM_ANSWER_CONTENT = $(this).parent().parent().prev().prev().prev().prev().val();
-	var check = $(this).parent().next().next().next().next().children().val();
+	var check = $(this).parent().parent().prev().prev().prev().prev().val();
 	
 	$("#ASK_NUM").val(ITEM_ASK_NUM);
 	$("#SUBJECT").val(ITEM_ASK_SUBJECT);
@@ -37,23 +37,32 @@ $(function(){
 	var id_now = $("#id_now").val();
 	console.log("id_now=" + id_now);	
 	
-	//작성자일 경우 또는 답변완료 된경우
+	//작성자일 경우
 	if( $("#id_now").val() == $("#USERNAME").val() ) {
-		if( check != 1 ) {
-			$("#check").show();
-			$("#check").html('<button type="button" class="btn btn-primary a_update">문의 수정</button>')
-			$("#comment").hide();
-		} else {
-			$("#check").hide();
+		if( check == 1 ) { 
 			$("#comment").show();
+			$(".a_update").hide();
+		} else {  // 답변완료 한경우
+			$("#comment").hide();
+			$(".a_update").show();
 		}
-	}	
+	} else {  // 작성자 아닌경우
+		if( check == 1 ) { 
+			$("#comment").show();
+			$(".a_update").hide();
+		} else {  // 답변완료 한경우
+			$("#comment").hide();
+			$(".a_update").hide();
+		}	
+	}
+	
+	$(".c_update").hide();		
 })
 	
 	//문의 수정 버튼
   	$("#update").on('click',".a_update",function(){
-		$(".a_update").remove();
-		$("#check").html('<button type="submit" class="btn btn-primary">수정 완료</button>');
+		$(".a_update").hide();
+		$(".c_update").show();
 		$("#SUBJECT").attr("readOnly", false);
 		$("#CONTENT").attr("readOnly", false);
 	});	
@@ -76,6 +85,7 @@ $(function(){
 		alert("로그인이 필요합니다.")
 	})
 	
+	//더보기
 	
             
 })
