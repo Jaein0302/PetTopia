@@ -22,9 +22,14 @@
 	  <jsp:include page="../mypage/aside.jsp" />
    </div>
    
+
+	   
    <!-- 내가 커뮤니티에 쓴 글 -->
    <div class="col-md-9 pb-3">
-     <table class="table text-center">
+       <div class='w-100 m-2'>
+   		 <span class="commu pr-4" style='font-weight: bold;'>내 게시글</span>
+  	</div>
+     <table class="table text-center mt-3">
      <thead>
      	<tr>
      		<th>번호</th>

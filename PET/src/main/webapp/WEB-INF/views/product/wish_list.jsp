@@ -41,10 +41,21 @@ $(function(){
 </head>
 
 <body>
-	<jsp:include page="../member/header.jsp" />
-	<div class="container">
+<!-- header -->
+<div class="header">
+<jsp:include page="../member/header.jsp" />
+</div>
+
+
+    <div class="container mb-5 mainbody" style="min-height:600px;">
+     <div class="row border-top px-xl-5">
+		<div class="col-lg-12" style="margin:0 auto;">
+		
+		<div class="text-center mb-4 mt-4">
+            <h2 class="section-title px-5"><span class="px-2">찜한 상품</span></h2>
+        </div>
+		
 		<table class="table table-striped">
-			<div><h3>찜한 상품</h3></div>
 			<thead>				
 				<tr>
 					<th>번호</th>
@@ -90,7 +101,7 @@ $(function(){
 	</div>
 	
 	<!-- 페이징 처리 -->
-	<div style="position:absolute;left:45%;margin-top:80px">
+<div class="pagination-div">
 	<ul class="pagination modal-2 text-center">
 	  
 	 <c:if test="${page <= 1 }">
@@ -128,4 +139,8 @@ $(function(){
 	</c:if>
 	</ul>
 	</div>
-</body>	
+	</div>
+	</div>
+</body>
+<jsp:include page="../member/footer.jsp" />
+</html>

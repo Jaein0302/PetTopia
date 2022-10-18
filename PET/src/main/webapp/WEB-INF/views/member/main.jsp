@@ -303,8 +303,14 @@ if(message == 'JoinSuccess'){
   '회원가입을 축하드립니다!',
   '서비스는 로그인 후 이용가능합니다.',
   'success'
-)
-  };
+)};
+let message1 = '${login_check}';
+if(message1 == "로그인하세요"){
+	Swal.fire(
+	'로그인 해주세요',
+	'고객센터 문의는 로그인 이후 사용가능합니다.',
+	'error'
+)};
 </script>
 </body>
 </html>

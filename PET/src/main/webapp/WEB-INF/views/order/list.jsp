@@ -29,7 +29,7 @@
 <div class="header">
 <jsp:include page="../member/header.jsp" />
 </div>
- <div class="container mb-5 mainbody" style="margin-top:220px;min-height:600px">
+ <div class="container mb-5 mainbody" style="height:1500px;margin-top:220px;">
   <div class="row px-xl-5">
   
    <!-- 사이드바 -->	  

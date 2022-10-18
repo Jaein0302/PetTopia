@@ -7,7 +7,7 @@
 	        $('.mn0 > a').addClass('navActive');
 	    } else if (pageUrl.indexOf('order/list') > -1) { 
 	        $('.mn1 > a').addClass('navActive');
-	    }else if (pageUrl.indexOf('#') > -1) { 
+	    }else if (pageUrl.indexOf('myask') > -1) { 
 	        $('.mn2 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('myreview') > -1) { 
 	        $('.mn3 > a').addClass('navActive');
@@ -19,9 +19,9 @@
 	        $('.mn6 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('mypage/SCH') > -1) { 
 	        $('.mn7 > a').addClass('navActive');
-	    }else if (pageUrl.indexOf('admin_list') > -1) { 
+	    }else if (pageUrl.indexOf('my_product') > -1) { 
 	        $('.mn8 > a').addClass('navActive');
-	    }else if (pageUrl.indexOf('withdraw') > -1) { 
+	    }else if (pageUrl.indexOf('admin_list') > -1) { 
 	        $('.mn9 > a').addClass('navActive');
 	    }
 	    
