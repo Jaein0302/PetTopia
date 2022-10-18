@@ -15,6 +15,8 @@
    .add { float : right }
    
    .m_product table tbody td {font-size : 10pt}
+   
+   form{display:none}
 </style>
 
 <script>
@@ -35,7 +37,7 @@
 	  <jsp:include page="../mypage/aside.jsp" />
    </div>
    
-   <!-- 내가 남긴 리뷰 -->
+   <!-- 내가 남긴 문의 -->
    <div class="col-md-9 pb-3">
      
    <div class='w-100 m-2'>
