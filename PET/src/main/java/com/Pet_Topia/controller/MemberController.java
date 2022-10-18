@@ -223,7 +223,7 @@ public class MemberController {
 		
 	//아이디 찾기
 	@GetMapping(value="/Find_id")
-	public ModelAndView Find_id(String member_name,String member_email, HttpServletRequest request,
+	public ModelAndView Find_id(String member_name,String member_email,
 			ModelAndView mv) {
 			String id = memberservice.find_id(member_name, member_email);
 			if(id!=null) {
@@ -275,7 +275,6 @@ public class MemberController {
 					mv.addObject("message","fail");
 					mv.setViewName("member/Find_user/Find_id_pass");
 				}
-				
 				return mv;
 	}
 	
