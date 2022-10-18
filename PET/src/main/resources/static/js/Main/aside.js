@@ -7,7 +7,7 @@
 	        $('.mn0 > a').addClass('navActive');
 	    } else if (pageUrl.indexOf('order/list') > -1) { 
 	        $('.mn1 > a').addClass('navActive');
-	    }else if (pageUrl.indexOf('#') > -1) { 
+	    }else if (pageUrl.indexOf('myask') > -1) { 
 	        $('.mn2 > a').addClass('navActive');
 	    }else if (pageUrl.indexOf('myreview') > -1) { 
 	        $('.mn3 > a').addClass('navActive');

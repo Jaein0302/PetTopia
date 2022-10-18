@@ -1,28 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-
-<title>상품 등록</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>펫토피아 - 내가 남긴 리뷰</title>
+<link href="${pageContext.request.contextPath}/resources/css/Order/review_list.css" type="text/css" rel="stylesheet">
+</head>
 <style>
    .m_product {
       width : 400px;
       margin : 0 auto;
       padding : 40px
    }
-   
    .add { float : right }
-   
    .m_product table tbody td {font-size : 10pt}
-   
-   form{display:none}
+   .logout, form{margin:0!important; margin-block-end: 0em !important; display:inline!important;}
 </style>
-
-<script>
-	
-</script>
-
 <body>
 	<!-- header -->
 	<div class="header">
@@ -122,4 +117,6 @@
 </div>
 </div>   
 
-</body>   
+</body>
+<jsp:include page="../member/footer.jsp" />
+</html>
