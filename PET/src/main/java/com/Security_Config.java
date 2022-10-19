@@ -47,7 +47,8 @@ public class Security_Config extends WebSecurityConfigurerAdapter{
 			.antMatchers("/order/add").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
 			.antMatchers("/order/uploadSummernoteImageFile").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
 			.antMatchers("/order/myreview").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN','ROLE_SELLER')")
-			.antMatchers("/product/**").permitAll();
+			.antMatchers("/product/**").permitAll()
+			.antMatchers("/admin/**").permitAll();
 			//.antMatchers("/main/list").access("hasRole('ROLE_ADMIN')")
 			//.antMatchers("/**").access("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')");
 		

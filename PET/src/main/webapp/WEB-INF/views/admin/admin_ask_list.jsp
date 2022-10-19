@@ -34,7 +34,7 @@
 	
 	
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-   <form action="admin_ask_list" method="post">
+   <form action="admin_ask_list_post" method="post">
          <div class="input-group">
          
             <select id="viewcount" name="search_field_one">
@@ -59,7 +59,7 @@
      
     
    <c:if test="${listcount > 0}">      
-   <sec:authorize access="hasRole('ROLE_MEMBER')">     
+   
   <table class="table table-striped">
    <thead>
    <tr>
@@ -78,13 +78,12 @@
    
    <tbody>
    <c:set var="num" value="${listcount-(page-1)*limit}"/>
-      
    <c:forEach var="b" items="${list}">   
    <tr>
          
       <th><div><c:out value="${num}"/><c:set var="num" value="${num-1}"/><%-- num 출력 --%></div></th>      
          
-      <th><div><a href="detail?num=${b.AAM_NUMBER}">
+      <th><div><a href="AskToAdminView?num=${b.AAM_NUMBER}">
           <c:out value="${b.AAM_SUBJECT}" escapeXml="true"/>
          </a> 
          </div>
@@ -106,7 +105,7 @@
      </c:forEach>
     </tbody>   
    </table>
-   </sec:authorize>
+   
    
    <!-- 페이징 -->
    <ul class="pagination justify-content-center">
@@ -147,7 +146,8 @@
                      <a href="${go}" class="page-link">${a}</a>
                   </li>
                </c:if>
-            </c:forEach>
+                   </c:forEach>
+            
 
             <c:if test="${page >= maxpage}">
                <li class="page-item">
@@ -165,7 +165,7 @@
                   <a href="${next}" class="page-link">&nbsp;다음</a>
                </li>
             </c:if>
-         
+     
          </ul>
          
          
@@ -175,6 +175,8 @@
    
    
    </div></div>
+   
+   
    
 
 </body>

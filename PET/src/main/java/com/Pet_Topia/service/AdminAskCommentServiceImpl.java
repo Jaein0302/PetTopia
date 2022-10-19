@@ -24,5 +24,11 @@ public class AdminAskCommentServiceImpl implements AdminAskCommentService {
          return dao.Admin_ask_comment_update(aac);
       }
 
+	@Override
+	public Aac getComment(int num) {
+		return dao.getComent(num);
+	}
+
+
 
 }

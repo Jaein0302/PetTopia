@@ -73,6 +73,12 @@ public interface AdminMapper {
 
    public List<Aam> getAskMemberOwnList(Map<String, Object> map);
    
+   //글 클릭 했을 때 상세 뷰를 보이도록 함 1:1문의 글 클릭시
+   
+   public Aam ask_to_admin_view(int num);
+   
+   
+   
    
    
    

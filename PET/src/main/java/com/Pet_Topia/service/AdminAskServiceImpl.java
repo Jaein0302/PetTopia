@@ -4,12 +4,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.Pet_Topia.controller.AdminController;
 import com.Pet_Topia.domain.Aac;
 import com.Pet_Topia.domain.Aam;
 import com.Pet_Topia.mybatis.mapper.AdminMapper;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 public class AdminAskServiceImpl implements AdminAskService {
@@ -18,6 +24,7 @@ public class AdminAskServiceImpl implements AdminAskService {
       private AdminMapper dao;
     
    
+    private static final Logger logger = LoggerFactory.getLogger(AdminAskServiceImpl.class);
     
 //      // 2.검색 리스트에 대하여 얼마나 검색되었는지 알려줌.
 //      @Override
@@ -36,7 +43,7 @@ public class AdminAskServiceImpl implements AdminAskService {
     
     ////   1.관리자는 컬럼 선택에 따라 1:1문의 사항을 다볼수있음.
    @Override
-   public List<Aam> getAskColumnList(int search_field_one, int search_field_two, int page, int limit,String search_word) {
+   public List<Aam> getAskColumnList(int page, int limit, int search_field_one, int search_field_two,String search_word) {
       Map<String, Object> map = new HashMap<String, Object>();
       if (search_field_one == 0 ) {
          String[] search_field = new String[] {"SUBJECT", "NAME"};
@@ -56,18 +63,22 @@ public class AdminAskServiceImpl implements AdminAskService {
       int endrow = startrow + limit - 1;
       map.put("start", startrow);
       map.put("end", endrow);
-      map.put("CHECK", "DONE");
+      map.put("CHECK", "NOT");
       return dao.getAskColumnList(map);
-      }else if(search_field_one == -1){
+      }else {
+      
+    	  
+    	  
+      logger.info("이건 2가 나와야합니다. => search_field_one = "+search_field_one);
+    	  String[] search_field = new String[] {"SUBJECT", "NAME"};
+          map.put("search_field", search_field[search_field_two]);
+          map.put("search_word", "%" + search_word + "%");
          int startrow = (page - 1) * limit + 1;
          int endrow = startrow + limit - 1;
          map.put("start", startrow);
          map.put("end", endrow);
-         return dao.getAskColumnListAll(map);
-   }else if(search_field_one ==2) {
-      return null;
-   }else {
-      return null;
+         map.put("CHECK", "DONE");
+         return dao.getAskColumnList(map);
    }
    }
    
@@ -81,39 +92,26 @@ public class AdminAskServiceImpl implements AdminAskService {
       //map.get("search_field")의 값은 null이 됩니다.
 
       if (search_field_one == 0 ) {
-         //0은 답변 대기이다. 
-         
-         String[] search_field = new String[] {"SUBJECT", "NAME"};
-         //2가지 상황이 나눠지고 ...
-         //답변대기일때 따로 답변완료일때 따로
-      
-         map.put("search_field", search_field[search_field_two]);
-         
-         map.put("search_word", "%" + search_word + "%");
-      
-          map.put("CHECK", "NOT");
+          String[] search_field = new String[] {"SUBJECT", "NAME"};
+          map.put("search_field", search_field[search_field_two]);
+          map.put("search_word", "%" + search_word + "%");
+          map.put("CHECK", null);
       
       return dao.getAskColumnListCount(map);
       
       }else if(search_field_one ==1) {
-         //1은 답변 완료를 부른다.
-//0은 답변 대기이다. 
-         
-         String[] search_field = new String[] {"제목", "작성자"};
-         //2가지 상황이 나눠지고 ...
-         //답변대기일때 따로 답변완료일때 따로
-      
-         map.put("search_field", search_field[search_field_two]);
-         map.put("search_word", "%" + search_word + "%");
-      
-      map.put("CHECK", "DONE");
+    	  String[] search_field = new String[] {"SUBJECT", "NAME"};
+          map.put("search_field", search_field[search_field_two]);
+          map.put("search_word", "%" + search_word + "%");
+          map.put("CHECK", "NOT");
       return dao.getAskColumnListCount(map);
-      }else if(search_field_one == -1){
-         
-         return dao.getAskListAllCount();
-         
-   }else {
-      return 1;
+      }else{
+    	  logger.info("이건 2가 나와야합니다. => search_field_one = "+search_field_one);
+    	  String[] search_field = new String[] {"SUBJECT", "NAME"};
+          map.put("search_field", search_field[search_field_two]);
+          map.put("search_word", "%" + search_word + "%");
+          map.put("CHECK", "DONE");
+      return dao.getAskColumnListCount(map);
    }
       
    }
@@ -167,6 +165,11 @@ public class AdminAskServiceImpl implements AdminAskService {
       return dao.write_to_admin_form(aam);
    }
 
+   public Aam ask_to_admin_view(int num) {
+	   return dao.ask_to_admin_view(num);
+   }
+   
+   
 
    
    
