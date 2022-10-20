@@ -159,6 +159,6 @@
 	  on item.item_id = c.review_item_id
 	  join member m
 	  on item.item_seller = m.member_id
-      order by item.ITEM_SCORE asc
+	  order by item.item_score desc
     </select>
 </mapper>
