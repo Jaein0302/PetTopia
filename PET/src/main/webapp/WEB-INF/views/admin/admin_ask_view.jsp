@@ -97,6 +97,8 @@ color:black;
 		</tr>
  	</table>
  	
+ 	
+ 	<sec:authorize access="hasRole('ROLE_ADMIN')">
  	 <c:if test="${null ne Aac.AAC_DATE}">
 	<button id="comment_update" class="btn btn-info float-right">수정</button>
 	</c:if>
@@ -104,7 +106,7 @@ color:black;
 	<c:if test="${empty Aac.AAC_DATE}">
 	<button type = "button" id="write" class="btn btn-info float-right">등록</button>
 	</c:if>
- 	
+ 	</sec:authorize>
  	
  	
  	
@@ -112,9 +114,11 @@ color:black;
    </div>
   </div>
    <div id="comment">
+   <sec:authorize access="hasRole('ROLE_ADMIN')">
 		<div>답변 텍스트</div>
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		 <textarea rows=3 class="form-control" id="content" maxLength="1000"></textarea>
+		 </sec:authorize>
 		 </div>
 		 
 		  <input type="hidden" name="ask_list_num"

@@ -498,14 +498,20 @@ public class AdminController {
        
        int listcount = adminaskservice.getAskColumnListCount(search_field_one,search_field_two,search_word);
         int maxpage = (listcount + limit - 1) / limit;
-
        int startpage = ((page - 1) / 10) * 10 + 1;
-
        int endpage = startpage + 10 - 1;
+       int num = listcount-(page-1)*limit;
 
         if (endpage > maxpage)
         endpage = maxpage;
 
+        logger.info("page 확인용 " + page);
+        logger.info("startpage 확인용 " + startpage);
+        logger.info("endpage 확인용 " + endpage);
+        logger.info("listcount 확인용 " + listcount);
+        logger.info("maxpage 확인용 " + maxpage);
+        
+        
        mv.setViewName("admin/admin_ask_list");
        mv.addObject("page", page);
        mv.addObject("startpage", startpage);
@@ -513,6 +519,7 @@ public class AdminController {
        mv.addObject("listcount", listcount);
        mv.addObject("maxpage", maxpage);
        mv.addObject("list", list);
+       mv.addObject("num",num);
        return mv;
        
 		}else {
