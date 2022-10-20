@@ -34,7 +34,7 @@
 	
 	
 	<sec:authorize access="hasRole('ROLE_ADMIN')">
-   <form action="admin_ask_list" method="post">
+   <form action="admin_ask_list_post" method="post">
          <div class="input-group">
          
             <select id="viewcount" name="search_field_one">
@@ -59,7 +59,7 @@
      
     
    <c:if test="${listcount > 0}">      
-   <sec:authorize access="hasRole('ROLE_MEMBER')">     
+   
   <table class="table table-striped">
    <thead>
    <tr>
@@ -77,14 +77,14 @@
    
    
    <tbody>
-   <c:set var="num" value="${listcount-(page-1)*limit}"/>
-      
+   <c:set var="num" value="${num}"/>
+  
    <c:forEach var="b" items="${list}">   
    <tr>
          
       <th><div><c:out value="${num}"/><c:set var="num" value="${num-1}"/><%-- num 출력 --%></div></th>      
          
-      <th><div><a href="detail?num=${b.AAM_NUMBER}">
+      <th><div><a href="AskToAdminView?num=${b.AAM_NUMBER}">
           <c:out value="${b.AAM_SUBJECT}" escapeXml="true"/>
          </a> 
          </div>
@@ -106,9 +106,10 @@
      </c:forEach>
     </tbody>   
    </table>
-   </sec:authorize>
+   
    
    <!-- 페이징 -->
+   <sec:authorize access="hasRole('ROLE_ADMIN')">
    <ul class="pagination justify-content-center">
          
          
@@ -121,7 +122,7 @@
             
             <c:if test="${page > 1}">
                <li class="page-item">
-                  <a href="list?page=${page - 1}&search_field=${search_field}&search_word=${search_word}"
+                  <a href="admin_ask_list?page=${page - 1}&search_field_one=${search_field_one}&search_field_two=${search_field_two}&search_word=${search_word}"
                      class="page-link">이전&nbsp;</a>
                </li>
             </c:if>
@@ -138,8 +139,9 @@
                </c:if>
                
                <c:if test="${a != page}">
-                  <c:url var="go" value="list">
-                     <c:param name="search_field" value="${search_field}"/>
+                  <c:url var="go" value="admin_ask_list">
+                     <c:param name="search_field_one" value="${search_field_one}"/>
+                     <c:param name="search_field_two" value="${search_field_two}"/>
                      <c:param name="search_word" value="${search_word}"/>
                      <c:param name="page" value="${a}"/>
                   </c:url>   
@@ -147,7 +149,8 @@
                      <a href="${go}" class="page-link">${a}</a>
                   </li>
                </c:if>
-            </c:forEach>
+                   </c:forEach>
+            
 
             <c:if test="${page >= maxpage}">
                <li class="page-item">
@@ -156,7 +159,9 @@
             </c:if>
             
             <c:if test="${page < maxpage}">
-               <c:url var="next" value="list">
+               <c:url var="next" value="admin_ask_list">
+               		  <c:param name="search_field_one" value="${search_field_one}"/>
+                     <c:param name="search_field_two" value="${search_field_two}"/>
                      <c:param name="search_field" value="${search_field}"/>
                      <c:param name="search_word" value="${search_word}"/>
                      <c:param name="page" value="${page + 1}"/>
@@ -165,8 +170,71 @@
                   <a href="${next}" class="page-link">&nbsp;다음</a>
                </li>
             </c:if>
-         
+     
          </ul>
+     </sec:authorize>    
+     
+      <sec:authorize access="hasRole('ROLE_MEMBER')">
+     <ul class="pagination justify-content-center">
+         
+         
+            <c:if test="${page <= 1}">
+               <li class="page-item">
+                  <a class="page-link gray">이전&nbsp;</a>
+               </li>
+            </c:if>
+            
+            
+            <c:if test="${page > 1}">
+               <li class="page-item">
+                  <a href="admin_ask_list?page=${page - 1}"
+                     class="page-link">이전&nbsp;</a>
+               </li>
+            </c:if>
+            
+            
+            
+            
+            
+            <c:forEach var="a" begin="${startpage}" end="${endpage}">
+               <c:if test="${a == page}">
+                  <li class="page-item active">
+                     <a class="page-link">${a}</a>
+                  </li>
+               </c:if>
+               
+               <c:if test="${a != page}">
+                  <c:url var="go" value="admin_ask_list">
+                     <c:param name="page" value="${a}"/>
+                  </c:url>   
+                  <li class="page-item">
+                     <a href="${go}" class="page-link">${a}</a>
+                  </li>
+               </c:if>
+                   </c:forEach>
+            
+
+            <c:if test="${page >= maxpage}">
+               <li class="page-item">
+                  <a class="page-link gray">&nbsp;다음</a>
+               </li>
+            </c:if>
+            
+            <c:if test="${page < maxpage}">
+               <c:url var="next" value="admin_ask_list">
+                     <c:param name="page" value="${page + 1}"/>
+                  </c:url>
+               <li class="page-item">
+                  <a href="${next}" class="page-link">&nbsp;다음</a>
+               </li>
+            </c:if>
+     
+         </ul>
+         </sec:authorize>
+         
+         
+         
+         
          
          
          </c:if>
@@ -175,6 +243,8 @@
    
    
    </div></div>
+   
+   
    
 
 </body>

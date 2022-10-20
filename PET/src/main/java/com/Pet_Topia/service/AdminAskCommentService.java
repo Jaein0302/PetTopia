@@ -13,6 +13,8 @@ public interface AdminAskCommentService {
    
    public int Admin_ask_comment_update(Aac aac);
    
+
+public Aac getComment(int num);
    
 
 

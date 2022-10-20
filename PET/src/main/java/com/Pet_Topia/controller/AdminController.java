@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -473,39 +474,124 @@ public class AdminController {
       return "admin/admin_main";
    }
    
-   // 1:1 문의글을 불러오기
+   
    @GetMapping(value = "/admin_ask_list")
+   public ModelAndView admin_ask_list_main(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
+	         @RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
+	         // 왜 limit를 3으로 했을때 jsp에서 2개만 보이는걸까?
+	         ModelAndView mv, Principal userPrincipal,
+	         @RequestParam(value = "search_field_one", defaultValue = "0", required = false) int search_field_one,
+	         //-1이면 jsp에서 전체보기가 셀렉트됨.
+	         @RequestParam(value = "search_field_two", defaultValue = "0", required = false) int search_field_two,
+	         //-1이면 
+	         @RequestParam(value = "search_word", defaultValue = "", required = false) String search_word,
+	         RedirectAttributes rattr) {
+	   
+	   
+	   if(userPrincipal != null) {
+		   
+	   
+		   
+		if(userPrincipal.getName().equals("admin")) {   
+	   logger.info("admin_ask_list 화면입니다 겟맵핑 ");
+	   List<Aam> list = adminaskservice.getAskColumnList(page,limit,search_field_one,search_field_two,search_word);
+       
+       int listcount = adminaskservice.getAskColumnListCount(search_field_one,search_field_two,search_word);
+        int maxpage = (listcount + limit - 1) / limit;
+       int startpage = ((page - 1) / 10) * 10 + 1;
+       int endpage = startpage + 10 - 1;
+       int num = listcount-(page-1)*limit;
+
+        if (endpage > maxpage)
+        endpage = maxpage;
+
+        logger.info("page 확인용 " + page);
+        logger.info("startpage 확인용 " + startpage);
+        logger.info("endpage 확인용 " + endpage);
+        logger.info("listcount 확인용 " + listcount);
+        logger.info("maxpage 확인용 " + maxpage);
+        
+        
+       mv.setViewName("admin/admin_ask_list");
+       mv.addObject("page", page);
+       mv.addObject("startpage", startpage);
+       mv.addObject("endpage", endpage);
+       mv.addObject("listcount", listcount);
+       mv.addObject("maxpage", maxpage);
+       mv.addObject("list", list);
+       mv.addObject("num",num);
+       return mv;
+       
+		}else {
+			logger.info("admin_ask_list 개인 유저 로그인 화면입니다");
+			String login_id = userPrincipal.getName();
+			List<Aam> list = adminaskservice.getAskMemberOwnList(page,limit,login_id);
+		       int listcount = adminaskservice.getAskMemberOwnListCount(login_id);
+			  int maxpage = (listcount + limit - 1) / limit;
+
+		       int startpage = ((page - 1) / 10) * 10 + 1;
+
+		       int endpage = startpage + 10 - 1;
+
+		        if (endpage > maxpage)
+		        endpage = maxpage;
+
+		       mv.setViewName("admin/admin_ask_list");
+		       mv.addObject("page", page);
+		       mv.addObject("startpage", startpage);
+		       mv.addObject("endpage", endpage);
+		       mv.addObject("listcount", listcount);
+		       mv.addObject("maxpage", maxpage);
+		       mv.addObject("list", list);
+		       return mv;
+		}
+	   }else {
+		   mv.setViewName("redirect:/main/main");
+		   rattr.addFlashAttribute("login_check", "로그인하세요");
+		   return mv;
+		   
+	   }
+	   
+	   
+	   
+	   
+   }
+   
+   
+   
+   
+   
+   
+   
+   
+   // 1:1 문의글을 불러오기에서 검색을 했을 때.
+   @PostMapping(value = "/admin_ask_list_post")
    public ModelAndView admin_ask_list(@RequestParam(value = "page", defaultValue = "1", required = false) int page,
          @RequestParam(value = "limit", defaultValue = "10", required = false) int limit,
          // 왜 limit를 3으로 했을때 jsp에서 2개만 보이는걸까?
          ModelAndView mv, Principal userPrincipal,
-       
          @RequestParam(value = "search_field_one", defaultValue = "0", required = false) int search_field_one,
          //-1이면 jsp에서 전체보기가 셀렉트됨.
-         
          @RequestParam(value = "search_field_two", defaultValue = "0", required = false) int search_field_two,
          //-1이면 
-         
-         
          @RequestParam(value = "search_word", defaultValue = "", required = false) String search_word,
          RedirectAttributes rattr) {
 
-	   String login_id = userPrincipal.getName();
+	
 	   
-	   
-      if (login_id == null) {
-         // 겟네임은 아님...
+      if (userPrincipal == null) {
 
-         // 리다이렉트 시 RedirectAttributes rattr
          rattr.addFlashAttribute("login_check", "로그인하세요");
          mv.setViewName("redirect:/main/main");
 
          return mv;
 
-      } else if (login_id.equals("admin")) {
+      } else if (userPrincipal.getName().equals("admin")) {
          // 관리자는
          // 1. 전체보기, 답변 대기, 답변 완료를 볼수 있다.
-    	  logger.info("어드민이면 나와야함!!!!");
+    	  logger.info("어드민 검색 POST ");
+    	  
+    	 
          List<Aam> list = adminaskservice.getAskColumnList(page,limit,search_field_one,search_field_two,search_word);
          
          int listcount = adminaskservice.getAskColumnListCount(search_field_one,search_field_two,search_word);
@@ -523,11 +609,13 @@ public class AdminController {
          mv.addObject("startpage", startpage);
          mv.addObject("endpage", endpage);
          mv.addObject("listcount", listcount);
+         mv.addObject("maxpage", maxpage);
          mv.addObject("list", list);
          return mv;
 
       } else {
     	  logger.info("일반회원 고객센터 접속");
+    	  String login_id =userPrincipal.getName(); 
     	  List<Aam> list = adminaskservice.getAskMemberOwnList(page,limit,login_id);
          int listcount = adminaskservice.getAskMemberOwnListCount(login_id);
           int maxpage = (listcount + limit - 1) / limit;
@@ -540,6 +628,7 @@ public class AdminController {
          mv.addObject("startpage", startpage);
          mv.addObject("endpage", endpage);
          mv.addObject("listcount", listcount);
+         mv.addObject("maxpage", maxpage);
          mv.addObject("list", list);
          return mv;
 
@@ -547,28 +636,43 @@ public class AdminController {
 
    }
 
-
-   @PostMapping(value = "/comment_add")
-   public int Admin_ask_commnet(Aac aac)
+   //@RequestMapping(value = "/user", method = RequestMethod.POST)
+//   @ResponseBody
+//   @PostMapping(value = "/comment_add")
+   
+   @ResponseBody
+   @RequestMapping(value = "/comment_add", method = RequestMethod.POST)
+   public String Admin_ask_commnet(Aac aac)
 
    {
+	   
+	  int comment_add_number =  aac.getAAC_NUMBER();
+	  String AAC_CONTENT = aac.getAAC_CONTENT();
+	  logger.info("AAC_CONTENT 555555 = "+AAC_CONTENT);
+	  logger.info("확인용 ㅈㅇㅈㅇㅈㅇㅈ" + comment_add_number);
 
-      int update_number = aac.getAsk_list_num();
+      int AnswerUpdate = adminaskservice.AnswerUpdate(comment_add_number);
 
-      int AnswerUpdate = adminaskservice.AnswerUpdate(update_number);
-
-      logger.info("확인용 : comment_add : " + update_number);
+      logger.info("확인용 : comment_add : " + comment_add_number);
       logger.info("확인용 : AnswerUpdate : " + AnswerUpdate);
 
-      return adminaskcommentservice.Admin_ask_comment(aac);
+       adminaskcommentservice.Admin_ask_comment(aac);
+       return "redirect:/admin/AskToAdminView?num="+comment_add_number;
+       
    }
+   
+   
 
    @PostMapping(value = "/comment_update")
-   public int Admin_ask_commnet_update(Aac aac)
+   public ModelAndView Admin_ask_commnet_update(Aac aac,ModelAndView mv)
 
    {
+		  int comment_add_number =  aac.getAAC_NUMBER();
       logger.info("확인용 : comment_add");
-      return adminaskcommentservice.Admin_ask_comment_update(aac);
+      adminaskcommentservice.Admin_ask_comment_update(aac);
+   
+      mv.setViewName("redirect:/admin/admin_notice");
+      return mv;
    }
 
    //고객센터 글쓰기
@@ -641,6 +745,64 @@ public class AdminController {
 
 		return jsonObject;
 	}
+	
+	//1:1문의 글 클릭시 보여줄 뷰.
+	
+	   @GetMapping("/AskToAdminView")
+	   public ModelAndView AskToAdminView(int num, ModelAndView mv, HttpServletRequest request
+	   // @RequestHeader(value="referer") String beforeURL
+	   ) {
+
+	      Aam aam = adminaskservice.ask_to_admin_view(num);
+	      Aac aac = adminaskcommentservice.getComment(num);
+	      
+	      
+	      // board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
+
+	      if (aam == null) {
+	         logger.info("1:1문의 글 상세보기 실패");
+	         mv.setViewName("error/error");
+	         // mv.addObject("url", request.getRequestURL());
+	         mv.addObject("message", "상세보기 실패입니다.");
+	      } else {
+	         logger.info("1:1문의 글 상세보기 성공");
+	         mv.setViewName("admin/admin_ask_view");
+	         mv.addObject("Aam", aam);
+	         mv.addObject("Aac", aac);
+	      }
+	      return mv;
+
+	   }//
+	
+	   
+	   
+	   @GetMapping("/commentView")
+	   public ModelAndView commentView(int num, ModelAndView mv, HttpServletRequest request
+	   // @RequestHeader(value="referer") String beforeURL
+	   ) {
+
+	      Aam aam = adminaskservice.ask_to_admin_view(num);
+
+	      // board=null; //error 페이지 이동 확인하고자 임의로 지정합니다.
+
+	      if (aam == null) {
+	         logger.info("1:1문의 글 상세보기 실패");
+	         mv.setViewName("error/error");
+	         // mv.addObject("url", request.getRequestURL());
+	         mv.addObject("message", "상세보기 실패입니다.");
+	      } else {
+	         logger.info("1:1문의 글 상세보기 성공");
+	         mv.setViewName("admin/admin_ask_view");
+	         mv.addObject("Aam", aam);
+	      }
+	      return mv;
+
+	   }//
+	   
+	   
+	  
+	
+	
 	
 
 }

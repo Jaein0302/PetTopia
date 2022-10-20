@@ -230,55 +230,45 @@
 
 <!--  관리자의 기능 회원목록 불러오기 검색 등등 -->
 
-   <select id="getAskColumnList" parameterType="java.util.Map" resultType="Aam">
-      select *  
-      from (select b.*, rownum rnum  
-             from (select * 
-                  from Aam 
-                  <choose>
-                  <when test="CHECK ==null">
-                    AAM_ANSCHECK IN ('답변대기','답변완료') and
-                  </when>
-                  <when test="CHECK=='NOT'">
-                   AAM_ANSCHECK = '답변대기' and 
-                  </when>
-                  <when test="CHECK=='DONE">
-                   AAM_ANSCHECK = '답변완료' and 
-                  </when>
-                  </choose>
-                  
-		       <choose>
-		          <when test="search_field=='SUBJECT'">AAM_SUBJECT = like #{search_word} </when>
-		          <when test="search_field=='NAME'">AAM_NAME  = like #{search_word} </when>
-		       </choose>
-               order by AAM_NUMBER
-               ) b
-               where rownum &lt;= #{end}
+    <select id="getAskColumnList" parameterType="java.util.Map" resultType="Aam">
+      select *  from
+       (select b.*, rownum rnum  
+       		from (select * 
+       			  from Aam where
+       			  <if test="CHECK ==null">
+       			    AAM_ANSCHECK IN ('답변대기','답변완료') and
+       			  </if>
+       			  <if test="CHECK=='NOT'">
+       			   AAM_ANSCHECK = '답변대기' and 
+       			  </if>
+       			  <if test="CHECK=='DONE'">
+       			   AAM_ANSCHECK = '답변완료' and 
+       			  </if>
+          <if test="search_field=='SUBJECT'">AAM_SUBJECT like #{search_word} </if>
+          <if test="search_field=='NAME'">AAM_NAME like #{search_word} </if>
+            	order by AAM_NUMBER
+            	) b
+            	where rownum &lt;= #{end}
              )
       where rnum &gt;= #{start} and rnum &lt;= #{end}
    </select> 
    
    <select id="getAskColumnListCount" parameterType="map" resultType="int">
       select count(*) 
-      from Aam
-     	<choose>
-                  <when test="CHECK ==null">
-                    AAM_ANSCHECK IN ('답변대기','답변완료') and
-                  </when>
-                  <when test="CHECK=='NOT'">
-                   AAM_ANSCHECK = '답변대기' and 
-                  </when>
-                  <when test="CHECK=='DONE">
-                   AAM_ANSCHECK = '답변완료' and 
-                  </when>
-                  
-       </choose>
-       <choose>
-          <when test="search_field=='SUBJECT'">AAM_SUBJECT like #{search_word} </when>
-          <when test="search_field=='NAME'">AAM_NAME like #{search_word} </when>
-       </choose>
-      
+      from Aam where
+       			  <if test="CHECK ==null">
+       			    AAM_ANSCHECK IN ('답변대기','답변완료') and
+       			  </if>
+       			  <if test="CHECK=='NOT'">
+       			   AAM_ANSCHECK = '답변대기' and 
+       			  </if>
+       			  <if test="CHECK=='DONE'">
+       			   AAM_ANSCHECK = '답변완료' and 
+       			  </if>
+          <if test="search_field=='SUBJECT'">AAM_SUBJECT like #{search_word} </if>
+          <if test="search_field=='NAME'">AAM_NAME like #{search_word} </if>
    </select>
+
 
       <select id="getAskMemberOwnList" parameterType="java.util.Map" resultType="Aam">
 
@@ -292,7 +282,7 @@
       where rnum &gt;= #{start} and rnum &lt;= #{end}
    
    </select>
-   
+ 
    <select id="getAskMemberOwnListCount" parameterType="String" resultType="int">
    
    select count(*) from Aam
@@ -301,7 +291,7 @@
    </select>
    
    
-   <select id ="getAskDetail" parameterType="int" resultType="Aam">
+   <select id ="ask_to_admin_view" parameterType="int" resultType="Aam">
    
    select * from Aam where AAM_NUMBER = #{num}
    </select>
@@ -309,17 +299,17 @@
    
    <select id ="getComent"  parameterType="int" resultType="Aac">
    
-   select * from admin_ask_comment where ask_list_num = #{ask_list_num}
+   select * from Aac where AAC_NUMBER = #{AAC_NUMBER}
    
    </select>
    
-   
+   <!--  질문글 처음 답변 합니다. -->
    
    <insert id="Admin_ask_comment" parameterType="Aac" >
-      insert into admin_ask_comment
-      values(ask_comment_seq.nextval, #{content},sysdate, 1, #{ask_list_num})
-      
-      
+      insert into AAC (AAC_NUMBER,AAC_CONTENT,AAC_DATE)
+      values(#{AAC_NUMBER},
+       #{AAC_CONTENT},
+       sysdate)
       
    </insert>
    
@@ -327,9 +317,9 @@
 
    <update id="Admin_ask_comment_update" parameterType="Aac" >
 
-      update admin_ask_comment
-      set content = #{content}
-      where ask_list_num = #{ask_list_num}
+      update Aac
+      set AAC_CONTENT = #{AAC_CONTENT}
+      where AAC_NUMBER = #{AAC_NUMBER}
    
    </update>
 
@@ -337,7 +327,7 @@
    <update id="AnswerUpdate" parameterType="int">
    
        update Aam
-      set AAM_ANSCHECK = 1
+      set AAM_ANSCHECK = '답변완료'
       where AAM_NUMBER = #{num}
    
    
@@ -353,6 +343,8 @@
       #{AAM_CONTENT},sysdate,sysdate,'답변대기')
       
    </insert>
+   
+   
    
 
 </mapper>
