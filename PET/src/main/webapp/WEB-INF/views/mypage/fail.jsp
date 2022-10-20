@@ -12,7 +12,7 @@
 
 <img src="${pageContext.request.contextPath}/resources/img/Main/depressed.jpg" style="width: 250px; height: 250px">
 
-<button>창닫기</button>
+<button class="button-5 cancelbtn updateb">창닫기</button>
 
 <script>
 $('button').click(function(){
