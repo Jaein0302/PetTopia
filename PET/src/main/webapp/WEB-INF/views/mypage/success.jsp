@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/css/Main/join.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div class="container">
@@ -13,7 +14,7 @@
 <br>
 <img src="${pageContext.request.contextPath}/resources/img/Main/tabom.jpg" style="width: 250px; height: 250px">
 <br>
-<button>창닫기</button>
+<button class="button-5 cancelbtn updateb">창닫기</button>
 </div>
 
 <script>

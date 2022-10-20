@@ -15,30 +15,3 @@ DELETE FROM ITEM_ASK
 
 insert into item_ask
 
-
-		select *
-		from(select rownum rnum, a.*
-		 	 from (select * 
-			   	   from ITEM_ASK
-			   	   order by ITEM_ASK_DATE desc) a
-		 	 where rownum <= 5
-		 	)
-		where rnum >= 1  and rnum <=5
-		and ITEM_ASK_ITEMID = '30002'
-		
-		
-		select nvl(max(ITEM_ASK_NUM), 0)+1 from ITEM_ASK where ITEM_ASK_ITEMID = '20002'		
-		
-		
-		select *
-		from ITEM_ASK
-		where ITEM_ASK_ITEMID = '30001'		
-		order by ITEM_ASK_DATE desc
-
-
-		select *
-		from ITEM_ASK, ITEM
-		where ITEM_ASK.ITEM_ASK_ITEMID = '10001'
-		order by ITEM_ASK_NUM desc
-
-
