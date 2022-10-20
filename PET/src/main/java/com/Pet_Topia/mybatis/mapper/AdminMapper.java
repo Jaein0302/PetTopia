@@ -36,7 +36,7 @@ public interface AdminMapper {
    public List<Abn> getDivisionMain(String division);
 
    // 공지사항 카운터 가져오기.
-   public int getDivisionCount(String division);
+   public int getDivisionCount();
 
    public List<Abn> getdivision(String division);
 

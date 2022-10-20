@@ -10,25 +10,22 @@ CREATE TABLE Abn(
  ABN_ORIGINAL VARCHAR2(1000), --첨부파일명
  PRIMARY KEY(ABN_NUMBER)
  );
- 
- drop table Aac cascade constraints purge;
- 
+
+
 
  
+ drop table Aac cascade constraints purge;
  CREATE TABLE Aac(
  AAC_NUMBER NUMBER references Aam(AAM_NUMBER) on delete cascade,
  AAC_CONTENT VARCHAR2(4000),
  AAC_DATE DATE
 );
  
- SELECT * FROM AAM
+
+
+
 SELECT * FROM AAC
- 
- 
- 
- 
- 
- SELECT * FROM ABN;
+SELECT * FROM ABN;
  
  UPDATE ABN
  SET ABN_SUBJECT ='공지 수정 해봄', ABN_CONTENT='내용수정'

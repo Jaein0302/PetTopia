@@ -89,8 +89,8 @@ public class AdminServiceImpl implements AdminService {
    }
 
    // 공지사항 메인 카운트
-   public int getDivisionCount(String division) {
-      return dao.getDivisionCount(division);
+   public int getDivisionCount() {
+      return dao.getDivisionCount();
    }
 
    // 공지사항 일반글 글

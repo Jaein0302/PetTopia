@@ -187,9 +187,8 @@
    order by ABN_NUMBER desc
    </select>
    
-   <select id="getDivisionCount" resultType="int" parameterType="String">
+   <select id="getDivisionCount" resultType="int" >
      select count(*) from abn
-   where abn_division = #{abn_division}
    </select>
       
    <delete id="deleteNotice" parameterType="int">

@@ -5,8 +5,13 @@
 <html>
 <head>
 <title>문의하기</title>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+
+</script>
 </head>
 <body>
+
 <!-- header -->
 <div class="header">
 <jsp:include page="../member/header.jsp" />
@@ -91,18 +96,8 @@
          </th>
       <th><div>${b.AAM_ANSDATE}</div></th>
       
-               <th><div>
-   <c:choose>  
-    <c:when test="${b.AAM_ANSCHECK == '답변완료'}">
-      답변완료
-   </c:when> <%--sdsdsdsd --%>
-   <c:otherwise> 
-      답변대기
-   </c:otherwise> 
-   </c:choose>   
-   </div>
-   </th>
-      </tr>
+   <th><c:choose><c:when test="${b.AAM_ANSCHECK == '답변완료'}"><div style="color:green">답변완료</div></c:when><%--sdsdsdsd --%>
+   <c:otherwise><div style="color:tomato">답변대기</div></c:otherwise></c:choose></th></tr>
      </c:forEach>
     </tbody>   
    </table>
@@ -305,7 +300,6 @@ if(selectedValue2 ='-1'){
     
     
  
-
 
 
 

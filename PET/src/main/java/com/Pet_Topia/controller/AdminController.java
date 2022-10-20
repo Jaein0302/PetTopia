@@ -169,12 +169,13 @@ public class AdminController {
 
       // 공지를 불러오는것을 따로 처리
 
-      String division_main = "공지";
+      String division_main = "중요";
       String division = "일반";
 
       List<Abn> division_main_list = adminservice.getDivisionMain(division_main);
       int limit = 10; // 한 화면에 출력할 로우 갯수
-      int listcount = adminservice.getDivisionCount(division); // 총 리스트 수를 받아옴
+      int listcount = adminservice.getDivisionCount(); //일반만 들어갔을때 listcount가  세고 있고 중요에 대해서는 있어도 listcount가 세지를 못하는데
+     
       // 총 페이지 수
       int maxpage = (listcount + limit - 1) / limit;
       // 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
