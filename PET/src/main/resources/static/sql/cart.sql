@@ -1,4 +1,4 @@
-drop table cart CASCADE CONSTRAINTS PURGE;
+rop table cart CASCADE CONSTRAINTS PURGE;
 create table CART (
    CART_ID            VARCHAR2(15) primary key,
    CART_ITEM_ID       NUMBER(15) not null references ITEM(ITEM_ID),

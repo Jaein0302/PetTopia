@@ -15,7 +15,7 @@ public interface AdminService {
 //공지사항 메인 글
    List<Abn> getDivisionMain(String division);
 //공지사항 일반글 카운트
-   int getDivisionCount(String division);
+   int getDivisionCount();
 //공지사항 일반 글
    List<Abn> getdivision(String division);
 

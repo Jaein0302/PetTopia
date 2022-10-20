@@ -60,7 +60,7 @@
 	
 	<b>카테고리</b>
 	<select class="mb-4" id="viewcount" name="ABN_DIVISION">
-               <option value="공지" >공지</option>
+               <option value="중요" >중요</option>
                <option value="일반" selected>일반</option>
 
             </select>

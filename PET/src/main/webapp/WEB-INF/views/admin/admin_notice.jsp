@@ -92,14 +92,15 @@ select.form-control {
    </thead>
    <tbody>
    
-   
+   <!-- 중요공지는 계속 위에 위치해 있어야 하고
+   		일반공지는 그냥 나오고 페이징 처리가 되야함 -->
    <c:forEach var="main" items="${division_main_list}">
    <tr>
    
-   <td><div>공지</div>
+   <td><div>중요</div>
    <td><%--제목 --%>
-        <div>         
-         
+        <div style="color:tomato!important">         
+         <i class="fa-solid fa-circle-exclamation"></i>
          <a href="detailNotice?num=${main.ABN_NUMBER}">
           <c:out value="${main.ABN_SUBJECT}" escapeXml="true"/>
          </a> 
@@ -139,7 +140,14 @@ select.form-control {
     </tbody>   
    </table>
       
-   <div class="center-block">
+
+   
+ <%-- 게시글이 없는 경우--%>
+ <c:if test="${listcount == 0 }">
+   <font size=5>등록된 공지가 없습니다.</font>
+ </c:if>
+ 
+    <div class="center-block">
         <ul class="pagination justify-content-center">      
           <c:if test="${page <= 1 }">
             <li class="page-item">
@@ -189,11 +197,8 @@ select.form-control {
          </c:if>
        </ul>
       </div>
-   
- <%-- 게시글이 없는 경우--%>
- <c:if test="${listcount == 0 }">
-   <font size=5>등록된 글이 없습니다.</font>
- </c:if>
+      
+ <!-- 이름이 admin일때 말고 권한이 role_admin일때로 바꾸자 -->
  <sec:authorize access="isAuthenticated()">
    <sec:authentication property="principal" var="pinfo"/>
     <c:if test="${pinfo.username == 'admin'}">
