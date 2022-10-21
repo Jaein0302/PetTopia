@@ -89,7 +89,7 @@ color:black;
 			<td class="p-2">
 			<div style="text-align:right;">
 		
-				<a href="${pageContext.request.contextPath}/admin/admin_notice" style="padding-right:10px;">
+				<a href="${pageContext.request.contextPath}/admin/admin_ask_list" style="padding-right:10px;">
 				 <i class="fa fa-list-ul" style="color:#444444;font-weight:lighter;font-size:16.5px"></i>
 				 <span style="color:#444444;font-size:16px;font-weight:bold;">목록</span></a>
 			</div>	
