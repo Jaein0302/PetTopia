@@ -90,7 +90,7 @@ padding:6px 15px
 				</c:if>
 			</sec:authorize>
 				<a href="${pageContext.request.contextPath}/admin/admin_notice" style="padding-right:10px;">
-				 <i class="fa fa-list-ul" style="color:#444444;font-weight:lighter;font-size:16.5px"></i>
+				 <i class="fa-solid fa-list" style="color:#444444;"></i>
 				 <span style="color:#444444;font-size:16px;font-weight:bold;">목록</span></a>
 			</div>	
 			</td>
