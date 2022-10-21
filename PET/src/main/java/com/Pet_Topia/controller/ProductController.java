@@ -329,48 +329,55 @@ public class ProductController {
 	
 	
 	@PostMapping("/update")
-	public String BoardModifyAction(Model mv, 
-						  RedirectAttributes rattr, 
-						  Product product, 
-						  HttpServletRequest request, Principal p) throws Exception {
+	public String BoardModifyAction(String check,
+						  			Model mv, 
+								    RedirectAttributes rattr, 
+								    Product product, String ITEM_SELLER,
+								    HttpServletRequest request) throws Exception {
 		
 		MultipartFile uploadfile = product.getUploadfile();
 		
-		if (!uploadfile.isEmpty()) {
-		String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
-		product.setITEM_IMAGE_ORIGINAL(fileName); // 원래 파일명 저장
-		String saveFolder = mysavefolder.getSavefolder();
-		
-		logger.info("fileName=" + fileName);
-		logger.info("mysavefolder=" + mysavefolder);
-		logger.info("saveFolder=" + saveFolder);
+		if (check != null && !check.equals("")) { // 기존파일 그대로 사용하는 경우입니다.
+			logger.info("기존파일 그대로 사용합니다.");			
+			product.setITEM_IMAGE_ORIGINAL(check);
+			//<input type="hidden" name="BOARD_FILE" value="${boarddata.BOARD_FILE}">
+			//위 문장 때문에 board.setBOARD_FILE()값은 자동 저장됩니다.
+		} else {
+			logger.info("파일 변경되었습니다.");	
+			
+			String fileName = uploadfile.getOriginalFilename(); // 원래 파일명
+			product.setITEM_IMAGE_ORIGINAL(fileName);
+			
+			String saveFolder = mysavefolder.getSavefolder();
+			
+			String fileDBName = fileDBName(fileName, saveFolder);
+			String fileDBNameReplace = fileDBName.replace("\\","/");
 
-		String fileDBName = fileDBName(fileName, saveFolder);
-		logger.info("fileDBName = " + fileDBName);
+			logger.info("fileDBName = " + fileDBName);
+			// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
+			uploadfile.transferTo(new File(saveFolder + fileDBName));
+			logger.info("transferTo path = " + saveFolder + fileDBName);
+			// 바뀐 파일명으로 저장
+			product.setITEM_IMAGE_FILE(fileDBNameReplace);
 		
-		// transferTo(File path) : 업로드한 파일을 매개변수의 경로에 저장합니다.
-		uploadfile.transferTo(new File(saveFolder + fileDBName));
-		logger.info("transferTo path = " + saveFolder + fileDBName);
-		// 바뀐 파일명으로 저장
-		product.setITEM_IMAGE_FILE(fileDBName);
-		}
+		}//else end
+		
 		
 		logger.info(product.toString());// selectKey로 정의한 BAORD_NUM 값 확인해 봅니다.
 		int result = productService.productUpdate(product); // 저장 메서드 호출
 		
 		if(result == 0) {
-		logger.info("상품 수정 실패");
-		mv.addAttribute("url",request.getRequestURL());
-		mv.addAttribute("message", "상품 수정 실패");
-		return "error/error";
+			logger.info("상품 수정 실패");
+			mv.addAttribute("url",request.getRequestURL());
+			mv.addAttribute("message", "상품 수정 실패");
+			return "error/error";
 		}
 		
 		logger.info("상품 수정 성공");		
 		rattr.addFlashAttribute("result","updateSuccess");
 		
-		String id = (String) p.getName(); 
-		return "redirect:my_product?member_id="+id;
-		}
+		return "redirect:my_product?member_id="+ ITEM_SELLER;
+	}
 
 	
 	@GetMapping("/delete")

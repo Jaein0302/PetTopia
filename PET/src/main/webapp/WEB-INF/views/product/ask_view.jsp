@@ -75,6 +75,9 @@
 	              	<c:if test = "${answercheck[status.index] eq '1'}" >
                   		답변완료
                   	</c:if>  
+                  	<c:if test = "${answercheck[status.index] eq '0'}" >
+                  		답변미완료
+                  	</c:if>  
 	              </td>
                   
                </tr>
@@ -117,7 +120,7 @@
                 
                 <div class=m-3>
                    	<h6>내용</h6>
-               		<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5"></textarea>                
+               		<textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" style="resize: none;"></textarea>                
              	</div>    
              
              	<button type="submit" class="btn btn-primary" id="p_add">문의 등록</button>
@@ -157,7 +160,7 @@
                 
                 <div class=m-3>
 	                <h6>내용</h6>
-	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT" readOnly></textarea>
+	                <textarea name="ITEM_ASK_CONTENT" class="form-control" rows="5" id="CONTENT" style="resize: none;" readOnly></textarea>
                 </div>    
                 <div>
 				<button type="button" class="btn btn-primary a_update">문의 수정</button>
@@ -171,7 +174,7 @@
 	        <div id="comment">
 	            <hr>	        
 	        	<h4>판매자 답변</h4>
-	        	<textarea class="form-control" name="ITEM_ANSWER_CONTENT" id="content" rows="6" readOnly></textarea>	
+	        	<textarea class="form-control" name="ITEM_ANSWER_CONTENT" id="content" rows="6" style="resize: none;" readOnly></textarea>	
 			</div>
 			
          </div>           

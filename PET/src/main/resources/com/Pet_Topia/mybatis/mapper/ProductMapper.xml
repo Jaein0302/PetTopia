@@ -94,15 +94,16 @@
 	<update id="productUpdate" parameterType="product">
 		update item 
 		
-		set ITEM_NAME = #{ITEM_NAME}, 
+		set 			
+			ITEM_NAME = #{ITEM_NAME}, 
 			ITEM_CATEGORY = #{ITEM_CATEGORY}, 
 			ITEM_PRICE = #{ITEM_PRICE},
 			ITEM_CONTENT = #{ITEM_CONTENT},   
-			ITEM_IMAGE_ORIGINAL = #{ITEM_IMAGE_ORIGINAL},   
-			ITEM_IMAGE_FILE = #{ITEM_IMAGE_FILE},   
-			ITEM_SEX = #{ITEM_SEX},   
-			ITEM_WEIGHT = #{ITEM_WEIGHT},   
-			ITEM_SPECIES = #{ITEM_SPECIES}
+			ITEM_IMAGE_ORIGINAL = #{ITEM_IMAGE_ORIGINAL, jdbcType=VARCHAR},   
+			ITEM_IMAGE_FILE = #{ITEM_IMAGE_FILE, jdbcType=VARCHAR},   
+			ITEM_SEX = #{ITEM_SEX, jdbcType=VARCHAR},   
+			ITEM_WEIGHT = #{ITEM_WEIGHT, jdbcType=VARCHAR},   
+			ITEM_SPECIES = #{ITEM_SPECIES, jdbcType=VARCHAR}
 			
 		where ITEM_ID = #{ITEM_ID}
 	</update> 
