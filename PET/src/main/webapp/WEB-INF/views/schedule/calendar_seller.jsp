@@ -68,12 +68,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 select: function (arg) {
 
                 	var title = prompt('사유를 입력해주세요.');
-                	if (title) {
+                	if (title && title != null) {
                 		calendar.addEvent({
                 			title: title,
                 			start: arg.start,
                 			color: 'red',
                 		})
+                	} else {
+						return false;
                 	}
                 	
                 	var allEvent = calendar.getEvents();
