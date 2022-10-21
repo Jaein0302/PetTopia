@@ -62,8 +62,6 @@ td:nth-child(1) {
 			<select id ="viewcount" name="search_field">
 				<option value="0" selected>아이디</option>
 				<option value="1">이름</option>
-				<option value="2">나이</option>
-				<option value="3">성별</option>
 			</select>
 				<input name ="search_word" type="text" class="form-control" style="display: inline-block;width: 70%;"
 					placeholder="아이디를 입력하세요" value="${search_word}" >

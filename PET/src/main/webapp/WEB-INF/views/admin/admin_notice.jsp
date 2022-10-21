@@ -75,6 +75,11 @@ select.form-control {
 
 
 
+ <c:choose>
+    
+       <c:when test = "${listcount > 0}">
+       
+
   <table class="table table-striped">
    <thead>
    <tr>
@@ -116,7 +121,7 @@ select.form-control {
    
    
    
-   <c:set var="num" value="${listcount-(page-1)*limit}"/>   
+   <c:set var="num" value="${num}"/>   
    <c:forEach var="b" items="${admin_notice_boardlist}">   
    <tr>
    <td>
@@ -143,9 +148,7 @@ select.form-control {
 
    
  <%-- 게시글이 없는 경우--%>
- <c:if test="${listcount == 0 }">
-   <font size=5>등록된 공지가 없습니다.</font>
- </c:if>
+
  
     <div class="center-block">
         <ul class="pagination justify-content-center">      
@@ -198,6 +201,15 @@ select.form-control {
        </ul>
       </div>
       
+  </c:when>
+  <c:otherwise>
+  등록된 글이 없습니다.
+  </c:otherwise>
+  
+  </c:choose>
+  
+  
+      
  <!-- 이름이 admin일때 말고 권한이 role_admin일때로 바꾸자 -->
  <sec:authorize access="isAuthenticated()">
    <sec:authentication property="principal" var="pinfo"/>
@@ -205,6 +217,8 @@ select.form-control {
    <button type="button" id="noitce_button" class="btn btn-info float-right">글쓰기</button>
    </c:if>
 </sec:authorize>
+
+
 </div></div></div>
 </body>
 <script>

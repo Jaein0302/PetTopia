@@ -182,6 +182,7 @@ public class AdminController {
       int startpage = ((page - 1) / 10) * 10 + 1;
       // 현재 페이지에 보여줄 마지막 페이지 수(10,20,30 등..)
       int endpage = startpage + 10 - 1;
+      int num = listcount-(page-1)*limit;
 
       if (endpage > maxpage)
          endpage = maxpage;
@@ -197,7 +198,8 @@ public class AdminController {
       mv.addObject("admin_notice_boardlist", admin_notice_boardlist);
       mv.addObject("limit", limit);
       mv.addObject("division_main_list", division_main_list);
-
+      mv.addObject("num",num);
+      
       return mv;
 
    }
@@ -521,6 +523,11 @@ public class AdminController {
        mv.addObject("maxpage", maxpage);
        mv.addObject("list", list);
        mv.addObject("num",num);
+       mv.addObject("search_field_one",search_field_one);
+       mv.addObject("search_field_two",search_field_two);
+       mv.addObject("search_word",search_word);
+       
+       
        return mv;
        
 		}else {
@@ -533,7 +540,8 @@ public class AdminController {
 		       int startpage = ((page - 1) / 10) * 10 + 1;
 
 		       int endpage = startpage + 10 - 1;
-
+		       int num = listcount-(page-1)*limit;
+		       
 		        if (endpage > maxpage)
 		        endpage = maxpage;
 
@@ -544,6 +552,11 @@ public class AdminController {
 		       mv.addObject("listcount", listcount);
 		       mv.addObject("maxpage", maxpage);
 		       mv.addObject("list", list);
+		       mv.addObject("num",num);
+		         mv.addObject("search_field_one",search_field_one);
+		         mv.addObject("search_field_two",search_field_two);
+		         mv.addObject("search_word",search_word);
+		         
 		       return mv;
 		}
 	   }else {
@@ -596,12 +609,10 @@ public class AdminController {
          List<Aam> list = adminaskservice.getAskColumnList(page,limit,search_field_one,search_field_two,search_word);
          
          int listcount = adminaskservice.getAskColumnListCount(search_field_one,search_field_two,search_word);
-          int maxpage = (listcount + limit - 1) / limit;
-
+         int maxpage = (listcount + limit - 1) / limit;
          int startpage = ((page - 1) / 10) * 10 + 1;
-
          int endpage = startpage + 10 - 1;
-
+         int num = listcount-(page-1)*limit;
           if (endpage > maxpage)
           endpage = maxpage;
 
@@ -612,6 +623,10 @@ public class AdminController {
          mv.addObject("listcount", listcount);
          mv.addObject("maxpage", maxpage);
          mv.addObject("list", list);
+         mv.addObject("num",num);
+         mv.addObject("search_field_one",search_field_one);
+         mv.addObject("search_field_two",search_field_two);
+         mv.addObject("search_word",search_word);
          return mv;
 
       } else {
@@ -622,6 +637,8 @@ public class AdminController {
           int maxpage = (listcount + limit - 1) / limit;
          int startpage = ((page - 1) / 10) * 10 + 1;
          int endpage = startpage + 10 - 1;
+         int num = listcount-(page-1)*limit;
+         
           if (endpage > maxpage)
           endpage = maxpage;
          mv.setViewName("admin/admin_ask_list");
@@ -630,7 +647,13 @@ public class AdminController {
          mv.addObject("endpage", endpage);
          mv.addObject("listcount", listcount);
          mv.addObject("maxpage", maxpage);
-         mv.addObject("list", list);
+         mv.addObject("list", list);         
+         mv.addObject("num",num);
+         mv.addObject("search_field_one",search_field_one);
+         mv.addObject("search_field_two",search_field_two);
+         mv.addObject("search_word",search_word);
+         
+         
          return mv;
 
       }

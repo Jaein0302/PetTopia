@@ -42,14 +42,14 @@
    <form action="admin_ask_list_post" method="post">
          <div class="input-group">
          
-            <select id="viewcount" name="search_field_one">
-            <option value="0" selected>전체보기</option>
+            <select id="viewcount" name="search_field_one" onchange="chageLangSelect()">
+            <option value="0">전체보기</option>
             <option value="1">답변대기</option>
             <option value="2">답변완료</option>
             </select>
             
             <select id="viewcount2" name="search_field_two">
-            <option value="0" selected>제목</option>
+            <option value="0" >제목</option>
             <option value="1">작성자</option>
             </select>
             
@@ -62,8 +62,11 @@
       </form>
      </sec:authorize>
      
+    <c:choose>
     
-   <c:if test="${listcount > 0}">      
+       <c:when test = "${listcount > 0}">
+       
+       
    
   <table class="table table-striped">
    <thead>
@@ -94,7 +97,7 @@
          </a> 
          </div>
          </th>
-      <th><div>${b.AAM_ANSDATE}</div></th>
+      <th><div>${b.AAM_DATE}</div></th>
       
    <th><c:choose><c:when test="${b.AAM_ANSCHECK == '답변완료'}"><div style="color:green">답변완료</div></c:when><%--sdsdsdsd --%>
    <c:otherwise><div style="color:tomato">답변대기</div></c:otherwise></c:choose></th></tr>
@@ -232,8 +235,17 @@
          
          
          
-         </c:if>
-            <button class="btn btn-primary" id="ask_to_admin" type="submit">문의하기</button>
+       </c:when>
+         
+    <c:otherwise>
+       등록된 글이 없습니다.
+    </c:otherwise>
+         </c:choose>
+         
+         
+            <button class="btn btn-primary" id="ask_to_admin" type="submit" style="float:right">문의하기</button>
+                
+         
       </div>
    
    
@@ -250,43 +262,20 @@ $("#ask_to_admin").click(function(){
    location.href="admin_ask_to_admin";
 })
 
-var selectedValue = '${search_field_one}'
-var selectedValue2 = '${search_field_two}'
 
-if(selectedVaule = '-1'){
-       $("#viewcount").val(0);
-    }
-    
-if(selectedValue2 ='-1'){
-   $("#viewcount2").val(0);
-   
-}
-       
- 
-    
-    
-    //검색 버튼을 클릭한 경우
-    //$("#search_button").click(function(){
-       //검색어 공백 유효성 검사를 합니다.
-       //if($("#search_button").val()==''){
-       //   alert("검색어를 입력하세요.!!!");
-       //   $("#search_button").focus();
-       //   return false;
-       //}//if val() 끝
-       
-       
-   // })//버튼끝
-    
-    //검색어 입력창에 플래스홀더가 나타나도록 합니다.
-    
-    $("#viewcount_test").change(function(){
-    
-    
-    
-    
-    
-    }) //chane end
-    
+var search_field_one = '${search_field_one}'
+console.log("selectedValue =" + search_field_one);
+	$("#viewcount").val(search_field_one);
+	
+	
+var search_field_two = '${search_field_two}'
+	$("#viewcount2").val(search_field_two);
+
+
+
+
+
+
     
     //회원 목록의 삭제를 클릭한  경우
     $("tr > td:nth-child(3) > a").click(function(){

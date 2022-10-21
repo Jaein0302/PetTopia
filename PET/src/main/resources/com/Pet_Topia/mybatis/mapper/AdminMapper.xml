@@ -188,7 +188,7 @@
    </select>
    
    <select id="getDivisionCount" resultType="int" >
-     select count(*) from abn
+     select count(*) from abn where ABN_DIVISION ='일반'
    </select>
       
    <delete id="deleteNotice" parameterType="int">
@@ -229,11 +229,14 @@
 
 <!--  관리자의 기능 회원목록 불러오기 검색 등등 -->
 
-    <select id="getAskColumnList" parameterType="java.util.Map" resultType="Aam">
+  
+  <select id="getAskColumnList" parameterType="java.util.Map" resultType="Aam">
       select *  from
        (select b.*, rownum rnum  
-       		from (select * 
+
+       		from (select *
        			  from Aam where
+
        			  <if test="CHECK ==null">
        			    AAM_ANSCHECK IN ('답변대기','답변완료') and
        			  </if>
@@ -245,12 +248,21 @@
        			  </if>
           <if test="search_field=='SUBJECT'">AAM_SUBJECT like #{search_word} </if>
           <if test="search_field=='NAME'">AAM_NAME like #{search_word} </if>
-            	order by AAM_NUMBER
+            	
+            	order by AAM_ANSCHECK ASC
+            	
             	) b
             	where rownum &lt;= #{end}
              )
       where rnum &gt;= #{start} and rnum &lt;= #{end}
    </select> 
+
+   
+   
+   
+   
+   
+   
    
    <select id="getAskColumnListCount" parameterType="map" resultType="int">
       select count(*) 
@@ -337,9 +349,9 @@
 <insert id="write_to_admin_form" parameterType="Aam" >
    insert into Aam
    (AAM_NUMBER, AAM_NAME, AAM_SUBJECT, AAM_CONTENT, 
-   AAM_ANSDATE, AAM_DATE,AAM_ANSCHECK) 
+    AAM_DATE,AAM_ANSCHECK) 
       values(Aam_seq.nextval, #{AAM_NAME},#{AAM_SUBJECT},
-      #{AAM_CONTENT},sysdate,sysdate,'답변대기')
+      #{AAM_CONTENT},sysdate,'답변대기')
       
    </insert>
    
