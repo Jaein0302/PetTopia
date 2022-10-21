@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <title>상품 등록</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -75,7 +76,7 @@
 	   	</table>
 		   
 		<div class="mt-4 mb-4 total">	   		
-			<h5>금액</h5><h4><c:out value = "${productdata.ITEM_PRICE}"/>원</h4>
+			<h5>금액</h5><h4><fmt:formatNumber value="${productdata.ITEM_PRICE}" pattern="#,###" />원</h4>
 		</div>
 		
 		<table class="table text-left mt-5 item">

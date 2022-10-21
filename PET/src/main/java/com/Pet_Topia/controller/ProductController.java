@@ -76,7 +76,9 @@ public class ProductController {
 		logger.info("search_field= " + index);
 		logger.info("search_word= " + search_word);
 		
+		
 		List<Product> list = productService.getSearchList(category, index, search_word);
+
 
 		mv.addObject("category", category);
 		mv.addObject("productlist", list);
