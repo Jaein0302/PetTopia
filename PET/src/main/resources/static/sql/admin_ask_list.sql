@@ -25,40 +25,7 @@ create sequence Aam_seq;
 select * from Aam order by aam_ansdate desc;
       order by aam_number
       
-      
-       			select ROWNUM, x.*
-		       			   from
-				       			 (
-				       			select a.* from Aam a order by a.aam_ansdate desc
-				       			 )x
-      
-      
-      
-      
-      
-      
- 	select * from (
-					select b.*,rownum1 rnum3
-							from (
-						select z.*,rownum rownum1 from (
-			      						
-												select ROWNUM, x.*
-					       			                  from
-							       		                	 (
-							       		          				select a.* from Aam a order by a.aam_ansdate desc
-							       		             		  )x	
-									
-				       		             		   ) z 
-				       		             		   
-										where AAM_ANSCHECK IN ('답변대기','답변완료') and AAM_SUBJECT like '6565' order by AAM_ANSCHECK ASC 
-									  )b
-								where rownum1 <10
-					)
-			   where rnum3 > 1 and rnum3 < 10
 
-
-      select * from aam
-      
       
       
       

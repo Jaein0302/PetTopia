@@ -14,86 +14,64 @@ import com.Pet_Topia.domain.Member;
 @Mapper
 public interface AdminMapper {
 
-   // 회원정보 수정 + 검색
-
-   // 회원명단 카운트임.. 이건 매개변수 쓰고 아래껏은 왜안쓰는지 생각?
-
-   public int getSearchMemberListCount(Map<String, String> map);
-
-   public List<Member> getSearchMemberList(Map<String, Object> map);
-
-   public List<Member> listAll();
-
-   public int getAdminNoticeListCount();
-
-   // 공지사항 일반글 업데이트
-   public int admin_write_notice_update(Abn abn);
-
-   // 공지사항 글 디테일
-   public Abn getNoticeDetail(int num);
-
-   // 공지사항 메인 가져오기
-   public List<Abn> getDivisionMain(String division);
-
-   // 공지사항 카운터 가져오기.
-   public int getDivisionCount();
-
-   public List<Abn> getdivision(String division);
-
-   // 이걸로 써야함...
-   public List<Abn> getadminNoticeList(Map<String, Object> map);
-
-   // 공지사항 삭제
-
-   public int deleteNotice(int num);
-
-   public int admin_write_notice(Abn abn);
-
-   public int getNoticeNormalListCount(String aa);
-
-   // 1:1 문의 작성 코드 관리. AdminAskService
-
-   //1.관리자는 컬럼 선택에 따라 1:1문의 사항을 다볼수있음.
+	//기능 1. 회원목록 (AdminService)
+	
+	//맵핑:/admin_list
+	public int getSearchMemberListCount(Map<String, String> map); //회원수 카운팅
+	
+	public List<Member> getSearchMemberList(Map<String, Object> map); //검색(회원 이름, 아이디)
+	
+	//회원정보 조회는 mservice에서 가져옴.
+	
+	public int deleteMember(String member_id); //멤버 삭제
+	
+    public List<Member> listAll(); ///회원목록 excel , pdf 명단을 가져옴
+	
+    /////////////////////////////////////////////////////////////////////////////////////////////// 기능 1. 회원목록 끝.
+          
+   //기능2 공지사항  (AdminService)
+    
+   public int getAdminNoticeListCount(); //공지사항 카운트
    
-   public List<Aam> getAskColumnList(Map<String, Object> map);
-   //답변대기 쿼리에서 제목 작성자 선택하는 One
-   
-   //전체 목록일시 다 출력되는 맵퍼
-   public List<Aam> getAskColumnListAll(Map<String, Object> map);
+   public int admin_write_notice_update(Abn abn); // 공지사항 수정
 
-   //컬럼 카운트
-   public int getAskColumnListCount(Map<String, Object> map);
-   
-   //관리자가 전체 조회를 함.
-   public int getAskListAllCount();
-   
-   
-   //로그인 한 사람의 게시글만 보이도록.
-   public int getAskMemberOwnListCount(String ask_member);
+   public Abn getNoticeDetail(int num); //공지사항 조회
 
-   public List<Aam> getAskMemberOwnList(Map<String, Object> map);
-   
-   //글 클릭 했을 때 상세 뷰를 보이도록 함 1:1문의 글 클릭시
-   
-   public Aam ask_to_admin_view(int num);
-   
-   
-   
-   
-   
-   
-   public List<Aam> test_ask_member(int test);
+   public List<Abn> getDivisionMain(String division); //공지사항 중요 가져오기.
 
-   public Aam getAskDetail(int num);
+   public int getDivisionCount(); //공지사항 일반 카운팅
 
-   public Aac getComent(int num);
+   public List<Abn> getdivision(String division); //카테고리 일반,중요 검색
 
-   public int AnswerUpdate(int num);
+   public List<Abn> getadminNoticeList(Map<String, Object> map); //공지사항 검색 페이징 처리
 
-   public int write_to_admin_form(Aam aam);
+   public int deleteNotice(int num); //공지사항 삭제
 
-   public int Admin_ask_comment(Aac aac);
+   public int admin_write_notice(Abn abn); //공지사항 삭제
 
-   public int Admin_ask_comment_update(Aac aac);
+
+   ///////////////////////////////////////////////////////////////////////////////////////////////// 기능 2 공지사항.
+   
+   //기능 3. 1:1문의
+   
+   public List<Aam> getAskColumnList(Map<String, Object> map); //1:1문의 조회
+
+   public int getAskColumnListCount(Map<String, Object> map); //1:1문의 카운팅
+   
+   public int getAskMemberOwnListCount(String ask_member); //1:1문의 보기(고객)
+
+   public List<Aam> getAskMemberOwnList(Map<String, Object> map); //1:1문의 카운팅
+   
+   public Aam ask_to_admin_view(int num); //1:1문의 상세보기
+
+   public Aac getComent(int num); //코멘트 가져오기
+
+   public int AnswerUpdate(int num); //1:1문의 업데이트
+
+   public int write_to_admin_form(Aam aam); //글쓰기
+
+   public int Admin_ask_comment(Aac aac); //어드민 답글달기
+
+   public int Admin_ask_comment_update(Aac aac); //답변
 
 }

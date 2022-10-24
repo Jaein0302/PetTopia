@@ -17,30 +17,6 @@ drop sequence Abn_seq;
 
 create sequence Abn_seq;
 
-      select z.*, rownum rnum  from
-      
-		 (select d.*, rownum rnum 
-        
-       			  from 
-						(
-       			  
-       			  select c.*, rownum rnum
-						
-							from (
-
-
-		       			select ROWNUM, x.*
-		       			   from
-				       			 (
-				       			select a.* from Aam a order by a.aam_ansdate desc
-				       			 )x				
-		       			 
-       					  )c  where AAM_ANSCHECK IN ('답변대기','답변완료') and AAM_SUBJECT like %% order by AAM_ANSCHECK ASC
-            	
-            	       )d where rownum <10
-             )z
-      where rnum >1 and rnum <10
-
 
      
    
