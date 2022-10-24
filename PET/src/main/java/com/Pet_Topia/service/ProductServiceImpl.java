@@ -184,5 +184,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 
+	@Override
+	public int deletewish_by_itemID(int item_id, String user_id) {
+		return dao.deletewish_by_itemID(item_id, user_id);
+	}
+
+
 
 }

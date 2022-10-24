@@ -60,49 +60,49 @@ $(function(){
 	*/
 	$('body').on('click','.wishbutton', function(){
 
-		var item_id = $(this).next();
+		var icon = $(this).children(':nth-child(1)')
+		var item_id = $(this).prev();
+	
 		
-		
-		$.ajax({
-			type : "POST",
-			url: "is_inmywish",
-			data : {"ITEM_ID" : item_id.val() }, 
-			beforeSend : function(xhr)
-            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-            },
-			success: function(resp){
-				console.log(resp);
-				if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
-					alert("해당 상품은 이미 찜한상품에 있습니다.");
-				} else { //없으므로 다시 에이잭스에서 사용자 아이디로 상품을 찜한다.
-					
-					
-					$.ajax({
-						type: "POST",
-						url:"addWish",
-						data: {"ITEM_ID" : item_id.val() },
-						beforeSend : function(xhr)
-			            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
-			                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
-			            },
-						success: function(resp){
-							//console.log(resp)
-							if (resp != null) {
-								alert("상품이 성공적으로 찜목록에 담겼습니다.");
-							} else{
-								alert("상품을 찜목록에 담는중 오류가 발생했습니다.");
-							}
-						}//inner success
-					})//inner ajax
-					
-					
-					
-				}
-			},//outter success
-		})//outer ajax end
+		if( icon.hasClass("fa-heart-broken") ){
 
-	});//wishbutton click function
+			$.ajax({
+				url:"deleteWish_byItemID",
+				data : {"ITEM_ID": item_id.val()},
+				success: function(res){
+					console.log(res);
+					alert("찜 취소 되었습니다.");
+					document.location.href = document.location.href;
+				},//success
+		
+			})//ajax end
+		
+		} else {//찜하기
+
+			$.ajax({
+				type: "POST",
+				url:"addWish",
+				data: {"ITEM_ID" : item_id.val() },
+				beforeSend : function(xhr)
+	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	            },
+				success: function(resp){
+					//console.log(resp)
+					if (resp != null) {
+						alert("상품이 성공적으로 찜목록에 담겼습니다.");
+						window.location.href=window.location.href
+					} else{
+						alert("상품을 찜목록에 담는중 오류가 발생했습니다.");
+					}
+				}//inner success
+			})//inner ajax
+		
+		}
+	
+	
+	})
+	
 
 	//검색 checkbox 한개만 선택
 	$("input[name='ITEM_SEX']").click(function(){
@@ -209,6 +209,7 @@ $(function(){
 </script>
 
 <body>
+
 <div class="header">
 	<jsp:include page="../member/header.jsp" />
 </div>
@@ -219,6 +220,7 @@ $(function(){
  		<div>
 	 		<form action="${pageContext.request.contextPath}/product/product_list" method="post" > 
 	 			<h5>결과내 재검색</h5>
+	 			<!-- <h1>ProductList2 입니다</h1> -->
 		    	<input name = "search_word" value="${search_word}" class="form-control" type="text" placeholder="검색어를 입력해 주세요" id="search_word">
 		    	<input class="button-5 postb" type="submit" value="검색" id="search_button" style="padding:10px 20px">
 		    	<input type="hidden" name="item_category" value="${category}">
@@ -271,13 +273,38 @@ $(function(){
                          <h4 class="text-truncate m-0">${p.ITEM_NAME}</h4>
                          <i class="fas fa-star"></i><span class="text-body">&nbsp;${p.ITEM_SCORE}&ensp;<span class="text-small">후기 (${p.cnt})</span></span>
                     </div>
-                    <div class="card-footer d-flex justify-content-between bg-light border">
+                    <div class="card-footer d-flex justify-content-between bg-light border itemCard" id="itemCard">
                     	<span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<!-- 찜하기 버튼 -->
+                    	<!-- 찜하기 버튼
                     	<a href="javascript:void(0)" class="btn border wishbutton">
                   			<i class="fas fa-heart text-primary"></i>
                			</a>
-               			<input type="hidden" value="${p.ITEM_ID}">
+               			-->
+               			<input type="hidden" value="${p.ITEM_ID}" class="hidden_itemID" id="hidden_itemID">
+               			
+               			<script>
+               			$.ajax({
+               				type : "POST",
+               				url: "is_inmywish",
+               				data : {"ITEM_ID" : "${p.ITEM_ID}" }, 
+               				beforeSend : function(xhr)
+               	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+               	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+               	            },
+               	            success: function(resp){
+
+               	            	var output = "<a href='javascript:void(0)' class='btn border wishbutton'>"
+               					//console.log(resp);
+               					if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
+               						output += "<i class='fas fa-heart-broken text-primary'></i>"
+               					} else {
+               						output += "<i class='fas fa-heart text-primary'></i>"
+               					}
+               					output += "</a>"
+               					$('input[value="${p.ITEM_ID}"]').after(output)
+               	            }
+               			})
+               			</script>
                     </div>
                 </div>
             </div>

@@ -507,11 +507,26 @@ public class ProductController {
 	
 	/**찜 목록에서 상품 삭제**/
 	@RequestMapping(value = "deleteWish")
-	public void addWish(@RequestParam(value="WISH_ID") int wish_id,
+	public void deleteWish(@RequestParam(value="WISH_ID") int wish_id,
 							HttpServletResponse response) throws Exception{
 		
 		
 		int result = productService.deleteWish(wish_id);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
+	}
+	
+	/**찜 목록에서 상품 삭제**/
+	@RequestMapping(value = "deleteWish_byItemID")
+	public void deleteWish_byItemID(@RequestParam(value="ITEM_ID") int item_id, Principal principal,
+									HttpServletResponse response) throws Exception{
+		
+		String user_id = (String) principal.getName();
+		
+		
+		int result = productService.deletewish_by_itemID(item_id, user_id);
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

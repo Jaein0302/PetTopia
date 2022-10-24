@@ -50,5 +50,7 @@ public interface ProductMapper {
 
 	public int deleteWish(int wish_id);
 
+	public int deletewish_by_itemID(int item_id, String user_id);
+
 
 }

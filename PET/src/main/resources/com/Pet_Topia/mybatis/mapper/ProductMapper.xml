@@ -166,4 +166,9 @@
 		where wish_id = #{wish_id}
 	</delete>
 	
+	<delete id="deletewish_by_itemID">
+		delete wish
+		where WISH_ITEM_ID = #{item_id}
+		and WISH_MEMBER_ID = #{user_id}
+	</delete>
 </mapper>
