@@ -19,11 +19,33 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<!-- 찜하기 버튼 -->
-                    	<a href="javascript:void(0)" class="btn border wishbutton">
-                  			<i class="fas fa-heart text-primary"></i>
-               			</a>
-               			<input type="hidden" value="${p.ITEM_ID}">
+
+
+            			<input type="hidden" value="${p.ITEM_ID}" class="hidden_itemID" id="hidden_itemID">
+               			
+               			<script>
+               			$.ajax({
+               				type : "POST",
+               				url: "../product/is_inmywish",
+               				data : {"ITEM_ID" : "${p.ITEM_ID}" }, 
+               				beforeSend : function(xhr)
+               	            {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+               	                xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+               	            },
+               	            success: function(resp){
+
+               	            	var output = "<a href='javascript:void(0)' class='btn border wishbutton'>"
+               					//console.log(resp);
+               					if(resp != "null" ){ //사용자 아이디로 찜한 상품이 있을경우
+               						output += "<i class='fas fa-heart-broken text-primary'></i>"
+               					} else {
+               						output += "<i class='fas fa-heart text-primary'></i>"
+               					}
+               					output += "</a>"
+               					$('input[value="${p.ITEM_ID}"]').after(output)
+               	            }
+               			})
+               			</script>
                     </div>
                 </div>
             </div>        

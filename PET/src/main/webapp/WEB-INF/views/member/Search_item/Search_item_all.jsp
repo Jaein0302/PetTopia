@@ -19,11 +19,9 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between bg-light border">
                     	 <span class="text-dark price" style="margin:0;font-color:black"><fmt:formatNumber value="${p.ITEM_PRICE}" pattern="#,###" />원</span>
-                    	<!-- 찜하기 버튼 -->
-                    	<a href="javascript:void(0)" class="btn border wishbutton">
-                  			<i class="fas fa-heart text-primary"></i>
-               			</a>
-               			<input type="hidden" value="${p.ITEM_ID}">
+                    	
+                    	<input type="hidden" value="${p.ITEM_ID}" class="hidden_itemID" id="hidden_itemID">
+               			
                     </div>
                 </div>
             </div>        

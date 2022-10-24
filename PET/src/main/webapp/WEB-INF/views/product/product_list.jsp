@@ -54,10 +54,6 @@
 
 
 $(function(){
-	/*
-		첫번째. 위시버튼을 눌렀을때 에이잭스에서 사용자 아이디로 찜한 상품이 있는지 확인한다. 있으면 있다고 alert창 띄우기
-		두번째. 없으면 에이잭스에서 사용자 아이디로 상품을 찜한다. 완료되면 완료되었다고 alert창 띄우기
-	*/
 	$('body').on('click','.wishbutton', function(){
 
 		var icon = $(this).children(':nth-child(1)')
@@ -66,7 +62,7 @@ $(function(){
 		
 		if( icon.hasClass("fa-heart-broken") ){
 
-			$.ajax({
+			$.ajax({//찜 취소
 				url:"deleteWish_byItemID",
 				data : {"ITEM_ID": item_id.val()},
 				success: function(res){
