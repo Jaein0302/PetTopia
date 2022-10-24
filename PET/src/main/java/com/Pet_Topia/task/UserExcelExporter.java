@@ -2,10 +2,8 @@ package com.Pet_Topia.task;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -17,7 +15,6 @@ public class UserExcelExporter {
 	
 	private XSSFWorkbook workbook;
 	private XSSFSheet sheet;
-	
 	private List<Member> memberlist;
 	
 	
@@ -25,28 +22,20 @@ public class UserExcelExporter {
 		this.memberlist=memberlist;
 		workbook = new XSSFWorkbook();
 		sheet=workbook.createSheet("Members");
-		
 	}
-	
-	
 	private void writeHeaderRow() {
 		Row row = sheet.createRow(0);
 		
 		Cell cell = row.createCell(0);
 		cell.setCellValue("MEMBER_ID");
-		
 		cell = row.createCell(1);
 		cell.setCellValue("MEMBER_PASSWORD");
-		
 	    cell = row.createCell(2);
 		cell.setCellValue("MEMBER_NAME");
-		
 		cell = row.createCell(3);
 		cell.setCellValue("MEMBER_POST");
-		
 		cell = row.createCell(4);
 		cell.setCellValue("MEMBER_ADDRESS");
-		
 		cell = row.createCell(5);
 		cell.setCellValue("MEMBER_EMAIL");
 		cell = row.createCell(6);
@@ -58,17 +47,11 @@ public class UserExcelExporter {
 		cell = row.createCell(9);
 		cell.setCellValue("AUTH");
 		
-		
-		
 	}
 	
 	private void writeDataRows() {
 		
 		int rowCount = 1;
-		//rowCount를 10으로 하면 1번 라인의 컬럼 라인 후 11번에서 데이터 나옴 2~10은 공백이됨.
-		//11번에서 나오니까 10
-		//2번에서 나와야하니까 1
-		
 		for(Member member :memberlist ) {
 			Row row = sheet.createRow(rowCount++);
 			
@@ -102,12 +85,6 @@ public class UserExcelExporter {
 			cell = row.createCell(9);
 			cell.setCellValue("petto");
 			
-			
-			
-			
-			
-			
-			
 		}
 		
 	}
@@ -121,8 +98,6 @@ public class UserExcelExporter {
 		workbook.close();
 		outputStream.close();
 	}
-	
-	
 	
 
 }
